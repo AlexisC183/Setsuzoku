@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - Setsuzoku</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .contenedor_registro {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .titulo_registro {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        .grupo_formulario {
+            margin-bottom: 20px;
+        }
+
+        .etiqueta_formulario {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-size: 14px;
+        }
+
+        .campo_formulario {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .campo_formulario:focus {
+            outline: none;
+            border-color: #28a745;
+        }
+
+        .boton_principal {
+            width: 100%;
+            padding: 12px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton_principal:hover {
+            background-color: #218838;
+        }
+
+        .enlace_login {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+
+        .texto_enlace {
+            color: #007bff;
+            text-decoration: underline;
+            cursor: pointer;
+        }
+
+        .texto_enlace:hover {
+            color: #0056b3;
+        }
+
+        .mensaje_error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .mensaje_exito {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .seleccion_grupo {
+            margin-bottom: 30px;
+        }
+
+        .titulo_seleccion {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .opciones_grupo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .opcion_grupo {
+            flex: 1;
+            margin: 0 5px;
+            padding: 15px 10px;
+            background-color: #f8f9fa;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .opcion_grupo:hover {
+            background-color: #e9ecef;
+        }
+
+        .opcion_grupo.seleccionado {
+            background-color: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .paso {
+            display: none;
+        }
+
+        .paso.activo {
+            display: block;
+        }
+
+        .indicador_pasos {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .punto_paso {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 5px;
+        }
+
+        .punto_paso.completado {
+            background-color: #28a745;
+        }
+
+        .boton_secundario {
+            width: 100%;
+            padding: 12px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton_secundario:hover {
+            background-color: #5a6268;
+        }
+
+        .grupo_botones {
+            display: flex;
+            gap: 10px;
+        }
+
+        .grupo_botones .boton_principal,
+        .grupo_botones .boton_secundario {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor_registro">
+        <h1 class="titulo_registro">Crear Cuenta</h1>
+
+        <div id="mensaje_error" class="mensaje_error"></div>
+        <div id="mensaje_exito" class="mensaje_exito"></div>
+
+        <div class="indicador_pasos">
+            <div class="punto_paso completado" id="punto_paso_1"></div>
+            <div class="punto_paso" id="punto_paso_2"></div>
+            <div class="punto_paso" id="punto_paso_3"></div>
+            <div class="punto_paso" id="punto_paso_4"></div>
+        </div>
+
+        <!-- PASO 1: Selección de grupo -->
+        <div id="paso_1" class="paso activo">
+            <div class="seleccion_grupo">
+                <p class="titulo_seleccion">Para poder registrarte, nos gustaría saber, ¿A cuál grupo perteneces?</p>
+                <div class="opciones_grupo">
+                    <div class="opcion_grupo" data-grupo="candidato">Candidato</div>
+                    <div class="opcion_grupo" data-grupo="reclutador">Reclutador</div>
+                    <div class="opcion_grupo" data-grupo="instructor">Instructor</div>
+                </div>
+            </div>
+            <button type="button" class="boton_principal" id="continuar_paso_1">Continuar</button>
+        </div>
+
+        <!-- PASO 2: Datos personales -->
+        <div id="paso_2" class="paso">
+            <form id="formulario_datos_personales">
+                <div class="grupo_formulario">
+                    <label for="nombre" class="etiqueta_formulario">Nombre(s)</label>
+                    <input type="text" id="nombre" name="nombre" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="apellido_paterno" class="etiqueta_formulario">Apellido Paterno</label>
+                    <input type="text" id="apellido_paterno" name="apellido_paterno" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="apellido_materno" class="etiqueta_formulario">Apellido Materno</label>
+                    <input type="text" id="apellido_materno" name="apellido_materno" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="fecha_nacimiento" class="etiqueta_formulario">Fecha de Nacimiento</label>
+                    <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="genero" class="etiqueta_formulario">Género</label>
+                    <select id="genero" name="genero" class="campo_formulario" required>
+                        <option value="">Selecciona una opción</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                        <option value="otro">Otro</option>
+                        <option value="no_especificar">Prefiero no especificar</option>
+                    </select>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="telefono" class="etiqueta_formulario">Teléfono Celular</label>
+                    <input type="tel" id="telefono" name="telefono" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_botones">
+                    <button type="button" class="boton_secundario" id="volver_paso_1">Volver</button>
+                    <button type="button" class="boton_principal" id="continuar_paso_2">Siguiente</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PASO 3: Información profesional -->
+        <div id="paso_3" class="paso">
+            <form id="formulario_informacion_profesional">
+                <div class="grupo_formulario">
+                    <label for="estudios" class="etiqueta_formulario">Últimos Estudios</label>
+                    <textarea id="estudios" name="estudios" class="campo_formulario" rows="3" required></textarea>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="experiencia" class="etiqueta_formulario">Experiencia Laboral</label>
+                    <textarea id="experiencia" name="experiencia" class="campo_formulario" rows="3" required></textarea>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="habilidades" class="etiqueta_formulario">Habilidades</label>
+                    <textarea id="habilidades" name="habilidades" class="campo_formulario" rows="3" required></textarea>
+                </div>
+
+                <div class="grupo_botones">
+                    <button type="button" class="boton_secundario" id="volver_paso_2">Volver</button>
+                    <button type="button" class="boton_principal" id="continuar_paso_3">Siguiente</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- PASO 4: Cuenta -->
+        <div id="paso_4" class="paso">
+            <form id="formulario_cuenta">
+                <div class="grupo_formulario">
+                    <label for="correo" class="etiqueta_formulario">Correo Electrónico</label>
+                    <input type="email" id="correo" name="correo" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="contrasena" class="etiqueta_formulario">Contraseña</label>
+                    <input type="password" id="contrasena" name="contrasena" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_formulario">
+                    <label for="confirmar_contrasena" class="etiqueta_formulario">Confirmar Contraseña</label>
+                    <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" class="campo_formulario" required>
+                </div>
+
+                <div class="grupo_botones">
+                    <button type="button" class="boton_secundario" id="volver_paso_3">Volver</button>
+                    <button type="submit" class="boton_principal">Registrarse</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="enlace_login">
+            <span>¿Ya tienes cuenta? </span>
+            <span class="texto_enlace" onclick="redirigirLogin()">Inicia sesión aquí</span>
+        </div>
+    </div>
+
+    <script>
+        // Datos del formulario que se irán guardando
+        let datos_registro = {
+            grupo: '',
+            personales: {},
+            profesional: {},
+            cuenta: {}
+        };
+
+        function redirigirLogin() {
+            window.location.href = 'inicio_sesion.html';
+        }
+
+        // Selección de grupo
+        document.addEventListener('DOMContentLoaded', function() {
+            const opciones_grupo = document.querySelectorAll('.opcion_grupo');
+            
+            opciones_grupo.forEach(opcion => {
+                opcion.addEventListener('click', function() {
+                    opciones_grupo.forEach(opt => opt.classList.remove('seleccionado'));
+                    this.classList.add('seleccionado');
+                    datos_registro.grupo = this.getAttribute('data-grupo');
+                });
+            });
+
+            // Continuar desde paso 1
+            document.getElementById('continuar_paso_1').addEventListener('click', function() {
+                if (!datos_registro.grupo) {
+                    mostrarError('Por favor selecciona un grupo');
+                    return;
+                }
+                
+                mostrarPaso(2);
+            });
+
+            // Continuar desde paso 2
+            document.getElementById('continuar_paso_2').addEventListener('click', function() {
+                const form = document.getElementById('formulario_datos_personales');
+                const formData = new FormData(form);
+                
+                // Validar campos
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                // Guardar datos personales
+                for (let [key, value] of formData.entries()) {
+                    datos_registro.personales[key] = value;
+                }
+                
+                mostrarPaso(3);
+            });
+
+            // Continuar desde paso 3
+            document.getElementById('continuar_paso_3').addEventListener('click', function() {
+                const form = document.getElementById('formulario_informacion_profesional');
+                const formData = new FormData(form);
+                
+                // Validar campos
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                // Guardar datos profesionales
+                for (let [key, value] of formData.entries()) {
+                    datos_registro.profesional[key] = value;
+                }
+                
+                mostrarPaso(4);
+            });
+
+            // Volver a paso 1
+            document.getElementById('volver_paso_1').addEventListener('click', function() {
+                mostrarPaso(1);
+            });
+
+            // Volver a paso 2
+            document.getElementById('volver_paso_2').addEventListener('click', function() {
+                mostrarPaso(2);
+            });
+
+            // Volver a paso 3
+            document.getElementById('volver_paso_3').addEventListener('click', function() {
+                mostrarPaso(3);
+            });
+
+            // Enviar formulario final
+            document.getElementById('formulario_cuenta').addEventListener('submit', function(evento) {
+                evento.preventDefault();
+                
+                const form = evento.target;
+                const formData = new FormData(form);
+                
+                // Validar campos
+                if (!form.checkValidity()) {
+                    form.reportValidity();
+                    return;
+                }
+                
+                const contrasena = formData.get('contrasena');
+                const confirmar_contrasena = formData.get('confirmar_contrasena');
+                
+                if (contrasena !== confirmar_contrasena) {
+                    mostrarError('Las contraseñas no coinciden');
+                    return;
+                }
+                
+                if (contrasena.length < 6) {
+                    mostrarError('La contraseña debe tener al menos 6 caracteres');
+                    return;
+                }
+                
+                // Guardar datos de cuenta
+                for (let [key, value] of formData.entries()) {
+                    if (key !== 'confirmar_contrasena') {
+                        datos_registro.cuenta[key] = value;
+                    }
+                }
+                
+                // Enviar todos los datos al servidor
+                enviarRegistro();
+            });
+        });
+
+        function mostrarPaso(numero_paso) {
+            // Ocultar todos los pasos
+            document.querySelectorAll('.paso').forEach(paso => {
+                paso.classList.remove('activo');
+            });
+            
+            // Mostrar el paso actual
+            document.getElementById(`paso_${numero_paso}`).classList.add('activo');
+            
+            // Actualizar indicadores
+            for (let i = 1; i <= 4; i++) {
+                const punto = document.getElementById(`punto_paso_${i}`);
+                if (i <= numero_paso) {
+                    punto.classList.add('completado');
+                } else {
+                    punto.classList.remove('completado');
+                }
+            }
+        }
+
+        function enviarRegistro() {
+            // Combinar todos los datos
+            const datos_completos = {
+                grupo: datos_registro.grupo,
+                ...datos_registro.personales,
+                ...datos_registro.profesional,
+                ...datos_registro.cuenta
+            };
+            
+            // Enviar formulario al servidor
+            fetch('/registro', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: new URLSearchParams(datos_completos)
+            })
+            .then(response => {
+                if (response.redirected) {
+                    window.location.href = response.url;
+                } else {
+                    // Si no hay redirección, mostrar error de correo duplicado
+                    mostrarError('El correo electrónico ya está registrado.');
+                }
+            })
+            .catch(error => {
+                mostrarError('Error de conexión. Por favor intenta más tarde.');
+                console.error('Error:', error);
+            });
+        }
+
+        function mostrarError(mensaje) {
+            const mensaje_error = document.getElementById('mensaje_error');
+            const mensaje_exito = document.getElementById('mensaje_exito');
+
+            mensaje_exito.style.display = 'none';
+            mensaje_error.textContent = mensaje;
+            mensaje_error.style.display = 'block';
+
+            setTimeout(function() {
+                mensaje_error.style.display = 'none';
+            }, 5000);
+        }
+
+        function mostrarExito(mensaje) {
+            const mensaje_error = document.getElementById('mensaje_error');
+            const mensaje_exito = document.getElementById('mensaje_exito');
+
+            mensaje_error.style.display = 'none';
+            mensaje_exito.textContent = mensaje;
+            mensaje_exito.style.display = 'block';
+        }
+
+        const parametros_url = new URLSearchParams(window.location.search);
+        if (parametros_url.get('exito') === '1') {
+            mostrarExito('Registro exitoso. Ahora puedes iniciar sesión.');
+        } else if (parametros_url.get('error') === '1') {
+            mostrarError('El correo electrónico ya está registrado.');
+        } else if (parametros_url.get('error') === '2') {
+            mostrarError('Error en el registro. Por favor intenta nuevamente.');
+        }
+    </script>
+</body>
+</html>

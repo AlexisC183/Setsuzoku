@@ -1,0 +1,36 @@
+INFORMACIÓN GENERAL
+Nombre del proyecto: Setsuzoku (conexión en japonés)
+Tipo de aplicación: Bolsa de trabajo/plataforma de empleo
+Enfoque: Desarrollo minimalista y progresivo
+
+ESTRUCTURA DE ARCHIVOS ACTUAL
+Setsuzoku/
+├── backend/        (Se trabajará sobre esto)
+├── frontend/        (Se trabajará sobre esto)
+├── data/        (Se trabajará sobre esto)
+│   └── index.html        (Página principal de inicio)
+├── It_Dir.py             (Script Python para ver árbol de directorio del proyecto (se muestra el árbol al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
+├── It_Fil.py             (Script Python para ver texto en cada archivo (se muestra código al modelo NLP asistente (tú))). Herramienta, no es parte del proyecto, sólo contexto
+├── Prompt - Code.txt     (Guía de estilo de programación para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
+├── Prompt - Web.txt    (Información sobre el proyecto para el modelo NLP asistente (tú)), no es parte del proyecto, sólo contexto
+└── Setsuzoku.bat         (Acceso directo a index.html)
+
+REGLAS DE NOMBRADO PARA ARCHIVOS HTML
+Nomenclatura: minúsculas con guiones bajos sin acentuar
+Extensión: .html
+Ejemplos: inicio_sesion.html (correcto), registro.html (correcto)
+
+REQUERIMIENTOS
+Frontend:
+         HTML plano
+         CSS básico  
+         JavaScript vanilla
+         (Cero frameworks, cero React)
+Backend:
+         Node.js (JavaScript en servidor)
+         Base de datos: Archivos JSON locales
+         Sesiones con almacenamiento local
+         (Cero PHP, cero MySQL, cero XAMPP)
+
+CODIFICACIÓN
+Eres un asistente de programación, deberás generar el archivo completo aun así se un pequeño detalle el que se pida modificar por parte del usuario, no generar parcialmente la parte que se pide a menos que el usuario así lo especifique. Todos los recursos deben almacenarse localmente, por ejemplo, si inicialmente no hay hay ningún usuario registrado y entonces se registra un nuevo usuario éste se guardaría localmente y entonces podría accederse al sitio, la información se guardará en la carpeta "data". Al agregar botones o elementos visuales del mismo tipo juntos estos deben tener el mismo tamaño para dar armonía al diseño. Al cerrar el servidor desde la terminal CMD y volver a iniciarlo la sesión de perderá, es decir, no hay persistencia después de cerrar la terminal. El entorno de desarrollo es Windows.

@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "titulo": "Desarrollador Frontend Senior",
+    "empresa": "Tech Solutions S.A.",
+    "descripcion": "Buscamos un desarrollador frontend con experiencia en React, Angular y Vue.js.",
+    "requisitos": [
+      "Experiencia mínima de 3 años en desarrollo frontend",
+      "Conocimiento sólido de JavaScript, HTML5 y CSS3",
+      "Experiencia con frameworks como React, Angular o Vue.js"
+    ],
+    "reclutador_id": 2,
+    "fecha_publicacion": "2023-06-20T09:15:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "titulo": "Diseñador UX/UI",
+    "empresa": "Creative Studios",
+    "descripcion": "Buscamos un diseñador UX/UI creativo y apasionado para unirse a nuestro equipo.",
+    "requisitos": [
+      "Experiencia en diseño de interfaces de usuario",
+      "Conocimiento de herramientas de diseño como Figma, Sketch o Adobe XD"
+    ],
+    "reclutador_id": 2,
+    "fecha_publicacion": "2023-06-18T11:30:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "titulo": "Analista de Datos",
+    "empresa": "Data Insights Ltd.",
+    "descripcion": "Buscamos un analista de datos con experiencia en Python, R y SQL para analizar grandes volúmenes de datos.",
+    "requisitos": [
+      "Experiencia en análisis de datos",
+      "Conocimiento de Python, R y SQL",
+      "Experiencia con herramientas de visualización como Tableau o Power BI"
+    ],
+    "reclutador_id": 2,
+    "fecha_publicacion": "2023-06-22T14:45:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 4,
+    "titulo": "Instructor de Programación",
+    "empresa": "Code Academy",
+    "descripcion": "Buscamos un instructor apasionado por la enseñanza de programación con experiencia en desarrollo web.",
+    "requisitos": [
+      "Experiencia en desarrollo web",
+      "Habilidades de enseñanza y comunicación",
+      "Conocimiento de múltiples lenguajes de programación"
+    ],
+    "reclutador_id": 2,
+    "fecha_publicacion": "2023-06-25T10:20:00.000Z",
+    "activo": true
+  }
+]

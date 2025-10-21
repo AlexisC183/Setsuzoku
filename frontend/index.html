@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setsuzoku</title>
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffffff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .enlaces-sesion {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enlace-sesion {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .enlace-sesion:hover {
+            text-decoration: underline;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .barra-lateral {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .barra-lateral.abierta {
+            transform: translateX(0);
+        }
+
+        .boton-menu {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-usuario {
+            padding: 20px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nombre-usuario {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .rol-usuario {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        .menu-opciones {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-opciones li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-opciones a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .menu-opciones a:hover {
+            background-color: #2c3e50;
+        }
+
+        .menu-opciones a.disabled {
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .menu-opciones a.disabled:hover {
+            background-color: transparent;
+        }
+
+        .contenido-principal {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .titulo-bienvenida {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .descripcion-bienvenida {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .mensaje-exito {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .mensaje-sesion {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .seccion-reclutador {
+            display: none;
+            width: 100%;
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .seccion-titulo {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .tabla-usuarios {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .tabla-usuarios th, .tabla-usuarios td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .tabla-usuarios th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        .tabla-usuarios tr:hover {
+            background-color: #f5f5f5;
+        }
+
+        .boton-accion {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 5px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-ver {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .boton-ver:hover {
+            background-color: #2980b9;
+        }
+
+        .boton-editar {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .boton-editar:hover {
+            background-color: #d68910;
+        }
+
+        .boton-eliminar {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .boton-eliminar:hover {
+            background-color: #c0392b;
+        }
+
+        .pestanas {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .pestana {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f8f9fa;
+            border: 1px solid transparent;
+            border-bottom: none;
+            border-radius: 4px 4px 0 0;
+            margin-right: 5px;
+        }
+
+        .pestana.activa {
+            background-color: white;
+            border-color: #ddd;
+            border-bottom-color: white;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+
+        .contenido-pestana {
+            display: none;
+        }
+
+        .contenido-pestana.activo {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <a href="#" class="logo">Setsuzoku</a>
+        <div class="enlaces-sesion" id="enlaces-sesion">
+            <a class="enlace-sesion" href="inicio_sesion.html">Iniciar Sesión</a>
+            <a class="enlace-sesion" href="registro.html">Registrarse</a>
+        </div>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral" id="barra-lateral">
+            <button class="boton-menu" id="boton-menu">☰</button>
+
+            <div class="menu-usuario">
+                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
+                <div class="rol-usuario" id="rol-usuario">Rol</div>
+            </div>
+
+            <ul class="menu-opciones">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Menú principal</a></li>
+                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
+                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
+                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
+                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
+                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main class="contenido-principal">
+            <div id="mensaje-exito" class="mensaje-exito"></div>
+            <div id="mensaje-sesion" class="mensaje-sesion"></div>
+
+            <h1 class="titulo-bienvenida">Bienvenido a Setsuzoku</h1>
+            <p class="descripcion-bienvenida">
+                Tu plataforma de conexión laboral. Inicia sesión o regístrate para acceder a todas las funcionalidades.
+            </p>
+
+            <!-- SECCIÓN PARA RECLUTADORES -->
+            <div class="seccion-reclutador" id="seccion-reclutador">
+                <h2 class="seccion-titulo">Gestión de Candidatos</h2>
+
+                <div class="pestanas">
+                    <div class="pestana activa" data-pestana="candidatos">Candidatos</div>
+                    <div class="pestana" data-pestana="inscripciones">Inscripciones a Cursos</div>
+                    <div class="pestana" data-pestana="postulaciones">Postulaciones a Trabajos</div>
+                </div>
+
+                <div class="contenido-pestana activo" id="contenido-candidatos">
+                    <table class="tabla-usuarios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Nombre Completo</th>
+                                <th>Correo</th>
+                                <th>Teléfono</th>
+                                <th>Estudios</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-candidatos">
+                            <!-- Los candidatos se cargarán aquí con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="contenido-pestana" id="contenido-inscripciones">
+                    <table class="tabla-usuarios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Candidato</th>
+                                <th>Curso</th>
+                                <th>Fecha de Inscripción</th>
+                                <th>Progreso</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-inscripciones">
+                            <!-- Las inscripciones se cargarán aquí con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="contenido-pestana" id="contenido-postulaciones">
+                    <table class="tabla-usuarios">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Candidato</th>
+                                <th>Trabajo</th>
+                                <th>Fecha de Postulación</th>
+                                <th>Estado</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla-postulaciones">
+                            <!-- Las postulaciones se cargarán aquí con JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            console.log('Datos en sessionStorage:', usuarioStr); // Para depuración
+
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    console.log('Usuario parseado:', usuario); // Para depuración
+                    
+                    // Verificar que tenga las propiedades mínimas necesarias
+                    if (usuario && usuario.nombre && usuario.grupo) {
+                        // Sesión válida encontrada
+                        mostrarInterfazConSesion(usuario);
+                        return true;
+                    } else {
+                        console.error('Usuario incompleto:', usuario);
+                        sessionStorage.removeItem('usuario');
+                    }
+                } catch (error) {
+                    console.error('Error parseando usuario:', error);
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            
+            // No hay sesión válida
+            mostrarInterfazNoSesion();
+            return false;
+        }
+
+        // MOSTRAR INTERFAZ CUANDO NO HAY SESIÓN
+        function mostrarInterfazNoSesion() {
+            document.getElementById('enlaces-sesion').style.display = 'flex';
+            document.getElementById('barra-lateral').style.display = 'none';
+            document.getElementById('seccion-reclutador').style.display = 'none';
+
+            // Asegurar que el mensaje de bienvenida sea visible
+            document.querySelector('.titulo-bienvenida').style.display = 'block';
+            document.querySelector('.descripcion-bienvenida').style.display = 'block';
+        }
+
+        // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
+        function mostrarInterfazConSesion(usuario) {
+            document.getElementById('enlaces-sesion').style.display = 'none';
+            document.getElementById('barra-lateral').classList.add('abierta');
+            document.getElementById('barra-lateral').style.display = 'block';
+
+            // Mostrar información del usuario
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+            document.getElementById('rol-usuario').textContent =
+                usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
+
+            // Configurar opciones según el rol
+            configurarMenuSegunRol(usuario.grupo);
+
+            // Si es reclutador, mostrar sección de gestión de candidatos
+            if (usuario.grupo === 'reclutador') {
+                document.getElementById('seccion-reclutador').style.display = 'block';
+                cargarDatosReclutador();
+            }
+
+            // Ocultar mensaje de bienvenida cuando hay sesión
+            document.querySelector('.titulo-bienvenida').style.display = 'none';
+            document.querySelector('.descripcion-bienvenida').style.display = 'none';
+        }
+
+        // Configurar el menú según el rol del usuario
+        function configurarMenuSegunRol(rol) {
+            // Por defecto, todos los enlaces están habilitados
+            const enlaces = {
+                'postulaciones': false,
+                'cursos-usuario': false,
+                'trabajos': false,
+                'cursos': false
+            };
+
+            // Configurar según el rol
+            switch(rol) {
+                case 'candidato':
+                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
+                    enlaces['trabajos'] = true;
+                    break;
+                case 'reclutador':
+                    // Los reclutadores pueden ver todo excepto "Tus cursos"
+                    enlaces['cursos-usuario'] = true;
+                    break;
+                case 'instructor':
+                    // Los instructores pueden ver todo excepto "Tus postulaciones"
+                    enlaces['postulaciones'] = true;
+                    break;
+            }
+
+            // Aplicar la configuración
+            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
+                const elemento = document.getElementById(`enlace-${enlace}`);
+                if (deshabilitar) {
+                    elemento.classList.add('disabled');
+                    elemento.setAttribute('href', '#');
+                }
+            }
+        }
+
+        // Función para cargar datos del reclutador
+        function cargarDatosReclutador() {
+            cargarCandidatos();
+            cargarInscripciones();
+            cargarPostulaciones();
+
+            // Configurar eventos de pestañas
+            document.querySelectorAll('.pestana').forEach(pestana => {
+                pestana.addEventListener('click', function() {
+                    // Remover clase activa de todas las pestañas
+                    document.querySelectorAll('.pestana').forEach(p => p.classList.remove('activa'));
+                    document.querySelectorAll('.contenido-pestana').forEach(c => c.classList.remove('activo'));
+
+                    // Agregar clase activa a la pestaña actual
+                    this.classList.add('activa');
+                    const idContenido = `contenido-${this.getAttribute('data-pestana')}`;
+                    document.getElementById(idContenido).classList.add('activo');
+                });
+            });
+        }
+
+        // Función para cargar candidatos
+        function cargarCandidatos() {
+            const tablaCandidatos = document.getElementById('tabla-candidatos');
+
+            // Simulación de datos de candidatos
+            // En una aplicación real, estos datos vendrían de una API o base de datos
+            const candidatosSimulados = [
+                {
+                    id: 2,
+                    nombre: "Juan Pérez Gómez",
+                    correo: "juan.perez@email.com",
+                    telefono: "5551234567",
+                    estudios: "Licenciatura en Diseño Gráfico"
+                },
+                {
+                    id: 5,
+                    nombre: "Ana López Martínez",
+                    correo: "ana.lopez@email.com",
+                    telefono: "5559876543",
+                    estudios: "Ingeniería en Sistemas Computacionales"
+                },
+                {
+                    id: 7,
+                    nombre: "Carlos Sánchez Ruiz",
+                    correo: "carlos.sanchez@email.com",
+                    telefono: "5552468135",
+                    estudios: "Licenciatura en Administración de Empresas"
+                }
+            ];
+
+            // Limpiar tabla
+            tablaCandidatos.innerHTML = '';
+
+            // Agregar cada candidato a la tabla
+            candidatosSimulados.forEach(candidato => {
+                const fila = document.createElement('tr');
+
+                // Construir HTML de la fila
+                fila.innerHTML = `
+                    <td>${candidato.id}</td>
+                    <td>${candidato.nombre}</td>
+                    <td>${candidato.correo}</td>
+                    <td>${candidato.telefono}</td>
+                    <td>${candidato.estudios}</td>
+                    <td>
+                        <button class="boton-accion boton-ver">Ver</button>
+                        <button class="boton-accion boton-editar">Editar</button>
+                        <button class="boton-accion boton-eliminar">Eliminar</button>
+                    </td>
+                `;
+
+                tablaCandidatos.appendChild(fila);
+            });
+        }
+
+        // Función para cargar inscripciones a cursos
+        function cargarInscripciones() {
+            const tablaInscripciones = document.getElementById('tabla-inscripciones');
+
+            // Simulación de datos de inscripciones
+            // En una aplicación real, estos datos vendrían de una API o base de datos
+            const inscripcionesSimuladas = [
+                {
+                    id: 1,
+                    candidato: "Juan Pérez Gómez",
+                    curso: "Desarrollo Web con JavaScript",
+                    fecha_inscripcion: "2023-06-15",
+                    progreso: 75,
+                    estado: "en-curso"
+                },
+                {
+                    id: 2,
+                    candidato: "Ana López Martínez",
+                    curso: "Diseño UX/UI Fundamental",
+                    fecha_inscripcion: "2023-06-10",
+                    progreso: 100,
+                    estado: "completado"
+                },
+                {
+                    id: 3,
+                    candidato: "Carlos Sánchez Ruiz",
+                    curso: "Python para Ciencia de Datos",
+                    fecha_inscripcion: "2023-06-20",
+                    progreso: 30,
+                    estado: "en-curso"
+                }
+            ];
+
+            // Limpiar tabla
+            tablaInscripciones.innerHTML = '';
+
+            // Agregar cada inscripción a la tabla
+            inscripcionesSimuladas.forEach(inscripcion => {
+                const fila = document.createElement('tr');
+
+                // Determinar clase CSS según el estado
+                let textoEstado = '';
+                switch(inscripcion.estado) {
+                    case 'en-curso':
+                        textoEstado = 'En curso';
+                        break;
+                    case 'completado':
+                        textoEstado = 'Completado';
+                        break;
+                    case 'abandonado':
+                        textoEstado = 'Abandonado';
+                        break;
+                }
+
+                // Construir HTML de la fila
+                fila.innerHTML = `
+                    <td>${inscripcion.id}</td>
+                    <td>${inscripcion.candidato}</td>
+                    <td>${inscripcion.curso}</td>
+                    <td>${inscripcion.fecha_inscripcion}</td>
+                    <td>${inscripcion.progreso}%</td>
+                    <td>${textoEstado}</td>
+                    <td>
+                        <button class="boton-accion boton-ver">Ver</button>
+                        <button class="boton-accion boton-editar">Editar</button>
+                        <button class="boton-accion boton-eliminar">Eliminar</button>
+                    </td>
+                `;
+
+                tablaInscripciones.appendChild(fila);
+            });
+        }
+
+        // Función para cargar postulaciones a trabajos
+        function cargarPostulaciones() {
+            const tablaPostulaciones = document.getElementById('tabla-postulaciones');
+
+            // Simulación de datos de postulaciones
+            // En una aplicación real, estos datos vendrían de una API o base de datos
+            const postulacionesSimuladas = [
+                {
+                    id: 1,
+                    candidato: "Juan Pérez Gómez",
+                    trabajo: "Desarrollador Frontend Senior",
+                    fecha_postulacion: "2023-06-21",
+                    estado: "pendiente"
+                },
+                {
+                    id: 2,
+                    candidato: "Ana López Martínez",
+                    trabajo: "Diseñador UX/UI",
+                    fecha_postulacion: "2023-06-22",
+                    estado: "revisado"
+                },
+                {
+                    id: 3,
+                    candidato: "Carlos Sánchez Ruiz",
+                    trabajo: "Analista de Datos",
+                    fecha_postulacion: "2023-06-23",
+                    estado: "aceptado"
+                }
+            ];
+
+            // Limpiar tabla
+            tablaPostulaciones.innerHTML = '';
+
+            // Agregar cada postulación a la tabla
+            postulacionesSimuladas.forEach(postulacion => {
+                const fila = document.createElement('tr');
+
+                // Determinar clase CSS según el estado
+                let textoEstado = '';
+                switch(postulacion.estado) {
+                    case 'pendiente':
+                        textoEstado = 'Pendiente';
+                        break;
+                    case 'revisado':
+                        textoEstado = 'Revisado';
+                        break;
+                    case 'aceptado':
+                        textoEstado = 'Aceptado';
+                        break;
+                    case 'rechazado':
+                        textoEstado = 'Rechazado';
+                        break;
+                }
+
+                // Construir HTML de la fila
+                fila.innerHTML = `
+                    <td>${postulacion.id}</td>
+                    <td>${postulacion.candidato}</td>
+                    <td>${postulacion.trabajo}</td>
+                    <td>${postulacion.fecha_postulacion}</td>
+                    <td>${textoEstado}</td>
+                    <td>
+                        <button class="boton-accion boton-ver">Ver</button>
+                        <button class="boton-accion boton-editar">Editar</button>
+                        <button class="boton-accion boton-eliminar">Eliminar</button>
+                    </td>
+                `;
+
+                tablaPostulaciones.appendChild(fila);
+            });
+        }
+
+        // FUNCIÓN MEJORADA PARA CERRAR SESIÓN
+        function cerrarSesion() {
+            // Limpiar todos los datos de sesión
+            sessionStorage.removeItem('usuario');
+
+            // Redirigir a index.html para forzar recarga completa
+            window.location.href = 'index.html';
+        }
+
+        // Función para alternar la barra lateral
+        function toggleBarraLateral() {
+            const barraLateral = document.getElementById('barra-lateral');
+            barraLateral.classList.toggle('abierta');
+        }
+
+        // Verificar si hay parámetros en la URL
+        const parametros_url = new URLSearchParams(window.location.search);
+
+        // Mostrar mensaje si el registro fue exitoso
+        if (parametros_url.get('exito') === '1') {
+            const mensaje_exito = document.getElementById('mensaje-exito');
+            mensaje_exito.textContent = '¡Registro exitoso! Ahora puedes iniciar sesión.';
+            mensaje_exito.style.display = 'block';
+
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                mensaje_exito.style.display = 'none';
+            }, 5000);
+        }
+
+        // Mostrar mensaje si el inicio de sesión fue exitoso
+        if (parametros_url.get('sesion') === '1') {
+            const mensaje_sesion = document.getElementById('mensaje-sesion');
+            mensaje_sesion.textContent = '¡Sesión iniciada correctamente! Bienvenido de nuevo.';
+            mensaje_sesion.style.display = 'block';
+
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                mensaje_sesion.style.display = 'none';
+            }, 5000);
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión al cargar la página
+            verificarSesion();
+
+            // Configurar evento para el botón de menú
+            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
+
+            // Configurar evento para cerrar sesión
+            document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+                e.preventDefault();
+                cerrarSesion();
+            });
+        });
+    </script>
+</body>
+</html>

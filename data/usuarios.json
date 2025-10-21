@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1760979392116,
+    "grupo": "candidato",
+    "nombre": "Jesús",
+    "apellido_paterno": "García",
+    "apellido_materno": "Hernández",
+    "fecha_nacimiento": "1998-06-15",
+    "genero": "masculino",
+    "telefono": "6647809020",
+    "estudios": "Licenciatura en Diseño Gráfico",
+    "experiencia": "Diseñador gráfico en empresa de marketing por 3 años",
+    "habilidades": "Adobe Creative Suite, Figma, Illustrator, Photoshop",
+    "correo": "candidato@mail.com",
+    "contrasena": "39a28de708f29ed871b744d88fc6eb6633a1ae49e4a3a05dbc2274a0bd6dbcdf",
+    "fecha_registro": "2025-10-20T16:56:32.116Z"
+  }
+]

@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursos - Setsuzoku</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            min-height: calc(100vh - 60px);
+        }
+
+        .barra-lateral {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .boton-menu {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-usuario {
+            padding: 20px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nombre-usuario {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .rol-usuario {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        .menu-opciones {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-opciones li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-opciones a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .menu-opciones a:hover {
+            background-color: #2c3e50;
+        }
+
+        .menu-opciones a.disabled {
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .menu-opciones a.disabled:hover {
+            background-color: transparent;
+        }
+
+        .contenido-cursos {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .titulo-cursos {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .boton-nuevo-curso {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .boton-nuevo-curso:hover {
+            background-color: #229954;
+        }
+
+        .lista-cursos {
+            width: 100%;
+        }
+
+        .curso-item {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            display: flex;
+            align-items: center;
+        }
+
+        .curso-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .curso-imagen {
+            width: 200px;
+            height: 120px;
+            background-color: #ddd;
+            background-size: cover;
+            background-position: center;
+            border-radius: 4px;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+
+        .curso-contenido {
+            flex: 1;
+        }
+
+        .curso-titulo {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .curso-instructor {
+            font-size: 1rem;
+            color: #7f8c8d;
+            margin-bottom: 10px;
+        }
+
+        .curso-descripcion {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.4;
+        }
+
+        .curso-detalles {
+            display: flex;
+            margin-bottom: 15px;
+        }
+
+        .curso-duracion, .curso-precio {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            margin-right: 20px;
+        }
+
+        .curso-precio {
+            font-weight: bold;
+            color: #27ae60;
+        }
+
+        .curso-acciones {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .curso-boton {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: background-color 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .curso-boton:hover {
+            background-color: #2980b9;
+        }
+
+        .mensaje-vacio {
+            text-align: center;
+            padding: 40px;
+            color: #7f8c8d;
+        }
+
+        .debug-info {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            color: #333;
+        }
+
+        .boton-explorar {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            transition: background-color 0.2s;
+        }
+
+        .boton-explorar:hover {
+            background-color: #2980b9;
+        }
+
+        /* Modal para crear nuevo curso */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido {
+            background-color: white;
+            margin: 5% auto;
+            padding: 20px;
+            border-radius: 8px;
+            width: 80%;
+            max-width: 600px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-titulo {
+            font-size: 1.5rem;
+            color: #2c3e50;
+        }
+
+        .modal-cerrar {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #7f8c8d;
+        }
+
+        .modal-cerrar:hover {
+            color: #2c3e50;
+        }
+
+        .grupo-formulario {
+            margin-bottom: 15px;
+        }
+
+        .etiqueta-formulario {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+
+        .campo-formulario {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .campo-formulario:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+
+        .boton-principal {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .boton-principal:hover {
+            background-color: #229954;
+        }
+
+        .boton-secundario {
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .boton-secundario:hover {
+            background-color: #7f8c8d;
+        }
+
+        .mensaje-exito {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+
+        .mensaje-error {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <a href="index.html" class="logo">Setsuzoku</a>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral">
+            <button class="boton-menu" id="boton-menu">☰</button>
+
+            <div class="menu-usuario">
+                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
+                <div class="rol-usuario" id="rol-usuario">Rol</div>
+            </div>
+
+            <ul class="menu-opciones">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Menú principal</a></li>
+                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
+                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
+                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
+                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
+                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO DE CURSOS -->
+        <div class="contenido-cursos">
+            <h1 class="titulo-cursos">
+                Catálogo de Cursos
+                <button class="boton-nuevo-curso" id="boton-nuevo-curso">Crear Nuevo Curso</button>
+            </h1>
+
+            <!-- Información de depuración -->
+            <div class="debug-info" id="debug-info">
+                Cargando información de depuración...
+            </div>
+
+            <div id="contenedor-cursos">
+                <!-- Los cursos se cargarán aquí con JavaScript -->
+                <div class="mensaje-vacio">Cargando cursos...</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para crear nuevo curso -->
+    <div id="modal-nuevo-curso" class="modal">
+        <div class="modal-contenido">
+            <div class="modal-cabecera">
+                <h2 class="modal-titulo">Crear Nuevo Curso</h2>
+                <span class="modal-cerrar" id="modal-cerrar">&times;</span>
+            </div>
+
+            <div id="mensaje-exito" class="mensaje-exito"></div>
+            <div id="mensaje-error" class="mensaje-error"></div>
+
+            <form id="formulario-nuevo-curso">
+                <div class="grupo-formulario">
+                    <label for="titulo" class="etiqueta-formulario">Título del Curso</label>
+                    <input type="text" id="titulo" name="titulo" class="campo-formulario" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="descripcion" class="etiqueta-formulario">Descripción</label>
+                    <textarea id="descripcion" name="descripcion" class="campo-formulario" rows="3" required></textarea>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="instructor" class="etiqueta-formulario">Instructor</label>
+                    <input type="text" id="instructor" name="instructor" class="campo-formulario" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="duracion" class="etiqueta-formulario">Duración</label>
+                    <input type="text" id="duracion" name="duracion" class="campo-formulario" placeholder="Ej: 8 semanas" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="precio" class="etiqueta-formulario">Precio</label>
+                    <input type="text" id="precio" name="precio" class="campo-formulario" placeholder="Ej: $99.99" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <label for="imagen" class="etiqueta-formulario">Imagen (nombre para la URL)</label>
+                    <input type="text" id="imagen" name="imagen" class="campo-formulario" placeholder="Ej: javascript" required>
+                </div>
+
+                <div class="grupo-formulario">
+                    <button type="submit" class="boton-principal">Crear Curso</button>
+                    <button type="button" class="boton-secundario" id="cancelar-nuevo-curso">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Función para cargar los datos del usuario
+        function cargarDatosUsuario() {
+            const debugInfo = document.getElementById('debug-info');
+            debugInfo.innerHTML = 'Verificando sessionStorage...';
+
+            // Verificar si hay un usuario en sessionStorage
+            const usuarioStr = sessionStorage.getItem('usuario');
+            debugInfo.innerHTML += `<br>Usuario en sessionStorage: ${usuarioStr ? 'Sí' : 'No'}`;
+
+            if (!usuarioStr) {
+                debugInfo.innerHTML += '<br>No hay usuario en sessionStorage. Redirigiendo a index.html...';
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Parsear el usuario
+            let usuario;
+            try {
+                usuario = JSON.parse(usuarioStr);
+                debugInfo.innerHTML += `<br>Usuario parseado correctamente: ${usuario.nombre} (${usuario.grupo})`;
+            } catch (error) {
+                debugInfo.innerHTML += `<br>Error al parsear usuario: ${error.message}`;
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Verificar que el usuario tenga las propiedades necesarias
+            if (!usuario || !usuario.nombre || !usuario.grupo) {
+                debugInfo.innerHTML += '<br>Usuario inválido o incompleto. Redirigiendo a index.html...';
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Mostrar información del usuario en la barra lateral
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+
+            // Manejar el grupo de usuario de forma segura
+            if (usuario.grupo) {
+                const grupoFormateado = usuario.grupo.charAt(0).toUpperCase() +
+                    (usuario.grupo.length > 1 ? usuario.grupo.slice(1) : '');
+                document.getElementById('rol-usuario').textContent = grupoFormateado;
+            } else {
+                document.getElementById('rol-usuario').textContent = 'Usuario';
+            }
+
+            // Configurar opciones según el rol
+            if (usuario.grupo) {
+                configurarMenuSegunRol(usuario.grupo);
+            }
+
+            // Cargar cursos
+            if (usuario.grupo) {
+                cargarCursos(usuario.grupo);
+            }
+        }
+
+        // Configurar el menú según el rol del usuario
+        function configurarMenuSegunRol(rolUsuario) {
+            // Por defecto, todos los enlaces están habilitados
+            const enlaces = {
+                'postulaciones': false,
+                'cursos-usuario': false,
+                'trabajos': false,
+                'cursos': false
+            };
+
+            // Configurar según el rol
+            switch(rolUsuario) {
+                case 'candidato':
+                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
+                    enlaces['trabajos'] = true;
+                    break;
+                case 'reclutador':
+                    // Los reclutadores pueden ver todo excepto "Tus cursos"
+                    enlaces['cursos-usuario'] = true;
+                    break;
+                case 'instructor':
+                    // Los instructores pueden ver todo excepto "Tus postulaciones"
+                    enlaces['postulaciones'] = true;
+                    break;
+            }
+
+            // Aplicar la configuración
+            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
+                const elemento = document.getElementById(`enlace-${enlace}`);
+                if (elemento && deshabilitar) {
+                    elemento.classList.add('disabled');
+                    elemento.setAttribute('href', '#');
+                }
+            }
+
+            // Si el rol no es reclutador, ocultar el botón de nuevo curso
+            const botonNuevoCurso = document.getElementById('boton-nuevo-curso');
+            if (botonNuevoCurso && rolUsuario !== 'reclutador') {
+                botonNuevoCurso.style.display = 'none';
+            }
+        }
+
+        // Función para cargar los cursos
+        function cargarCursos(rolUsuario) {
+            const contenedorCursos = document.getElementById('contenedor-cursos');
+            const debugInfo = document.getElementById('debug-info');
+
+            // Mostrar mensaje de carga
+            contenedorCursos.innerHTML = '<div class="mensaje-vacio">Cargando cursos...</div>';
+            debugInfo.innerHTML += '<br>Iniciando carga de cursos...';
+
+            // Obtener cursos del servidor
+            fetch('/api/cursos')
+                .then(response => {
+                    debugInfo.innerHTML += `<br>Respuesta recibida: ${response.status} ${response.statusText}`;
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(cursos => {
+                    debugInfo.innerHTML += `<br>Cursos recibidos: ${cursos.length} cursos encontrados`;
+
+                    // Verificar si hay cursos
+                    if (!cursos || cursos.length === 0) {
+                        contenedorCursos.innerHTML = '<div class="mensaje-vacio">No hay cursos disponibles.</div>';
+                        return;
+                    }
+
+                    // Crear lista de cursos
+                    const listaCursos = document.createElement('div');
+                    listaCursos.className = 'lista-cursos';
+
+                    // Agregar cada curso a la lista
+                    cursos.forEach(curso => {
+                        const itemCurso = document.createElement('div');
+                        itemCurso.className = 'curso-item';
+
+                        // Construir HTML del item
+                        itemCurso.innerHTML = `
+                            <div class="curso-imagen" style="background-image: url('https://picsum.photos/seed/${curso.imagen || 'curso'}/400/240.jpg')"></div>
+                            <div class="curso-contenido">
+                                <h3 class="curso-titulo">${curso.titulo || 'Sin título'}</h3>
+                                <p class="curso-instructor">Instructor: ${curso.instructor || 'No especificado'}</p>
+                                <p class="curso-descripcion">${curso.descripcion || 'Sin descripción'}</p>
+                                <div class="curso-detalles">
+                                    <span class="curso-duracion">Duración: ${curso.duracion || 'No especificada'}</span>
+                                    <span class="curso-precio">${curso.precio || 'Gratis'}</span>
+                                </div>
+                                <div class="curso-acciones">
+                                    ${rolUsuario === 'candidato' ? 
+                                        `<button class="curso-boton" onclick="inscribirseCurso(${curso.id})">Inscribirse</button>` :
+                                        rolUsuario === 'reclutador' ?
+                                        `<button class="curso-boton" onclick="inscribirseCurso(${curso.id})">Ver detalles</button>` :
+                                        `<button class="curso-boton" onclick="inscribirseCurso(${curso.id})">Explorar</button>`
+                                    }
+                                </div>
+                            </div>
+                        `;
+
+                        listaCursos.appendChild(itemCurso);
+                    });
+
+                    // Limpiar contenedor y agregar lista
+                    contenedorCursos.innerHTML = '';
+                    contenedorCursos.appendChild(listaCursos);
+                })
+                .catch(error => {
+                    console.error('Error al cargar cursos:', error);
+                    debugInfo.innerHTML += `<br>Error: ${error.message}`;
+                    contenedorCursos.innerHTML = `
+                        <div class="mensaje-vacio">
+                            <p>Error al cargar los cursos. Por favor intenta más tarde.</p>
+                            <p>Detalle: ${error.message}</p>
+                            <button class="boton-explorar" onclick="cargarCursos('${rolUsuario}')">Reintentar</button>
+                        </div>
+                    `;
+                });
+        }
+
+        // Función para inscribirse en un curso
+        function inscribirseCurso(cursoId) {
+            const usuarioStr = sessionStorage.getItem('usuario');
+
+            if (!usuarioStr) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            let usuario;
+            try {
+                usuario = JSON.parse(usuarioStr);
+            } catch (error) {
+                console.error('Error al parsear usuario:', error);
+                window.location.href = 'index.html';
+                return;
+            }
+
+            // Enviar solicitud de inscripción al servidor
+            fetch('/api/inscribir-curso', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    usuario_id: usuario.id,
+                    curso_id: cursoId
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exito) {
+                    alert('¡Te has inscrito al curso correctamente!');
+                    // No recargar la página, solo actualizar la lista de cursos
+                    cargarCursos(usuario.grupo);
+                } else {
+                    alert(data.mensaje || 'Error al inscribirse al curso. Por favor intenta nuevamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error de conexión. Por favor intenta más tarde.');
+            });
+        }
+
+        // Función para cerrar sesión
+        function cerrarSesion() {
+            // Limpiar sessionStorage
+            sessionStorage.removeItem('usuario');
+
+            // Forzar recarga completa de la página
+            window.location.href = 'index.html';
+        }
+
+        // Función para alternar la barra lateral
+        function toggleBarraLateral() {
+            const barraLateral = document.querySelector('.barra-lateral');
+            barraLateral.classList.toggle('abierta');
+        }
+
+        // Función para abrir el modal de nuevo curso
+        function abrirModalNuevoCurso() {
+            document.getElementById('modal-nuevo-curso').style.display = 'block';
+        }
+
+        // Función para cerrar el modal de nuevo curso
+        function cerrarModalNuevoCurso() {
+            document.getElementById('modal-nuevo-curso').style.display = 'none';
+            document.getElementById('formulario-nuevo-curso').reset();
+            document.getElementById('mensaje-exito').style.display = 'none';
+            document.getElementById('mensaje-error').style.display = 'none';
+        }
+
+        // Función para mostrar mensaje de éxito
+        function mostrarMensajeExito(mensaje) {
+            const mensajeExito = document.getElementById('mensaje-exito');
+            mensajeExito.textContent = mensaje;
+            mensajeExito.style.display = 'block';
+
+            setTimeout(() => {
+                mensajeExito.style.display = 'none';
+            }, 5000);
+        }
+
+        // Función para mostrar mensaje de error
+        function mostrarMensajeError(mensaje) {
+            const mensajeError = document.getElementById('mensaje-error');
+            mensajeError.textContent = mensaje;
+            mensajeError.style.display = 'block';
+
+            setTimeout(() => {
+                mensajeError.style.display = 'none';
+            }, 5000);
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cargar datos del usuario
+            cargarDatosUsuario();
+
+            // Configurar evento para el botón de menú
+            const botonMenu = document.getElementById('boton-menu');
+            if (botonMenu) {
+                botonMenu.addEventListener('click', toggleBarraLateral);
+            }
+
+            // Configurar evento para cerrar sesión
+            const botonCerrarSesion = document.getElementById('cerrar-sesion');
+            if (botonCerrarSesion) {
+                botonCerrarSesion.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    cerrarSesion();
+                });
+            }
+
+            // Configurar evento para el botón de nuevo curso
+            const botonNuevoCurso = document.getElementById('boton-nuevo-curso');
+            if (botonNuevoCurso) {
+                botonNuevoCurso.addEventListener('click', abrirModalNuevoCurso);
+            }
+
+            // Configurar evento para cerrar el modal
+            const modalCerrar = document.getElementById('modal-cerrar');
+            const cancelarNuevoCurso = document.getElementById('cancelar-nuevo-curso');
+
+            if (modalCerrar) {
+                modalCerrar.addEventListener('click', cerrarModalNuevoCurso);
+            }
+
+            if (cancelarNuevoCurso) {
+                cancelarNuevoCurso.addEventListener('click', cerrarModalNuevoCurso);
+            }
+
+            // Configurar evento para el formulario de nuevo curso
+            const formularioNuevoCurso = document.getElementById('formulario-nuevo-curso');
+            if (formularioNuevoCurso) {
+                formularioNuevoCurso.addEventListener('submit', function(e) {
+                    e.preventDefault();
+
+                    const usuarioStr = sessionStorage.getItem('usuario');
+                    if (!usuarioStr) {
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    let usuario;
+                    try {
+                        usuario = JSON.parse(usuarioStr);
+                    } catch (error) {
+                        console.error('Error al parsear usuario:', error);
+                        window.location.href = 'index.html';
+                        return;
+                    }
+
+                    if (!usuario || usuario.grupo !== 'reclutador') {
+                        mostrarMensajeError('No tienes permisos para crear cursos.');
+                        return;
+                    }
+
+                    // Obtener datos del formulario
+                    const formData = new FormData(this);
+                    const datosCurso = {
+                        titulo: formData.get('titulo'),
+                        descripcion: formData.get('descripcion'),
+                        instructor: formData.get('instructor'),
+                        instructor_id: usuario.id, // ID del reclutador que crea el curso
+                        duracion: formData.get('duracion'),
+                        precio: formData.get('precio'),
+                        imagen: formData.get('imagen'),
+                        fecha_creacion: new Date().toISOString(),
+                        activo: true
+                    };
+
+                    // Enviar datos al servidor
+                    fetch('/api/cursos', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(datosCurso)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.exito) {
+                            mostrarMensajeExito('Curso creado correctamente.');
+                            // Recargar la página después de un breve retraso
+                            setTimeout(() => {
+                                window.location.reload();
+                            }, 2000);
+                        } else {
+                            mostrarMensajeError(data.mensaje || 'Error al crear el curso. Por favor intenta nuevamente.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        mostrarMensajeError('Error de conexión. Por favor intenta más tarde.');
+                    });
+                });
+            }
+
+            // Cerrar modal si se hace clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('modal-nuevo-curso');
+                if (event.target === modal) {
+                    cerrarModalNuevoCurso();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

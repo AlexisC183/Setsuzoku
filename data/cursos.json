@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "titulo": "Desarrollo Web con JavaScript",
+    "descripcion": "Aprende a desarrollar aplicaciones web modernas utilizando JavaScript, HTML5 y CSS3.",
+    "instructor": "Carlos Rodríguez",
+    "instructor_id": 3,
+    "duracion": "8 semanas",
+    "precio": "$99.99",
+    "imagen": "javascript",
+    "fecha_creacion": "2023-06-15T10:30:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 2,
+    "titulo": "Diseño UX/UI Fundamental",
+    "descripcion": "Curso completo sobre los principios fundamentales del diseño de experiencia de usuario.",
+    "instructor": "Ana Martínez",
+    "instructor_id": 8,
+    "duracion": "6 semanas",
+    "precio": "$79.99",
+    "imagen": "uxui",
+    "fecha_creacion": "2023-06-10T14:20:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 3,
+    "titulo": "Python para Ciencia de Datos",
+    "descripcion": "Domina el uso de Python para el análisis de datos, visualización y machine learning.",
+    "instructor": "Miguel Ángel López",
+    "instructor_id": 5,
+    "duracion": "10 semanas",
+    "precio": "$129.99",
+    "imagen": "python",
+    "fecha_creacion": "2023-06-20T09:45:00.000Z",
+    "activo": true
+  },
+  {
+    "id": 4,
+    "titulo": "Marketing Digital Estratégico",
+    "descripcion": "Aprende a desarrollar estrategias de marketing digital efectivas para impulsar el crecimiento de negocios.",
+    "instructor": "Laura Gómez",
+    "instructor_id": 7,
+    "duracion": "7 semanas",
+    "precio": "$89.99",
+    "imagen": "marketing",
+    "fecha_creacion": "2023-06-18T16:30:00.000Z",
+    "activo": true
+  }
+]

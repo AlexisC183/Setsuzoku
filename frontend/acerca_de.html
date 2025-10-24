@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acerca de Nosotros - Setsuzoku</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .barra-lateral {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .boton-menu {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-usuario {
+            padding: 20px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nombre-usuario {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .rol-usuario {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        .menu-opciones {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-opciones li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-opciones a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .menu-opciones a:hover {
+            background-color: #2c3e50;
+        }
+
+        .menu-opciones a.disabled {
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .menu-opciones a.disabled:hover {
+            background-color: transparent;
+        }
+
+        .contenido-acerca {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .titulo-acerca {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .seccion-acerca {
+            margin-bottom: 30px;
+        }
+
+        .subtitulo-acerca {
+            font-size: 1.5rem;
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        .parrafo-acerca {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .equipo {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .miembro-equipo {
+            flex: 1;
+            min-width: 200px;
+            text-align: center;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .foto-miembro {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin: 0 auto 15px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .nombre-miembro {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .cargo-miembro {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .valores {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .valor {
+            flex: 1;
+            min-width: 200px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .icono-valor {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .nombre-valor {
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .descripcion-valor {
+            font-size: 0.9rem;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <a href="index.html" class="logo">Setsuzoku</a>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral">
+            <button class="boton-menu" id="boton-menu">☰</button>
+
+            <div class="menu-usuario">
+                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
+                <div class="rol-usuario" id="rol-usuario">Rol</div>
+            </div>
+
+            <ul class="menu-opciones">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Menú principal</a></li>
+                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
+                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
+                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
+                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
+                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO ACERCA DE NOSOTROS -->
+        <div class="contenido-acerca">
+            <h1 class="titulo-acerca">Acerca de Nosotros</h1>
+
+            <div class="seccion-acerca">
+                <h2 class="subtitulo-acerca">Nuestra Misión</h2>
+                <p class="parrafo-acerca">
+                    En Setsuzoku, nos dedicamos a conectar talento con oportunidades. Nuestra misión es facilitar 
+                    el encuentro entre profesionales y empresas, creando una plataforma eficiente y accesible 
+                    para todos los actores del mercado laboral.
+                </p>
+                <p class="parrafo-acerca">
+                    Creemos que el talento no tiene fronteras y que cada persona merece la oportunidad de 
+                    desarrollar su potencial en un ambiente que valore sus habilidades y aportes.
+                </p>
+            </div>
+
+            <div class="seccion-acerca">
+                <h2 class="subtitulo-acerca">Nuestra Visión</h2>
+                <p class="parrafo-acerca">
+                    Aspiramos a ser la plataforma líder en conexión laboral en la región, reconocida por nuestra 
+                    innovación, calidad de servicio y compromiso con el desarrollo profesional de nuestros usuarios.
+                </p>
+                <p class="parrafo-acerca">
+                    Visualizamos un futuro donde la búsqueda de empleo y la contratación de talento sean procesos 
+                    transparentes, eficientes y satisfactorios para todas las partes involucradas.
+                </p>
+            </div>
+
+            <div class="seccion-acerca">
+                <h2 class="subtitulo-acerca">Nuestra Historia</h2>
+                <p class="parrafo-acerca">
+                    Setsuzoku nació en 2023 con la idea de revolucionar la forma en que las personas encuentran 
+                    empleo y las empresas contratan talento. Nuestros fundadores, experimentados profesionales 
+                    del sector tecnológico y de recursos humanos, identificaron una necesidad en el mercado: 
+                    una plataforma que fuera realmente efectiva para conectar las habilidades específicas de los 
+                    candidatos con las necesidades precisas de las empresas.
+                </p>
+                <p class="parrafo-acerca">
+                    Desde nuestros inicios, hemos crecido constantemente, incorporando nuevas funcionalidades 
+                    y mejorando nuestra tecnología para ofrecer un servicio cada vez más completo y personalizado.
+                </p>
+            </div>
+
+            <div class="seccion-acerca">
+                <h2 class="subtitulo-acerca">Nuestros Valores</h2>
+                <div class="valores">
+                    <div class="valor">
+                        <div class="icono-valor">🤝</div>
+                        <div class="nombre-valor">Colaboración</div>
+                        <div class="descripcion-valor">Fomentamos el trabajo en equipo y la construcción de relaciones profesionales sólidas.</div>
+                    </div>
+                    <div class="valor">
+                        <div class="icono-valor">🔍</div>
+                        <div class="nombre-valor">Transparencia</div>
+                        <div class="descripcion-valor">Creemos en procesos claros y honestos para todas las partes involucradas.</div>
+                    </div>
+                    <div class="valor">
+                        <div class="icono-valor">🚀</div>
+                        <div class="nombre-valor">Innovación</div>
+                        <div class="descripcion-valor">Buscamos constantemente nuevas formas de mejorar y optimizar nuestra plataforma.</div>
+                    </div>
+                    <div class="valor">
+                        <div class="icono-valor">🌱</div>
+                        <div class="nombre-valor">Crecimiento</div>
+                        <div class="descripcion-valor">Promovemos el desarrollo profesional y personal de nuestros usuarios.</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="seccion-acerca">
+                <h2 class="subtitulo-acerca">Nuestro Equipo</h2>
+                <p class="parrafo-acerca">
+                    Detrás de Setsuzoku hay un equipo diverso de profesionales apasionados por la tecnología 
+                    y los recursos humanos. Nuestro equipo combina experiencia en desarrollo de software, 
+                    diseño de experiencia de usuario, gestión de talento y marketing digital.
+                </p>
+                <div class="equipo">
+                    <div class="miembro-equipo">
+                        <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador1/240/240.jpg')"></div>
+                        <div class="nombre-miembro">Carlos Rodríguez</div>
+                        <div class="cargo-miembro">CEO y Fundador</div>
+                    </div>
+                    <div class="miembro-equipo">
+                        <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador2/240/240.jpg')"></div>
+                        <div class="nombre-miembro">Ana Martínez</div>
+                        <div class="cargo-miembro">Directora de Producto</div>
+                    </div>
+                    <div class="miembro-equipo">
+                        <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador3/240/240.jpg')"></div>
+                        <div class="nombre-miembro">Miguel Ángel López</div>
+                        <div class="cargo-miembro">CTO</div>
+                    </div>
+                    <div class="miembro-equipo">
+                        <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador4/240/240.jpg')"></div>
+                        <div class="nombre-miembro">Laura Gómez</div>
+                        <div class="cargo-miembro">Directora de RRHH</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para alternar la barra lateral
+        function toggleBarraLateral() {
+            const barraLateral = document.querySelector('.barra-lateral');
+            barraLateral.classList.toggle('abierta');
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar evento para el botón de menú
+            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
+        });
+    </script>
+</body>
+</html>

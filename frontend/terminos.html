@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Términos y Condiciones - Setsuzoku</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        .barra-lateral {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            height: 100%;
+            overflow-y: auto;
+            position: relative;
+            z-index: 100;
+        }
+
+        .boton-menu {
+            position: absolute;
+            top: 10px;
+            right: -40px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 0 5px 5px 0;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .menu-usuario {
+            padding: 20px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nombre-usuario {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .rol-usuario {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        .menu-opciones {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-opciones li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-opciones a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .menu-opciones a:hover {
+            background-color: #2c3e50;
+        }
+
+        .menu-opciones a.disabled {
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .menu-opciones a.disabled:hover {
+            background-color: transparent;
+        }
+
+        .contenido-terminos {
+            flex: 1;
+            padding: 30px;
+            background-color: white;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            overflow-y: auto;
+        }
+
+        .titulo-terminos {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .intro-terminos {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .seccion-terminos {
+            margin-bottom: 30px;
+        }
+
+        .subtitulo-terminos {
+            font-size: 1.3rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .parrafo-terminos {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 15px;
+        }
+
+        .lista-terminos {
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+
+        .item-terminos {
+            margin-bottom: 10px;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        .indice-terminos {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .titulo-indice {
+            font-size: 1.2rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .lista-indice {
+            list-style-type: decimal;
+            margin-left: 20px;
+        }
+
+        .item-indice {
+            margin-bottom: 8px;
+        }
+
+        .enlace-indice {
+            color: #3498db;
+            text-decoration: none;
+        }
+
+        .enlace-indice:hover {
+            text-decoration: underline;
+        }
+
+        .fecha-actualizacion {
+            font-size: 0.9rem;
+            color: #7f8c8d;
+            text-align: right;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <a href="index.html" class="logo">Setsuzoku</a>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral">
+            <button class="boton-menu" id="boton-menu">☰</button>
+
+            <div class="menu-usuario">
+                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
+                <div class="rol-usuario" id="rol-usuario">Rol</div>
+            </div>
+
+            <ul class="menu-opciones">
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="index.html">Menú principal</a></li>
+                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
+                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
+                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
+                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
+                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
+            </ul>
+        </div>
+
+        <!-- CONTENIDO DE TÉRMINOS Y CONDICIONES -->
+        <div class="contenido-terminos">
+            <h1 class="titulo-terminos">Términos y Condiciones</h1>
+
+            <p class="intro-terminos">
+                Bienvenido a Setsuzoku. Al acceder y utilizar nuestra plataforma, aceptas cumplir 
+                con los siguientes términos y condiciones. Por favor, léelos detenidamente antes de utilizar nuestros servicios.
+            </p>
+
+            <div class="indice-terminos">
+                <h2 class="titulo-indice">Índice</h2>
+                <ol class="lista-indice">
+                    <li class="item-indice"><a href="#aceptacion" class="enlace-indice">Aceptación de los términos</a></li>
+                    <li class="item-indice"><a href="#descripcion" class="enlace-indice">Descripción del servicio</a></li>
+                    <li class="item-indice"><a href="#registro" class="enlace-indice">Registro y cuenta de usuario</a></li>
+                    <li class="item-indice"><a href="#responsabilidades" class="enlace-indice">Responsabilidades del usuario</a></li>
+                    <li class="item-indice"><a href="#propiedad" class="enlace-indice">Propiedad intelectual</a></li>
+                    <li class="item-indice"><a href="#privacidad" class="enlace-indice">Privacidad y protección de datos</a></li>
+                    <li class="item-indice"><a href="#terminos" class="enlace-indice">Terminos de pago</a></li>
+                    <li class="item-indice"><a href="#limitacion" class="enlace-indice">Limitación de responsabilidad</a></li>
+                    <li class="item-indice"><a href="#modificaciones" class="enlace-indice">Modificaciones del servicio</a></li>
+                    <li class="item-indice"><a href="#resolucion" class="enlace-indice">Resolución de controversias</a></li>
+                </ol>
+            </div>
+
+            <div class="seccion-terminos" id="aceptacion">
+                <h2 class="subtitulo-terminos">1. Aceptación de los términos</h2>
+                <p class="parrafo-terminos">
+                    Al acceder y utilizar el sitio web y servicios de Setsuzoku, usted acepta quedar 
+                    vinculado por estos Términos y Condiciones de Uso, nuestra Política de Privacidad 
+                    y todas las leyes y regulaciones aplicables. Si no está de acuerdo con alguno de 
+                    estos términos, se le prohíbe utilizar o acceder a Setsuzoku.
+                </p>
+                <p class="parrafo-terminos">
+                    Los materiales contenidos en este sitio web están protegidos por las leyes de 
+                    derechos de autor y marcas comerciales aplicables.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="descripcion">
+                <h2 class="subtitulo-terminos">2. Descripción del servicio</h2>
+                <p class="parrafo-terminos">
+                    Setsuzoku es una plataforma de conexión laboral que facilita el encuentro entre 
+                    candidatos, reclutadores e instructores. A través de nuestra plataforma, los usuarios 
+                    pueden:
+                </p>
+                <ul class="lista-terminos">
+                    <li class="item-terminos">Crear perfiles profesionales destacando sus habilidades y experiencia</li>
+                    <li class="item-terminos">Publicar y buscar ofertas de empleo</li>
+                    <li class="item-terminos">Ofrecer y participar en cursos de formación profesional</li>
+                    <li class="item-terminos">Interactuar con otros profesionales del sector</li>
+                </ul>
+                <p class="parrafo-terminos">
+                    Setsuzoku se reserva el derecho de modificar, suspender o discontinuar cualquier 
+                    aspecto del servicio en cualquier momento, incluyendo la disponibilidad de 
+                    características, base de datos o contenido. Setsuzoku también puede imponer límites 
+                    sobre ciertas características o restringir su acceso a partes o todo el servicio 
+                    sin previo aviso ni responsabilidad.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="registro">
+                <h2 class="subtitulo-terminos">3. Registro y cuenta de usuario</h2>
+                <p class="parrafo-terminos">
+                    Para utilizar ciertas características de Setsuzoku, puede que se le requiera crear una 
+                    cuenta de usuario. Al registrarse, usted acepta proporcionar información veraz, 
+                    precisa, actualizada y completa según lo solicitado en el formulario de registro.
+                </p>
+                <p class="parrafo-terminos">
+                    Usted es responsable de mantener la confidencialidad de su cuenta y contraseña, y 
+                    de todas las actividades que ocurran en su cuenta. Usted acepta notificar 
+                    inmediatamente a Setsuzoku sobre cualquier uso no autorizado de su cuenta o 
+                    cualquier otra violación de seguridad.
+                </p>
+                <p class="parrafo-terminos">
+                    Setsuzoku no se responsabiliza por ninguna pérdida o daño que surja de su 
+                    incumplimiento de esta obligación de seguridad.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="responsabilidades">
+                <h2 class="subtitulo-terminos">4. Responsabilidades del usuario</h2>
+                <p class="parrafo-terminos">
+                    Como usuario de Setsuzoku, usted se compromete a:
+                </p>
+                <ul class="lista-terminos">
+                    <li class="item-terminos">Proporcionar información veraz y actualizada en su perfil</li>
+                    <li class="item-terminos">No utilizar la plataforma para fines ilegales o no autorizados</li>
+                    <li class="item-terminos">No publicar contenido ofensivo, difamatorio, obsceno o inapropiado</li>
+                    <li class="item-terminos">No realizar actividades que puedan dañar, deshabilitar o sobrecargar el servicio</li>
+                    <li class="item-terminos">Respetar los derechos de propiedad intelectual de terceros</li>
+                    <li class="item-terminos">No recopilar información personal de otros usuarios sin su consentimiento</li>
+                </ul>
+                <p class="parrafo-terminos">
+                    Setsuzoku se reserva el derecho de suspender o cancelar cuentas de usuarios que 
+                    violen estos términos o utilicen la plataforma de manera inapropiada.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="propiedad">
+                <h2 class="subtitulo-terminos">5. Propiedad intelectual</h2>
+                <p class="parrafo-terminos">
+                    Todo el contenido de Setsuzoku, incluyendo但不限于 textos, gráficos, logos, imágenes, 
+                    software y otros materiales, está protegido por las leyes de propiedad intelectual 
+                    aplicables.
+                </p>
+                <p class="parrafo-terminos">
+                    Al publicar contenido en Setsuzoku, usted concede a Setsuzoku una licencia mundial, 
+                    no exclusiva, transferible y sublicenciable para usar, reproducir, modificar, 
+                    adaptar, publicar y mostrar dicho contenido en conexión con el servicio.
+                </p>
+                <p class="parrafo-terminos">
+                    Usted declara y garantiza que posee todos los derechos sobre el contenido que 
+                    publica o que tiene la autorización necesaria para publicarlo y conceder la licencia 
+                    mencionada anteriormente.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="privacidad">
+                <h2 class="subtitulo-terminos">6. Privacidad y protección de datos</h2>
+                <p class="parrafo-terminos">
+                    Su privacidad es importante para nosotros. Nuestra Política de Privacidad, que se 
+                    incorpora a estos Términos y Condiciones, describe cómo recopilamos, utilizamos y 
+                    protegemos su información personal.
+                </p>
+                <p class="parrafo-terminos">
+                    Al utilizar Setsuzoku, usted acepta la recopilación y uso de información de acuerdo 
+                    con nuestra Política de Privacidad. Nos comprometemos a proteger sus datos personales 
+                    y a cumplir con todas las leyes de protección de datos aplicables.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="terminos">
+                <h2 class="subtitulo-terminos">7. Términos de pago</h2>
+                <p class="parrafo-terminos">
+                    Algunos servicios de Setsuzoku pueden estar sujetos a cargos. Al optar por un 
+                    servicio de pago, usted se compromete a pagar todas las tarifas aplicables según 
+                    los precios y condiciones establecidos en el momento de la compra.
+                </p>
+                <p class="parrafo-terminos">
+                    Setsuzoku se reserva el derecho de modificar los precios en cualquier momento. 
+                    Cualquier cambio en los precios se aplicará a las compras realizadas después 
+                    de la modificación.
+                </p>
+                <p class="parrafo-terminos">
+                    Todos los pagos se procesan a través de plataformas de pago seguras. Setsuzoku no 
+                    almacena información de tarjetas de crédito en sus servidores.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="limitacion">
+                <h2 class="subtitulo-terminos">8. Limitación de responsabilidad</h2>
+                <p class="parrafo-terminos">
+                    En la máxima medida permitida por la ley aplicable, Setsuzoku no será responsable 
+                    por ningún daño indirecto, incidental, especial, consecuente o punitivo, incluyendo 
+                   但不限于 pérdida de beneficios, datos, uso, buena voluntad u otras pérdidas intangibles, 
+                    que resulten del uso o la incapacidad de usar el servicio.
+                </p>
+                <p class="parrafo-terminos">
+                    Setsuzoku no garantiza que el servicio será ininterrumpido, oportuno, seguro o libre 
+                    de errores. El servicio puede estar sujeto a limitaciones, retrasos y otros problemas 
+                    inherentes al uso de internet y las comunicaciones electrónicas.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="modificaciones">
+                <h2 class="subtitulo-terminos">9. Modificaciones del servicio</h2>
+                <p class="parrafo-terminos">
+                    Setsuzoku se reserva el derecho de modificar o reemplazar estos Términos y 
+                    Condiciones en cualquier momento. Si una revisión es material, intentaremos 
+                    proporcionar un aviso con al menos 30 días de antelación antes de que los nuevos 
+                    términos entren en vigencia.
+                </p>
+                <p class="parrafo-terminos">
+                    Lo que constituye un cambio material será determinado a nuestro exclusivo criterio. 
+                    Al continuar accediendo o utilizando nuestro servicio después de que esas revisiones 
+                    entren en vigencia, usted acepta estar vinculado por los términos revisados.
+                </p>
+            </div>
+
+            <div class="seccion-terminos" id="resolucion">
+                <h2 class="subtitulo-terminos">10. Resolución de controversias</h2>
+                <p class="parrafo-terminos">
+                    Cualquier controversia que surja de o se relacione con estos Términos y Condiciones 
+                    o el servicio será resuelta mediante negociación de buena fe entre las partes.
+                </p>
+                <p class="parrafo-terminos">
+                    Si la controversia no puede resolverse mediante negociación dentro de los 30 días 
+                    posteriores a la notificación, se someterá a mediación y, si es necesario, a un 
+                    proceso de arbitraje de acuerdo con las leyes aplicables.
+                </p>
+                <p class="parrafo-terminos">
+                    Estos Términos y Condiciones se regirán e interpretarán de acuerdo con las leyes 
+                    del país donde se encuentra la sede principal de Setsuzoku, sin tener en cuenta sus 
+                    disposiciones sobre conflicto de leyes.
+                </p>
+            </div>
+
+            <div class="fecha-actualizacion">
+                Última actualización: 20 de octubre de 2023
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para alternar la barra lateral
+        function toggleBarraLateral() {
+            const barraLateral = document.querySelector('.barra-lateral');
+            barraLateral.classList.toggle('abierta');
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar evento para el botón de menú
+            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
+        });
+    </script>
+</body>
+</html>

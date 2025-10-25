@@ -21,6 +21,66 @@
             flex-direction: column;
         }
 
+        /* Estilos para enlaces públicos */
+        .enlaces-publicos {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .enlaces-publicos a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .enlaces-publicos a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Estilos para enlaces de sesión (botones destacados) */
+        .enlaces-sesion {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .enlace-sesion {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            background-color: #3498db; /* Color azul para diferenciar */
+            transition: background-color 0.2s;
+        }
+
+        .enlace-sesion:hover {
+            background-color: #2980b9; /* Azul más oscuro al pasar el mouse */
+        }
+
+        /* Estilos adicionales para dispositivos móviles */
+        @media (max-width: 768px) {
+            .barra-superior {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .enlaces-publicos {
+                flex-wrap: wrap;
+                justify-content: center;
+                margin-bottom: 1rem;
+            }
+            
+            .enlaces-sesion {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+
         .barra-superior {
             background-color: #2c3e50;
             padding: 0.8rem 2rem;
@@ -291,10 +351,24 @@
 <body>
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
-        <a href="#" class="logo">Setsuzoku</a>
+        <a href="index.html" class="logo">Setsuzoku</a>
+        
+        <!-- Enlaces públicos (siempre visibles) -->
+        <div class="enlaces-publicos">
+            <a href="acerca_de.html">Acerca de</a>
+            <a href="ayuda.html">Ayuda</a>
+            <a href="contacto.html">Contacto</a>
+            <a href="cursos.html">Cursos</a>
+            <a href="faq.html">FAQ</a>
+            <a href="terminos.html">Términos</a>
+            <a href="testimonios.html">Testimonios</a>
+            <a href="trabajos.html">Trabajos</a>
+        </div>
+        
+        <!-- Enlaces de sesión (solo cuando no hay sesión) -->
         <div class="enlaces-sesion" id="enlaces-sesion">
-            <a class="enlace-sesion" href="inicio_sesion.html">Iniciar Sesión</a>
-            <a class="enlace-sesion" href="registro.html">Registrarse</a>
+            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
+            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
         </div>
     </nav>
 

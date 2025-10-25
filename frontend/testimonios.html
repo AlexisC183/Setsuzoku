@@ -21,10 +21,16 @@
 
         .barra-superior {
             background-color: #2c3e50;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
         }
 
         .logo {
@@ -34,33 +40,40 @@
             text-decoration: none;
         }
 
+        .enlaces-sesion {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enlace-sesion {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .enlace-sesion:hover {
+            text-decoration: underline;
+        }
+
         .contenedor-principal {
             display: flex;
             flex: 1;
-            overflow: hidden;
+            margin-top: 60px; /* Altura de la barra superior */
+            position: relative;
         }
 
         .barra-lateral {
             width: 250px;
             background-color: #34495e;
             color: white;
-            height: 100%;
+            height: calc(100vh - 60px); /* Altura total menos la barra superior */
+            position: fixed;
+            top: 60px; /* Justo debajo de la barra superior */
+            left: 0;
             overflow-y: auto;
-            position: relative;
             z-index: 100;
-        }
-
-        .boton-menu {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
+            display: none;
         }
 
         .menu-usuario {
@@ -108,11 +121,28 @@
             background-color: transparent;
         }
 
-        .contenido-testimonios {
+        /* CONTENEDOR DE CONTENIDO */
+        .contenedor-contenido {
             flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .contenedor-contenido.con-barra-lateral {
+            margin-left: 250px;
+            width: calc(100% - 250px);
+        }
+
+        /* CONTENIDO DE TESTIMONIOS */
+        .contenido-testimonios {
+            max-width: 1000px;
+            width: 100%;
             padding: 30px;
             background-color: white;
-            margin: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -126,198 +156,192 @@
         }
 
         .intro-testimonios {
-            font-size: 1.1rem;
-            color: #555;
             margin-bottom: 30px;
+            color: #555;
             line-height: 1.6;
         }
 
         .filtro-testimonios {
-            display: flex;
-            gap: 10px;
             margin-bottom: 30px;
-            flex-wrap: wrap;
         }
 
-        .boton-filtro {
-            padding: 8px 15px;
-            background-color: #f8f9fa;
+        .etiqueta-filtro {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .campo-filtro {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 0.9rem;
+            border-radius: 5px;
+            font-size: 1rem;
         }
 
-        .boton-filtro:hover,
-        .boton-filtro.activo {
-            background-color: #3498db;
-            color: white;
+        .campo-filtro:focus {
+            outline: none;
             border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
         }
 
         .lista-testimonios {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 25px;
         }
 
-        .testimonio-item {
-            border: 1px solid #eee;
+        .testimonio {
+            background-color: #f8f9fa;
             border-radius: 8px;
-            padding: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            background-color: #fff;
+            padding: 25px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
         }
 
-        .testimonio-item:hover {
+        .testimonio:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        .testimonio-cabecera {
+        .comillas {
+            font-size: 3rem;
+            color: #3498db;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            opacity: 0.3;
+        }
+
+        .texto-testimonio {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-style: italic;
+            position: relative;
+            z-index: 1;
+        }
+
+        .autor-testimonio {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-top: 20px;
         }
 
-        .testimonio-foto {
+        .foto-autor {
             width: 60px;
             height: 60px;
             border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 15px;
             background-size: cover;
             background-position: center;
-            margin-right: 15px;
         }
 
-        .testimonio-info {
+        .info-autor {
             flex: 1;
         }
 
-        .testimonio-nombre {
+        .nombre-autor {
             font-weight: bold;
-            font-size: 1.1rem;
             color: #2c3e50;
+            margin-bottom: 5px;
         }
 
-        .testimonio-rol {
+        .cargo-autor {
             font-size: 0.9rem;
             color: #7f8c8d;
         }
 
-        .testimonio-empresa {
+        .empresa-autor {
             font-size: 0.9rem;
             color: #3498db;
         }
 
-        .testimonio-texto {
-            font-style: italic;
-            color: #555;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            position: relative;
-        }
-
-        .testimonio-texto::before {
-            content: '"';
-            font-size: 3rem;
-            color: #ddd;
-            position: absolute;
-            left: -10px;
-            top: -10px;
-        }
-
-        .testimonio-texto::after {
-            content: '"';
-            font-size: 3rem;
-            color: #ddd;
-            position: absolute;
-            margin-left: 5px;
-            bottom: -20px;
-        }
-
-        .testimonio-valoracion {
+        .calificacion {
             display: flex;
+            margin-top: 10px;
+        }
+
+        .estrella {
             color: #f39c12;
             font-size: 1.2rem;
         }
 
-        .testimonio-fecha {
-            font-size: 0.8rem;
-            color: #95a5a6;
-            text-align: right;
-            margin-top: 10px;
+        .boton-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
         }
 
-        .testimonio-destacado {
-            grid-column: span 2;
-            display: flex;
-            background-color: #f8f9fa;
+        .mensaje-no-sesion {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            display: none;
         }
 
-        .testimonio-destacado .testimonio-foto {
-            width: 100px;
-            height: 100px;
+        .mensaje-no-sesion h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
         }
 
-        .testimonio-destacado .testimonio-texto {
+        .mensaje-no-sesion p {
+            color: #555;
+            margin-bottom: 30px;
             font-size: 1.1rem;
-            padding: 0 20px;
         }
 
-        .testimonio-destacado .testimonio-texto::before {
-            font-size: 4rem;
-        }
-
-        .testimonio-destacado .testimonio-texto::after {
-            font-size: 4rem;
-        }
-
-        .call-to-action {
+        .boton-iniciar-sesion {
+            display: inline-block;
             background-color: #3498db;
             color: white;
-            padding: 30px;
-            border-radius: 8px;
-            text-align: center;
-            margin-top: 20px;
-        }
-
-        .call-to-action-titulo {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .call-to-action-texto {
-            margin-bottom: 20px;
-            line-height: 1.6;
-        }
-
-        .call-to-action-boton {
-            display: inline-block;
             padding: 12px 25px;
-            background-color: white;
-            color: #3498db;
-            border-radius: 4px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: background-color 0.3s;
         }
 
-        .call-to-action-boton:hover {
-            background-color: #f8f9fa;
+        .boton-iniciar-sesion:hover {
+            background-color: #2980b9;
         }
 
         @media (max-width: 768px) {
-            .testimonio-destacado {
-                grid-column: span 1;
-                flex-direction: column;
+            .contenedor-contenido.con-barra-lateral {
+                margin-left: 0;
+                width: 100%;
             }
             
-            .testimonio-destacado .testimonio-foto {
-                width: 60px;
-                height: 60px;
-                margin: 0 auto 15px;
+            .barra-lateral {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+            
+            .boton-menu {
+                display: block;
+            }
+            
+            .lista-testimonios {
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -326,13 +350,17 @@
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
         <a href="index.html" class="logo">Setsuzoku</a>
+        <div class="enlaces-sesion" id="enlaces-sesion">
+            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
+            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
+        </div>
     </nav>
 
     <div class="contenedor-principal">
         <!-- BARRA LATERAL -->
-        <div class="barra-lateral">
-            <button class="boton-menu" id="boton-menu">☰</button>
-
+        <button class="boton-menu" id="boton-menu">☰ Menú</button>
+        
+        <div class="barra-lateral" id="barra-lateral">
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
                 <div class="rol-usuario" id="rol-usuario">Rol</div>
@@ -349,152 +377,175 @@
             </ul>
         </div>
 
-        <!-- CONTENIDO DE TESTIMONIOS -->
-        <div class="contenido-testimonios">
-            <h1 class="titulo-testimonios">Testimonios</h1>
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <!-- CONTENIDO DE TESTIMONIOS -->
+            <div class="contenido-testimonios" id="contenido-testimonios">
+                <h1 class="titulo-testimonios">Testimonios</h1>
 
-            <p class="intro-testimonios">
-                Descubre las experiencias de profesionales y empresas que han encontrado en Setsuzoku 
-                el aliado perfecto para sus necesidades laborales y de formación.
-            </p>
+                <p class="intro-testimonios">
+                    Descubre lo que nuestros usuarios tienen que decir sobre su experiencia con Setsuzoku. 
+                    Estos testimonios reflejan el impacto que nuestra plataforma ha tenido en sus carreras 
+                    profesionales y desarrollo de habilidades.
+                </p>
 
-            <div class="filtro-testimonios">
-                <div class="boton-filtro activo" data-filtro="todos">Todos</div>
-                <div class="boton-filtro" data-filtro="candidatos">Candidatos</div>
-                <div class="boton-filtro" data-filtro="reclutadores">Reclutadores</div>
-                <div class="boton-filtro" data-filtro="instructores">Instructores</div>
-                <div class="boton-filtro" data-filtro="empresas">Empresas</div>
-            </div>
+                <div class="filtro-testimonios">
+                    <label class="etiqueta-filtro" for="filtrar-testimonio">Buscar testimonio</label>
+                    <input type="text" id="filtrar-testimonio" class="campo-filtro" placeholder="Buscar por nombre, empresa o cargo">
+                </div>
 
-            <div class="lista-testimonios">
-                <!-- Testimonio destacado -->
-                <div class="testimonio-item testimonio-destacado" data-categoria="candidatos">
-                    <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio1/200/200.jpg')"></div>
-                    <div>
-                        <div class="testimonio-cabecera">
-                            <div class="testimonio-info">
-                                <div class="testimonio-nombre">María González</div>
-                                <div class="testimonio-rol">Diseñadora UX/UI</div>
-                                <div class="testimonio-empresa">Tech Solutions S.A.</div>
+                <div class="lista-testimonios" id="lista-testimonios">
+                    <div class="testimonio" data-nombre="María González" data-empresa="Tech Solutions" data-cargo="Desarrolladora Frontend">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Gracias a Setsuzoku encontré el trabajo de mis sueños. La plataforma es muy intuitiva 
+                            y me permitió postularme a varias ofertas que se ajustaban perfectamente a mi perfil. 
+                            Recibí respuestas rápidas y en menos de un mes ya tenía una nueva oportunidad laboral.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/maria/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">María González</div>
+                                <div class="cargo-autor">Desarrolladora Frontend</div>
+                                <div class="empresa-autor">Tech Solutions</div>
                             </div>
                         </div>
-                        <div class="testimonio-texto">
-                            Gracias a Setsuzoku encontré el trabajo de mis sueños en menos de un mes. 
-                            La plataforma es muy intuitiva y me permitió mostrar todo mi potencial a través 
-                            de un perfil completo. ¡Recomendado 100%!
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
                         </div>
-                        <div class="testimonio-valoracion">
-                            ★★★★★
-                        </div>
-                        <div class="testimonio-fecha">Hace 2 semanas</div>
                     </div>
-                </div>
 
-                <!-- Testimonios regulares -->
-                <div class="testimonio-item" data-categoria="reclutadores">
-                    <div class="testimonio-cabecera">
-                        <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio2/200/200.jpg')"></div>
-                        <div class="testimonio-info">
-                            <div class="testimonio-nombre">Carlos Rodríguez</div>
-                            <div class="testimonio-rol">Director de RRHH</div>
-                            <div class="testimonio-empresa">Innovatech</div>
+                    <div class="testimonio" data-nombre="Carlos Rodríguez" data-empresa="Data Insights" data-cargo="Analista de Datos">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Los cursos que encontré en Setsuzoku fueron fundamentales para mi transición de carrera. 
+                            Pasé de ser un analista junior a un puesto de analista senior con un aumento salarial 
+                            significativo. La calidad de los instructores y el contenido de los cursos es excepcional.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/carlos/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">Carlos Rodríguez</div>
+                                <div class="cargo-autor">Analista de Datos</div>
+                                <div class="empresa-autor">Data Insights</div>
+                            </div>
+                        </div>
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
                         </div>
                     </div>
-                    <div class="testimonio-texto">
-                        Setsuzoku ha revolucionado nuestra forma de contratar. Hemos reducido el tiempo 
-                        de selección en un 40% y hemos encontrado candidatos de mucha más calidad.
-                    </div>
-                    <div class="testimonio-valoracion">
-                        ★★★★☆
-                    </div>
-                    <div class="testimonio-fecha">Hace 1 mes</div>
-                </div>
 
-                <div class="testimonio-item" data-categoria="instructores">
-                    <div class="testimonio-cabecera">
-                        <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio3/200/200.jpg')"></div>
-                        <div class="testimonio-info">
-                            <div class="testimonio-nombre">Ana Martínez</div>
-                            <div class="testimonio-rol">Instructora de Marketing Digital</div>
-                            <div class="testimonio-empresa">Freelance</div>
+                    <div class="testimonio" data-nombre="Ana Martínez" data-empresa="Creative Studios" data-cargo="Diseñadora UX/UI">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Como reclutadora, Setsuzoku ha simplificado enormemente mi proceso de búsqueda de talento. 
+                            La plataforma me permite encontrar candidatos altamente cualificados de manera eficiente, 
+                            y las herramientas de filtrado me ahorran muchísimo tiempo. Definitivamente la recomendaría.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/ana/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">Ana Martínez</div>
+                                <div class="cargo-autor">Diseñadora UX/UI</div>
+                                <div class="empresa-autor">Creative Studios</div>
+                            </div>
+                        </div>
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">☆</span>
                         </div>
                     </div>
-                    <div class="testimonio-texto">
-                        Como instructora, Setsuzoku me ha permitido llegar a más estudiantes y compartir 
-                                mis conocimientos con profesionales de todo el país. La plataforma es muy completa 
-                                y fácil de usar.
-                    </div>
-                    <div class="testimonio-valoracion">
-                        ★★★★★
-                    </div>
-                    <div class="testimonio-fecha">Hace 3 semanas</div>
-                </div>
 
-                <div class="testimonio-item" data-categoria="candidatos">
-                    <div class="testimonio-cabecera">
-                        <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio4/200/200.jpg')"></div>
-                        <div class="testimonio-info">
-                            <div class="testimonio-nombre">Pedro López</div>
-                            <div class="testimonio-rol">Desarrollador Full Stack</div>
-                            <div class="testimonio-empresa">Digital Creations</div>
+                    <div class="testimonio" data-nombre="Miguel Ángel López" data-empresa="Code Academy" data-cargo="Instructor de Programación">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Como instructor, Setsuzoku me ha dado la oportunidad de llegar a miles de estudiantes 
+                            interesados en aprender programación. La plataforma es muy fácil de usar tanto para 
+                            instructores como para alumnos, y el soporte técnico siempre está disponible para ayudar.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/miguel/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">Miguel Ángel López</div>
+                                <div class="cargo-autor">Instructor de Programación</div>
+                                <div class="empresa-autor">Code Academy</div>
+                            </div>
+                        </div>
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
                         </div>
                     </div>
-                    <div class="testimonio-texto">
-                        Los cursos de Setsuzoku me ayudaron a actualizar mis habilidades y encontrar un 
-                        mejor trabajo. La calidad de los instructores y el contenido es excepcional.
-                    </div>
-                    <div class="testimonio-valoracion">
-                        ★★★★☆
-                    </div>
-                    <div class="testimonio-fecha">Hace 2 meses</div>
-                </div>
 
-                <div class="testimonio-item" data-categoria="empresas">
-                    <div class="testimonio-cabecera">
-                        <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio5/200/200.jpg')"></div>
-                        <div class="testimonio-info">
-                            <div class="testimonio-nombre">Laura Gómez</div>
-                            <div class="testimonio-rol">CEO</div>
-                            <div class="testimonio-empresa">StartupX</div>
+                    <div class="testimonio" data-nombre="Laura Gómez" data-empresa="Marketing Pro" data-cargo="Especialista en Marketing Digital">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Después de varios años fuera del mercado laboral, Setsuzoku me ayudó a actualizar mis 
+                            habilidades y encontrar un nuevo trabajo en el campo del marketing digital. Los cursos son 
+                            muy prácticos y actualizados, y la comunidad de profesionales es muy colaborativa.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/laura/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">Laura Gómez</div>
+                                <div class="cargo-autor">Especialista en Marketing Digital</div>
+                                <div class="empresa-autor">Marketing Pro</div>
+                            </div>
+                        </div>
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">☆</span>
                         </div>
                     </div>
-                    <div class="testimonio-texto">
-                        Gracias a Setsuzoku hemos conformado un equipo excepcional para nuestra startup. 
-                        La calidad de los candidatos y la facilidad del proceso nos han ahorrado tiempo y recursos.
-                    </div>
-                    <div class="testimonio-valoracion">
-                        ★★★★★
-                    </div>
-                    <div class="testimonio-fecha">Hace 1 mes</div>
-                </div>
 
-                <div class="testimonio-item" data-categoria="candidatos">
-                    <div class="testimonio-cabecera">
-                        <div class="testimonio-foto" style="background-image: url('https://picsum.photos/seed/testimonio6/200/200.jpg')"></div>
-                        <div class="testimonio-info">
-                            <div class="testimonio-nombre">Javier Fernández</div>
-                            <div class="testimonio-rol">Analista de Datos</div>
-                            <div class="testimonio-empresa">Data Insights</div>
+                    <div class="testimonio" data-nombre="Pedro Sánchez" data-empresa="Innovatech" data-cargo="Project Manager">
+                        <div class="comillas">"</div>
+                        <p class="texto-testimonio">
+                            Setsuzoku ha transformado la manera en que nuestra empresa encuentra talento. Hemos 
+                            reducido el tiempo de contratación en un 40% y hemos encontrado candidatos mucho más 
+                            cualificados. La interfaz es intuitiva y las herramientas de gestión son excelentes.
+                        </p>
+                        <div class="autor-testimonio">
+                            <div class="foto-autor" style="background-image: url('https://picsum.photos/seed/pedro/120/120.jpg')"></div>
+                            <div class="info-autor">
+                                <div class="nombre-autor">Pedro Sánchez</div>
+                                <div class="cargo-autor">Project Manager</div>
+                                <div class="empresa-autor">Innovatech</div>
+                            </div>
+                        </div>
+                        <div class="calificacion">
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
+                            <span class="estrella">★</span>
                         </div>
                     </div>
-                    <div class="testimonio-texto">
-                        Después de 6 meses buscando trabajo, Setsuzoku fue la plataforma que finalmente 
-                        me conectó con la empresa perfecta para mí. ¡No puedo estar más agradecido!
-                    </div>
-                    <div class="testimonio-valoracion">
-                        ★★★★★
-                    </div>
-                    <div class="testimonio-fecha">Hace 3 semanas</div>
                 </div>
             </div>
 
-            <div class="call-to-action">
-                <h2 class="call-to-action-titulo">¿Tienes una historia de éxito que compartir?</h2>
-                <p class="call-to-action-texto">
-                    Nos encantaría conocer tu experiencia con Setsuzoku. Tu testimonio puede ayudar 
-                    a otros profesionales a encontrar su camino.
-                </p>
-                <a href="contacto.html" class="call-to-action-boton">Comparte tu historia</a>
+            <!-- MENSAJE PARA USUARIOS NO AUTENTICADOS -->
+            <div class="mensaje-no-sesion" id="mensaje-no-sesion">
+                <h2>Para ver esta página, necesitas iniciar sesión</h2>
+                <p>Por favor, inicia sesión o regístrate para acceder a esta sección.</p>
+                <a href="inicio_sesion.html" class="boton-iniciar-sesion">Iniciar sesión</a>
             </div>
         </div>
     </div>
@@ -502,33 +553,165 @@
     <script>
         // Función para alternar la barra lateral
         function toggleBarraLateral() {
-            const barraLateral = document.querySelector('.barra-lateral');
-            barraLateral.classList.toggle('abierta');
+            const barraLateral = document.getElementById('barra-lateral');
+            if (barraLateral.style.display === 'block') {
+                barraLateral.style.display = 'none';
+            } else {
+                barraLateral.style.display = 'block';
+            }
         }
 
-        // Función para filtrar testimonios
-        function inicializarFiltros() {
-            const botonesFiltro = document.querySelectorAll('.boton-filtro');
-            const testimonios = document.querySelectorAll('.testimonio-item');
+        // Función para cerrar sesión
+        function cerrarSesion() {
+            sessionStorage.removeItem('usuario');
+            window.location.href = 'index.html';
+        }
+
+        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
             
-            botonesFiltro.forEach(boton => {
-                boton.addEventListener('click', function() {
-                    // Actualizar botón activo
-                    document.querySelectorAll('.boton-filtro').forEach(b => {
-                        b.classList.remove('activo');
-                    });
-                    this.classList.add('activo');
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
                     
-                    // Filtrar testimonios
-                    const categoriaSeleccionada = this.getAttribute('data-filtro');
+                    // Verificar que tenga las propiedades mínimas necesarias
+                    if (usuario && usuario.nombre && usuario.grupo) {
+                        // Sesión válida encontrada
+                        mostrarInterfazConSesion(usuario);
+                        return true;
+                    } else {
+                        console.error('Usuario incompleto:', usuario);
+                        sessionStorage.removeItem('usuario');
+                    }
+                } catch (error) {
+                    console.error('Error parseando usuario:', error);
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            
+            // No hay sesión válida
+            mostrarInterfazNoSesion();
+            return false;
+        }
+
+        // MOSTRAR INTERFAZ CUANDO NO HAY SESIÓN
+        function mostrarInterfazNoSesion() {
+            const enlacesSesion = document.getElementById('enlaces-sesion');
+            const barraLateral = document.getElementById('barra-lateral');
+            const contenidoTestimonios = document.getElementById('contenido-testimonios');
+            const mensajeNoSesion = document.getElementById('mensaje-no-sesion');
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            
+            // Mostrar enlaces de inicio de sesión y registro
+            enlacesSesion.style.display = 'flex';
+            
+            // Ocultar barra lateral
+            barraLateral.style.display = 'none';
+            
+            // Para testimonios, mostramos el contenido aunque no haya sesión
+            contenidoTestimonios.style.display = 'block';
+            mensajeNoSesion.style.display = 'none';
+            
+            // Quitar clase al contenedor de contenido cuando no hay barra lateral
+            contenedorContenido.classList.remove('con-barra-lateral');
+        }
+
+        // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
+        function mostrarInterfazConSesion(usuario) {
+            const enlacesSesion = document.getElementById('enlaces-sesion');
+            const barraLateral = document.getElementById('barra-lateral');
+            const contenidoTestimonios = document.getElementById('contenido-testimonios');
+            const mensajeNoSesion = document.getElementById('mensaje-no-sesion');
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            
+            // Ocultar enlaces de inicio de sesión y registro
+            enlacesSesion.style.display = 'none';
+            
+            // Mostrar barra lateral
+            barraLateral.style.display = 'block';
+            
+            // Mostrar información del usuario en la barra lateral
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+            document.getElementById('rol-usuario').textContent = 
+                usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
+
+            // Configurar opciones según el rol
+            configurarMenuSegunRol(usuario.grupo);
+
+            // Mostrar contenido principal
+            contenidoTestimonios.style.display = 'block';
+            mensajeNoSesion.style.display = 'none';
+            
+            // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
+            contenedorContenido.classList.add('con-barra-lateral');
+
+            // Modificar la barra superior para mostrar solo "Perfil"
+            enlacesSesion.innerHTML = '<a class="enlace-sesion" href="perfil.html">Perfil</a>';
+        }
+
+        // Configurar el menú según el rol del usuario
+        function configurarMenuSegunRol(rol) {
+            // Por defecto, todos los enlaces están habilitados
+            const enlaces = {
+                'postulaciones': false,
+                'cursos-usuario': false,
+                'trabajos': false,
+                'cursos': false
+            };
+
+            // Configurar según el rol
+            switch(rol) {
+                case 'candidato':
+                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
+                    enlaces['trabajos'] = true;
+                    break;
+                case 'reclutador':
+                    // Los reclutadores pueden ver todo excepto "Tus cursos" y "Tus postulaciones"
+                    enlaces['cursos-usuario'] = true;
+                    enlaces['postulaciones'] = true;
+                    enlaces['cursos'] = true;
+                    break;
+                case 'instructor':
+                    // Los instructores pueden ver todo excepto "Tus postulaciones"
+                    enlaces['postulaciones'] = true;
+                    break;
+            }
+
+            // Aplicar la configuración
+            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
+                const elemento = document.getElementById(`enlace-${enlace}`);
+                if (deshabilitar) {
+                    elemento.classList.add('disabled');
+                    elemento.setAttribute('href', '#');
+                } else {
+                    elemento.classList.remove('disabled');
+                }
+            }
+        }
+
+        // Función para configurar el filtro de testimonios
+        function configurarFiltro() {
+            const filtroTestimonio = document.getElementById('filtrar-testimonio');
+            const testimonios = document.querySelectorAll('.testimonio');
+            
+            filtroTestimonio.addEventListener('input', function() {
+                const textoBusqueda = this.value.toLowerCase();
+                
+                testimonios.forEach(testimonio => {
+                    const nombre = testimonio.getAttribute('data-nombre').toLowerCase();
+                    const empresa = testimonio.getAttribute('data-empresa').toLowerCase();
+                    const cargo = testimonio.getAttribute('data-cargo').toLowerCase();
+                    const texto = testimonio.querySelector('.texto-testimonio').textContent.toLowerCase();
                     
-                    testimonios.forEach(testimonio => {
-                        if (categoriaSeleccionada === 'todos' || testimonio.getAttribute('data-categoria') === categoriaSeleccionada) {
-                            testimonio.style.display = 'block';
-                        } else {
-                            testimonio.style.display = 'none';
-                        }
-                    });
+                    if (nombre.includes(textoBusqueda) || 
+                        empresa.includes(textoBusqueda) || 
+                        cargo.includes(textoBusqueda) ||
+                        texto.includes(textoBusqueda)) {
+                        testimonio.style.display = 'block';
+                    } else {
+                        testimonio.style.display = 'none';
+                    }
                 });
             });
         }
@@ -538,8 +721,17 @@
             // Configurar evento para el botón de menú
             document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
             
-            // Inicializar filtros
-            inicializarFiltros();
+            // Verificar si el usuario ha iniciado sesión
+            verificarSesion();
+
+            // Configurar evento para cerrar sesión
+            document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+                e.preventDefault();
+                cerrarSesion();
+            });
+            
+            // Configurar filtro de testimonios
+            configurarFiltro();
         });
     </script>
 </body>

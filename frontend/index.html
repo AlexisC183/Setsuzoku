@@ -23,10 +23,16 @@
 
         .barra-superior {
             background-color: #2c3e50;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
         }
 
         .logo {
@@ -55,36 +61,21 @@
         .contenedor-principal {
             display: flex;
             flex: 1;
-            overflow: hidden;
+            margin-top: 60px; /* Altura de la barra superior */
+            position: relative;
         }
 
         .barra-lateral {
             width: 250px;
             background-color: #34495e;
             color: white;
-            transform: translateX(-100%);
-            transition: transform 0.3s ease;
-            height: 100%;
+            height: calc(100vh - 60px); /* Altura total menos la barra superior */
+            position: fixed;
+            top: 60px; /* Justo debajo de la barra superior */
+            left: 0;
             overflow-y: auto;
-            position: relative;
             z-index: 100;
-        }
-
-        .barra-lateral.abierta {
-            transform: translateX(0);
-        }
-
-        .boton-menu {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
+            display: none;
         }
 
         .menu-usuario {
@@ -132,8 +123,17 @@
             background-color: transparent;
         }
 
-        .contenido-principal {
+        .contenedor-contenido {
             flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .contenedor-contenido.con-barra-lateral {
+            margin-left: 250px; /* Ancho de la barra lateral */
+        }
+
+        .contenido-principal {
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -301,8 +301,6 @@
     <div class="contenedor-principal">
         <!-- BARRA LATERAL -->
         <div class="barra-lateral" id="barra-lateral">
-            <button class="boton-menu" id="boton-menu">☰</button>
-
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
                 <div class="rol-usuario" id="rol-usuario">Rol</div>
@@ -319,82 +317,85 @@
             </ul>
         </div>
 
-        <!-- CONTENIDO PRINCIPAL -->
-        <main class="contenido-principal">
-            <div id="mensaje-exito" class="mensaje-exito"></div>
-            <div id="mensaje-sesion" class="mensaje-sesion"></div>
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <!-- CONTENIDO PRINCIPAL -->
+            <main class="contenido-principal">
+                <div id="mensaje-exito" class="mensaje-exito"></div>
+                <div id="mensaje-sesion" class="mensaje-sesion"></div>
 
-            <h1 class="titulo-bienvenida">Bienvenido a Setsuzoku</h1>
-            <p class="descripcion-bienvenida">
-                Tu plataforma de conexión laboral. Inicia sesión o regístrate para acceder a todas las funcionalidades.
-            </p>
+                <h1 class="titulo-bienvenida">Bienvenido a Setsuzoku</h1>
+                <p class="descripcion-bienvenida">
+                    Tu plataforma de conexión laboral. Inicia sesión o regístrate para acceder a todas las funcionalidades.
+                </p>
 
-            <!-- SECCIÓN PARA RECLUTADORES -->
-            <div class="seccion-reclutador" id="seccion-reclutador">
-                <h2 class="seccion-titulo">Gestión de Candidatos</h2>
+                <!-- SECCIÓN PARA RECLUTADORES -->
+                <div class="seccion-reclutador" id="seccion-reclutador">
+                    <h2 class="seccion-titulo">Gestión de Candidatos</h2>
 
-                <div class="pestanas">
-                    <div class="pestana activa" data-pestana="candidatos">Candidatos</div>
-                    <div class="pestana" data-pestana="inscripciones">Inscripciones a Cursos</div>
-                    <div class="pestana" data-pestana="postulaciones">Postulaciones a Trabajos</div>
+                    <div class="pestanas">
+                        <div class="pestana activa" data-pestana="candidatos">Candidatos</div>
+                        <div class="pestana" data-pestana="inscripciones">Inscripciones a Cursos</div>
+                        <div class="pestana" data-pestana="postulaciones">Postulaciones a Trabajos</div>
+                    </div>
+
+                    <div class="contenido-pestana activo" id="contenido-candidatos">
+                        <table class="tabla-usuarios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre Completo</th>
+                                    <th>Correo</th>
+                                    <th>Teléfono</th>
+                                    <th>Estudios</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-candidatos">
+                                <!-- Los candidatos se cargarán aquí con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="contenido-pestana" id="contenido-inscripciones">
+                        <table class="tabla-usuarios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Candidato</th>
+                                    <th>Curso</th>
+                                    <th>Fecha de Inscripción</th>
+                                    <th>Progreso</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-inscripciones">
+                                <!-- Las inscripciones se cargarán aquí con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="contenido-pestana" id="contenido-postulaciones">
+                        <table class="tabla-usuarios">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Candidato</th>
+                                    <th>Trabajo</th>
+                                    <th>Fecha de Postulación</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tabla-postulaciones">
+                                <!-- Las postulaciones se cargarán aquí con JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
-
-                <div class="contenido-pestana activo" id="contenido-candidatos">
-                    <table class="tabla-usuarios">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Nombre Completo</th>
-                                <th>Correo</th>
-                                <th>Teléfono</th>
-                                <th>Estudios</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-candidatos">
-                            <!-- Los candidatos se cargarán aquí con JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="contenido-pestana" id="contenido-inscripciones">
-                    <table class="tabla-usuarios">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Candidato</th>
-                                <th>Curso</th>
-                                <th>Fecha de Inscripción</th>
-                                <th>Progreso</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-inscripciones">
-                            <!-- Las inscripciones se cargarán aquí con JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-
-                <div class="contenido-pestana" id="contenido-postulaciones">
-                    <table class="tabla-usuarios">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Candidato</th>
-                                <th>Trabajo</th>
-                                <th>Fecha de Postulación</th>
-                                <th>Estado</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody id="tabla-postulaciones">
-                            <!-- Las postulaciones se cargarán aquí con JavaScript -->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </main>
+            </main>
+        </div>
     </div>
 
     <script>
@@ -437,12 +438,15 @@
             // Asegurar que el mensaje de bienvenida sea visible
             document.querySelector('.titulo-bienvenida').style.display = 'block';
             document.querySelector('.descripcion-bienvenida').style.display = 'block';
+            
+            // Quitar clase al contenedor de contenido cuando no hay barra lateral
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            contenedorContenido.classList.remove('con-barra-lateral');
         }
 
         // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
         function mostrarInterfazConSesion(usuario) {
             document.getElementById('enlaces-sesion').style.display = 'none';
-            document.getElementById('barra-lateral').classList.add('abierta');
             document.getElementById('barra-lateral').style.display = 'block';
 
             // Mostrar información del usuario
@@ -462,6 +466,14 @@
             // Ocultar mensaje de bienvenida cuando hay sesión
             document.querySelector('.titulo-bienvenida').style.display = 'none';
             document.querySelector('.descripcion-bienvenida').style.display = 'none';
+            
+            // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            contenedorContenido.classList.add('con-barra-lateral');
+
+            // Modificar la barra superior para mostrar solo "Perfil"
+            const enlacesSesion = document.getElementById('enlaces-sesion');
+            enlacesSesion.innerHTML = '<a class="enlace-sesion" href="perfil.html">Perfil</a>';
         }
 
         // Configurar el menú según el rol del usuario
@@ -730,12 +742,6 @@
             window.location.href = 'index.html';
         }
 
-        // Función para alternar la barra lateral
-        function toggleBarraLateral() {
-            const barraLateral = document.getElementById('barra-lateral');
-            barraLateral.classList.toggle('abierta');
-        }
-
         // Verificar si hay parámetros en la URL
         const parametros_url = new URLSearchParams(window.location.search);
 
@@ -767,9 +773,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Verificar sesión al cargar la página
             verificarSesion();
-
-            // Configurar evento para el botón de menú
-            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
 
             // Configurar evento para cerrar sesión
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) {

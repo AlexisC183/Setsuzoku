@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Preguntas frecuentes sobre Setsuzoku - Encuentra respuestas sobre trabajos, cursos y tu cuenta">
     <title>Preguntas Frecuentes - Setsuzoku</title>
     <style>
         * {
@@ -12,65 +13,118 @@
             font-family: Arial, sans-serif;
         }
 
+        :root {
+            --color-primary: #2c3e50;
+            --color-secondary: #34495e;
+            --color-accent: #3498db;
+            --color-accent-dark: #2980b9;
+            --color-text: #333;
+            --color-text-light: #555;
+            --color-background: #f5f5f5;
+            --color-white: #ffffff;
+            --color-border: #ddd;
+            --color-hover: #e9ecef;
+            --shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
         body {
-            background-color: #f5f5f5;
+            background-color: var(--color-background);
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+            color: var(--color-text);
+            line-height: 1.6;
         }
 
+        /* BARRA SUPERIOR */
         .barra-superior {
-            background-color: #2c3e50;
-            padding: 1rem 2rem;
+            background-color: var(--color-primary);
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .logo {
-            color: #ffffff;
+            color: var(--color-white);
             font-size: 1.5rem;
             font-weight: bold;
             text-decoration: none;
+            transition: var(--transition);
         }
 
+        .logo:hover, .logo:focus {
+            opacity: 0.9;
+            outline: none;
+        }
+
+        .enlaces-sesion {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enlace-sesion {
+            color: var(--color-white);
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .enlace-sesion:hover, .enlace-sesion:focus {
+            text-decoration: underline;
+            background-color: rgba(255, 255, 255, 0.1);
+            outline: none;
+        }
+
+        /* CONTENEDOR PRINCIPAL */
         .contenedor-principal {
             display: flex;
             flex: 1;
-            overflow: hidden;
+            margin-top: 60px; /* Altura de la barra superior */
+            position: relative;
         }
 
+        /* BARRA LATERAL */
         .barra-lateral {
             width: 250px;
-            background-color: #34495e;
-            color: white;
-            height: 100%;
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            height: calc(100vh - 60px); /* Altura total menos la barra superior */
+            position: fixed;
+            top: 60px; /* Justo debajo de la barra superior */
+            left: 0;
             overflow-y: auto;
-            position: relative;
             z-index: 100;
+            display: none;
+            transition: var(--transition);
         }
 
-        .boton-menu {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
+        .barra-lateral.mostrar {
+            display: block;
         }
 
         .menu-usuario {
             padding: 20px;
-            border-bottom: 1px solid #2c3e50;
+            border-bottom: 1px solid var(--color-primary);
+            background-color: rgba(0, 0, 0, 0.1);
         }
 
         .nombre-usuario {
             font-size: 1.2rem;
             margin-bottom: 5px;
+            font-weight: bold;
         }
 
         .rol-usuario {
@@ -84,19 +138,20 @@
         }
 
         .menu-opciones li {
-            border-bottom: 1px solid #2c3e50;
+            border-bottom: 1px solid var(--color-primary);
         }
 
         .menu-opciones a {
             display: block;
             padding: 15px 20px;
-            color: white;
+            color: var(--color-white);
             text-decoration: none;
-            transition: background-color 0.2s;
+            transition: var(--transition);
         }
 
-        .menu-opciones a:hover {
-            background-color: #2c3e50;
+        .menu-opciones a:hover, .menu-opciones a:focus {
+            background-color: var(--color-primary);
+            outline: none;
         }
 
         .menu-opciones a.disabled {
@@ -104,158 +159,335 @@
             cursor: not-allowed;
         }
 
-        .menu-opciones a.disabled:hover {
+        .menu-opciones a.disabled:hover, .menu-opciones a.disabled:focus {
             background-color: transparent;
         }
 
+        /* CONTENIDO FAQ - CENTRADO CORRECTAMENTE */
         .contenido-faq {
             flex: 1;
             padding: 30px;
-            background-color: white;
-            margin: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background-color: var(--color-white);
+            margin: 20px auto; /* Centrado automático */
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 1200px; /* Ancho máximo para pantallas grandes */
+            width: calc(100% - 40px); /* Ancho completo menos márgenes */
+            transition: var(--transition);
+        }
+
+        /* Cuando la barra lateral está visible */
+        .contenedor-principal.con-barra-lateral .contenido-faq {
+            margin-left: 270px; /* Espacio para la barra lateral */
+            width: calc(100% - 290px); /* Ajustar ancho considerando la barra lateral */
         }
 
         .titulo-faq {
             font-size: 2rem;
-            color: #2c3e50;
+            color: var(--color-primary);
             margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
+            text-align: center;
         }
 
         .intro-faq {
-            font-size: 1.1rem;
-            color: #555;
             margin-bottom: 30px;
-            line-height: 1.6;
+            color: var(--color-text-light);
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
+        /* BARRA DE BÚSQUEDA */
+        .barra-busqueda-faq {
+            margin-bottom: 30px;
+            position: relative;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .barra-busqueda-faq input {
+            width: 100%;
+            padding: 12px 20px;
+            border: 1px solid var(--color-border);
+            border-radius: 30px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .barra-busqueda-faq input:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
+        }
+
+        .barra-busqueda-faq button {
+            position: absolute;
+            right: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--color-accent);
+            color: var(--color-white);
+            border: none;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .barra-busqueda-faq button:hover, .barra-busqueda-faq button:focus {
+            background: var(--color-accent-dark);
+            outline: none;
+        }
+
+        /* CATEGORÍAS */
         .categorias-faq {
             display: flex;
             flex-wrap: wrap;
-            gap: 10px;
+            gap: 15px;
             margin-bottom: 30px;
+            justify-content: center;
         }
 
         .categoria-faq {
             padding: 8px 15px;
-            background-color: #f8f9fa;
+            background-color: var(--color-accent);
+            color: var(--color-white);
             border-radius: 20px;
-            font-size: 0.9rem;
-            color: #3498db;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: var(--transition);
+            border: 2px solid transparent;
         }
 
-        .categoria-faq:hover,
+        .categoria-faq:hover, .categoria-faq:focus {
+            background-color: var(--color-accent-dark);
+            outline: none;
+        }
+
         .categoria-faq.activa {
-            background-color: #3498db;
-            color: white;
+            background-color: var(--color-primary);
+            border-color: var(--color-accent);
         }
 
-        .acordeon-faq {
-            margin-bottom: 20px;
+        /* PREGUNTAS Y RESPUESTAS */
+        .preguntas-faq {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
         }
 
-        .item-acordeon {
-            margin-bottom: 10px;
-            border: 1px solid #eee;
-            border-radius: 8px;
+        .pregunta-faq {
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
             overflow: hidden;
+            transition: var(--transition);
         }
 
-        .cabecera-acordeon {
+        .pregunta-faq:hover {
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+        }
+
+        .encabezado-pregunta {
             padding: 15px 20px;
             background-color: #f8f9fa;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: background-color 0.3s;
+            transition: var(--transition);
         }
 
-        .cabecera-acordeon:hover {
-            background-color: #e9ecef;
+        .encabezado-pregunta:hover, .encabezado-pregunta:focus {
+            background-color: var(--color-hover);
+            outline: none;
         }
 
-        .cabecera-acordeon.activa {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .pregunta-acordeon {
+        .texto-pregunta {
             font-weight: bold;
-            font-size: 1.1rem;
+            color: var(--color-primary);
+            flex: 1;
         }
 
-        .icono-acordeon {
+        .icono-pregunta {
             font-size: 1.2rem;
-            transition: transform 0.3s;
+            color: var(--color-accent);
+            transition: var(--transition);
+            min-width: 20px;
+            text-align: center;
         }
 
-        .cabecera-acordeon.activa .icono-acordeon {
-            transform: rotate(180deg);
-        }
-
-        .contenido-acordeon {
+        .respuesta-pregunta {
+            padding: 0 20px;
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease;
-            background-color: white;
+            transition: var(--transition);
+            background-color: var(--color-white);
         }
 
-        .contenido-acordeon.activo {
+        .respuesta-pregunta.mostrar {
+            padding: 20px;
             max-height: 500px;
         }
 
-        .respuesta-acordeon {
-            padding: 20px;
-            color: #555;
-            line-height: 1.6;
+        .texto-respuesta {
+            color: var(--color-text-light);
         }
 
-        .busqueda-faq {
+        /* BOTÓN MENÚ MÓVIL */
+        .boton-menu {
+            display: none;
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            background-color: var(--color-secondary);
+            color: var(--color-white);
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+            transition: var(--transition);
+        }
+
+        .boton-menu:hover, .boton-menu:focus {
+            background-color: var(--color-primary);
+            outline: none;
+        }
+
+        /* MENSAJE PARA USUARIOS NO AUTENTICADOS */
+        .mensaje-no-sesion {
+            text-align: center;
+            padding: 50px 20px;
+            background-color: var(--color-white);
+            margin: 20px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .mensaje-no-sesion h2 {
+            color: var(--color-primary);
+            margin-bottom: 20px;
+        }
+
+        .mensaje-no-sesion p {
+            color: var(--color-text-light);
             margin-bottom: 30px;
-            position: relative;
+            font-size: 1.1rem;
         }
 
-        .campo-busqueda {
-            width: 100%;
-            padding: 12px 40px 12px 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 1rem;
+        .boton-iniciar-sesion {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: var(--color-white);
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: var(--transition);
         }
 
-        .icono-busqueda {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #7f8c8d;
+        .boton-iniciar-sesion:hover, .boton-iniciar-sesion:focus {
+            background-color: var(--color-accent-dark);
+            outline: none;
         }
 
+        /* CONTADOR DE RESULTADOS */
+        .contador-resultados {
+            margin-bottom: 20px;
+            color: var(--color-text-light);
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* SIN RESULTADOS */
         .sin-resultados {
             text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-            display: none;
+            padding: 40px 20px;
+            color: var(--color-text-light);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .contenedor-principal.con-barra-lateral .contenido-faq {
+                margin-left: 20px;
+                width: calc(100% - 40px);
+            }
+            
+            .barra-lateral {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+            
+            .boton-menu {
+                display: block;
+            }
+
+            .categorias-faq {
+                justify-content: center;
+            }
+
+            .titulo-faq {
+                font-size: 1.7rem;
+            }
+            
+            .contenido-faq {
+                padding: 20px;
+                margin: 10px;
+                width: calc(100% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .barra-superior {
+                padding: 0.8rem 1rem;
+            }
+
+            .contenido-faq {
+                margin: 10px;
+                padding: 15px;
+            }
+
+            .titulo-faq {
+                font-size: 1.5rem;
+            }
+
+            .categorias-faq {
+                gap: 10px;
+            }
+
+            .categoria-faq {
+                padding: 6px 12px;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
     <!-- BARRA SUPERIOR -->
-    <nav class="barra-superior">
+    <header class="barra-superior">
         <a href="index.html" class="logo">Setsuzoku</a>
-    </nav>
+        <div class="enlaces-sesion">
+            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
+            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
+        </div>
+    </header>
 
-    <div class="contenedor-principal">
+    <main class="contenedor-principal" id="contenedor-principal">
         <!-- BARRA LATERAL -->
-        <div class="barra-lateral">
-            <button class="boton-menu" id="boton-menu">☰</button>
-
+        <button class="boton-menu" id="boton-menu" aria-label="Abrir menú">☰ Menú</button>
+        
+        <nav class="barra-lateral" id="barra-lateral" aria-label="Menú principal">
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
                 <div class="rol-usuario" id="rol-usuario">Rol</div>
@@ -270,369 +502,411 @@
                 <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
                 <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
             </ul>
-        </div>
+        </nav>
 
-        <!-- CONTENIDO FAQ -->
-        <div class="contenido-faq">
+        <!-- CONTENIDO DE FAQ -->
+        <section class="contenido-faq" id="contenido-faq">
             <h1 class="titulo-faq">Preguntas Frecuentes</h1>
 
             <p class="intro-faq">
-                Bienvenido a nuestra sección de preguntas frecuentes. Aquí encontrarás respuestas a las dudas 
-                más comunes sobre Setsuzoku. Si no encuentras lo que buscas, no dudes en contactarnos.
+                Bienvenido a nuestra sección de preguntas frecuentes. Aquí encontrarás respuestas a las dudas más 
+                comunes sobre Setsuzoku, nuestros servicios y cómo aprovechar al máximo nuestra plataforma.
             </p>
 
-            <div class="busqueda-faq">
-                <input type="text" class="campo-busqueda" id="campo-busqueda" placeholder="Buscar preguntas...">
-                <span class="icono-busqueda">🔍</span>
+            <!-- Barra de búsqueda -->
+            <div class="barra-busqueda-faq">
+                <input type="text" id="buscar-faq" placeholder="Buscar en preguntas frecuentes...">
+                <button id="boton-buscar" aria-label="Buscar">🔍</button>
+            </div>
+
+            <!-- Contador de resultados -->
+            <div class="contador-resultados" id="contador-resultados">
+                Mostrando todas las preguntas
             </div>
 
             <div class="categorias-faq">
                 <div class="categoria-faq activa" data-categoria="todas">Todas</div>
-                <div class="categoria-faq" data-categoria="cuenta">Cuenta</div>
-                <div class="categoria-faq" data-categoria="candidatos">Candidatos</div>
-                <div class="categoria-faq" data-categoria="reclutadores">Reclutadores</div>
-                <div class="categoria-faq" data-categoria="cursos">Cursos</div>
+                <div class="categoria-faq" data-categoria="cuenta">Mi cuenta</div>
                 <div class="categoria-faq" data-categoria="trabajos">Trabajos</div>
+                <div class="categoria-faq" data-categoria="cursos">Cursos</div>
+                <div class="categoria-faq" data-categoria="postulaciones">Postulaciones</div>
             </div>
 
-            <div class="acordeon-faq" id="acordeon-faq">
-                <!-- Preguntas sobre Cuenta -->
-                <div class="item-acordeon" data-categoria="cuenta">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo creo una cuenta en Setsuzoku?</div>
-                        <div class="icono-acordeon">▼</div>
+            <div class="preguntas-faq" id="contenedor-preguntas">
+                <div class="pregunta-faq" data-categoria="cuenta">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Cómo creo una cuenta en Setsuzoku?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Para crear una cuenta en Setsuzoku, haz clic en el botón "Registrarse" en la página principal. 
-                            Deberás seleccionar el tipo de usuario que eres (candidato, reclutador o instructor) y completar 
-                            el formulario con tus datos personales, información profesional y datos de la cuenta. 
-                            Una vez completado el registro, recibirás un correo de confirmación y podrás comenzar a usar la plataforma.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Para crear una cuenta en Setsuzoku, haz clic en el botón "Registrarse" en la parte superior 
+                            derecha de nuestra página de inicio. Completa el formulario con tus datos personales, 
+                            incluyendo tu nombre, apellido, correo electrónico y una contraseña segura. Una vez que 
+                            hayas completado todos los campos, haz clic en "Registrarse" y recibirás un correo 
+                            electrónico de confirmación para activar tu cuenta.
                         </div>
                     </div>
                 </div>
 
-                <div class="item-acordeon" data-categoria="cuenta">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿He olvidado mi contraseña, cómo puedo recuperarla?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="cuenta">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Olvidé mi contraseña, cómo puedo recuperarla?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Si has olvidado tu contraseña, ve a la página de inicio de sesión y haz clic en el enlace 
-                            "¿Olvidaste tu contraseña?". Ingresa el correo electrónico asociado a tu cuenta y te enviaremos 
-                            un enlace para que puedas restablecer tu contraseña. Sigue las instrucciones del correo para 
-                            crear una nueva contraseña segura.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Si olvidaste tu contraseña, ve a la página de inicio de sesión y haz clic en el enlace 
+                            "¿Olvidaste tu contraseña?". Ingresa el correo electrónico asociado a tu cuenta y te 
+                            enviaremos un enlace para restablecer tu contraseña. Sigue las instrucciones del correo 
+                            para crear una nueva contraseña segura.
                         </div>
                     </div>
                 </div>
 
-                <div class="item-acordeon" data-categoria="cuenta">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Puedo cambiar mi tipo de usuario después de registrarme?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="trabajos">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Cómo busco trabajos en Setsuzoku?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Actualmente, no es posible cambiar el tipo de usuario una vez que has completado el registro. 
-                            Esto se debe a que cada tipo de usuario tiene funcionalidades y permisos específicos. 
-                            Si necesitas cambiar tu tipo de usuario, te recomendamos crear una nueva cuenta con el tipo 
-                            deseado o contactar a nuestro equipo de soporte para evaluar tu caso particular.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Para buscar trabajos en Setsuzoku, inicia sesión en tu cuenta y haz clic en la sección 
+                            "Trabajos" en el menú lateral. Podrás utilizar filtros para refinar tu búsqueda según 
+                            tus preferencias, como ubicación, tipo de contrato, salario o palabras clave. Una vez 
+                            que encuentres un trabajo de tu interés, haz clic en él para ver los detalles y 
+                            postularte si cumples con los requisitos.
                         </div>
                     </div>
                 </div>
 
-                <!-- Preguntas sobre Candidatos -->
-                <div class="item-acordeon" data-categoria="candidatos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo puedo mejorar mi perfil como candidato?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="trabajos">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Cómo me postulo a un trabajo?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Para mejorar tu perfil como candidato, te recomendamos:
-                            <br><br>
-                            1. Completa toda la información de tu perfil, incluyendo experiencia laboral, estudios y habilidades.
-                            <br>
-                            2. Añade una foto profesional de buena calidad.
-                            <br>
-                            3. Sé específico sobre tus habilidades y logros profesionales.
-                            <br>
-                            4. Mantén tu perfil actualizado con tus experiencias más recientes.
-                            <br>
-                            5. Inscribirte en cursos relevantes para tu área profesional.
-                            <br><br>
-                            Un perfil completo y detallado aumenta significativamente tus posibilidades de ser contactado por reclutadores.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Para postularte a un trabajo, primero inicia sesión en tu cuenta. Luego, navega a la 
+                            sección "Trabajos" y busca la oferta que te interese. Haz clic en el trabajo para ver 
+                            todos los detalles y requisitos. Si cumples con los requisitos, haz clic en el botón 
+                            "Postularme" y completa el formulario con tu información y un mensaje opcional para el 
+                            reclutador. Una vez enviada tu postulación, podrás seguirla desde la sección 
+                            "Tus postulaciones".
                         </div>
                     </div>
                 </div>
 
-                <div class="item-acordeon" data-categoria="candidatos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo funciona el proceso de postulación a un trabajo?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="cursos">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Cómo me inscribo a un curso?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            El proceso de postulación a un trabajo en Setsuzoku es sencillo:
-                            <br><br>
-                            1. Busca ofertas de trabajo que se ajusten a tu perfil utilizando los filtros disponibles.
-                            <br>
-                            2. Al encontrar una oferta de tu interés, haz clic en "Ver detalles" para obtener más información.
-                            <br>
-                            3. Si deseas postularte, haz clic en el botón "Postularse".
-                            <br>
-                            4. Podrás añadir un mensaje personalizado para el reclutador (opcional).
-                            <br>
-                            5. Una vez enviada tu postulación, podrás seguirla desde la sección "Tus postulaciones".
-                            <br><br>
-                            Los reclutadores recibirán una notificación y podrán revisar tu perfil. Si están interesados, 
-                            se pondrán en contacto contigo a través de la plataforma.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Para inscribirte a un curso, inicia sesión en tu cuenta y ve a la sección "Cursos". 
+                            Explora nuestro catálogo de cursos disponibles y haz clic en aquel que te interese para 
+                            ver todos los detalles, como duración, precio e instructor. Si deseas inscribirte, haz 
+                            clic en el botón "Inscribirse" y sigue las instrucciones para completar el pago. Una 
+                            vez inscrito, el curso aparecerá en tu sección "Mis cursos".
                         </div>
                     </div>
                 </div>
 
-                <!-- Preguntas sobre Reclutadores -->
-                <div class="item-acordeon" data-categoria="reclutadores">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo publico una oferta de trabajo?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="cursos">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Puedo acceder a un curso después de haberlo completado?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Para publicar una oferta de trabajo como reclutador:
-                            <br><br>
-                            1. Inicia sesión en tu cuenta de reclutador.
-                            <br>
-                            2. Ve a la sección "Trabajos" y haz clic en "Publicar Nuevo Trabajo".
-                            <br>
-                            3. Completa el formulario con todos los detalles de la oferta: título, empresa, descripción, requisitos, etc.
-                            <br>
-                            4. Revisa la información y haz clic en "Publicar Trabajo".
-                            <br><br>
-                            Una vez publicada, tu oferta estará visible para todos los candidatos y podrás gestionar las 
-                            postulaciones recibidas desde tu panel de reclutador.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Sí, una vez que te inscribes a un curso, tienes acceso de por vida al contenido del mismo. 
+                            Incluso después de completarlo, puedes volver a consultar los materiales, ver las clases 
+                            y descargar los recursos whenever lo necesites. El curso permanecerá en tu sección 
+                            "Mis cursos" con el estado "Completado".
                         </div>
                     </div>
                 </div>
 
-                <div class="item-acordeon" data-categoria="reclutadores">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo puedo contactar a un candidato que me interesa?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="postulaciones">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Cómo puedo seguir el estado de mis postulaciones?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Cuando encuentres un candidato que te interese:
-                            <br><br>
-                            1. Accede al perfil completo del candidato desde la sección de postulaciones o desde la búsqueda.
-                            <br>
-                            2. Revisa su perfil, experiencia y habilidades para asegurarte de que se ajusta a lo que buscas.
-                            <br>
-                            3. Utiliza el botón "Contactar" disponible en su perfil.
-                            <br>
-                            4. Envía un mensaje inicial presentando tu empresa y la oportunidad laboral.
-                            <br><br>
-                            Todos los mensajes se envían a través de la plataforma para garantizar la privacidad 
-                            y seguridad de ambos usuarios. Una vez establecido el contacto inicial, podrás coordinar 
-                            entrevistas o compartir información adicional según sea necesario.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Para seguir el estado de tus postulaciones, inicia sesión en tu cuenta y haz clic en la 
+                            sección "Tus postulaciones" en el menú lateral. Allí verás una lista de todas tus 
+                            postulaciones con su estado actual (pendiente, en revisión, aceptada o rechazada). 
+                            También recibirás notificaciones por correo electrónico cuando haya actualizaciones 
+                            importantes sobre tus postulaciones.
                         </div>
                     </div>
                 </div>
 
-                <!-- Preguntas sobre Cursos -->
-                <div class="item-acordeon" data-categoria="cursos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo me inscribo en un curso?</div>
-                        <div class="icono-acordeon">▼</div>
+                <div class="pregunta-faq" data-categoria="postulaciones">
+                    <div class="encabezado-pregunta" tabindex="0" role="button" aria-expanded="false">
+                        <div class="texto-pregunta">¿Puedo cancelar una postulación?</div>
+                        <div class="icono-pregunta">+</div>
                     </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Para inscribirte en un curso:
-                            <br><br>
-                            1. Ve a la sección "Cursos" para explorar el catálogo disponible.
-                            <br>
-                            2. Utiliza los filtros para encontrar cursos que se ajusten a tus intereses.
-                            <br>
-                            3. Al encontrar un curso de tu interés, haz clic en "Ver detalles".
-                            <br>
-                            4. Si deseas inscribirte, haz clic en el botón "Inscribirse".
-                            <br><br>
-                            Una vez inscrito, el curso aparecerá en tu sección "Tus cursos" donde podrás acceder 
-                            al contenido, seguir tu progreso y completar las actividades requeridas.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-acordeon" data-categoria="cursos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Recibo un certificado al completar un curso?</div>
-                        <div class="icono-acordeon">▼</div>
-                    </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Sí, al completar satisfactoriamente un curso en Setsuzoku, recibirás un certificado digital 
-                            que acredita tu participación y aprovechamiento. Este certificado incluirá:
-                            <br><br>
-                            - Nombre del curso
-                            <br>
-                            - Fecha de realización
-                            <br>
-                            - Duración del curso
-                            <br>
-                            - Nombre del instructor o institución
-                            <br>
-                            - Tu nombre como participante
-                            <br><br>
-                            El certificado estará disponible para descargar en formato PDF desde tu perfil y podrás 
-                            compartirlo en tus redes profesionales o adjuntarlo a tus postulaciones laborales.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Preguntas sobre Trabajos -->
-                <div class="item-acordeon" data-categoria="trabajos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Cómo busco ofertas de trabajo?</div>
-                        <div class="icono-acordeon">▼</div>
-                    </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Para buscar ofertas de trabajo en Setsuzoku:
-                            <br><br>
-                            1. Inicia sesión en tu cuenta de candidato.
-                            <br>
-                            2. Ve a la sección "Trabajos" donde encontrarás todas las ofertas disponibles.
-                            <br>
-                            3. Utiliza los filtros para refinar tu búsqueda por categoría, ubicación, tipo de contrato, etc.
-                            <br>
-                            4. También puedes usar la barra de búsqueda para encontrar ofertas por palabras clave.
-                            <br>
-                            5. Al encontrar una oferta de tu interés, haz clic en "Ver detalles" para obtener más información.
-                            <br><br>
-                            Puedes guardar las ofertas que más te interesen para postularte más tarde o recibir 
-                            notificaciones cuando se publiquen nuevas ofertas similares.
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item-acordeon" data-categoria="trabajos">
-                    <div class="cabecera-acordeon">
-                        <div class="pregunta-acordeon">¿Las ofertas de trabajo tienen fecha de caducidad?</div>
-                        <div class="icono-acordeon">▼</div>
-                    </div>
-                    <div class="contenido-acordeon">
-                        <div class="respuesta-acordeon">
-                            Sí, todas las ofertas de trabajo publicadas en Setsuzoku tienen una fecha de caducidad 
-                            establecida por el reclutador. Esta fecha suele ser de 30 días desde la publicación, 
-                            aunque puede variar según las necesidades del reclutador.
-                            <br><br>
-                            Cuando una oferta está próxima a caducar, tanto el reclutador como los candidatos 
-                            que hayan guardado la oferta recibirán una notificación. El reclutador tendrá la 
-                            opción de renovar la oferta si aún no ha encontrado al candidato ideal.
-                            <br><br>
-                            Las ofertas caducadas ya no aparecerán en los resultados de búsqueda, pero el 
-                            reclutador podrá acceder a ellas desde su panel para revisar las postulaciones recibidas.
+                    <div class="respuesta-pregunta" aria-hidden="true">
+                        <div class="texto-respuesta">
+                            Sí, puedes cancelar una postulación mientras esté en estado "pendiente" o "en revisión". 
+                            Para hacerlo, ve a la sección "Tus postulaciones", busca la postulación que deseas 
+                            cancelar y haz clic en el botón "Cancelar postulación". Ten en cuenta que una vez 
+                            cancelada, no podrás revertir esta acción y deberás realizar una nueva postulación si 
+                            estás interesado en el trabajo.
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="sin-resultados" id="sin-resultados">
-                <p>No se encontraron preguntas que coincidan con tu búsqueda.</p>
+            <!-- Mensaje cuando no hay resultados -->
+            <div class="sin-resultados" id="sin-resultados" style="display: none;">
+                <p>No se encontraron resultados para tu búsqueda. Intenta con otros términos.</p>
             </div>
+        </section>
+        
+        <!-- MENSAJE PARA USUARIOS NO AUTENTICADOS -->
+        <div class="mensaje-no-sesion" id="mensaje-no-sesion" style="display: none;">
+            <h2>Para ver esta página, necesitas iniciar sesión</h2>
+            <p>Por favor, inicia sesión o regístrate para acceder a esta sección.</p>
+            <a href="inicio_sesion.html" class="boton-iniciar-sesion">Iniciar sesión</a>
         </div>
-    </div>
+    </main>
 
     <script>
         // Función para alternar la barra lateral
         function toggleBarraLateral() {
-            const barraLateral = document.querySelector('.barra-lateral');
-            barraLateral.classList.toggle('abierta');
+            const barraLateral = document.getElementById('barra-lateral');
+            const botonMenu = document.getElementById('boton-menu');
+            const contenedorPrincipal = document.getElementById('contenedor-principal');
+            
+            if (barraLateral.classList.contains('mostrar')) {
+                barraLateral.classList.remove('mostrar');
+                contenedorPrincipal.classList.remove('con-barra-lateral');
+                botonMenu.setAttribute('aria-expanded', 'false');
+            } else {
+                barraLateral.classList.add('mostrar');
+                contenedorPrincipal.classList.add('con-barra-lateral');
+                botonMenu.setAttribute('aria-expanded', 'true');
+            }
         }
 
-        // Función para inicializar el acordeón
-        function inicializarAcordeon() {
-            const cabeceras = document.querySelectorAll('.cabecera-acordeon');
+        // Función para verificar si el usuario ha iniciado sesión
+        function verificarSesion() {
+            const usuario = localStorage.getItem('usuario');
+            const barraLateral = document.getElementById('barra-lateral');
+            const enlacesSesion = document.querySelector('.enlaces-sesion');
+            const contenidoFaq = document.getElementById('contenido-faq');
+            const mensajeNoSesion = document.getElementById('mensaje-no-sesion');
+            const contenedorPrincipal = document.getElementById('contenedor-principal');
             
-            cabeceras.forEach(cabecera => {
-                cabecera.addEventListener('click', function() {
-                    const contenido = this.nextElementSibling;
-                    const estaActiva = this.classList.contains('activa');
-                    
-                    // Cerrar todos los acordeones
-                    document.querySelectorAll('.cabecera-acordeon').forEach(c => {
-                        c.classList.remove('activa');
-                    });
-                    document.querySelectorAll('.contenido-acordeon').forEach(c => {
-                        c.classList.remove('activo');
-                    });
-                    
-                    // Abrir el acordeón actual si no estaba activo
-                    if (!estaActiva) {
-                        this.classList.add('activa');
-                        contenido.classList.add('activo');
-                    }
+            if (usuario) {
+                // Usuario ha iniciado sesión
+                const datosUsuario = JSON.parse(usuario);
+                
+                // Mostrar barra lateral
+                barraLateral.classList.add('mostrar');
+                contenedorPrincipal.classList.add('con-barra-lateral');
+                
+                // Actualizar información del usuario en la barra lateral
+                document.getElementById('nombre-usuario').textContent = 
+                    `${datosUsuario.nombre} ${datosUsuario.apellido_paterno}`;
+                document.getElementById('rol-usuario').textContent = datosUsuario.grupo;
+                
+                // Ocultar enlaces de inicio de sesión y registro
+                enlacesSesion.style.display = 'none';
+                
+                // Mostrar contenido principal
+                contenidoFaq.style.display = 'block';
+                mensajeNoSesion.style.display = 'none';
+                
+                // Configurar enlaces según el tipo de usuario
+                if (datosUsuario.grupo === 'candidato') {
+                    document.getElementById('enlace-postulaciones').classList.remove('disabled');
+                    document.getElementById('enlace-cursos-usuario').classList.remove('disabled');
+                    document.getElementById('enlace-trabajos').classList.remove('disabled');
+                    document.getElementById('enlace-cursos').classList.remove('disabled');
+                } else if (datosUsuario.grupo === 'reclutador') {
+                    document.getElementById('enlace-postulaciones').classList.add('disabled');
+                    document.getElementById('enlace-cursos-usuario').classList.add('disabled');
+                    document.getElementById('enlace-trabajos').classList.remove('disabled');
+                    document.getElementById('enlace-cursos').classList.add('disabled');
+                }
+                
+                // Configurar evento para cerrar sesión
+                document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('usuario');
+                    window.location.reload();
                 });
-            });
+            } else {
+                // Usuario no ha iniciado sesión
+                barraLateral.classList.remove('mostrar');
+                contenedorPrincipal.classList.remove('con-barra-lateral');
+                
+                // Mostrar enlaces de inicio de sesión y registro
+                enlacesSesion.style.display = 'flex';
+                
+                // Para esta página, mostramos el contenido aunque no haya sesión iniciada
+                contenidoFaq.style.display = 'block';
+                mensajeNoSesion.style.display = 'none';
+            }
         }
 
-        // Función para filtrar por categoría
-        function inicializarCategorias() {
-            const categorias = document.querySelectorAll('.categoria-faq');
-            const itemsAcordeon = document.querySelectorAll('.item-acordeon');
+        // Función para configurar las preguntas frecuentes
+        function configurarFAQ() {
+            const preguntas = document.querySelectorAll('.pregunta-faq');
+            let preguntasVisibles = preguntas.length;
             
+            // Actualizar contador de resultados
+            function actualizarContador() {
+                const contador = document.getElementById('contador-resultados');
+                if (preguntasVisibles === 0) {
+                    contador.textContent = 'No se encontraron resultados';
+                } else if (preguntasVisibles === preguntas.length) {
+                    contador.textContent = 'Mostrando todas las preguntas';
+                } else {
+                    contador.textContent = `Mostrando ${preguntasVisibles} de ${preguntas.length} preguntas`;
+                }
+            }
+            
+            // Configurar categorías
+            const categorias = document.querySelectorAll('.categoria-faq');
             categorias.forEach(categoria => {
                 categoria.addEventListener('click', function() {
                     // Actualizar categoría activa
-                    document.querySelectorAll('.categoria-faq').forEach(c => {
-                        c.classList.remove('activa');
-                    });
+                    categorias.forEach(cat => cat.classList.remove('activa'));
                     this.classList.add('activa');
                     
-                    // Filtrar elementos
+                    // Filtrar preguntas
                     const categoriaSeleccionada = this.getAttribute('data-categoria');
+                    preguntasVisibles = 0;
                     
-                    itemsAcordeon.forEach(item => {
-                        if (categoriaSeleccionada === 'todas' || item.getAttribute('data-categoria') === categoriaSeleccionada) {
-                            item.style.display = 'block';
+                    preguntas.forEach(pregunta => {
+                        if (categoriaSeleccionada === 'todas' || 
+                            pregunta.getAttribute('data-categoria') === categoriaSeleccionada) {
+                            pregunta.style.display = 'block';
+                            preguntasVisibles++;
                         } else {
-                            item.style.display = 'none';
+                            pregunta.style.display = 'none';
                         }
                     });
-                });
-            });
-        }
-
-        // Función para buscar preguntas
-        function inicializarBusqueda() {
-            const campoBusqueda = document.getElementById('campo-busqueda');
-            const itemsAcordeon = document.querySelectorAll('.item-acordeon');
-            const sinResultados = document.getElementById('sin-resultados');
-            
-            campoBusqueda.addEventListener('input', function() {
-                const terminoBusqueda = this.value.toLowerCase();
-                let hayResultados = false;
-                
-                itemsAcordeon.forEach(item => {
-                    const pregunta = item.querySelector('.pregunta-acordeon').textContent.toLowerCase();
-                    const respuesta = item.querySelector('.respuesta-acordeon').textContent.toLowerCase();
                     
-                    if (pregunta.includes(terminoBusqueda) || respuesta.includes(terminoBusqueda)) {
-                        item.style.display = 'block';
-                        hayResultados = true;
+                    actualizarContador();
+                    
+                    // Mostrar/ocultar mensaje de sin resultados
+                    const sinResultados = document.getElementById('sin-resultados');
+                    if (preguntasVisibles === 0) {
+                        sinResultados.style.display = 'block';
                     } else {
-                        item.style.display = 'none';
+                        sinResultados.style.display = 'none';
                     }
                 });
+            });
+            
+            // Configurar preguntas y respuestas
+            preguntas.forEach(pregunta => {
+                const encabezado = pregunta.querySelector('.encabezado-pregunta');
+                const respuesta = pregunta.querySelector('.respuesta-pregunta');
+                const icono = pregunta.querySelector('.icono-pregunta');
                 
-                // Mostrar mensaje de sin resultados si es necesario
-                if (terminoBusqueda && !hayResultados) {
+                encabezado.addEventListener('click', function() {
+                    togglePregunta(pregunta, respuesta, icono, encabezado);
+                });
+                
+                // Permitir activar con tecla Enter
+                encabezado.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        togglePregunta(pregunta, respuesta, icono, encabezado);
+                    }
+                });
+            });
+            
+            // Función para alternar pregunta
+            function togglePregunta(pregunta, respuesta, icono, encabezado) {
+                // Alternar respuesta
+                respuesta.classList.toggle('mostrar');
+                
+                // Actualizar atributos ARIA
+                const estaExpandida = respuesta.classList.contains('mostrar');
+                encabezado.setAttribute('aria-expanded', estaExpandida);
+                respuesta.setAttribute('aria-hidden', !estaExpandida);
+                
+                // Cambiar icono
+                if (estaExpandida) {
+                    icono.textContent = '−';
+                } else {
+                    icono.textContent = '+';
+                }
+            }
+            
+            // Configurar búsqueda
+            const barraBusqueda = document.getElementById('buscar-faq');
+            const botonBuscar = document.getElementById('boton-buscar');
+            
+            function realizarBusqueda() {
+                const termino = barraBusqueda.value.toLowerCase().trim();
+                preguntasVisibles = 0;
+                
+                if (termino === '') {
+                    // Si no hay término de búsqueda, mostrar todas las preguntas
+                    preguntas.forEach(pregunta => {
+                        pregunta.style.display = 'block';
+                        preguntasVisibles++;
+                    });
+                    
+                    // Restablecer categoría activa a "Todas"
+                    categorias.forEach(cat => {
+                        if (cat.getAttribute('data-categoria') === 'todas') {
+                            cat.classList.add('activa');
+                        } else {
+                            cat.classList.remove('activa');
+                        }
+                    });
+                } else {
+                    // Filtrar preguntas por término de búsqueda
+                    preguntas.forEach(pregunta => {
+                        const textoPregunta = pregunta.querySelector('.texto-pregunta').textContent.toLowerCase();
+                        const textoRespuesta = pregunta.querySelector('.texto-respuesta').textContent.toLowerCase();
+                        
+                        if (textoPregunta.includes(termino) || textoRespuesta.includes(termino)) {
+                            pregunta.style.display = 'block';
+                            preguntasVisibles++;
+                        } else {
+                            pregunta.style.display = 'none';
+                        }
+                    });
+                    
+                    // Quitar categoría activa
+                    categorias.forEach(cat => cat.classList.remove('activa'));
+                }
+                
+                actualizarContador();
+                
+                // Mostrar/ocultar mensaje de sin resultados
+                const sinResultados = document.getElementById('sin-resultados');
+                if (preguntasVisibles === 0) {
                     sinResultados.style.display = 'block';
                 } else {
                     sinResultados.style.display = 'none';
                 }
+            }
+            
+            barraBusqueda.addEventListener('input', realizarBusqueda);
+            botonBuscar.addEventListener('click', realizarBusqueda);
+            
+            // Permitir búsqueda con Enter
+            barraBusqueda.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    realizarBusqueda();
+                }
             });
+            
+            // Inicializar contador
+            actualizarContador();
         }
 
         // Inicializar la página
@@ -640,10 +914,11 @@
             // Configurar evento para el botón de menú
             document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
             
-            // Inicializar funcionalidades
-            inicializarAcordeon();
-            inicializarCategorias();
-            inicializarBusqueda();
+            // Verificar si el usuario ha iniciado sesión
+            verificarSesion();
+            
+            // Configurar preguntas frecuentes
+            configurarFAQ();
         });
     </script>
 </body>

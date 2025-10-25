@@ -21,10 +21,16 @@
 
         .barra-superior {
             background-color: #2c3e50;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
         }
 
         .logo {
@@ -34,33 +40,40 @@
             text-decoration: none;
         }
 
+        .enlaces-sesion {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enlace-sesion {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .enlace-sesion:hover {
+            text-decoration: underline;
+        }
+
         .contenedor-principal {
             display: flex;
             flex: 1;
-            min-height: calc(100vh - 60px); /* Altura total menos la barra superior */
+            margin-top: 60px; /* Altura de la barra superior */
+            position: relative;
         }
 
         .barra-lateral {
             width: 250px;
             background-color: #34495e;
             color: white;
-            height: 100%;
+            height: calc(100vh - 60px); /* Altura total menos la barra superior */
+            position: fixed;
+            top: 60px; /* Justo debajo de la barra superior */
+            left: 0;
             overflow-y: auto;
-            position: relative;
             z-index: 100;
-        }
-
-        .boton-menu {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
+            display: none;
         }
 
         .menu-usuario {
@@ -108,14 +121,21 @@
             background-color: transparent;
         }
 
-        .contenido-trabajos {
+        .contenedor-contenido {
             flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .contenedor-contenido.con-barra-lateral {
+            margin-left: 250px; /* Ancho de la barra lateral */
+        }
+
+        .contenido-trabajos {
             padding: 30px;
             background-color: white;
-            margin: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
         }
 
         .titulo-trabajos {
@@ -124,242 +144,218 @@
             margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
+        }
+
+        .filtros-trabajos {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
         }
 
-        .boton-nuevo-trabajo {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
+        .filtro {
+            flex: 1;
+            min-width: 200px;
         }
 
-        .boton-nuevo-trabajo:hover {
-            background-color: #229954;
-        }
-
-        .lista-trabajos {
-            list-style: none;
-        }
-
-        .trabajo-item {
-            border: 1px solid #eee;
-            border-radius: 8px;
-            padding: 20px;
-            margin-bottom: 20px;
-            transition: transform 0.2s, box-shadow 0.2s;
-        }
-
-        .trabajo-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .trabajo-titulo {
-            font-size: 1.3rem;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .trabajo-empresa {
-            font-size: 1rem;
-            color: #7f8c8d;
-            margin-bottom: 10px;
-        }
-
-        .trabajo-descripcion {
-            margin-bottom: 15px;
-            color: #555;
-        }
-
-        .trabajo-requisitos {
-            margin-bottom: 15px;
-        }
-
-        .trabajo-requisitos h4 {
-            margin-bottom: 5px;
+        .etiqueta-filtro {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
             color: #34495e;
         }
 
-        .trabajo-requisitos ul {
-            padding-left: 20px;
-        }
-
-        .trabajo-requisitos li {
-            margin-bottom: 5px;
-        }
-
-        .trabajo-acciones {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .trabajo-boton {
-            padding: 8px 15px;
-            border-radius: 4px;
-            font-size: 0.9rem;
-            cursor: pointer;
-            transition: background-color 0.2s;
-            border: none;
-        }
-
-        .boton-ver {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .boton-ver:hover {
-            background-color: #2980b9;
-        }
-
-        .boton-editar {
-            background-color: #f39c12;
-            color: white;
-        }
-
-        .boton-editar:hover {
-            background-color: #d68910;
-        }
-
-        .boton-eliminar {
-            background-color: #e74c3c;
-            color: white;
-        }
-
-        .boton-eliminar:hover {
-            background-color: #c0392b;
-        }
-
-        .mensaje-vacio {
-            text-align: center;
-            padding: 40px;
-            color: #7f8c8d;
-        }
-
-        /* Modal para crear nuevo trabajo */
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
-
-        .modal-contenido {
-            background-color: white;
-            margin: 5% auto;
-            padding: 20px;
-            border-radius: 8px;
-            width: 80%;
-            max-width: 600px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .modal-cabecera {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .modal-titulo {
-            font-size: 1.5rem;
-            color: #2c3e50;
-        }
-
-        .modal-cerrar {
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #7f8c8d;
-        }
-
-        .modal-cerrar:hover {
-            color: #2c3e50;
-        }
-
-        .grupo-formulario {
-            margin-bottom: 15px;
-        }
-
-        .etiqueta-formulario {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-weight: bold;
-        }
-
-        .campo-formulario {
+        .campo-filtro {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
-            border-radius: 4px;
+            border-radius: 5px;
             font-size: 1rem;
         }
 
-        .campo-formulario:focus {
+        .campo-filtro:focus {
             outline: none;
             border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
         }
 
-        .boton-principal {
-            background-color: #27ae60;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
+        .lista-trabajos {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .trabajo {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .trabajo:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .encabezado-trabajo {
+            padding: 20px;
+            background-color: #f1f2f6;
+        }
+
+        .titulo-trabajo {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+
+        .empresa-trabajo {
             font-size: 1rem;
-            transition: background-color 0.3s;
+            color: #3498db;
+            margin-bottom: 10px;
         }
 
-        .boton-principal:hover {
-            background-color: #229954;
+        .cuerpo-trabajo {
+            padding: 20px;
         }
 
-        .boton-secundario {
-            background-color: #95a5a6;
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: background-color 0.3s;
-            margin-right: 10px;
+        .descripcion-trabajo {
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.5;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .boton-secundario:hover {
-            background-color: #7f8c8d;
+        .requisitos-trabajo {
+            margin-bottom: 15px;
         }
 
-        .mensaje-exito {
-            background-color: #d4edda;
-            color: #155724;
+        .titulo-requisitos {
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: #34495e;
+        }
+
+        .lista-requisitos {
+            list-style-type: disc;
+            margin-left: 20px;
+            color: #555;
+        }
+
+        .requisito {
+            margin-bottom: 5px;
+        }
+
+        .detalles-trabajo {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: #7f8c8d;
+        }
+
+        .boton-postularse {
+            display: block;
+            width: 100%;
             padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .boton-postularse:hover {
+            background-color: #2980b9;
+        }
+
+        .boton-menu {
             display: none;
+            position: fixed;
+            top: 70px;
+            left: 10px;
+            background-color: #34495e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px;
+            cursor: pointer;
+            z-index: 101;
+        }
+
+        .mensaje-no-sesion {
             text-align: center;
+            padding: 50px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mensaje-no-sesion h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .mensaje-no-sesion p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .boton-iniciar-sesion {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .boton-iniciar-sesion:hover {
+            background-color: #2980b9;
+        }
+
+        .mensaje-carga {
+            text-align: center;
+            padding: 50px 20px;
+            font-size: 1.2rem;
+            color: #7f8c8d;
         }
 
         .mensaje-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            padding: 10px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            display: none;
             text-align: center;
+            padding: 50px 20px;
+            color: #e74c3c;
+            font-size: 1.1rem;
+        }
+
+        @media (max-width: 768px) {
+            .contenedor-contenido.con-barra-lateral {
+                margin-left: 0;
+            }
+            
+            .barra-lateral {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+            }
+            
+            .boton-menu {
+                display: block;
+            }
+            
+            .lista-trabajos {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -367,13 +363,17 @@
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
         <a href="index.html" class="logo">Setsuzoku</a>
+        <div class="enlaces-sesion" id="enlaces-sesion">
+            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
+            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
+        </div>
     </nav>
 
     <div class="contenedor-principal">
         <!-- BARRA LATERAL -->
-        <div class="barra-lateral">
-            <button class="boton-menu" id="boton-menu">☰</button>
-
+        <button class="boton-menu" id="boton-menu">☰ Menú</button>
+        
+        <div class="barra-lateral" id="barra-lateral">
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
                 <div class="rol-usuario" id="rol-usuario">Rol</div>
@@ -390,83 +390,110 @@
             </ul>
         </div>
 
-        <!-- CONTENIDO DE TRABAJOS -->
-        <div class="contenido-trabajos">
-            <h1 class="titulo-trabajos">
-                Ofertas de Trabajo
-                <button class="boton-nuevo-trabajo" id="boton-nuevo-trabajo">Publicar Nuevo Trabajo</button>
-            </h1>
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <!-- CONTENIDO DE TRABAJOS -->
+            <div class="contenido-trabajos" id="contenido-principal">
+                <h1 class="titulo-trabajos">Trabajos Disponibles</h1>
 
-            <div id="contenedor-trabajos">
-                <!-- Los trabajos se cargarán aquí con JavaScript -->
-            </div>
-        </div>
-    </div>
+                <div class="filtros-trabajos">
+                    <div class="filtro">
+                        <label class="etiqueta-filtro" for="buscar-trabajo">Buscar trabajo</label>
+                        <input type="text" id="buscar-trabajo" class="campo-filtro" placeholder="Buscar por título o empresa">
+                    </div>
+                    <div class="filtro">
+                        <label class="etiqueta-filtro" for="filtrar-empresa">Empresa</label>
+                        <select id="filtrar-empresa" class="campo-filtro">
+                            <option value="">Todas las empresas</option>
+                        </select>
+                    </div>
+                </div>
 
-    <!-- Modal para crear nuevo trabajo -->
-    <div id="modal-nuevo-trabajo" class="modal">
-        <div class="modal-contenido">
-            <div class="modal-cabecera">
-                <h2 class="modal-titulo">Publicar Nuevo Trabajo</h2>
-                <span class="modal-cerrar" id="modal-cerrar">&times;</span>
+                <div class="lista-trabajos" id="lista-trabajos">
+                    <div class="mensaje-carga">Cargando trabajos...</div>
+                </div>
             </div>
             
-            <div id="mensaje-exito" class="mensaje-exito"></div>
-            <div id="mensaje-error" class="mensaje-error"></div>
-            
-            <form id="formulario-nuevo-trabajo">
-                <div class="grupo-formulario">
-                    <label for="titulo" class="etiqueta-formulario">Título del Puesto</label>
-                    <input type="text" id="titulo" name="titulo" class="campo-formulario" required>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="empresa" class="etiqueta-formulario">Empresa</label>
-                    <input type="text" id="empresa" name="empresa" class="campo-formulario" required>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="descripcion" class="etiqueta-formulario">Descripción</label>
-                    <textarea id="descripcion" name="descripcion" class="campo-formulario" rows="3" required></textarea>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="requisitos" class="etiqueta-formulario">Requisitos (uno por línea)</label>
-                    <textarea id="requisitos" name="requisitos" class="campo-formulario" rows="4" required></textarea>
-                </div>
-
-                <div class="grupo-formulario">
-                    <button type="submit" class="boton-principal">Publicar Trabajo</button>
-                    <button type="button" class="boton-secundario" id="cancelar-nuevo-trabajo">Cancelar</button>
-                </div>
-            </form>
+            <!-- MENSAJE PARA USUARIOS NO AUTENTICADOS -->
+            <div class="mensaje-no-sesion" id="mensaje-no-sesion" style="display: none;">
+                <h2>Para ver esta página, necesitas iniciar sesión</h2>
+                <p>Por favor, inicia sesión o regístrate para acceder a esta sección.</p>
+                <a href="inicio_sesion.html" class="boton-iniciar-sesion">Iniciar sesión</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // Función para cargar los datos del usuario
-        function cargarDatosUsuario() {
-            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            console.log('Datos en sessionStorage:', usuarioStr); // Para depuración
 
-            if (usuario) {
-                // Mostrar información del usuario en la barra lateral
-                document.getElementById('nombre-usuario').textContent = usuario.nombre;
-                document.getElementById('rol-usuario').textContent =
-                    usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-
-                // Configurar opciones según el rol
-                configurarMenuSegunRol(usuario.grupo);
-
-                // Cargar trabajos
-                cargarTrabajos(usuario.grupo);
-            } else {
-                // Si no hay sesión, redirigir al inicio
-                window.location.href = 'index.html';
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    console.log('Usuario parseado:', usuario); // Para depuración
+                    
+                    // Verificar que tenga las propiedades mínimas necesarias
+                    if (usuario && usuario.nombre && usuario.grupo) {
+                        // Sesión válida encontrada
+                        mostrarInterfazConSesion(usuario);
+                        return true;
+                    } else {
+                        console.error('Usuario incompleto:', usuario);
+                        sessionStorage.removeItem('usuario');
+                    }
+                } catch (error) {
+                    console.error('Error parseando usuario:', error);
+                    sessionStorage.removeItem('usuario');
+                }
             }
+            
+            // No hay sesión válida
+            mostrarInterfazNoSesion();
+            return false;
+        }
+
+        // MOSTRAR INTERFAZ CUANDO NO HAY SESIÓN
+        function mostrarInterfazNoSesion() {
+            document.getElementById('enlaces-sesion').style.display = 'flex';
+            document.getElementById('barra-lateral').style.display = 'none';
+            document.getElementById('contenido-principal').style.display = 'block';
+            document.getElementById('mensaje-no-sesion').style.display = 'none';
+
+            // Quitar clase al contenedor de contenido cuando no hay barra lateral
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            contenedorContenido.classList.remove('con-barra-lateral');
+            
+            // Cargar trabajos sin usuario
+            cargarTrabajos(null);
+        }
+
+        // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
+        function mostrarInterfazConSesion(usuario) {
+            document.getElementById('enlaces-sesion').style.display = 'none';
+            document.getElementById('barra-lateral').style.display = 'block';
+            document.getElementById('contenido-principal').style.display = 'block';
+            document.getElementById('mensaje-no-sesion').style.display = 'none';
+
+            // Mostrar información del usuario
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+            document.getElementById('rol-usuario').textContent =
+                usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
+
+            // Configurar opciones según el rol
+            configurarMenuSegunRol(usuario.grupo);
+            
+            // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
+            const contenedorContenido = document.getElementById('contenedor-contenido');
+            contenedorContenido.classList.add('con-barra-lateral');
+
+            // Cargar trabajos con usuario
+            cargarTrabajos(usuario);
         }
 
         // Configurar el menú según el rol del usuario
-        function configurarMenuSegunRol(rolUsuario) {
+        function configurarMenuSegunRol(rol) {
             // Por defecto, todos los enlaces están habilitados
             const enlaces = {
                 'postulaciones': false,
@@ -476,7 +503,7 @@
             };
 
             // Configurar según el rol
-            switch(rolUsuario) {
+            switch(rol) {
                 case 'candidato':
                     // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
                     enlaces['trabajos'] = true;
@@ -499,411 +526,228 @@
                     elemento.setAttribute('href', '#');
                 }
             }
-
-            // Si el rol no es reclutador, ocultar el botón de nuevo trabajo
-            if (rolUsuario !== 'reclutador') {
-                document.getElementById('boton-nuevo-trabajo').style.display = 'none';
-            }
         }
 
-        // Función para cargar los trabajos
-        function cargarTrabajos(rolUsuario) {
-            const contenedorTrabajos = document.getElementById('contenedor-trabajos');
+        // FUNCIÓN MEJORADA PARA CERRAR SESIÓN
+        function cerrarSesion() {
+            // Limpiar todos los datos de sesión
+            sessionStorage.removeItem('usuario');
 
-            // Obtener trabajos del servidor
+            // Redirigir a index.html para forzar recarga completa
+            window.location.href = 'index.html';
+        }
+
+        // Función para cargar trabajos desde la API
+        function cargarTrabajos(usuario) {
+            const listaTrabajos = document.getElementById('lista-trabajos');
+            
+            // Mostrar mensaje de carga
+            listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
+            
+            // Realizar petición a la API
             fetch('/api/trabajos')
-                .then(response => response.json())
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Error al cargar los trabajos');
+                    }
+                    return response.json();
+                })
                 .then(trabajos => {
+                    // Limpiar lista de trabajos
+                    listaTrabajos.innerHTML = '';
+                    
                     // Verificar si hay trabajos
                     if (trabajos.length === 0) {
-                        contenedorTrabajos.innerHTML = '<div class="mensaje-vacio">No hay ofertas de trabajo disponibles.</div>';
+                        listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
                         return;
                     }
-
-                    // Crear lista de trabajos
-                    const listaTrabajos = document.createElement('ul');
-                    listaTrabajos.className = 'lista-trabajos';
-
-                    // Agregar cada trabajo a la lista
-                    trabajos.forEach(trabajo => {
-                        const itemTrabajo = document.createElement('li');
-                        itemTrabajo.className = 'trabajo-item';
-
-                        // Construir HTML del item
-                        itemTrabajo.innerHTML = `
-                            <h3 class="trabajo-titulo">${trabajo.titulo}</h3>
-                            <p class="trabajo-empresa">${trabajo.empresa}</p>
-                            <p class="trabajo-descripcion">${trabajo.descripcion}</p>
-                            <div class="trabajo-requisitos">
-                                <h4>Requisitos:</h4>
-                                <ul>
-                                    ${trabajo.requisitos.map(req => `<li>${req}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div class="trabajo-acciones">
-                                <button class="trabajo-boton boton-ver" onclick="verDetallesTrabajo(${trabajo.id})">Ver detalles</button>
-                                ${rolUsuario === 'reclutador' ? `
-                                    <button class="trabajo-boton boton-editar" onclick="editarTrabajo(${trabajo.id})">Editar</button>
-                                    <button class="trabajo-boton boton-eliminar" onclick="eliminarTrabajo(${trabajo.id})">Eliminar</button>
-                                ` : ''}
-                                ${rolUsuario === 'candidato' ? `
-                                    <button class="trabajo-boton boton-ver" onclick="postularseTrabajo(${trabajo.id})">Postularse</button>
-                                ` : ''}
-                            </div>
-                        `;
-
-                        listaTrabajos.appendChild(itemTrabajo);
-                    });
-
-                    // Agregar lista al contenedor
-                    contenedorTrabajos.appendChild(listaTrabajos);
-                })
-                .catch(error => {
-                    console.error('Error al cargar trabajos:', error);
-                    contenedorTrabajos.innerHTML = '<div class="mensaje-vacio">Error al cargar las ofertas de trabajo. Por favor intenta más tarde.</div>';
-                });
-        }
-
-        // Función para ver detalles de un trabajo
-        function verDetallesTrabajo(trabajoId) {
-            // Obtener detalles del trabajo
-            fetch(`/api/trabajos/${trabajoId}`)
-                .then(response => response.json())
-                .then(trabajo => {
-                    // Crear una ventana modal con los detalles
-                    const modal = document.createElement('div');
-                    modal.className = 'modal';
-                    modal.style.display = 'block';
                     
-                    modal.innerHTML = `
-                        <div class="modal-contenido">
-                            <div class="modal-cabecera">
-                                <h2 class="modal-titulo">${trabajo.titulo}</h2>
-                                <span class="modal-cerrar" onclick="this.closest('.modal').remove()">&times;</span>
+                    // Llenar el filtro de empresas
+                    const selectEmpresa = document.getElementById('filtrar-empresa');
+                    const empresas = [...new Set(trabajos.map(trabajo => trabajo.empresa))];
+                    
+                    empresas.forEach(empresa => {
+                        const option = document.createElement('option');
+                        option.value = empresa;
+                        option.textContent = empresa;
+                        selectEmpresa.appendChild(option);
+                    });
+                    
+                    // Mostrar trabajos
+                    trabajos.forEach(trabajo => {
+                        const trabajoElemento = document.createElement('div');
+                        trabajoElemento.className = 'trabajo';
+                        
+                        trabajoElemento.innerHTML = `
+                            <div class="encabezado-trabajo">
+                                <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                                <div class="empresa-trabajo">${trabajo.empresa}</div>
                             </div>
-                            <div class="modal-cuerpo">
-                                <p><strong>Empresa:</strong> ${trabajo.empresa}</p>
-                                <p><strong>Descripción:</strong> ${trabajo.descripcion}</p>
-                                <div>
-                                    <strong>Requisitos:</strong>
-                                    <ul>
-                                        ${trabajo.requisitos.map(req => `<li>${req}</li>`).join('')}
+                            <div class="cuerpo-trabajo">
+                                <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                                <div class="requisitos-trabajo">
+                                    <div class="titulo-requisitos">Requisitos:</div>
+                                    <ul class="lista-requisitos">
+                                        ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
                                     </ul>
                                 </div>
-                                <p><strong>Fecha de publicación:</strong> ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</p>
+                                <div class="detalles-trabajo">
+                                    <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                                </div>
+                                <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
                             </div>
-                            <div class="modal-pie">
-                                <button class="boton-secundario" onclick="this.closest('.modal').remove()">Cerrar</button>
-                            </div>
-                        </div>
-                    `;
-                    
-                    document.body.appendChild(modal);
-                    
-                    // Cerrar modal si se hace clic fuera de él
-                    modal.addEventListener('click', function(event) {
-                        if (event.target === modal) {
-                            modal.remove();
-                        }
+                        `;
+                        
+                        listaTrabajos.appendChild(trabajoElemento);
+                        
+                        // Configurar evento para el botón de postularse
+                        const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                        botonPostularse.addEventListener('click', function() {
+                            if (usuario) {
+                                postularseTrabajo(usuario, trabajo.id);
+                            } else {
+                                // Redirigir a inicio de sesión
+                                window.location.href = 'inicio_sesion.html';
+                            }
+                        });
                     });
+                    
+                    // Configurar filtros
+                    configurarFiltros(trabajos);
                 })
                 .catch(error => {
-                    console.error('Error al cargar detalles del trabajo:', error);
-                    alert('Error al cargar los detalles del trabajo. Por favor intenta más tarde.');
+                    console.error('Error:', error);
+                    listaTrabajos.innerHTML = '<div class="mensaje-error">Error al cargar los trabajos. Por favor, intenta de nuevo más tarde.</div>';
                 });
         }
 
         // Función para postularse a un trabajo
-        function postularseTrabajo(trabajoId) {
-            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+        function postularseTrabajo(usuario, trabajoId) {
+            // Crear objeto con los datos de la postulación
+            const datosPostulacion = {
+                usuario_id: usuario.id,
+                trabajo_id: trabajoId,
+                mensaje: `Hola, estoy interesado/a en el puesto. Mi nombre es ${usuario.nombre} ${usuario.apellido_paterno} y creo que mis habilidades y experiencia encajan perfectamente con lo que están buscando.`
+            };
             
-            if (!usuario) {
-                window.location.href = 'index.html';
-                return;
-            }
-
-            // Enviar solicitud de postulación al servidor
+            // Realizar petición a la API
             fetch('/api/postularse-trabajo', {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
+                    'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({
-                    usuario_id: usuario.id,
-                    trabajo_id: trabajoId,
-                    mensaje: "Estoy interesado en esta posición y creo que mis habilidades son adecuadas."
-                })
+                body: JSON.stringify(datosPostulacion)
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al postularse al trabajo');
+                }
+                return response.json();
+            })
             .then(data => {
                 if (data.exito) {
-                    alert('¡Te has postulado correctamente al trabajo!');
-                    // Recargar la página para actualizar la lista de trabajos
-                    window.location.reload();
+                    alert('¡Te has postulado al trabajo correctamente!');
                 } else {
-                    alert(data.mensaje || 'Error al postularse al trabajo. Por favor intenta nuevamente.');
+                    alert(data.mensaje || 'Error al postularse al trabajo');
                 }
             })
             .catch(error => {
                 console.error('Error:', error);
-                alert('Error de conexión. Por favor intenta más tarde.');
+                alert('Error al postularse al trabajo. Por favor, intenta de nuevo más tarde.');
             });
         }
 
-        // Función para editar un trabajo
-        function editarTrabajo(trabajoId) {
-            // Obtener detalles del trabajo
-            fetch(`/api/trabajos/${trabajoId}`)
-                .then(response => response.json())
-                .then(trabajo => {
-                    // Crear una ventana modal con el formulario de edición
-                    const modal = document.createElement('div');
-                    modal.className = 'modal';
-                    modal.style.display = 'block';
+        // Función para configurar los filtros
+        function configurarFiltros(trabajos) {
+            const buscarTrabajo = document.getElementById('buscar-trabajo');
+            const filtrarEmpresa = document.getElementById('filtrar-empresa');
+            const listaTrabajos = document.getElementById('lista-trabajos');
+            
+            function aplicarFiltros() {
+                const textoBusqueda = buscarTrabajo.value.toLowerCase();
+                const empresaSeleccionada = filtrarEmpresa.value;
+                
+                // Filtrar trabajos
+                const trabajosFiltrados = trabajos.filter(trabajo => {
+                    const coincideTexto = trabajo.titulo.toLowerCase().includes(textoBusqueda) || 
+                                        trabajo.descripcion.toLowerCase().includes(textoBusqueda);
+                    const coincideEmpresa = !empresaSeleccionada || trabajo.empresa === empresaSeleccionada;
                     
-                    modal.innerHTML = `
-                        <div class="modal-contenido">
-                            <div class="modal-cabecera">
-                                <h2 class="modal-titulo">Editar Trabajo</h2>
-                                <span class="modal-cerrar" onclick="this.closest('.modal').remove()">&times;</span>
+                    return coincideTexto && coincideEmpresa;
+                });
+                
+                // Limpiar lista de trabajos
+                listaTrabajos.innerHTML = '';
+                
+                // Verificar si hay trabajos después de filtrar
+                if (trabajosFiltrados.length === 0) {
+                    listaTrabajos.innerHTML = '<div class="mensaje-error">No se encontraron trabajos que coincidan con los filtros.</div>';
+                    return;
+                }
+                
+                // Mostrar trabajos filtrados
+                trabajosFiltrados.forEach(trabajo => {
+                    const trabajoElemento = document.createElement('div');
+                    trabajoElemento.className = 'trabajo';
+                    
+                    trabajoElemento.innerHTML = `
+                        <div class="encabezado-trabajo">
+                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                        </div>
+                        <div class="cuerpo-trabajo">
+                            <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                            <div class="requisitos-trabajo">
+                                <div class="titulo-requisitos">Requisitos:</div>
+                                <ul class="lista-requisitos">
+                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                </ul>
                             </div>
-                            <div id="mensaje-exito-editar" class="mensaje-exito"></div>
-                            <div id="mensaje-error-editar" class="mensaje-error"></div>
-                            <form id="formulario-editar-trabajo">
-                                <input type="hidden" id="editar-trabajo-id" value="${trabajo.id}">
-                                <div class="grupo-formulario">
-                                    <label for="editar-titulo" class="etiqueta-formulario">Título del Puesto</label>
-                                    <input type="text" id="editar-titulo" name="titulo" class="campo-formulario" value="${trabajo.titulo}" required>
-                                </div>
-                                <div class="grupo-formulario">
-                                    <label for="editar-empresa" class="etiqueta-formulario">Empresa</label>
-                                    <input type="text" id="editar-empresa" name="empresa" class="campo-formulario" value="${trabajo.empresa}" required>
-                                </div>
-                                <div class="grupo-formulario">
-                                    <label for="editar-descripcion" class="etiqueta-formulario">Descripción</label>
-                                    <textarea id="editar-descripcion" name="descripcion" class="campo-formulario" rows="3" required>${trabajo.descripcion}</textarea>
-                                </div>
-                                <div class="grupo-formulario">
-                                    <label for="editar-requisitos" class="etiqueta-formulario">Requisitos (uno por línea)</label>
-                                    <textarea id="editar-requisitos" name="requisitos" class="campo-formulario" rows="4" required>${trabajo.requisitos.join('\n')}</textarea>
-                                </div>
-                                <div class="grupo-formulario">
-                                    <button type="submit" class="boton-principal">Guardar Cambios</button>
-                                    <button type="button" class="boton-secundario" onclick="this.closest('.modal').remove()">Cancelar</button>
-                                </div>
-                            </form>
+                            <div class="detalles-trabajo">
+                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                            </div>
+                            <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
                         </div>
                     `;
                     
-                    document.body.appendChild(modal);
+                    listaTrabajos.appendChild(trabajoElemento);
                     
-                    // Configurar evento para el formulario
-                    document.getElementById('formulario-editar-trabajo').addEventListener('submit', function(e) {
-                        e.preventDefault();
-                        
-                        const formData = new FormData(this);
-                        const datosTrabajo = {
-                            id: formData.get('trabajo_id'),
-                            titulo: formData.get('titulo'),
-                            empresa: formData.get('empresa'),
-                            descripcion: formData.get('descripcion'),
-                            requisitos: formData.get('requisitos').split('\n').filter(req => req.trim() !== '')
-                        };
-                        
-                        // Enviar datos al servidor
-                        fetch(`/api/trabajos/${datosTrabajo.id}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json',
-                            },
-                            body: JSON.stringify(datosTrabajo)
-                        })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.exito) {
-                                document.getElementById('mensaje-exito-editar').textContent = 'Trabajo actualizado correctamente.';
-                                document.getElementById('mensaje-exito-editar').style.display = 'block';
-                                
-                                // Recargar la página después de un breve retraso
-                                setTimeout(() => {
-                                    modal.remove();
-                                    window.location.reload();
-                                }, 2000);
-                            } else {
-                                document.getElementById('mensaje-error-editar').textContent = data.mensaje || 'Error al actualizar el trabajo.';
-                                document.getElementById('mensaje-error-editar').style.display = 'block';
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                            document.getElementById('mensaje-error-editar').textContent = 'Error de conexión. Por favor intenta más tarde.';
-                            document.getElementById('mensaje-error-editar').style.display = 'block';
-                        });
-                    });
-                    
-                    // Cerrar modal si se hace clic fuera de él
-                    modal.addEventListener('click', function(event) {
-                        if (event.target === modal) {
-                            modal.remove();
+                    // Configurar evento para el botón de postularse
+                    const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                    botonPostularse.addEventListener('click', function() {
+                        const usuario = sessionStorage.getItem('usuario');
+                        if (usuario) {
+                            const datosUsuario = JSON.parse(usuario);
+                            postularseTrabajo(datosUsuario, trabajo.id);
+                        } else {
+                            // Redirigir a inicio de sesión
+                            window.location.href = 'inicio_sesion.html';
                         }
                     });
-                })
-                .catch(error => {
-                    console.error('Error al cargar detalles del trabajo:', error);
-                    alert('Error al cargar los detalles del trabajo. Por favor intenta más tarde.');
-                });
-        }
-
-        // Función para eliminar un trabajo
-        function eliminarTrabajo(trabajoId) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta oferta de trabajo?')) {
-                // Enviar solicitud de eliminación al servidor
-                fetch(`/api/trabajos/${trabajoId}`, {
-                    method: 'DELETE'
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.exito) {
-                        alert('Trabajo eliminado correctamente.');
-                        // Recargar la página para actualizar la lista de trabajos
-                        window.location.reload();
-                    } else {
-                        alert(data.mensaje || 'Error al eliminar el trabajo. Por favor intenta nuevamente.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Error de conexión. Por favor intenta más tarde.');
                 });
             }
-        }
-
-        // Función para cerrar sesión
-        function cerrarSesion() {
-            // Limpiar sessionStorage
-            sessionStorage.removeItem('usuario');
             
-            // Forzar recarga completa de la página
-            window.location.href = 'index.html';
-        }
-
-        // Función para alternar la barra lateral
-        function toggleBarraLateral() {
-            const barraLateral = document.querySelector('.barra-lateral');
-            barraLateral.classList.toggle('abierta');
-        }
-
-        // Función para abrir el modal de nuevo trabajo
-        function abrirModalNuevoTrabajo() {
-            document.getElementById('modal-nuevo-trabajo').style.display = 'block';
-        }
-
-        // Función para cerrar el modal de nuevo trabajo
-        function cerrarModalNuevoTrabajo() {
-            document.getElementById('modal-nuevo-trabajo').style.display = 'none';
-            document.getElementById('formulario-nuevo-trabajo').reset();
-            document.getElementById('mensaje-exito').style.display = 'none';
-            document.getElementById('mensaje-error').style.display = 'none';
-        }
-
-        // Función para mostrar mensaje de éxito
-        function mostrarMensajeExito(mensaje) {
-            const mensajeExito = document.getElementById('mensaje-exito');
-            mensajeExito.textContent = mensaje;
-            mensajeExito.style.display = 'block';
-
-            setTimeout(() => {
-                mensajeExito.style.display = 'none';
-            }, 5000);
-        }
-
-        // Función para mostrar mensaje de error
-        function mostrarMensajeError(mensaje) {
-            const mensajeError = document.getElementById('mensaje-error');
-            mensajeError.textContent = mensaje;
-            mensajeError.style.display = 'block';
-
-            setTimeout(() => {
-                mensajeError.style.display = 'none';
-            }, 5000);
+            // Configurar eventos para los filtros
+            buscarTrabajo.addEventListener('input', aplicarFiltros);
+            filtrarEmpresa.addEventListener('change', aplicarFiltros);
         }
 
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Cargar datos del usuario
-            cargarDatosUsuario();
-
             // Configurar evento para el botón de menú
-            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
-
+            document.getElementById('boton-menu').addEventListener('click', function() {
+                const barraLateral = document.getElementById('barra-lateral');
+                barraLateral.style.display = barraLateral.style.display === 'block' ? 'none' : 'block';
+            });
+            
             // Configurar evento para cerrar sesión
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
                 e.preventDefault();
                 cerrarSesion();
             });
-
-            // Configurar evento para el botón de nuevo trabajo
-            document.getElementById('boton-nuevo-trabajo').addEventListener('click', abrirModalNuevoTrabajo);
-
-            // Configurar evento para cerrar el modal
-            document.getElementById('modal-cerrar').addEventListener('click', cerrarModalNuevoTrabajo);
-            document.getElementById('cancelar-nuevo-trabajo').addEventListener('click', cerrarModalNuevoTrabajo);
-
-            // Configurar evento para el formulario de nuevo trabajo
-            document.getElementById('formulario-nuevo-trabajo').addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-                if (!usuario || usuario.grupo !== 'reclutador') {
-                    mostrarMensajeError('No tienes permisos para publicar trabajos.');
-                    return;
-                }
-
-                // Obtener datos del formulario
-                const formData = new FormData(this);
-                const datosTrabajo = {
-                    titulo: formData.get('titulo'),
-                    empresa: formData.get('empresa'),
-                    descripcion: formData.get('descripcion'),
-                    requisitos: formData.get('requisitos').split('\n').filter(req => req.trim() !== ''),
-                    reclutador_id: usuario.id,
-                    fecha_publicacion: new Date().toISOString(),
-                    activo: true
-                };
-
-                // Enviar datos al servidor
-                fetch('/api/trabajos', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(datosTrabajo)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.exito) {
-                        mostrarMensajeExito('Trabajo publicado correctamente.');
-                        // Recargar la página después de un breve retraso
-                        setTimeout(() => {
-                            window.location.reload();
-                        }, 2000);
-                    } else {
-                        mostrarMensajeError(data.mensaje || 'Error al publicar el trabajo. Por favor intenta nuevamente.');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    mostrarMensajeError('Error de conexión. Por favor intenta más tarde.');
-                });
-            });
-
-            // Cerrar modal si se hace clic fuera de él
-            window.addEventListener('click', function(event) {
-                const modal = document.getElementById('modal-nuevo-trabajo');
-                if (event.target === modal) {
-                    cerrarModalNuevoTrabajo();
-                }
-            });
+            
+            // Verificar si el usuario ha iniciado sesión
+            verificarSesion();
         });
     </script>
 </body>

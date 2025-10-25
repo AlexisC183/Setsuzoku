@@ -21,10 +21,16 @@
 
         .barra-superior {
             background-color: #2c3e50;
-            padding: 1rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
         }
 
         .logo {
@@ -34,33 +40,40 @@
             text-decoration: none;
         }
 
+        .enlaces-sesion {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .enlace-sesion {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .enlace-sesion:hover {
+            text-decoration: underline;
+        }
+
         .contenedor-principal {
             display: flex;
             flex: 1;
-            overflow: hidden;
+            margin-top: 60px;
+            position: relative;
         }
 
         .barra-lateral {
             width: 250px;
             background-color: #34495e;
             color: white;
-            height: 100%;
+            height: calc(100vh - 60px);
+            position: fixed;
+            top: 60px;
+            left: 0;
             overflow-y: auto;
-            position: relative;
             z-index: 100;
-        }
-
-        .boton-menu {
-            position: absolute;
-            top: 10px;
-            right: -40px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 0 5px 5px 0;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
+            display: none;
         }
 
         .menu-usuario {
@@ -108,11 +121,21 @@
             background-color: transparent;
         }
 
-        .contenido-perfil {
+        .contenedor-contenido {
             flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .contenedor-contenido.con-barra-lateral {
+            margin-left: 250px;
+        }
+
+        .contenido-perfil {
+            max-width: 900px;
+            margin: 0 auto;
             padding: 30px;
             background-color: white;
-            margin: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
@@ -125,55 +148,114 @@
             padding-bottom: 10px;
         }
 
-        .grupo-formulario {
+        .perfil-cabecera {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .perfil-imagen {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .perfil-info {
+            flex: 1;
+        }
+
+        .perfil-nombre {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .perfil-datos {
+            display: flex;
+            flex-wrap: wrap;
             margin-bottom: 20px;
         }
 
-        .etiqueta-formulario {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
-            font-size: 14px;
+        .perfil-dato {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 15px;
+        }
+
+        .perfil-etiqueta {
             font-weight: bold;
+            color: #34495e;
+            margin-bottom: 5px;
         }
 
-        .campo-formulario {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            font-size: 16px;
-            transition: border-color 0.3s;
+        .perfil-valor {
+            color: #555;
         }
 
-        .campo-formulario:focus {
-            outline: none;
-            border-color: #3498db;
+        .perfil-seccion {
+            margin-bottom: 30px;
         }
 
-        .boton-principal {
+        .perfil-subtitulo {
+            font-size: 1.3rem;
+            color: #34495e;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .boton {
+            padding: 10px 20px;
             background-color: #3498db;
             color: white;
             border: none;
-            padding: 12px 20px;
             border-radius: 4px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 1rem;
             transition: background-color 0.3s;
+            margin-right: 10px;
         }
 
-        .boton-principal:hover {
+        .boton:hover {
             background-color: #2980b9;
         }
 
-        .mensaje-exito {
-            background-color: #d4edda;
-            color: #155724;
-            padding: 15px;
-            border-radius: 4px;
-            margin-bottom: 20px;
-            display: none;
+        .boton-secundario {
+            background-color: #95a5a6;
+        }
+
+        .boton-secundario:hover {
+            background-color: #7f8c8d;
+        }
+
+        .no-sesion {
             text-align: center;
+            padding: 40px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .no-sesion h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .no-sesion p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .botones-accion {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
         }
     </style>
 </head>
@@ -181,13 +263,15 @@
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
         <a href="index.html" class="logo">Setsuzoku</a>
+        <div class="enlaces-sesion" id="enlaces-sesion">
+            <a class="enlace-sesion" href="inicio_sesion.html">Iniciar Sesión</a>
+            <a class="enlace-sesion" href="registro.html">Registrarse</a>
+        </div>
     </nav>
 
     <div class="contenedor-principal">
         <!-- BARRA LATERAL -->
-        <div class="barra-lateral">
-            <button class="boton-menu" id="boton-menu">☰</button>
-
+        <div class="barra-lateral" id="barra-lateral">
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
                 <div class="rol-usuario" id="rol-usuario">Rol</div>
@@ -204,204 +288,190 @@
             </ul>
         </div>
 
-        <!-- CONTENIDO DEL PERFIL -->
-        <div class="contenido-perfil">
-            <h1 class="titulo-perfil">Mi Perfil</h1>
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <!-- CONTENIDO DEL PERFIL -->
+            <div class="contenido-perfil" id="contenido-perfil">
+                <h1 class="titulo-perfil">Mi Perfil</h1>
 
-            <div id="mensaje-exito" class="mensaje-exito"></div>
-
-            <form id="formulario-perfil">
-                <div class="grupo-formulario">
-                    <label for="nombre" class="etiqueta-formulario">Nombre(s)</label>
-                    <input type="text" id="nombre" name="nombre" class="campo-formulario" required>
+                <div class="perfil-cabecera">
+                    <div class="perfil-imagen" id="perfil-imagen" style="background-image: url('https://picsum.photos/seed/usuario/240/240.jpg')"></div>
+                    <div class="perfil-info">
+                        <h2 class="perfil-nombre" id="perfil-nombre">Cargando...</h2>
+                        <p id="perfil-rol">Cargando...</p>
+                    </div>
                 </div>
 
-                <div class="grupo-formulario">
-                    <label for="apellido-paterno" class="etiqueta-formulario">Apellido Paterno</label>
-                    <input type="text" id="apellido-paterno" name="apellido-paterno" class="campo-formulario" required>
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Información Personal</h3>
+                    <div class="perfil-datos">
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Nombre Completo</div>
+                            <div class="perfil-valor" id="nombre-completo">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Fecha de Nacimiento</div>
+                            <div class="perfil-valor" id="fecha-nacimiento">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Género</div>
+                            <div class="perfil-valor" id="genero">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Teléfono</div>
+                            <div class="perfil-valor" id="telefono">Cargando...</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grupo-formulario">
-                    <label for="apellido-materno" class="etiqueta-formulario">Apellido Materno</label>
-                    <input type="text" id="apellido-materno" name="apellido-materno" class="campo-formulario" required>
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Información Profesional</h3>
+                    <div class="perfil-datos">
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Estudios</div>
+                            <div class="perfil-valor" id="estudios">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Experiencia</div>
+                            <div class="perfil-valor" id="experiencia">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Habilidades</div>
+                            <div class="perfil-valor" id="habilidades">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Correo Electrónico</div>
+                            <div class="perfil-valor" id="correo">Cargando...</div>
+                        </div>
+                    </div>
                 </div>
 
-                <div class="grupo-formulario">
-                    <label for="fecha-nacimiento" class="etiqueta-formulario">Fecha de Nacimiento</label>
-                    <input type="date" id="fecha-nacimiento" name="fecha-nacimiento" class="campo-formulario" required>
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Acciones</h3>
+                    <button class="boton" id="editar-perfil">Editar Perfil</button>
+                    <button class="boton boton-secundario" id="ver-postulaciones">Ver Postulaciones</button>
+                    <button class="boton boton-secundario" id="ver-cursos">Ver Mis Cursos</button>
                 </div>
+            </div>
+        </div>
 
-                <div class="grupo-formulario">
-                    <label for="genero" class="etiqueta-formulario">Género</label>
-                    <select id="genero" name="genero" class="campo-formulario" required>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
-                        <option value="no-especificar">Prefiero no especificar</option>
-                    </select>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="telefono" class="etiqueta-formulario">Teléfono Celular</label>
-                    <input type="tel" id="telefono" name="telefono" class="campo-formulario" required>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="correo" class="etiqueta-formulario">Correo Electrónico</label>
-                    <input type="email" id="correo" name="correo" class="campo-formulario" required>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="estudios" class="etiqueta-formulario">Últimos Estudios</label>
-                    <textarea id="estudios" name="estudios" class="campo-formulario" rows="3" required></textarea>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="experiencia" class="etiqueta-formulario">Experiencia Laboral</label>
-                    <textarea id="experiencia" name="experiencia" class="campo-formulario" rows="3" required></textarea>
-                </div>
-
-                <div class="grupo-formulario">
-                    <label for="habilidades" class="etiqueta-formulario">Habilidades</label>
-                    <textarea id="habilidades" name="habilidades" class="campo-formulario" rows="3" required></textarea>
-                </div>
-
-                <button type="submit" class="boton-principal">Guardar Cambios</button>
-            </form>
+        <!-- MENSAJE PARA USUARIOS NO REGISTRADOS -->
+        <div class="no-sesion" id="no-sesion" style="display: none;">
+            <h2>Debes iniciar sesión</h2>
+            <p>Para ver tu perfil, por favor inicia sesión en tu cuenta.</p>
+            <div class="botones-accion">
+                <a href="inicio_sesion.html" class="boton">Iniciar sesión</a>
+                <a href="registro.html" class="boton boton-secundario">Registrarse</a>
+            </div>
         </div>
     </div>
 
     <script>
-        // Función para cargar los datos del usuario
-        function cargarDatosUsuario() {
-            const usuario = JSON.parse(sessionStorage.getItem('usuario'));
-
-            if (usuario) {
-                // Mostrar información del usuario en la barra lateral
-                document.getElementById('nombre-usuario').textContent = usuario.nombre;
-                document.getElementById('rol-usuario').textContent =
-                    usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-
-                // Configurar opciones según el rol
-                configurarMenuSegunRol(usuario.grupo);
-
-                // Cargar datos en el formulario
-                document.getElementById('nombre').value = usuario.nombre || '';
-                document.getElementById('apellido-paterno').value = usuario.apellido_paterno || '';
-                document.getElementById('apellido-materno').value = usuario.apellido_materno || '';
-                document.getElementById('fecha-nacimiento').value = usuario.fecha_nacimiento || '';
-                document.getElementById('genero').value = usuario.genero || '';
-                document.getElementById('telefono').value = usuario.telefono || '';
-                document.getElementById('correo').value = usuario.correo || '';
-                document.getElementById('estudios').value = usuario.estudios || '';
-                document.getElementById('experiencia').value = usuario.experiencia || '';
-                document.getElementById('habilidades').value = usuario.habilidades || '';
-            } else {
-                // Si no hay sesión, redirigir al inicio
-                window.location.href = 'index.html';
-            }
-        }
-
-        // Configurar el menú según el rol del usuario
-        function configurarMenuSegunRol(rol) {
-            // Por defecto, todos los enlaces están habilitados
-            const enlaces = {
-                'postulaciones': false,
-                'cursos-usuario': false,
-                'trabajos': false,
-                'cursos': false
-            };
-
-            // Configurar según el rol
-            switch(rol) {
-                case 'candidato':
-                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
-                    enlaces['trabajos'] = true;
-                    break;
-                case 'reclutador':
-                    // Los reclutadores pueden ver todo excepto "Tus cursos"
-                    enlaces['cursos-usuario'] = true;
-                    break;
-                case 'instructor':
-                    // Los instructores pueden ver todo excepto "Tus postulaciones"
-                    enlaces['postulaciones'] = true;
-                    break;
-            }
-
-            // Aplicar la configuración
-            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
-                const elemento = document.getElementById(`enlace-${enlace}`);
-                if (deshabilitar) {
-                    elemento.classList.add('disabled');
-                    elemento.setAttribute('href', '#');
-                }
-            }
-        }
-
-        // FUNCIÓN MEJORADA PARA CERRAR SESIÓN
+        // Función para cerrar sesión
         function cerrarSesion() {
-            // Limpiar todos los datos de sesión
             sessionStorage.removeItem('usuario');
-
-            // Redirigir a index.html para forzar recarga completa
-            window.location.href = 'index.html';
+            window.location.reload();
         }
 
-        // Función para alternar la barra lateral
-        function toggleBarraLateral() {
-            const barraLateral = document.querySelector('.barra-lateral');
-            barraLateral.classList.toggle('abierta');
+        // Función para cargar los datos del perfil
+        function cargarPerfil() {
+            const usuario = sessionStorage.getItem('usuario');
+            
+            if (usuario) {
+                const datosUsuario = JSON.parse(usuario);
+                
+                // Actualizar la información del usuario en la barra lateral
+                document.getElementById('nombre-usuario').textContent = 
+                    `${datosUsuario.nombre} ${datosUsuario.apellido_paterno}`;
+                document.getElementById('rol-usuario').textContent = datosUsuario.grupo;
+                
+                // Actualizar la información del perfil
+                document.getElementById('perfil-nombre').textContent = 
+                    `${datosUsuario.nombre} ${datosUsuario.apellido_paterno} ${datosUsuario.apellido_materno}`;
+                document.getElementById('perfil-rol').textContent = datosUsuario.grupo;
+                
+                document.getElementById('nombre-completo').textContent = 
+                    `${datosUsuario.nombre} ${datosUsuario.apellido_paterno} ${datosUsuario.apellido_materno}`;
+                document.getElementById('fecha-nacimiento').textContent = datosUsuario.fecha_nacimiento;
+                document.getElementById('genero').textContent = datosUsuario.genero;
+                document.getElementById('telefono').textContent = datosUsuario.telefono;
+                
+                document.getElementById('estudios').textContent = datosUsuario.estudios;
+                document.getElementById('experiencia').textContent = datosUsuario.experiencia;
+                document.getElementById('habilidades').textContent = datosUsuario.habilidades;
+                document.getElementById('correo').textContent = datosUsuario.correo;
+                
+                // Configurar eventos para los botones
+                document.getElementById('editar-perfil').addEventListener('click', function() {
+                    alert('Función de edición de perfil no implementada en esta demostración');
+                });
+                
+                document.getElementById('ver-postulaciones').addEventListener('click', function() {
+                    window.location.href = 'postulaciones.html';
+                });
+                
+                document.getElementById('ver-cursos').addEventListener('click', function() {
+                    window.location.href = 'cursos_usuario.html';
+                });
+                
+                // Configurar el evento para cerrar sesión
+                document.getElementById('cerrar-sesion').addEventListener('click', cerrarSesion);
+            }
+        }
+
+        // Función para verificar si el usuario ha iniciado sesión
+        function verificarSesion() {
+            const usuario = sessionStorage.getItem('usuario');
+            
+            if (usuario) {
+                // Mostrar la barra lateral
+                const barraLateral = document.getElementById('barra-lateral');
+                barraLateral.style.display = 'block';
+                
+                // Mostrar el contenido del perfil
+                document.getElementById('contenido-perfil').style.display = 'block';
+                
+                // Ocultar el mensaje de no sesión
+                document.getElementById('no-sesion').style.display = 'none';
+                
+                // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
+                const contenedorContenido = document.getElementById('contenedor-contenido');
+                contenedorContenido.classList.add('con-barra-lateral');
+                
+                // Cargar los datos del perfil
+                cargarPerfil();
+                
+                // Modificar la barra superior para mostrar solo "Perfil"
+                const enlacesSesion = document.getElementById('enlaces-sesion');
+                enlacesSesion.innerHTML = '<a class="enlace-sesion" href="perfil.html">Perfil</a>';
+            } else {
+                // Ocultar la barra lateral
+                const barraLateral = document.getElementById('barra-lateral');
+                barraLateral.style.display = 'none';
+                
+                // Mostrar el mensaje de no sesión
+                document.getElementById('no-sesion').style.display = 'block';
+                
+                // Ocultar el contenido del perfil
+                document.getElementById('contenido-perfil').style.display = 'none';
+                
+                // Quitar clase al contenedor de contenido cuando no hay barra lateral
+                const contenedorContenido = document.getElementById('contenedor-contenido');
+                contenedorContenido.classList.remove('con-barra-lateral');
+                
+                // Asegurar que la barra superior muestre las opciones de inicio de sesión y registro
+                const enlacesSesion = document.getElementById('enlaces-sesion');
+                enlacesSesion.innerHTML = `
+                    <a class="enlace-sesion" href="inicio_sesion.html">Iniciar Sesión</a>
+                    <a class="enlace-sesion" href="registro.html">Registrarse</a>
+                `;
+            }
         }
 
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Cargar datos del usuario
-            cargarDatosUsuario();
-
-            // Configurar evento para el botón de menú
-            document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
-
-            // Configurar evento para cerrar sesión
-            document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
-                e.preventDefault();
-                cerrarSesion();
-            });
-
-            // Configurar evento para el formulario
-            document.getElementById('formulario-perfil').addEventListener('submit', function(e) {
-                e.preventDefault();
-
-                // Obtener datos del formulario
-                const formData = new FormData(this);
-                const datosActualizados = {};
-
-                // Convertir FormData a objeto
-                for (let [key, value] of formData.entries()) {
-                    datosActualizados[key] = value;
-                }
-
-                // Obtener datos actuales del usuario
-                const usuarioActual = JSON.parse(sessionStorage.getItem('usuario'));
-
-                // Actualizar datos del usuario
-                const usuarioActualizado = {
-                    ...usuarioActual,
-                    ...datosActualizados
-                };
-
-                // Guardar en sessionStorage
-                sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
-
-                // Mostrar mensaje de éxito
-                const mensajeExito = document.getElementById('mensaje-exito');
-                mensajeExito.textContent = 'Perfil actualizado correctamente';
-                mensajeExito.style.display = 'block';
-
-                // Ocultar mensaje después de 3 segundos
-                setTimeout(() => {
-                    mensajeExito.style.display = 'none';
-                }, 3000);
-            });
+            // Verificar si el usuario ha iniciado sesión
+            verificarSesion();
         });
     </script>
 </body>

@@ -2,6 +2,7 @@ import os # Funciones del sistema operativo para manejo de archivos y directorio
 
 # VARIABLES GLOBALES
 codificaciones_txt = ['utf-8'] # Lista de codificaciones a probar para archivos de texto
+nombre_script = os.path.basename(__file__) # Nombre del script actual para excluirlo
 
 # FUNCIONES
 # Función recursiva que procesa archivos y subdirectorios y guarda en archivo
@@ -11,8 +12,11 @@ def guardar_contenido_archivos(ruta_dir, archivo_salida, codificaciones_txt, niv
         # Construye la ruta completa del elemento
         ruta_completa = os.path.join(ruta_dir, nombre_elemento)
         
-        # Verifica si es un archivo y no es el archivo de salida actual
-        if os.path.isfile(ruta_completa) and ruta_completa != archivo_salida.name:
+        # Verifica si es un archivo y no es el archivo de salida actual ni el script
+        if (os.path.isfile(ruta_completa) and 
+            ruta_completa != archivo_salida.name and 
+            nombre_elemento != nombre_script):
+            
             for codificacion_iter in codificaciones_txt:
                 try:
                     # Intenta abrir y leer el contenido del archivo como texto
@@ -41,8 +45,11 @@ def procesar_archivos(ruta_dir, codificaciones_txt, nivel=0, archivo_salida_excl
         # Construye la ruta completa del elemento
         ruta_completa = os.path.join(ruta_dir, nombre_elemento)
         
-        # Verifica si es un archivo y no es el archivo de salida a excluir
-        if os.path.isfile(ruta_completa) and (archivo_salida_excluir is None or ruta_completa != archivo_salida_excluir):
+        # Verifica si es un archivo y no es el archivo de salida a excluir ni el script
+        if (os.path.isfile(ruta_completa) and 
+            (archivo_salida_excluir is None or ruta_completa != archivo_salida_excluir) and
+            nombre_elemento != nombre_script):
+            
             for codificacion_iter in codificaciones_txt:
                 try:
                     # Intenta abrir y leer el contenido del archivo como texto
@@ -69,8 +76,11 @@ def guardar_arbol_directorios(ruta_dir, archivo_salida, prefijo="", nivel=0):
     # Obtiene la lista de elementos en el directorio
     elementos = os.listdir(ruta_dir)
     
+    # Filtra excluyendo el archivo de salida y el script actual
+    elementos_filtrados = [elem for elem in elementos if elem != os.path.basename(archivo_salida.name) and elem != nombre_script]
+    
     # Ordena los elementos: primero directorios, luego archivos
-    elementos_ordenados = sorted(elementos, key=lambda x: (not os.path.isdir(os.path.join(ruta_dir, x)), x))
+    elementos_ordenados = sorted(elementos_filtrados, key=lambda x: (not os.path.isdir(os.path.join(ruta_dir, x)), x))
     
     # Recorre todos los elementos
     for i, nombre_elemento in enumerate(elementos_ordenados):
@@ -95,8 +105,11 @@ def mostrar_arbol_directorios(ruta_dir, prefijo="", nivel=0):
     # Obtiene la lista de elementos en el directorio
     elementos = os.listdir(ruta_dir)
     
+    # Filtra excluyendo el archivo de salida y el script actual
+    elementos_filtrados = [elem for elem in elementos if elem != nombre_script]
+    
     # Ordena los elementos: primero directorios, luego archivos
-    elementos_ordenados = sorted(elementos, key=lambda x: (not os.path.isdir(os.path.join(ruta_dir, x)), x))
+    elementos_ordenados = sorted(elementos_filtrados, key=lambda x: (not os.path.isdir(os.path.join(ruta_dir, x)), x))
     
     # Recorre todos los elementos
     for i, nombre_elemento in enumerate(elementos_ordenados):
@@ -135,5 +148,5 @@ with open(ruta_archivo_salida, 'w', encoding='utf-8') as archivo_salida:
     # Escribe el separador
     archivo_salida.write("------------------------------------\n")
     
-    # Procesa los archivos y guarda su contenido (excluyendo el archivo de salida actual)
+    # Procesa los archivos y guarda su contenido (excluyendo el archivo de salida actual y el script)
     guardar_contenido_archivos(ruta_dir, archivo_salida, codificaciones_txt)

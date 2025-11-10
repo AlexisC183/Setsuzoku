@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de Nosotros - Setsuzoku</title>
+    <title>Acerca de Setsuzoku</title>
     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../css/fuentes.css">
     <style>
@@ -185,10 +185,11 @@
             width: 120px;
             height: 120px;
             border-radius: 50%;
-            background-color: #ddd;
+            background-color: #ddd; /* Color de fondo si la imagen no carga */
             margin: 0 auto 15px;
             background-size: cover;
             background-position: center;
+            background-repeat: no-repeat;
         }
 
         .nombre-miembro {
@@ -301,44 +302,23 @@
         <div class="contenedor-contenido" id="contenedor-contenido">
             <!-- CONTENIDO ACERCA DE NOSOTROS -->
             <div class="contenido-acerca" id="contenido-principal">
-                <h1 class="titulo-acerca">Acerca de Nosotros</h1>
+                <!-- MODIFICACIÓN: Título cambiado -->
+                <h1 class="titulo-acerca">Acerca de Setsuzoku</h1>
 
-                <div class="seccion-acerca">
-                    <h2 class="subtitulo-acerca">Nuestra Misión</h2>
-                    <p class="parrafo-acerca">
-                        En Setsuzoku, nos dedicamos a conectar talento con oportunidades. Nuestra misión es facilitar 
-                        el encuentro entre profesionales y empresas, creando una plataforma eficiente y accesible 
-                        para todos los actores del mercado laboral.
-                    </p>
-                    <p class="parrafo-acerca">
-                        Creemos que el talento no tiene fronteras y que cada persona merece la oportunidad de 
-                        desarrollar su potencial en un ambiente que valore sus habilidades y aportes.
-                    </p>
-                </div>
-
-                <div class="seccion-acerca">
-                    <h2 class="subtitulo-acerca">Nuestra Visión</h2>
-                    <p class="parrafo-acerca">
-                        Aspiramos a ser la plataforma líder en conexión laboral en la región, reconocida por nuestra 
-                        innovación, calidad de servicio y compromiso con el desarrollo profesional de nuestros usuarios.
-                    </p>
-                    <p class="parrafo-acerca">
-                        Visualizamos un futuro donde la búsqueda de empleo y la contratación de talento sean procesos 
-                        transparentes, eficientes y satisfactorios para todas las partes involucradas.
-                    </p>
-                </div>
+                <!-- SECCIÓN ELIMINADA: Misión y Visión -->
 
                 <div class="seccion-acerca">
                     <h2 class="subtitulo-acerca">Nuestra Historia</h2>
                     <p class="parrafo-acerca">
-                        Setsuzoku nació en 2023 con la idea de revolucionar la forma en que las personas encuentran 
-                        empleo y las empresas contratan talento. Nuestros fundadores, experimentados profesionales 
-                        del sector tecnológico y de recursos humanos, identificaron una necesidad en el mercado: 
+                        Setsuzoku nació en 2025 con la idea de revolucionar la forma en que las personas encuentran 
+                        empleo y las empresas contratan talento. Apesar de que Setsuzoku nacio como un proyecto de estudiantes pertenecientes
+                        al Instituto Tecnológico de Tijuana, nuestros fundadores, identificaron una necesidad en el mercado: 
                         una plataforma que fuera realmente efectiva para conectar las habilidades específicas de los 
-                        candidatos con las necesidades precisas de las empresas.
+                        candidatos con las necesidades precisas de las empresas. Fundamentado además con experiencias reales,
+                        dentro del propio equipo desarrollador.
                     </p>
                     <p class="parrafo-acerca">
-                        Desde nuestros inicios, hemos crecido constantemente, incorporando nuevas funcionalidades 
+                        Desde nuestros inicios, fuimos incorporando nuevas funcionalidades 
                         y mejorando nuestra tecnología para ofrecer un servicio cada vez más completo y personalizado.
                     </p>
                 </div>
@@ -370,32 +350,59 @@
                 </div>
 
                 <div class="seccion-acerca">
-                    <h2 class="subtitulo-acerca">Nuestro Equipo</h2>
+                    <h2 class="subtitulo-acerca">Equipo Desarrollador</h2>
                     <p class="parrafo-acerca">
-                        Detrás de Setsuzoku hay un equipo diverso de profesionales apasionados por la tecnología 
-                        y los recursos humanos. Nuestro equipo combina experiencia en desarrollo de software, 
-                        diseño de experiencia de usuario, gestión de talento y marketing digital.
+                        Como ya se menciono con anterioridad, detrás del desarrollo de Setsuzoku hay un equipo diverso de estudiantes profesionales 
+                        apasionados por la tecnología. Nuestro equipo combina experiencia en desarrollo de software, 
+                        diseño de experiencia de usuario, gestión de talento y marketing digital. 
                     </p>
                     <div class="equipo">
                         <div class="miembro-equipo">
-                            <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador1/240/240.jpg')"></div>
-                            <div class="nombre-miembro">Carlos Rodríguez</div>
-                            <div class="cargo-miembro">CEO y Fundador</div>
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/alexis_contreras.jpg')"></div>
+                            <div class="nombre-miembro">Contreras Basurto Alexis Alberto</div>
+                            <div class="cargo-miembro">Arquitecto de software y Administrador de BD.</div>
                         </div>
                         <div class="miembro-equipo">
-                            <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador2/240/240.jpg')"></div>
-                            <div class="nombre-miembro">Ana Martínez</div>
-                            <div class="cargo-miembro">Directora de Producto</div>
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/christopher_garcia.jpg')"></div>
+                            <div class="nombre-miembro">Garcia Renteria Christopher Omar</div>
+                            <div class="cargo-miembro">Documentador, Tester y Diseñador.</div>
                         </div>
                         <div class="miembro-equipo">
-                            <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador3/240/240.jpg')"></div>
-                            <div class="nombre-miembro">Miguel Ángel López</div>
-                            <div class="cargo-miembro">CTO</div>
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/jesus_mejia.jpg')"></div>
+                            <div class="nombre-miembro">Mejia Gonzalez Jesus Antonio</div>
+                            <div class="cargo-miembro">Programador, Analista y Administrador de BD.</div>
                         </div>
                         <div class="miembro-equipo">
-                            <div class="foto-miembro" style="background-image: url('https://picsum.photos/seed/fundador4/240/240.jpg')"></div>
-                            <div class="nombre-miembro">Laura Gómez</div>
-                            <div class="cargo-miembro">Directora de RRHH</div>
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/sandra_salazar.jpg')"></div>
+                            <div class="nombre-miembro">Salazar Martínez Sandra Megumi</div>
+                            <div class="cargo-miembro">Analista, Diseñador y Programador.</div>
+                        </div>
+                         <div class="miembro-equipo">
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/sergio_sanchez.jpg')"></div>
+                            <div class="nombre-miembro">Sanchez Gonzalez Sergio Angel</div>
+                            <div class="cargo-miembro">Documentador, Tester y Analista.</div>
+                        </div>
+                        <div class="miembro-equipo">
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/kevin_velarde.jpg')"></div>
+                            <div class="nombre-miembro">Velarde Montoya Kevin Emmanuel</div>
+                            <div class="cargo-miembro">Diseñador de proyecto y Documentador.</div>
+                        </div>
+                    </div>
+                    <p class="parrafo-acerca">
+                        Que junto con un docente altamente calificado, se propucieron para proyecto de matería, desarrollar lo que es hoy en dia Setsuzoku.
+                    </p>
+                    <div class="equipo">
+                        <div class="miembro-equipo">
+                            <!-- MODIFICACIÓN: Ruta de imagen local -->
+                            <div class="foto-miembro" style="background-image: url('../Imagenes/ray_parra.jpg')"></div>
+                            <div class="nombre-miembro">Ray Brunett Parra Galaviz</div>
+                            <div class="cargo-miembro">Profesor y Supervisor del proyecto.</div>
                         </div>
                     </div>
                 </div>

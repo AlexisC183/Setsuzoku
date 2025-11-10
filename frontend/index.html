@@ -494,50 +494,126 @@
             color: #555555;
         }
 
+        /* ESTILOS SECCIÓN EMPRESAS - MODIFICADOS PARA LÍNEA DE TIEMPO */
         .seccion_proceso {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 30px;
+            padding: 40px 20px; /* Más padding para dar espacio a la línea de tiempo */
             margin-bottom: 40px;
+            overflow: hidden; /* Contiene la línea */
         }
 
-        .pasos_proceso {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        .paso {
-            flex: 1;
-            min-width: 200px;
+        .proceso_titulo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin-bottom: 40px;
             text-align: center;
         }
 
-        .paso_numero {
-            width: 50px;
-            height: 50px;
+        /* Contenedor de la línea de tiempo */
+        .linea_tiempo {
+            position: relative; /* Necesario para posicionar la línea */
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* La línea horizontal de la línea de tiempo (pseudo-elemento) */
+        .linea_tiempo::after {
+            content: '';
+            position: absolute;
+            top: 30px; /* Se alinea con el centro de los nodos */
+            left: 50px; /* Empieza después del primer nodo */
+            right: 50px; /* Termina antes del último nodo */
+            height: 4px;
+            background-color: #e0e0e0;
+            z-index: 1;
+        }
+
+        /* Contenedor para cada paso */
+        .paso_contenedor {
+            position: relative;
+            z-index: 2; /* Se sitúa por encima de la línea */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 200px; /* Ancho fijo para cada paso */
+        }
+
+        /* El nodo (círculo con el número) en la línea de tiempo */
+        .paso_nodo {
+            width: 60px;
+            height: 60px;
             background-color: #4A90E2;
-            color: white;
+            color: #ffffff;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
-            font-weight: 600;
-            margin: 0 auto 15px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            border: 4px solid #ffffff; /* Crea un "agujero" en la línea */
+            box-shadow: 0 0 0 4px #e0e0e0, 0 4px 6px rgba(0,0,0,0.1); /* Sombra y borde simulado */
+        }
+
+        /* Contenedor del texto de cada paso */
+        .paso_contenido {
+            max-width: 180px; /* Limita el ancho del texto */
         }
 
         .paso_titulo {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             color: #2A5CAA;
             margin-bottom: 10px;
         }
 
         .paso_texto {
+            font-size: 0.9rem;
             color: #555555;
+            line-height: 1.5;
+        }
+
+        /* --- RESPONSIVE DESIGN PARA LÍNEA DE TIEMPO --- */
+        @media (max-width: 768px) {
+            /* La línea se vuelve vertical */
+            .linea_tiempo {
+                flex-direction: column;
+                align-items: center;
+                padding-left: 40px; /* Espacio para la línea vertical */
+            }
+
+            /* La línea pseudo-elemento se vuelve vertical */
+            .linea_tiempo::after {
+                top: 30px; /* Empieza en el centro del primer nodo */
+                left: 30px; /* Se alinea a la izquierda */
+                right: auto;
+                bottom: 30px; /* Termina en el centro del último nodo */
+                height: auto;
+                width: 4px;
+            }
+
+            /* Los contenedores de paso se alinean a la izquierda */
+            .paso_contenedor {
+                width: 100%;
+                flex-direction: row;
+                text-align: left;
+                align-items: flex-start;
+                margin-bottom: 40px; /* Espacio entre pasos verticales */
+            }
+
+            /* El nodo se queda a la izquierda */
+            .paso_nodo {
+                margin-right: 20px;
+                margin-bottom: 0;
+                flex-shrink: 0; /* Evita que el nodo se encoja */
+            }
         }
 
         .seccion_testimonios {
@@ -764,7 +840,7 @@
                 flex-direction: column;
             }
             
-            .contenedor_modulos, .secciones_cursos, .pasos_proceso {
+            .contenedor_modulos, .secciones_cursos {
                 flex-direction: column;
             }
             
@@ -796,14 +872,13 @@
         
         <!-- Enlaces públicos (siempre visibles) -->
         <div class="enlaces-publicos">
-            <a href="acerca_de.html">Acerca de</a>
-            <a href="ayuda.html">Ayuda</a>
-            <a href="contacto.html">Contacto</a>
-            <a href="#cursos">Cursos</a>
-            <a href="faq.html">FAQ</a>
-            <a href="terminos.html">Términos</a>
-            <a href="testimonios.html">Testimonios</a>
-            <a href="#empresas">Empresas</a>
+            <a href="#cursos"> 📖 Cursos </a>
+            <a href="#empresas"> 💼 Empresas</a>
+            <a href="acerca_de.html"> ❓ Acerca de</a>
+            <a href="faq.html"> 💬 FAQ</a>
+            <a href="terminos.html"> 📜 Términos</a>
+            <a href="ayuda.html"> 🛠️ Soporte</a>
+             <!-- <a href="testimonios.html">Testimonios</a> -->
         </div>
         
         <!-- Enlaces de sesión (solo cuando no hay sesión) -->
@@ -852,11 +927,11 @@
                     <!-- MODIFICACIÓN: Módulo de Misión y Visión ahora ocupa todo el ancho -->
                     <div class="modulo_mision">
                         <div class="modulo_mision_header">
-                            Misión y Visión
+                            <center>Misión y Visión</center>
                         </div>
                         <div class="modulo_mision_contenido">
                             <div class="seccion">
-                                <h3 class="seccion_titulo">Misión</h3>
+                                <h3 class="seccion_titulo"> 🚩 Misión</h3>
                                 <p class="seccion_texto">
                                     En Setsuzoku nos dedicamos a construir un puente eficiente entre profesionales y empresas, 
                                     facilitando el encuentro del talento adecuado con las oportunidades laborales ideales. 
@@ -865,7 +940,7 @@
                                 </p>
                             </div>
                             <div class="seccion">
-                                <h3 class="seccion_titulo">Visión</h3>
+                                <h3 class="seccion_titulo"> 👀 Visión</h3>
                                 <p class="seccion_texto">
                                     Aspiramos a convertirnos en la plataforma líder de conexión laboral a nivel regional, 
                                     distinguiéndonos por nuestra innovación constante, la calidad de nuestro servicio y 
@@ -889,10 +964,10 @@
 
                     <div class="secciones_cursos">
                         <div class="seccion_cursos">
-                            <div class="seccion_header">Candidatos</div>
+                            <div class="seccion_header"><center>Candidatos</center></div>
                             <div class="seccion_contenido">
                                 <div class="seccion_texto">
-                                    <h3>Mejora tus habilidades</h3>
+                                    <h3> 💪 Mejora tus habilidades</h3>
                                     <p>
                                         Setsuzoku ayuda a candidatos como tú a mejorar sus conocimientos y habilidades a través de nuestros cursos especializados.
                                     </p>
@@ -907,10 +982,10 @@
                         </div>
 
                         <div class="seccion_cursos">
-                            <div class="seccion_header">Instructores</div>
+                            <div class="seccion_header"><center>Instructores</center></div>
                             <div class="seccion_contenido">
                                 <div class="seccion_texto">
-                                    <h3>Comparte tu conocimiento</h3>
+                                    <h3> 🧠 Comparte tu conocimiento</h3>
                                     <p>
                                         Si eres un experto en tu campo, te ofrecemos un espacio para compartir tus conocimientos y generar ingresos.
                                     </p>
@@ -1019,34 +1094,49 @@
                     <!-- SECCIÓN RESTAURADA: PROCESO DE SELECCIÓN -->
                     <div class="seccion_proceso">
                         <h2 class="proceso_titulo">Nuestro proceso de selección</h2>
-                        <div class="pasos_proceso">
-                            <div class="paso">
-                                <div class="paso_numero">1</div>
-                                <h3 class="paso_titulo">Publicación de vacante</h3>
-                                <p class="paso_texto">
-                                    Publica fácilmente tus vacantes con descripción detallada, requisitos y beneficios ofrecidos.
-                                </p>
+                        <div class="linea_tiempo">
+                            <!-- Paso 1 -->
+                            <div class="paso_contenedor">
+                                <div class="paso_nodo"> 📰</div>
+                                <div class="paso_contenido">
+                                    <h3 class="paso_titulo">1. Publicación de vacante</h3>
+                                    <p class="paso_texto">
+                                        Publica fácilmente tus vacantes con descripción detallada, requisitos y beneficios ofrecidos.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="paso">
-                                <div class="paso_numero">2</div>
-                                <h3 class="paso_titulo">Recepción de postulaciones</h3>
-                                <p class="paso_texto">
-                                    Recibe postulaciones de candidatos interesados y calificados para tus vacantes.
-                                </p>
+                            
+                            <!-- Paso 2 -->
+                            <div class="paso_contenedor">
+                                <div class="paso_nodo">🗳️</div>
+                                <div class="paso_contenido">
+                                    <h3 class="paso_titulo">2. Recepción de postulaciones</h3>
+                                    <p class="paso_texto">
+                                        Recibe postulaciones de candidatos interesados y calificados para tus vacantes.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="paso">
-                                <div class="paso_numero">3</div>
-                                <h3 class="paso_titulo">Evaluación y selección</h3>
-                                <p class="paso_texto">
-                                    Utiliza nuestro sistema de evaluación para identificar a los candidatos más adecuados.
-                                </p>
+
+                            <!-- Paso 3 -->
+                            <div class="paso_contenedor">
+                                <div class="paso_nodo">📋</div>
+                                <div class="paso_contenido">
+                                    <h3 class="paso_titulo">3. Evaluación y selección</h3>
+                                    <p class="paso_texto">
+                                        Utiliza nuestro sistema de evaluación para identificar a los candidatos más adecuados.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="paso">
-                                <div class="paso_numero">4</div>
-                                <h3 class="paso_titulo">Contratación</h3>
-                                <p class="paso_texto">
-                                    Contacta a los candidatos seleccionados y completa el proceso de contratación.
-                                </p>
+
+                            <!-- Paso 4 -->
+                            <div class="paso_contenedor">
+                                <div class="paso_nodo">✅</div>
+                                <div class="paso_contenido">
+                                    <h3 class="paso_titulo">4. Contratación</h3>
+                                    <p class="paso_texto">
+                                        Contacta a los candidatos seleccionados y completa el proceso de contratación.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>

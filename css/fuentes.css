@@ -1,0 +1,188 @@
+/* IMPORTACIÓN DE TIPOGRAFÍA POPPINS DESDE GOOGLE FONTS */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap');
+
+/* VARIABLES DE TIPOGRAFÍA */
+:root {
+--tipografia_principal: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+--peso_ligero: 300;
+--peso_normal: 400;
+--peso_medio: 500;
+--peso_semi_negrita: 600;
+--peso_negrita: 700;
+}
+
+/* CONFIGURACIÓN BASE DE TIPOGRAFÍA */
+body {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+line-height: 1.6;
+color: #333333;
+}
+
+/* ENCABEZADOS */
+h1 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_negrita);
+font-size: 2.5rem;
+line-height: 1.2;
+margin-bottom: 1rem;
+}
+
+h2 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_semi_negrita);
+font-size: 2rem;
+line-height: 1.3;
+margin-bottom: 0.8rem;
+}
+
+h3 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_semi_negrita);
+font-size: 1.5rem;
+line-height: 1.3;
+margin-bottom: 0.6rem;
+}
+
+h4 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+font-size: 1.25rem;
+line-height: 1.4;
+margin-bottom: 0.5rem;
+}
+
+h5 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+font-size: 1.1rem;
+line-height: 1.4;
+margin-bottom: 0.4rem;
+}
+
+h6 {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+font-size: 1rem;
+line-height: 1.5;
+margin-bottom: 0.3rem;
+}
+
+/* PÁRRAFOS Y TEXTO */
+p {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+margin-bottom: 1rem;
+}
+
+/* ENLACES */
+a {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+text-decoration: none;
+color: #0066cc;
+transition: color 0.2s ease;
+}
+
+a:hover {
+color: #0052a3;
+}
+
+/* BOTONES */
+button {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+font-size: 1rem;
+}
+
+/* CAMPOS DE FORMULARIO */
+input, textarea, select {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+font-size: 1rem;
+}
+
+/* ETIQUETAS DE FORMULARIO */
+label {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_medio);
+font-size: 0.9rem;
+}
+
+/* TEXTO SECUNDARIO O AYUDA */
+.texto_ayuda, .texto_secundario {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_ligero);
+font-size: 0.85rem;
+color: #666666;
+}
+
+/* MENSAJES DE ERROR */
+.mensaje_error {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+color: #d32f2f;
+}
+
+/* MENSAJES DE ÉXITO */
+.mensaje_exito {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+color: #388e3c;
+}
+
+/* LISTAS */
+ul, ol {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+padding-left: 1.5rem;
+}
+
+li {
+margin-bottom: 0.5rem;
+}
+
+/* TABLAS */
+table {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+width: 100%;
+border-collapse: collapse;
+}
+
+th {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_semi_negrita);
+text-align: left;
+padding: 0.75rem;
+border-bottom: 1px solid #dddddd;
+}
+
+td {
+font-family: var(--tipografia_principal);
+font-weight: var(--peso_normal);
+padding: 0.75rem;
+border-bottom: 1px solid #dddddd;
+}
+
+/* CÓDIGO */
+code {
+font-family: 'Courier New', monospace;
+background-color: #f5f5f5;
+padding: 0.2rem 0.4rem;
+border-radius: 3px;
+font-size: 0.9rem;
+}
+
+pre {
+font-family: 'Courier New', monospace;
+background-color: #f5f5f5;
+padding: 1rem;
+border-radius: 5px;
+overflow-x: auto;
+}
+
+pre code {
+background-color: transparent;
+padding: 0;
+}

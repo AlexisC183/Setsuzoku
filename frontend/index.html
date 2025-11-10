@@ -208,41 +208,13 @@
             min-height: 200px;
         }
 
-        .logo_principal {
-            width: 180px;
-            height: 180px;
-            margin-bottom: 20px;
-            background-color: #f0f2f5;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
-
-        .logo_conexion {
-            position: relative;
-            width: 120px;
-            height: 120px;
-        }
-        .linea_s1, .linea_s2 {
-            position: absolute;
-            width: 100px;
-            height: 20px;
-            border-radius: 50px;
-            transform-origin: center;
-        }
-        .linea_s1 {
-            background-color: #2A5CAA;
-            top: 30px;
-            left: 10px;
-            transform: rotate(35deg);
-        }
-        .linea_s2 {
-            background-color: #4A90E2;
-            top: 70px;
-            left: 10px;
-            transform: rotate(-35deg);
+        /* MODIFICACIÓN: Nuevo estilo para la imagen del logo */
+        .logo_imagen {
+            max-width: 180px; /* Tamaño máximo del logo */
+            max-height: 180px;
+            margin-bottom: 20px; /* Espacio entre el logo y el título */
+            border-radius: 50%; /* Hace que la imagen sea circular */
+            object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
         }
 
         .nombre_logo {
@@ -260,63 +232,36 @@
             color: #666666;
             margin-top: 10px;
         }
-
-        .contenedor_modulos {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .modulo_imagen, .modulo_mision {
-            flex: 1;
-            min-width: 300px;
+        
+        /* MODIFICACIÓN: Contenedor de Misión y Visión ahora ocupa todo el ancho */
+        .modulo_mision {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            margin-bottom: 30px;
         }
 
-        .modulo_imagen_header, .modulo_mision_header {
+        .modulo_mision_header {
             color: white;
             padding: 15px 20px;
             font-weight: 600;
             font-size: 1.2rem;
+            background-color: #4A90E2;
         }
-        .modulo_imagen_header { background-color: #2A5CAA; }
-        .modulo_mision_header { background-color: #4A90E2; }
 
-        .modulo_imagen_contenido, .modulo_mision_contenido {
-            flex-grow: 1;
+        /* MODIFICACIÓN: El contenido ahora es un contenedor flexible para Misión y Visión */
+        .modulo_mision_contenido {
+            display: flex;
+            gap: 30px;
             padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 300px;
         }
-        .modulo_mision_contenido { align-items: flex-start; justify-content: flex-start; }
 
-        .imagen_placeholder {
-            width: 100%;
-            height: 100%;
-            background-color: #f0f2f5;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666666;
-            font-size: 1.1rem;
-            text-align: center;
-        }
-        
-        /* ESTILO PARA LA IMAGEN DE ACOMPAÑAMIENTO VISUAL */
-        .imagen_relacionada {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 8px;
+        /* MODIFICACIÓN: Cada sección (Misión, Visión) ocupa el 50% del contenedor */
+        .modulo_mision_contenido .seccion {
+            flex: 1;
         }
 
         .seccion_titulo {
@@ -812,6 +757,13 @@
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
+            /* ... reglas existentes ... */
+
+            /* MODIFICACIÓN: Apilar Misión y Visión en móviles */
+            .modulo_mision_contenido {
+                flex-direction: column;
+            }
+            
             .contenedor_modulos, .secciones_cursos, .pasos_proceso {
                 flex-direction: column;
             }
@@ -890,55 +842,37 @@
                 <section id="inicio" class="seccion_pagina">
                     <!-- MÓDULO SUPERIOR - LOGO -->
                     <div class="modulo_logo">
-                        <div class="logo_principal">
-                            <div class="logo_conexion">
-                                <div class="linea_s1"></div>
-                                <div class="linea_s2"></div>
-                            </div>
-                        </div>
+                        <!-- MODIFICACIÓN: Reemplazado el logo SVG por una etiqueta de imagen -->
+                        <img src="../Imagenes/logo.png" alt="Logo de Setsuzoku" class="logo_imagen">
+                        
                         <h1 class="nombre_logo">Setsuzoku</h1>
                         <p class="tagline">Conectando talento con oportunidades</p>
                     </div>
 
-                    <!-- CONTENEDOR DE MÓDULOS INFERIORES -->
-                    <div class="contenedor_modulos">
-                        <!-- MÓDULO INFERIOR IZQUIERDO - IMAGEN RELACIONADA -->
-                        <div class="modulo_imagen">
-                            <div class="modulo_imagen_header">
-                                Imagen Relacionada
-                            </div>
-                            <div class="modulo_imagen_contenido">
-                                <img src="../Imagenes/conexion_profesional.jpg" 
-                                     alt="Grupo diverso de profesionales colaborando en una oficina moderna, simbolizando la conexión laboral y las oportunidades que ofrece Setsuzoku." 
-                                     class="imagen_relacionada">
-                            </div>
+                    <!-- MODIFICACIÓN: Módulo de Misión y Visión ahora ocupa todo el ancho -->
+                    <div class="modulo_mision">
+                        <div class="modulo_mision_header">
+                            Misión y Visión
                         </div>
-
-                        <!-- MÓDULO INFERIOR DERECHO - MISIÓN Y VISIÓN -->
-                        <div class="modulo_mision">
-                            <div class="modulo_mision_header">
-                                Misión y Visión
+                        <div class="modulo_mision_contenido">
+                            <div class="seccion">
+                                <h3 class="seccion_titulo">Misión</h3>
+                                <p class="seccion_texto">
+                                    En Setsuzoku nos dedicamos a construir un puente eficiente entre profesionales y empresas, 
+                                    facilitando el encuentro del talento adecuado con las oportunidades laborales ideales. 
+                                    Nuestro compromiso es servir a todo el mercado laboral con herramientas innovadoras y 
+                                    procesos transparentes.
+                                </p>
                             </div>
-                            <div class="modulo_mision_contenido">
-                                <div class="seccion">
-                                    <h3 class="seccion_titulo">Misión</h3>
-                                    <p class="seccion_texto">
-                                        En Setsuzoku nos dedicamos a construir un puente eficiente entre profesionales y empresas, 
-                                        facilitando el encuentro del talento adecuado con las oportunidades laborales ideales. 
-                                        Nuestro compromiso es servir a todo el mercado laboral con herramientas innovadoras y 
-                                        procesos transparentes.
-                                    </p>
-                                </div>
-                                <div class="seccion">
-                                    <h3 class="seccion_titulo">Visión</h3>
-                                    <p class="seccion_texto">
-                                        Aspiramos a convertirnos en la plataforma líder de conexión laboral a nivel regional, 
-                                        distinguiéndonos por nuestra innovación constante, la calidad de nuestro servicio y 
-                                        el desarrollo integral de nuestros usuarios. Buscamos transformar la experiencia de 
-                                        búsqueda de empleo y reclutamiento, haciéndola más transparente, eficiente y satisfactoria 
-                                        para todos los involucrados.
-                                    </p>
-                                </div>
+                            <div class="seccion">
+                                <h3 class="seccion_titulo">Visión</h3>
+                                <p class="seccion_texto">
+                                    Aspiramos a convertirnos en la plataforma líder de conexión laboral a nivel regional, 
+                                    distinguiéndonos por nuestra innovación constante, la calidad de nuestro servicio y 
+                                    el desarrollo integral de nuestros usuarios. Buscamos transformar la experiencia de 
+                                    búsqueda de empleo y reclutamiento, haciéndola más transparente, eficiente y satisfactoria 
+                                    para todos los involucrados.
+                                </p>
                             </div>
                         </div>
                     </div>

@@ -14,5 +14,21 @@
     "correo": "candidato@mail.com",
     "contrasena": "39a28de708f29ed871b744d88fc6eb6633a1ae49e4a3a05dbc2274a0bd6dbcdf",
     "fecha_registro": "2025-10-20T16:56:32.116Z"
+  },
+  {
+    "id": 1762851273036,
+    "grupo": "candidato",
+    "nombre": "sandra",
+    "apellido_paterno": "salazar",
+    "apellido_materno": "martinez",
+    "fecha_nacimiento": "2004-12-02",
+    "genero": "femenino",
+    "telefono": "6647894877",
+    "estudios": "a",
+    "experiencia": "a",
+    "habilidades": "a",
+    "correo": "uwu@gmail.com",
+    "contrasena": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
+    "fecha_registro": "2025-11-11T08:54:33.051Z"
   }
 ]

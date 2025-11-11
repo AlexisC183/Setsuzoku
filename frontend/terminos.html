@@ -50,11 +50,24 @@
             z-index: 1000;
         }
 
-        .logo {
+        /* ESTILOS PARA EL BOTÓN DE REGRESO */
+        .boton-regreso {
+            background-color: transparent;
+            border: none;
             color: var(--white);
             font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .boton-regreso:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .enlaces-sesion {
@@ -63,11 +76,10 @@
         }
 
         .enlace-sesion {
-            color: var(--white);
+            color: #ffffff;
             text-decoration: none;
             font-size: 1rem;
             cursor: pointer;
-            transition: text-decoration 0.2s;
         }
 
         .enlace-sesion:hover {
@@ -308,7 +320,10 @@
 <body>
     <!-- BARRA SUPERIOR -->
     <header class="barra-superior" role="banner">
-        <a href="index.html" class="logo">Setsuzoku</a>
+        <!-- SOLO BOTÓN DE REGRESO -->
+        <button class="boton-regreso" id="boton-regreso" title="Volver al inicio">
+            ←
+        </button>
         <nav class="enlaces-sesion" id="enlaces-sesion" aria-label="Enlaces de sesión">
             <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
             <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
@@ -649,6 +664,11 @@
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
                 e.preventDefault();
                 cerrarSesion();
+            });
+            
+            // AGREGADO: Event listener para el botón de regreso
+            document.getElementById('boton-regreso').addEventListener('click', function() {
+                window.location.href = 'index.html';
             });
         });
     </script>

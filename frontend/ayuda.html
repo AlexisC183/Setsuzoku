@@ -35,11 +35,24 @@
             z-index: 1000;
         }
 
-        .logo {
+        /* ESTILOS PARA EL BOTÓN DE REGRESO */
+        .boton-regreso {
+            background-color: transparent;
+            border: none;
             color: #ffffff;
             font-size: 1.5rem;
-            font-weight: bold;
-            text-decoration: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .boton-regreso:hover {
+            background-color: rgba(255, 255, 255, 0.1);
         }
 
         .enlaces-sesion {
@@ -285,7 +298,10 @@
 <body>
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
-        <a href="index.html" class="logo">Setsuzoku</a>
+        <!-- SOLO BOTÓN DE REGRESO -->
+        <button class="boton-regreso" id="boton-regreso" title="Volver al inicio">
+            ←
+        </button>
         <div class="enlaces-sesion">
             <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
             <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
@@ -501,7 +517,14 @@
         }
         
         // Verificar la sesión al cargar la página
-        document.addEventListener('DOMContentLoaded', verificarSesion);
+        document.addEventListener('DOMContentLoaded', function() {
+            verificarSesion();
+            
+            // AGREGADO: Event listener para el botón de regreso
+            document.getElementById('boton-regreso').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
     </script>
 </body>
 </html>

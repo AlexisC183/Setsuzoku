@@ -30,5 +30,21 @@
     "correo": "uwu@gmail.com",
     "contrasena": "8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92",
     "fecha_registro": "2025-11-11T08:54:33.051Z"
+  },
+  {
+    "id": 1763414565986,
+    "grupo": "instructor",
+    "nombre": "Alexis",
+    "apellido_paterno": "Contreras",
+    "apellido_materno": "Basurto",
+    "fecha_nacimiento": "2002-01-30",
+    "genero": "masculino",
+    "telefono": "6647341209",
+    "estudios": "Universidad",
+    "experiencia": "1 año",
+    "habilidades": "Asesorías en tecnología de la información",
+    "correo": "instructor@mail.com",
+    "contrasena": "cf2eb894cc40f5c6e781910063859278a3b214a3a14fedb9ca336ca39962b856",
+    "fecha_registro": "2025-11-17T21:22:45.988Z"
   }
 ]

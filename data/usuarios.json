@@ -46,5 +46,21 @@
     "correo": "instructor@mail.com",
     "contrasena": "cf2eb894cc40f5c6e781910063859278a3b214a3a14fedb9ca336ca39962b856",
     "fecha_registro": "2025-11-17T21:22:45.988Z"
+  },
+  {
+    "id": 1763415337648,
+    "grupo": "reclutador",
+    "nombre": "Erick",
+    "apellido_paterno": "Méndez",
+    "apellido_materno": "Ramírez",
+    "fecha_nacimiento": "1997-11-12",
+    "genero": "masculino",
+    "telefono": "6657834193",
+    "estudios": "Maestría",
+    "experiencia": "7 años",
+    "habilidades": "Asesor, reclutador",
+    "correo": "reclutador@mail.com",
+    "contrasena": "75b83205cd4e3dd5ab31658e4b32ba515d4d24fb507591fbee7fe22173c1ab1c",
+    "fecha_registro": "2025-11-17T21:35:37.650Z"
   }
 ]

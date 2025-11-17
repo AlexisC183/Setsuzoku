@@ -23,8 +23,9 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada) {
     peticion.on('end', () => {
         const parametros = new URLSearchParams(cuerpo);
 
-        // Manejar registro de usuario
-        if (ruta_parseada.pathname === '/registro') {
+        // Definir programas por ruta aquí
+
+        function manejarRegistroUsuario() {
             // Extraer todos los parámetros del formulario
             const datos_usuario = {
                 grupo: parametros.get('grupo'),
@@ -54,8 +55,7 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada) {
             }
         }
 
-        // Manejar inicio de sesión
-        else if (ruta_parseada.pathname === '/inicio-sesion') {
+        function manejarInicioDeSesion() {
             const resultado = auth.iniciar_sesion(
                 parametros.get('correo_usuario'),
                 parametros.get('contrasena_usuario')
@@ -71,6 +71,12 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada) {
                 respuesta.end(JSON.stringify(resultado));
             }
         }
+
+        // Ejecutando programa de acuerdo a la ruta parseada
+        ({
+            '/inicio-sesion': manejarInicioDeSesion,
+            '/registro': manejarRegistroUsuario
+        })[ruta_parseada.pathname]?.();
     });
 }
 

@@ -1,1 +1,50 @@
-[]
+[
+  {
+    "id": 1763425000605,
+    "grupo": "candidato",
+    "nombre": "Daniel",
+    "apellido_paterno": "Gutiérrez",
+    "apellido_materno": "Vargas",
+    "fecha_nacimiento": "2002-12-26",
+    "genero": "masculino",
+    "telefono": "6613429519",
+    "estudios": "Licenciatura",
+    "experiencia": "Ninguna",
+    "habilidades": "Liderazgo, facilidad de palabra, rápido aprendizaje",
+    "correo": "candidato@mail.com",
+    "contrasena": "39a28de708f29ed871b744d88fc6eb6633a1ae49e4a3a05dbc2274a0bd6dbcdf",
+    "fecha_registro": "2025-11-18T00:16:40.627Z"
+  },
+  {
+    "id": 1763425106716,
+    "grupo": "reclutador",
+    "nombre": "Erick",
+    "apellido_paterno": "Rodríguez",
+    "apellido_materno": "Méndez",
+    "fecha_nacimiento": "2000-03-01",
+    "genero": "masculino",
+    "telefono": "6613338410",
+    "estudios": "Maestría",
+    "experiencia": "7 años",
+    "habilidades": "Asesor, reclutador",
+    "correo": "reclutador@mail.com",
+    "contrasena": "75b83205cd4e3dd5ab31658e4b32ba515d4d24fb507591fbee7fe22173c1ab1c",
+    "fecha_registro": "2025-11-18T00:18:26.717Z"
+  },
+  {
+    "id": 1763425173575,
+    "grupo": "instructor",
+    "nombre": "Alexis",
+    "apellido_paterno": "Contreras",
+    "apellido_materno": "Basurto",
+    "fecha_nacimiento": "2002-01-30",
+    "genero": "masculino",
+    "telefono": "6641223431",
+    "estudios": "Universidad",
+    "experiencia": "1 año",
+    "habilidades": "Inglés, asesor de tecnología",
+    "correo": "instructor@mail.com",
+    "contrasena": "cf2eb894cc40f5c6e781910063859278a3b214a3a14fedb9ca336ca39962b856",
+    "fecha_registro": "2025-11-18T00:19:33.575Z"
+  }
+]

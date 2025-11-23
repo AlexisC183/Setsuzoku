@@ -24,81 +24,70 @@
             background-color: #f5f7fa;
             color: #333333;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ESTILOS PARA LA BARRA SUPERIOR */
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
         .contenedor-principal {
             display: flex;
             flex: 1;
-            margin-top: 0;
+            margin-top: 60px;
             position: relative;
-        }
-
-        .barra-lateral {
-            width: 250px;
-            background-color: #34495e;
-            color: white;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-        }
-
-        .menu-usuario {
-            padding: 20px;
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .nombre-usuario {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .rol-usuario {
-            font-size: 0.9rem;
-            color: #bdc3c7;
-        }
-
-        .menu-opciones {
-            list-style: none;
-            padding: 0;
-        }
-
-        .menu-opciones li {
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .menu-opciones a {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-
-        .menu-opciones a:hover {
-            background-color: #2c3e50;
-        }
-
-        .menu-opciones a.disabled {
-            color: #7f8c8d;
-            cursor: not-allowed;
-        }
-
-        .menu-opciones a.disabled:hover {
-            background-color: transparent;
         }
 
         .contenedor-contenido {
             flex: 1;
             padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-
-        .contenedor-contenido.con-barra-lateral {
-            margin-left: 250px;
+            width: 100%;
+            padding-bottom: 40px; /* Añadido para dar espacio al final */
         }
 
         /* ESTILOS PARA LA PÁGINA DE NOTIFICACIONES */
@@ -452,21 +441,6 @@
             cursor: not-allowed;
         }
 
-        /* ESTILOS PARA EL FOOTER */
-        footer {
-            background-color: #2c3e50;
-            color: #ffffff;
-            text-align: center;
-            padding: 20px;
-            margin-top: 40px;
-            width: 100%;
-        }
-
-        footer p {
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
         /* ESTILOS RESPONSIVOS */
         @media (max-width: 768px) {
             .pagina-cabecera {
@@ -499,24 +473,19 @@
     </style>
 </head>
 <body>
-    <div class="contenedor-principal">
-        <!-- BARRA LATERAL -->
-        <div class="barra-lateral" id="barra-lateral">
-            <div class="menu-usuario">
-                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
-                <div class="rol-usuario" id="rol-usuario">Rol</div>
-            </div>
-
-            <ul class="menu-opciones">
-                <li><a href="perfil.html"> 👤 Perfil </a></li>
-                <li><a href="candidato.html"> 🏠 Inicio </a></li>
-                <li><a href="#" id="enlace-notificaciones" class="disabled"> 🔔 Notificaciones </a></li>
-                <li><a href="Mispostulaciones.html" id="enlace-postulaciones"> 📑 Tus postulaciones </a></li>
-                <li><a href="Miscursos.html" id="enlace-cursos-usuario"> 📖 Tus cursos </a></li>
-                <li><a href="#" id="cerrar-sesion"> Cerrar sesión </a></li>
-            </ul>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver a la página anterior">
+                ←
+            </button>
         </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+    </nav>
 
+    <div class="contenedor-principal">
         <!-- CONTENEDOR DE CONTENIDO -->
         <div class="contenedor-contenido" id="contenedor-contenido">
             <main class="contenido-principal">
@@ -597,11 +566,6 @@
         </div>
     </div>
 
-    <!-- PIE DE PÁGINA -->
-    <footer>
-        <p>&copy; <span id="anio-actual"></span> Todos los derechos reservados al Tecnológico de Tijuana.</p>
-    </footer>
-
     <script>
         // VARIABLES GLOBALES
         let notificaciones = [];
@@ -609,6 +573,11 @@
         let pagina_actual = 1;
         let notificaciones_por_pagina = 10;
         let vista_actual = 'lista';
+
+        // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
+        function volverPaginaAnterior() {
+            window.history.back();
+        }
 
         // FUNCIONES AUXILIARES
         function formatear_fecha(fecha_iso) {
@@ -671,7 +640,7 @@
                     {
                         id: 2,
                         titulo: "Entrevista programada",
-                        mensaje: "Tienes una entrevista programada para el viernes a las 10:00 AM con Digital Marketing Co.",
+                        mensaje: "Tienes una entrevista programada para el viernes a las10:00 AM con Digital Marketing Co.",
                         fecha: new Date(Date.now() - 86400000).toISOString(),
                         leida: false,
                         tipo: 'entrevista'
@@ -945,76 +914,48 @@
             aplicar_filtros();
         }
 
-        // FUNCIONES PARA VERIFICAR SESIÓN
-        function verificar_sesion() {
-            const usuario_str = sessionStorage.getItem('usuario');
-            if (usuario_str) {
+        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            console.log('Datos en sessionStorage:', usuarioStr);
+
+            if (usuarioStr) {
                 try {
-                    const usuario = JSON.parse(usuario_str);
+                    const usuario = JSON.parse(usuarioStr);
+                    console.log('Usuario parseado:', usuario);
+                    
+                    // Verificar que tenga las propiedades mínimas necesarias
                     if (usuario && usuario.nombre && usuario.grupo) {
-                        mostrar_interfaz_con_sesion(usuario);
+                        // Sesión válida encontrada
                         return true;
+                    } else {
+                        console.error('Usuario incompleto:', usuario);
+                        sessionStorage.removeItem('usuario');
                     }
                 } catch (error) {
+                    console.error('Error parseando usuario:', error);
                     sessionStorage.removeItem('usuario');
                 }
             }
+            
+            // No hay sesión válida - redirigir a la página de inicio
             window.location.href = '../index.html';
             return false;
         }
 
-        function mostrar_interfaz_con_sesion(usuario) {
-            document.getElementById('barra-lateral').style.display = 'block';
-            document.getElementById('nombre-usuario').textContent = usuario.nombre;
-            document.getElementById('rol-usuario').textContent = usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-            configurar_menu_segun_rol(usuario.grupo);
-            
-            const contenedor_contenido = document.getElementById('contenedor-contenido');
-            contenedor_contenido.classList.add('con-barra-lateral');
-        }
-
-        function configurar_menu_segun_rol(rol) {
-            const enlaces = { 'postulaciones': false, 'cursos-usuario': false, 'trabajos': false };
-            switch(rol) {
-                case 'candidato': 
-                    break;
-                case 'reclutador': 
-                    enlaces['cursos-usuario'] = true; 
-                    break;
-                case 'instructor': 
-                    enlaces['postulaciones'] = true; 
-                    break;
-            }
-            
-            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
-                const elemento = document.getElementById(`enlace-${enlace}`);
-                if (elemento) {
-                    if (deshabilitar) {
-                        elemento.classList.add('disabled');
-                        elemento.setAttribute('href', '#');
-                    }
-                }
-            }
-        }
-        
-        function cerrar_sesion() { 
-            sessionStorage.removeItem('usuario'); 
-            window.location.href = '../index.html'; 
-        }
-
         // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
-            // Establecer el año actual en el footer
-            document.getElementById('anio-actual').textContent = new Date().getFullYear();
-
             // Verificar sesión
-            verificar_sesion();
+            verificarSesion();
             
             // Cargar notificaciones
             cargar_notificaciones();
             
             // Renderizar notificaciones iniciales
             renderizar_notificaciones();
+            
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
             
             // Configurar eventos
             document.getElementById('btn-marcar-todas-leidas').addEventListener('click', marcar_todas_leidas);
@@ -1035,12 +976,6 @@
                 this.classList.add('activo');
                 document.getElementById('vista-lista').classList.remove('activo');
                 renderizar_notificaciones();
-            });
-            
-            // Configurar evento de cerrar sesión
-            document.getElementById('cerrar-sesion').addEventListener('click', function(e) { 
-                e.preventDefault(); 
-                cerrar_sesion(); 
             });
             
             // Configurar búsqueda en tiempo real

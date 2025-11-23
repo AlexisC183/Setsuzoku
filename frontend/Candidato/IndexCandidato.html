@@ -1029,7 +1029,6 @@
             const panelNotificaciones = document.getElementById('panel-notificaciones');
             const panelCerrar = document.getElementById('panel-cerrar');
             const panelVerTodas = document.getElementById('panel-ver-todas');
-            const enlaceNotificaciones = document.getElementById('enlace-notificaciones');
             
             // Mostrar/ocultar panel de notificaciones
             botonNotificaciones.addEventListener('click', function() {
@@ -1041,16 +1040,9 @@
                 panelNotificaciones.classList.remove('activo');
             });
             
-            // Ver todas las notificaciones
+            // Ver todas las notificaciones - REDIRECCIÓN A Notificaciones.html
             panelVerTodas.addEventListener('click', function() {
-                panelNotificaciones.classList.remove('activo');
-                mostrarVistaNotificaciones();
-            });
-            
-            // Ver notificaciones desde el menú lateral
-            enlaceNotificaciones.addEventListener('click', function(e) {
-                e.preventDefault();
-                mostrarVistaNotificaciones();
+                window.location.href = 'Notificaciones.html';
             });
             
             // Cerrar panel al hacer clic fuera de él

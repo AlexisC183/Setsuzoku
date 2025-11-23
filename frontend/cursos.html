@@ -35,27 +35,36 @@
             z-index: 1000;
         }
 
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         .logo {
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: bold;
-            text-decoration: none;
-        }
-
-        .enlaces-sesion {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .enlace-sesion {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .enlace-sesion:hover {
-            text-decoration: underline;
         }
 
         .contenedor-principal {
@@ -65,72 +74,10 @@
             position: relative;
         }
 
-        .barra-lateral {
-            width: 250px;
-            background-color: #34495e;
-            color: white;
-            height: calc(100vh - 60px);
-            position: fixed;
-            top: 60px;
-            left: 0;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-        }
-
-        .menu-usuario {
-            padding: 20px;
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .nombre-usuario {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .rol-usuario {
-            font-size: 0.9rem;
-            color: #bdc3c7;
-        }
-
-        .menu-opciones {
-            list-style: none;
-            padding: 0;
-        }
-
-        .menu-opciones li {
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .menu-opciones a {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-
-        .menu-opciones a:hover {
-            background-color: #2c3e50;
-        }
-
-        .menu-opciones a.disabled {
-            color: #7f8c8d;
-            cursor: not-allowed;
-        }
-
-        .menu-opciones a.disabled:hover {
-            background-color: transparent;
-        }
-
         .contenedor-contenido {
             flex: 1;
             padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-
-        .contenedor-contenido.con-barra-lateral {
-            margin-left: 250px; /* Ancho de la barra lateral */
+            width: 100%;
         }
 
         .contenido-cursos {
@@ -284,38 +231,13 @@
             font-size: 1.1rem;
         }
 
-        .boton-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 10px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
-        }
-
         @media (max-width: 768px) {
             .lista-cursos {
                 grid-template-columns: 1fr;
             }
             
-            .contenedor-contenido.con-barra-lateral {
-                margin-left: 0;
-            }
-            
-            .barra-lateral {
-                width: 100%;
-                height: auto;
-                position: relative;
-                top: 0;
-            }
-            
-            .boton-menu {
-                display: block;
+            .contenedor-contenido {
+                padding: 10px;
             }
         }
     </style>
@@ -323,34 +245,18 @@
 <body>
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
-        <a href="index.html" class="logo">Setsuzoku</a>
-        <div class="enlaces-sesion" id="enlaces-sesion">
-            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
-            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver a la página anterior">
+                ←
+            </button>
         </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+        <!-- El contenedor de enlaces de sesión ha sido eliminado -->
     </nav>
 
     <div class="contenedor-principal">
-        <!-- BARRA LATERAL -->
-        <button class="boton-menu" id="boton-menu">☰ Menú</button>
-        
-        <div class="barra-lateral" id="barra-lateral">
-            <div class="menu-usuario">
-                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
-                <div class="rol-usuario" id="rol-usuario">Rol</div>
-            </div>
-
-            <ul class="menu-opciones">
-                <li><a href="perfil.html">Perfil</a></li>
-                <li><a href="index.html">Menú principal</a></li>
-                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
-                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
-                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
-                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
-                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
-            </ul>
-        </div>
-
         <!-- CONTENEDOR DE CONTENIDO -->
         <div class="contenedor-contenido" id="contenedor-contenido">
             <!-- CONTENIDO PRINCIPAL -->
@@ -382,14 +288,10 @@
     </div>
 
     <script>
-        // Función para alternar la barra lateral
-        function toggleBarraLateral() {
-            const barraLateral = document.getElementById('barra-lateral');
-            barraLateral.style.display = barraLateral.style.display === 'block' ? 'none' : 'block';
+        // Función para volver a la página anterior
+        function volverPaginaAnterior() {
+            window.history.back();
         }
-
-        // Event listener para el botón de menú
-        document.getElementById('boton-menu').addEventListener('click', toggleBarraLateral);
 
         // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -404,7 +306,6 @@
                     // Verificar que tenga las propiedades mínimas necesarias
                     if (usuario && usuario.nombre && usuario.grupo) {
                         // Sesión válida encontrada
-                        mostrarInterfazConSesion(usuario);
                         cargarCursos(usuario);
                         return true;
                     } else {
@@ -418,80 +319,8 @@
             }
             
             // No hay sesión válida - mostrar interfaz normal sin restricciones
-            mostrarInterfazNoSesion();
             cargarCursos(null); // Cargar cursos sin usuario
             return false;
-        }
-
-        // MOSTRAR INTERFAZ CUANDO NO HAY SESIÓN
-        function mostrarInterfazNoSesion() {
-            document.getElementById('enlaces-sesion').style.display = 'flex';
-            document.getElementById('barra-lateral').style.display = 'none';
-            
-            // Siempre mostrar el contenido (sin restricciones)
-            document.getElementById('contenido-principal').style.display = 'block';
-            
-            // Quitar clase al contenedor de contenido cuando no hay barra lateral
-            const contenedorContenido = document.getElementById('contenedor-contenido');
-            contenedorContenido.classList.remove('con-barra-lateral');
-        }
-
-        // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
-        function mostrarInterfazConSesion(usuario) {
-            document.getElementById('enlaces-sesion').style.display = 'none';
-            document.getElementById('barra-lateral').style.display = 'block';
-
-            // Mostrar información del usuario
-            document.getElementById('nombre-usuario').textContent = usuario.nombre;
-            document.getElementById('rol-usuario').textContent =
-                usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-
-            // Configurar opciones según el rol
-            configurarMenuSegunRol(usuario.grupo);
-            
-            // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
-            const contenedorContenido = document.getElementById('contenedor-contenido');
-            contenedorContenido.classList.add('con-barra-lateral');
-
-            // Modificar la barra superior para mostrar solo "Perfil"
-            const enlacesSesion = document.getElementById('enlaces-sesion');
-            enlacesSesion.innerHTML = '<a class="enlace-sesion" href="perfil.html">Perfil</a>';
-        }
-
-        // Configurar el menú según el rol del usuario
-        function configurarMenuSegunRol(rol) {
-            // Por defecto, todos los enlaces están habilitados
-            const enlaces = {
-                'postulaciones': false,
-                'cursos-usuario': false,
-                'trabajos': false,
-                'cursos': false
-            };
-
-            // Configurar según el rol
-            switch(rol) {
-                case 'candidato':
-                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
-                    enlaces['trabajos'] = true;
-                    break;
-                case 'reclutador':
-                    // Los reclutadores pueden ver todo excepto "Tus cursos"
-                    enlaces['cursos-usuario'] = true;
-                    break;
-                case 'instructor':
-                    // Los instructores pueden ver todo excepto "Tus postulaciones"
-                    enlaces['postulaciones'] = true;
-                    break;
-            }
-
-            // Aplicar la configuración
-            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
-                const elemento = document.getElementById(`enlace-${enlace}`);
-                if (deshabilitar) {
-                    elemento.classList.add('disabled');
-                    elemento.setAttribute('href', '#');
-                }
-            }
         }
 
         // Función para cargar cursos desde la API
@@ -615,32 +444,6 @@
         function inscribirseCurso(usuario, cursoId) {
             // Simulación de inscripción
             alert(`¡Te has inscrito al curso correctamente! (Usuario: ${usuario.nombre}, Curso ID: ${cursoId})`);
-            
-            // En una aplicación real, aquí iría la llamada a la API:
-            /*
-            fetch('/api/inscribir-curso', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    usuario_id: usuario.id,
-                    curso_id: cursoId
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.exito) {
-                    alert('¡Te has inscrito al curso correctamente!');
-                } else {
-                    alert(data.mensaje || 'Error al inscribirse en el curso');
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al inscribirse en el curso. Por favor, intenta de nuevo más tarde.');
-            });
-            */
         }
 
         // Función para configurar los filtros
@@ -725,25 +528,13 @@
             filtrarPrecio.addEventListener('input', aplicarFiltros);
         }
 
-        // FUNCIÓN MEJORADA PARA CERRAR SESIÓN
-        function cerrarSesion() {
-            // Limpiar todos los datos de sesión
-            sessionStorage.removeItem('usuario');
-
-            // Redirigir a index.html para forzar recarga completa
-            window.location.href = 'index.html';
-        }
-
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+            
             // Verificar sesión al cargar la página
             verificarSesion();
-
-            // Configurar evento para cerrar sesión
-            document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
-                e.preventDefault();
-                cerrarSesion();
-            });
         });
     </script>
 </body>

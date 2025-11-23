@@ -35,102 +35,50 @@
             z-index: 1000;
         }
 
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
         .logo {
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: bold;
-            text-decoration: none;
-        }
-
-        .enlaces-sesion {
-            display: flex;
-            gap: 1.5rem;
-        }
-
-        .enlace-sesion {
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 1rem;
-            cursor: pointer;
-        }
-
-        .enlace-sesion:hover {
-            text-decoration: underline;
+            /* El logo ya no es un enlace, por lo que no necesita estilos de enlace */
         }
 
         .contenedor-principal {
             display: flex;
             flex: 1;
-            margin-top: 60px; /* Altura de la barra superior */
+            margin-top: 60px;
             position: relative;
-        }
-
-        .barra-lateral {
-            width: 250px;
-            background-color: #34495e;
-            color: white;
-            height: calc(100vh - 60px); /* Altura total menos la barra superior */
-            position: fixed;
-            top: 60px; /* Justo debajo de la barra superior */
-            left: 0;
-            overflow-y: auto;
-            z-index: 100;
-            display: none;
-        }
-
-        .menu-usuario {
-            padding: 20px;
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .nombre-usuario {
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-        }
-
-        .rol-usuario {
-            font-size: 0.9rem;
-            color: #bdc3c7;
-        }
-
-        .menu-opciones {
-            list-style: none;
-            padding: 0;
-        }
-
-        .menu-opciones li {
-            border-bottom: 1px solid #2c3e50;
-        }
-
-        .menu-opciones a {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.2s;
-        }
-
-        .menu-opciones a:hover {
-            background-color: #2c3e50;
-        }
-
-        .menu-opciones a.disabled {
-            color: #7f8c8d;
-            cursor: not-allowed;
-        }
-
-        .menu-opciones a.disabled:hover {
-            background-color: transparent;
         }
 
         .contenedor-contenido {
             flex: 1;
             padding: 20px;
-            transition: margin-left 0.3s ease;
-        }
-
-        .contenedor-contenido.con-barra-lateral {
-            margin-left: 250px; /* Ancho de la barra lateral */
+            width: 100%;
         }
 
         .contenido-trabajos {
@@ -277,54 +225,6 @@
             background-color: #2980b9;
         }
 
-        .boton-menu {
-            display: none;
-            position: fixed;
-            top: 70px;
-            left: 10px;
-            background-color: #34495e;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px;
-            cursor: pointer;
-            z-index: 101;
-        }
-
-        .mensaje-no-sesion {
-            text-align: center;
-            padding: 50px 20px;
-            background-color: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .mensaje-no-sesion h2 {
-            color: #2c3e50;
-            margin-bottom: 20px;
-        }
-
-        .mensaje-no-sesion p {
-            color: #555;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .boton-iniciar-sesion {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 12px 25px;
-            border-radius: 5px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-
-        .boton-iniciar-sesion:hover {
-            background-color: #2980b9;
-        }
-
         .mensaje-carga {
             text-align: center;
             padding: 50px 20px;
@@ -340,23 +240,12 @@
         }
 
         @media (max-width: 768px) {
-            .contenedor-contenido.con-barra-lateral {
-                margin-left: 0;
-            }
-            
-            .barra-lateral {
-                width: 100%;
-                height: auto;
-                position: relative;
-                top: 0;
-            }
-            
-            .boton-menu {
-                display: block;
-            }
-            
             .lista-trabajos {
                 grid-template-columns: 1fr;
+            }
+            
+            .contenedor-contenido {
+                padding: 10px;
             }
         }
     </style>
@@ -364,34 +253,18 @@
 <body>
     <!-- BARRA SUPERIOR -->
     <nav class="barra-superior">
-        <a href="index.html" class="logo">Setsuzoku</a>
-        <div class="enlaces-sesion" id="enlaces-sesion">
-            <a href="inicio_sesion.html" class="enlace-sesion" id="enlace-inicio-sesion">Iniciar sesión</a>
-            <a href="registro.html" class="enlace-sesion" id="enlace-registro">Registrarse</a>
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver a la página anterior">
+                ←
+            </button>
         </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+        <!-- El contenedor de enlaces de sesión ha sido eliminado -->
     </nav>
 
     <div class="contenedor-principal">
-        <!-- BARRA LATERAL -->
-        <button class="boton-menu" id="boton-menu">☰ Menú</button>
-        
-        <div class="barra-lateral" id="barra-lateral">
-            <div class="menu-usuario">
-                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
-                <div class="rol-usuario" id="rol-usuario">Rol</div>
-            </div>
-
-            <ul class="menu-opciones">
-                <li><a href="perfil.html">Perfil</a></li>
-                <li><a href="index.html">Menú principal</a></li>
-                <li><a href="postulaciones.html" id="enlace-postulaciones">Tus postulaciones</a></li>
-                <li><a href="cursos_usuario.html" id="enlace-cursos-usuario">Tus cursos</a></li>
-                <li><a href="trabajos.html" id="enlace-trabajos">Trabajos</a></li>
-                <li><a href="cursos.html" id="enlace-cursos">Cursos</a></li>
-                <li><a href="#" id="cerrar-sesion">Cerrar sesión</a></li>
-            </ul>
-        </div>
-
         <!-- CONTENEDOR DE CONTENIDO -->
         <div class="contenedor-contenido" id="contenedor-contenido">
             <!-- CONTENIDO DE TRABAJOS -->
@@ -415,31 +288,29 @@
                     <div class="mensaje-carga">Cargando trabajos...</div>
                 </div>
             </div>
-            
-            <!-- MENSAJE PARA USUARIOS NO AUTENTICADOS -->
-            <div class="mensaje-no-sesion" id="mensaje-no-sesion" style="display: none;">
-                <h2>Para ver esta página, necesitas iniciar sesión</h2>
-                <p>Por favor, inicia sesión o regístrate para acceder a esta sección.</p>
-                <a href="inicio_sesion.html" class="boton-iniciar-sesion">Iniciar sesión</a>
-            </div>
         </div>
     </div>
 
     <script>
+        // Función para volver a la página anterior
+        function volverPaginaAnterior() {
+            window.history.back();
+        }
+
         // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
         function verificarSesion() {
             const usuarioStr = sessionStorage.getItem('usuario');
-            console.log('Datos en sessionStorage:', usuarioStr); // Para depuración
+            console.log('Datos en sessionStorage:', usuarioStr);
 
             if (usuarioStr) {
                 try {
                     const usuario = JSON.parse(usuarioStr);
-                    console.log('Usuario parseado:', usuario); // Para depuración
+                    console.log('Usuario parseado:', usuario);
                     
                     // Verificar que tenga las propiedades mínimas necesarias
                     if (usuario && usuario.nombre && usuario.grupo) {
                         // Sesión válida encontrada
-                        mostrarInterfazConSesion(usuario);
+                        cargarTrabajos(usuario);
                         return true;
                     } else {
                         console.error('Usuario incompleto:', usuario);
@@ -451,92 +322,9 @@
                 }
             }
             
-            // No hay sesión válida
-            mostrarInterfazNoSesion();
+            // No hay sesión válida - mostrar interfaz normal sin restricciones
+            cargarTrabajos(null); // Cargar trabajos sin usuario
             return false;
-        }
-
-        // MOSTRAR INTERFAZ CUANDO NO HAY SESIÓN
-        function mostrarInterfazNoSesion() {
-            document.getElementById('enlaces-sesion').style.display = 'flex';
-            document.getElementById('barra-lateral').style.display = 'none';
-            document.getElementById('contenido-principal').style.display = 'block';
-            document.getElementById('mensaje-no-sesion').style.display = 'none';
-
-            // Quitar clase al contenedor de contenido cuando no hay barra lateral
-            const contenedorContenido = document.getElementById('contenedor-contenido');
-            contenedorContenido.classList.remove('con-barra-lateral');
-            
-            // Cargar trabajos sin usuario
-            cargarTrabajos(null);
-        }
-
-        // MOSTRAR INTERFAZ CUANDO HAY SESIÓN
-        function mostrarInterfazConSesion(usuario) {
-            document.getElementById('enlaces-sesion').style.display = 'none';
-            document.getElementById('barra-lateral').style.display = 'block';
-            document.getElementById('contenido-principal').style.display = 'block';
-            document.getElementById('mensaje-no-sesion').style.display = 'none';
-
-            // Mostrar información del usuario
-            document.getElementById('nombre-usuario').textContent = usuario.nombre;
-            document.getElementById('rol-usuario').textContent =
-                usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-
-            // Configurar opciones según el rol
-            configurarMenuSegunRol(usuario.grupo);
-            
-            // Agregar clase al contenedor de contenido para ajustar el margen cuando hay barra lateral
-            const contenedorContenido = document.getElementById('contenedor-contenido');
-            contenedorContenido.classList.add('con-barra-lateral');
-
-            // Cargar trabajos con usuario
-            cargarTrabajos(usuario);
-        }
-
-        // Configurar el menú según el rol del usuario
-        function configurarMenuSegunRol(rol) {
-            // Por defecto, todos los enlaces están habilitados
-            const enlaces = {
-                'postulaciones': false,
-                'cursos-usuario': false,
-                'trabajos': false,
-                'cursos': false
-            };
-
-            // Configurar según el rol
-            switch(rol) {
-                case 'candidato':
-                    // Los candidatos pueden ver todo excepto "Trabajos" (publicar ofertas)
-                    enlaces['trabajos'] = true;
-                    break;
-                case 'reclutador':
-                    // Los reclutadores pueden ver todo excepto "Tus cursos"
-                    enlaces['cursos-usuario'] = true;
-                    break;
-                case 'instructor':
-                    // Los instructores pueden ver todo excepto "Tus postulaciones"
-                    enlaces['postulaciones'] = true;
-                    break;
-            }
-
-            // Aplicar la configuración
-            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
-                const elemento = document.getElementById(`enlace-${enlace}`);
-                if (deshabilitar) {
-                    elemento.classList.add('disabled');
-                    elemento.setAttribute('href', '#');
-                }
-            }
-        }
-
-        // FUNCIÓN MEJORADA PARA CERRAR SESIÓN
-        function cerrarSesion() {
-            // Limpiar todos los datos de sesión
-            sessionStorage.removeItem('usuario');
-
-            // Redirigir a index.html para forzar recarga completa
-            window.location.href = 'index.html';
         }
 
         // Función para cargar trabajos desde la API
@@ -546,121 +334,105 @@
             // Mostrar mensaje de carga
             listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
             
-            // Realizar petición a la API
-            fetch('/api/trabajos')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Error al cargar los trabajos');
-                    }
-                    return response.json();
-                })
-                .then(trabajos => {
-                    // Limpiar lista de trabajos
-                    listaTrabajos.innerHTML = '';
-                    
-                    // Verificar si hay trabajos
-                    if (trabajos.length === 0) {
-                        listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
-                        return;
-                    }
-                    
-                    // Llenar el filtro de empresas
-                    const selectEmpresa = document.getElementById('filtrar-empresa');
-                    const empresas = [...new Set(trabajos.map(trabajo => trabajo.empresa))];
-                    
-                    empresas.forEach(empresa => {
-                        const option = document.createElement('option');
-                        option.value = empresa;
-                        option.textContent = empresa;
-                        selectEmpresa.appendChild(option);
-                    });
-                    
-                    // Mostrar trabajos
-                    trabajos.forEach(trabajo => {
-                        const trabajoElemento = document.createElement('div');
-                        trabajoElemento.className = 'trabajo';
-                        
-                        trabajoElemento.innerHTML = `
-                            <div class="encabezado-trabajo">
-                                <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                                <div class="empresa-trabajo">${trabajo.empresa}</div>
-                            </div>
-                            <div class="cuerpo-trabajo">
-                                <p class="descripcion-trabajo">${trabajo.descripcion}</p>
-                                <div class="requisitos-trabajo">
-                                    <div class="titulo-requisitos">Requisitos:</div>
-                                    <ul class="lista-requisitos">
-                                        ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
-                                    </ul>
-                                </div>
-                                <div class="detalles-trabajo">
-                                    <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
-                                </div>
-                                <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
-                            </div>
-                        `;
-                        
-                        listaTrabajos.appendChild(trabajoElemento);
-                        
-                        // Configurar evento para el botón de postularse
-                        const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
-                        botonPostularse.addEventListener('click', function() {
-                            if (usuario) {
-                                postularseTrabajo(usuario, trabajo.id);
-                            } else {
-                                // Redirigir a inicio de sesión
-                                window.location.href = 'inicio_sesion.html';
-                            }
-                        });
-                    });
-                    
-                    // Configurar filtros
-                    configurarFiltros(trabajos);
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    listaTrabajos.innerHTML = '<div class="mensaje-error">Error al cargar los trabajos. Por favor, intenta de nuevo más tarde.</div>';
-                });
-        }
-
-        // Función para postularse a un trabajo
-        function postularseTrabajo(usuario, trabajoId) {
-            // Crear objeto con los datos de la postulación
-            const datosPostulacion = {
-                usuario_id: usuario.id,
-                trabajo_id: trabajoId,
-                mensaje: `Hola, estoy interesado/a en el puesto. Mi nombre es ${usuario.nombre} ${usuario.apellido_paterno} y creo que mis habilidades y experiencia encajan perfectamente con lo que están buscando.`
-            };
-            
-            // Realizar petición a la API
-            fetch('/api/postularse-trabajo', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
+            // Simulación de datos de trabajos (en una aplicación real, esto vendría de una API)
+            const trabajosSimulados = [
+                {
+                    id: 1,
+                    titulo: "Desarrollador Frontend",
+                    empresa: "Tech Solutions",
+                    descripcion: "Buscamos un desarrollador frontend con experiencia en React y JavaScript para unirse a nuestro equipo de desarrollo.",
+                    requisitos: ["Experiencia en React", "Conocimientos de JavaScript ES6+", "Familiaridad con CSS3 y HTML5"],
+                    fecha_publicacion: "2023-05-15"
                 },
-                body: JSON.stringify(datosPostulacion)
-            })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Error al postularse al trabajo');
+                {
+                    id: 2,
+                    titulo: "Especialista en SEO",
+                    empresa: "Digital Marketing Co.",
+                    descripcion: "Buscamos un especialista en SEO para mejorar nuestra visibilidad en línea y aumentar el tráfico orgánico.",
+                    requisitos: ["Experiencia en análisis de palabras clave", "Conocimientos de Google Analytics", "Experiencia con herramientas SEO"],
+                    fecha_publicacion: "2023-05-10"
+                },
+                {
+                    id: 3,
+                    titulo: "Diseñador UX/UI",
+                    empresa: "Creative Studio",
+                    descripcion: "Buscamos un diseñador UX/UI creativo para crear interfaces atractivas y funcionales para nuestros clientes.",
+                    requisitos: ["Experiencia con Figma o Sketch", "Conocimientos de principios de diseño", "Portafolio sólido"],
+                    fecha_publicacion: "2023-05-08"
                 }
-                return response.json();
-            })
-            .then(data => {
-                if (data.exito) {
-                    alert('¡Te has postulado al trabajo correctamente!');
-                } else {
-                    alert(data.mensaje || 'Error al postularse al trabajo');
+            ];
+
+            // Simular carga asíncrona
+            setTimeout(() => {
+                // Limpiar lista de trabajos
+                listaTrabajos.innerHTML = '';
+                
+                // Verificar si hay trabajos
+                if (trabajosSimulados.length === 0) {
+                    listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
+                    return;
                 }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Error al postularse al trabajo. Por favor, intenta de nuevo más tarde.');
-            });
+                
+                // Llenar el filtro de empresas
+                const selectEmpresa = document.getElementById('filtrar-empresa');
+                const empresas = [...new Set(trabajosSimulados.map(trabajo => trabajo.empresa))];
+                
+                empresas.forEach(empresa => {
+                    const option = document.createElement('option');
+                    option.value = empresa;
+                    option.textContent = empresa;
+                    selectEmpresa.appendChild(option);
+                });
+                
+                // Mostrar trabajos
+                trabajosSimulados.forEach(trabajo => {
+                    const trabajoElemento = document.createElement('div');
+                    trabajoElemento.className = 'trabajo';
+                    
+                    trabajoElemento.innerHTML = `
+                        <div class="encabezado-trabajo">
+                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                        </div>
+                        <div class="cuerpo-trabajo">
+                            <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                            <div class="requisitos-trabajo">
+                                <div class="titulo-requisitos">Requisitos:</div>
+                                <ul class="lista-requisitos">
+                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="detalles-trabajo">
+                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                            </div>
+                            <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                        </div>
+                    `;
+                    
+                    listaTrabajos.appendChild(trabajoElemento);
+                    
+                    // Configurar evento para el botón de postularse
+                    const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                    botonPostularse.addEventListener('click', function() {
+                        if (usuario) {
+                            postularseTrabajo(usuario, trabajo.id);
+                        } else {
+                            window.location.href = 'inicio_sesion.html';
+                        }
+                    });
+                });
+                
+                // Configurar filtros
+                configurarFiltros(trabajosSimulados, usuario);
+            }, 1000);
         }
 
-        // Función para configurar los filtros
-        function configurarFiltros(trabajos) {
+        function postularseTrabajo(usuario, trabajoId) {
+            // Simulación de postulación
+            alert(`¡Te has postulado al trabajo correctamente! (Usuario: ${usuario.nombre}, Trabajo ID: ${trabajoId})`);
+        }
+
+        function configurarFiltros(trabajos, usuario) {
             const buscarTrabajo = document.getElementById('buscar-trabajo');
             const filtrarEmpresa = document.getElementById('filtrar-empresa');
             const listaTrabajos = document.getElementById('lista-trabajos');
@@ -717,12 +489,9 @@
                     // Configurar evento para el botón de postularse
                     const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
                     botonPostularse.addEventListener('click', function() {
-                        const usuario = sessionStorage.getItem('usuario');
                         if (usuario) {
-                            const datosUsuario = JSON.parse(usuario);
-                            postularseTrabajo(datosUsuario, trabajo.id);
+                            postularseTrabajo(usuario, trabajo.id);
                         } else {
-                            // Redirigir a inicio de sesión
                             window.location.href = 'inicio_sesion.html';
                         }
                     });
@@ -736,19 +505,10 @@
 
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar evento para el botón de menú
-            document.getElementById('boton-menu').addEventListener('click', function() {
-                const barraLateral = document.getElementById('barra-lateral');
-                barraLateral.style.display = barraLateral.style.display === 'block' ? 'none' : 'block';
-            });
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
             
-            // Configurar evento para cerrar sesión
-            document.getElementById('cerrar-sesion').addEventListener('click', function(e) {
-                e.preventDefault();
-                cerrarSesion();
-            });
-            
-            // Verificar si el usuario ha iniciado sesión
+            // Verificar sesión al cargar la página
             verificarSesion();
         });
     </script>

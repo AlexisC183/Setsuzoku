@@ -177,8 +177,23 @@
                     sessionStorage.setItem('usuario', JSON.stringify(data.usuario));
                     console.log('Usuario guardado en sessionStorage:', data.usuario); // Para depuración
                     
-                    // Redirigir a index.html
-                    window.location.href = '/frontend/index.html?sesion=1';
+                    // Redirigir según el grupo del usuario
+                    const grupo_usuario = data.usuario.grupo.toLowerCase(); // 'candidato', 'reclutador' o 'instructor'
+                    
+                    switch(grupo_usuario) {
+                        case 'reclutador':
+                            window.location.href = '../Reclutador/IndexReclutador.html?sesion=1';
+                            break;
+                        case 'candidato':
+                            window.location.href = '../Candidato/IndexCandidato.html?sesion=1';
+                            break;
+                        case 'instructor':
+                            window.location.href = '../Instructor/IndexInstructor.html?sesion=1';
+                            break;
+                        default:
+                            // Si por alguna razón no se reconoce el grupo, redirigir a una página por defecto
+                            window.location.href = '../index.html?sesion=1';
+                    }
                 } else {
                     mostrarError(data.mensaje || 'Credenciales incorrectas. Por favor intenta nuevamente.');
                 }

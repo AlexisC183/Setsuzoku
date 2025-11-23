@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Notificaciones - Setsuzoku</title>
+     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 0;
+            position: relative;
+        }
+
+        .barra-lateral {
+            width: 250px;
+            background-color: #34495e;
+            color: white;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            z-index: 100;
+            display: none;
+        }
+
+        .menu-usuario {
+            padding: 20px;
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .nombre-usuario {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .rol-usuario {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+        }
+
+        .menu-opciones {
+            list-style: none;
+            padding: 0;
+        }
+
+        .menu-opciones li {
+            border-bottom: 1px solid #2c3e50;
+        }
+
+        .menu-opciones a {
+            display: block;
+            padding: 15px 20px;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.2s;
+        }
+
+        .menu-opciones a:hover {
+            background-color: #2c3e50;
+        }
+
+        .menu-opciones a.disabled {
+            color: #7f8c8d;
+            cursor: not-allowed;
+        }
+
+        .menu-opciones a.disabled:hover {
+            background-color: transparent;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .contenedor-contenido.con-barra-lateral {
+            margin-left: 250px;
+        }
+
+        /* ESTILOS PARA LA PÁGINA DE NOTIFICACIONES */
+        .contenido-principal {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .pagina-cabecera {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .pagina-titulo {
+            font-size: 2rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin: 0;
+        }
+
+        .pagina-subtitulo {
+            font-size: 1rem;
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .acciones-rapidas {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2A5CAA;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn:hover {
+            background-color: #1e3f7a;
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: #2A5CAA;
+            border: 2px solid #2A5CAA;
+        }
+
+        .btn-secundario:hover {
+            background-color: #f0f7ff;
+        }
+
+        .btn-peligro {
+            background-color: #e74c3c;
+        }
+
+        .btn-peligro:hover {
+            background-color: #c0392b;
+        }
+
+        /* ESTILOS PARA FILTROS */
+        .filtros-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .filtros-titulo {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .filtros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .filtro-grupo {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .filtro-etiqueta {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 5px;
+        }
+
+        .filtro-select, .filtro-input {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 0.9rem;
+        }
+
+        .filtro-select:focus, .filtro-input:focus {
+            outline: none;
+            border-color: #2A5CAA;
+        }
+
+        .filtros-acciones {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* ESTILOS PARA LISTA DE NOTIFICACIONES */
+        .notificaciones-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .notificaciones-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .notificaciones-contador {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .notificaciones-contador span {
+            font-weight: 600;
+            color: #2A5CAA;
+        }
+
+        .vista-toggle {
+            display: flex;
+            gap: 10px;
+        }
+
+        .vista-btn {
+            padding: 5px 10px;
+            background: none;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .vista-btn.activo {
+            background-color: #2A5CAA;
+            color: white;
+            border-color: #2A5CAA;
+        }
+
+        .notificaciones-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .notificacion-item {
+            padding: 20px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .notificacion-item:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .notificacion-item.no-leida {
+            background-color: #f0f7ff;
+            border-left: 4px solid #2A5CAA;
+        }
+
+        .notificacion-cabecera {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+
+        .notificacion-titulo {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .notificacion-fecha {
+            font-size: 0.85rem;
+            color: #999;
+            white-space: nowrap;
+        }
+
+        .notificacion-mensaje {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .notificacion-acciones {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .notificacion-btn {
+            padding: 5px 12px;
+            font-size: 0.85rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-marcar-leida {
+            background-color: #28a745;
+            color: white;
+        }
+
+        .btn-marcar-leida:hover {
+            background-color: #218838;
+        }
+
+        .btn-marcar-no-leida {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .btn-marcar-no-leida:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-eliminar {
+            background-color: #dc3545;
+            color: white;
+        }
+
+        .btn-eliminar:hover {
+            background-color: #c82333;
+        }
+
+        /* ESTILOS PARA VISTA TARJETA */
+        .notificaciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .notificacion-tarjeta {
+            background-color: white;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.2s;
+            position: relative;
+        }
+
+        .notificacion-tarjeta:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .notificacion-tarjeta.no-leida {
+            background-color: #f0f7ff;
+            border-top: 4px solid #2A5CAA;
+        }
+
+        /* ESTILOS PARA ESTADOS VACÍOS */
+        .estado-vacio {
+            text-align: center;
+            padding: 60px 20px;
+            color: #666;
+        }
+
+        .estado-vacio-icono {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+
+        .estado-vacio-titulo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .estado-vacio-mensaje {
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+
+        /* ESTILOS PARA PAGINACIÓN */
+        .paginacion {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+
+        .paginacion-btn {
+            padding: 8px 12px;
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .paginacion-btn:hover {
+            background-color: #f8f9fa;
+        }
+
+        .paginacion-btn.activo {
+            background-color: #2A5CAA;
+            color: white;
+            border-color: #2A5CAA;
+        }
+
+        .paginacion-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* ESTILOS PARA EL FOOTER */
+        footer {
+            background-color: #2c3e50;
+            color: #ffffff;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+            width: 100%;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 0.9rem;
+        }
+
+        /* ESTILOS RESPONSIVOS */
+        @media (max-width: 768px) {
+            .pagina-cabecera {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .filtros-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notificaciones-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .notificacion-cabecera {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .acciones-rapidas {
+                width: 100%;
+            }
+
+            .btn {
+                flex: 1;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <!-- BARRA LATERAL -->
+        <div class="barra-lateral" id="barra-lateral">
+            <div class="menu-usuario">
+                <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
+                <div class="rol-usuario" id="rol-usuario">Rol</div>
+            </div>
+
+            <ul class="menu-opciones">
+                <li><a href="perfil.html"> 👤 Perfil </a></li>
+                <li><a href="candidato.html"> 🏠 Inicio </a></li>
+                <li><a href="#" id="enlace-notificaciones" class="disabled"> 🔔 Notificaciones </a></li>
+                <li><a href="Mispostulaciones.html" id="enlace-postulaciones"> 📑 Tus postulaciones </a></li>
+                <li><a href="Miscursos.html" id="enlace-cursos-usuario"> 📖 Tus cursos </a></li>
+                <li><a href="#" id="cerrar-sesion"> Cerrar sesión </a></li>
+            </ul>
+        </div>
+
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <main class="contenido-principal">
+                <!-- CABECERA DE LA PÁGINA -->
+                <div class="pagina-cabecera">
+                    <div>
+                        <h1 class="pagina-titulo">Mis Notificaciones</h1>
+                        <p class="pagina-subtitulo">Gestiona todas tus notificaciones en un solo lugar</p>
+                    </div>
+                    <div class="acciones-rapidas">
+                        <button class="btn btn-secundario" id="btn-marcar-todas-leidas">Marcar todas como leídas</button>
+                        <button class="btn btn-peligro" id="btn-limpiar-leidas">Limpiar leídas</button>
+                    </div>
+                </div>
+
+                <!-- FILTROS -->
+                <div class="filtros-container">
+                    <h3 class="filtros-titulo">Filtrar notificaciones</h3>
+                    <div class="filtros-grid">
+                        <div class="filtro-grupo">
+                            <label class="filtro-etiqueta">Estado</label>
+                            <select class="filtro-select" id="filtro-estado">
+                                <option value="todas">Todas</option>
+                                <option value="no-leidas">No leídas</option>
+                                <option value="leidas">Leídas</option>
+                            </select>
+                        </div>
+                        <div class="filtro-grupo">
+                            <label class="filtro-etiqueta">Tipo</label>
+                            <select class="filtro-select" id="filtro-tipo">
+                                <option value="todos">Todos los tipos</option>
+                                <option value="vacante">Nuevas vacantes</option>
+                                <option value="entrevista">Entrevistas</option>
+                                <option value="curso">Cursos</option>
+                                <option value="postulacion">Postulaciones</option>
+                                <option value="sistema">Sistema</option>
+                            </select>
+                        </div>
+                        <div class="filtro-grupo">
+                            <label class="filtro-etiqueta">Fecha</label>
+                            <select class="filtro-select" id="filtro-fecha">
+                                <option value="todas">Cualquier fecha</option>
+                                <option value="hoy">Hoy</option>
+                                <option value="semana">Esta semana</option>
+                                <option value="mes">Este mes</option>
+                            </select>
+                        </div>
+                        <div class="filtro-grupo">
+                            <label class="filtro-etiqueta">Buscar</label>
+                            <input type="text" class="filtro-input" id="filtro-busqueda" placeholder="Buscar en notificaciones...">
+                        </div>
+                    </div>
+                    <div class="filtros-acciones">
+                        <button class="btn btn-secundario" id="btn-limpiar-filtros">Limpiar filtros</button>
+                        <button class="btn" id="btn-aplicar-filtros">Aplicar filtros</button>
+                    </div>
+                </div>
+
+                <!-- LISTA DE NOTIFICACIONES -->
+                <div class="notificaciones-container">
+                    <div class="notificaciones-header">
+                        <div class="notificaciones-contador">
+                            Mostrando <span id="contador-mostradas">0</span> de <span id="contador-total">0</span> notificaciones
+                        </div>
+                        <div class="vista-toggle">
+                            <button class="vista-btn activo" id="vista-lista">📋 Lista</button>
+                            <button class="vista-btn" id="vista-tarjeta">📇 Tarjetas</button>
+                        </div>
+                    </div>
+                    <div id="notificaciones-contenido">
+                        <!-- Las notificaciones se cargarán dinámicamente aquí -->
+                    </div>
+                    <div class="paginacion" id="paginacion">
+                        <!-- La paginación se cargará dinámicamente aquí -->
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <!-- PIE DE PÁGINA -->
+    <footer>
+        <p>&copy; <span id="anio-actual"></span> Todos los derechos reservados al Tecnológico de Tijuana.</p>
+    </footer>
+
+    <script>
+        // VARIABLES GLOBALES
+        let notificaciones = [];
+        let notificaciones_filtradas = [];
+        let pagina_actual = 1;
+        let notificaciones_por_pagina = 10;
+        let vista_actual = 'lista';
+
+        // FUNCIONES AUXILIARES
+        function formatear_fecha(fecha_iso) {
+            const fecha = new Date(fecha_iso);
+            const ahora = new Date();
+            const diferencia = ahora - fecha;
+            
+            // Si es hoy
+            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
+                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            // Si fue ayer
+            const ayer = new Date(ahora);
+            ayer.setDate(ayer.getDate() - 1);
+            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
+                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            // Si es esta semana
+            if (diferencia < 604800000) {
+                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            // Si no, mostrar fecha completa
+            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+        }
+
+        function obtener_tipo_notificacion(titulo) {
+            const titulo_lower = titulo.toLowerCase();
+            if (titulo_lower.includes('vacante') || titulo_lower.includes('trabajo')) return 'vacante';
+            if (titulo_lower.includes('entrevista')) return 'entrevista';
+            if (titulo_lower.includes('curso')) return 'curso';
+            if (titulo_lower.includes('postulacion')) return 'postulacion';
+            return 'sistema';
+        }
+
+        function guardar_notificaciones() {
+            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+        }
+
+        // FUNCIONES DE GESTIÓN DE NOTIFICACIONES
+        function cargar_notificaciones() {
+            const notificaciones_guardadas = sessionStorage.getItem('notificaciones');
+            
+            if (notificaciones_guardadas) {
+                notificaciones = JSON.parse(notificaciones_guardadas);
+            } else {
+                // Notificaciones de ejemplo
+                notificaciones = [
+                    {
+                        id: 1,
+                        titulo: "Nueva vacante disponible",
+                        mensaje: "Tech Solutions está buscando Desarrollador Frontend con experiencia en React y Node.js",
+                        fecha: new Date().toISOString(),
+                        leida: false,
+                        tipo: 'vacante'
+                    },
+                    {
+                        id: 2,
+                        titulo: "Entrevista programada",
+                        mensaje: "Tienes una entrevista programada para el viernes a las 10:00 AM con Digital Marketing Co.",
+                        fecha: new Date(Date.now() - 86400000).toISOString(),
+                        leida: false,
+                        tipo: 'entrevista'
+                    },
+                    {
+                        id: 3,
+                        titulo: "Curso actualizado",
+                        mensaje: "El curso 'Desarrollo Web Completo' ha sido actualizado con nuevo contenido sobre React 18",
+                        fecha: new Date(Date.now() - 172800000).toISOString(),
+                        leida: true,
+                        tipo: 'curso'
+                    },
+                    {
+                        id: 4,
+                        titulo: "Postulación recibida",
+                        mensaje: "Tu postulación para el puesto de Desarrollador Junior ha sido recibida exitosamente",
+                        fecha: new Date(Date.now() - 259200000).toISOString(),
+                        leida: true,
+                        tipo: 'postulacion'
+                    },
+                    {
+                        id: 5,
+                        titulo: "Bienvenido a Setsuzoku",
+                        mensaje: "Gracias por unirte a nuestra plataforma. Explora las oportunidades que tenemos para ti",
+                        fecha: new Date(Date.now() - 604800000).toISOString(),
+                        leida: true,
+                        tipo: 'sistema'
+                    }
+                ];
+                
+                // Asignar tipos si no existen
+                notificaciones = notificaciones.map(notif => ({
+                    ...notif,
+                    tipo: notif.tipo || obtener_tipo_notificacion(notif.titulo)
+                }));
+                
+                guardar_notificaciones();
+            }
+            
+            notificaciones_filtradas = [...notificaciones];
+        }
+
+        function aplicar_filtros() {
+            const estado = document.getElementById('filtro-estado').value;
+            const tipo = document.getElementById('filtro-tipo').value;
+            const fecha = document.getElementById('filtro-fecha').value;
+            const busqueda = document.getElementById('filtro-busqueda').value.toLowerCase();
+            
+            notificaciones_filtradas = notificaciones.filter(notif => {
+                // Filtro por estado
+                if (estado === 'no-leidas' && notif.leida) return false;
+                if (estado === 'leidas' && !notif.leida) return false;
+                
+                // Filtro por tipo
+                if (tipo !== 'todos' && notif.tipo !== tipo) return false;
+                
+                // Filtro por fecha
+                const notif_fecha = new Date(notif.fecha);
+                const ahora = new Date();
+                
+                if (fecha === 'hoy') {
+                    if (notif_fecha.toDateString() !== ahora.toDateString()) return false;
+                } else if (fecha === 'semana') {
+                    const semana_pasada = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    if (notif_fecha < semana_pasada) return false;
+                } else if (fecha === 'mes') {
+                    const mes_pasado = new Date(ahora.getTime() - 30 * 24 * 60 * 60 * 1000);
+                    if (notif_fecha < mes_pasado) return false;
+                }
+                
+                // Filtro por búsqueda
+                if (busqueda && !notif.titulo.toLowerCase().includes(busqueda) && 
+                    !notif.mensaje.toLowerCase().includes(busqueda)) {
+                    return false;
+                }
+                
+                return true;
+            });
+            
+            pagina_actual = 1;
+            renderizar_notificaciones();
+        }
+
+        function renderizar_notificaciones() {
+            const contenedor = document.getElementById('notificaciones-contenido');
+            const contador_mostradas = document.getElementById('contador-mostradas');
+            const contador_total = document.getElementById('contador-total');
+            
+            // Actualizar contadores
+            contador_total.textContent = notificaciones_filtradas.length;
+            
+            if (notificaciones_filtradas.length === 0) {
+                contenedor.innerHTML = `
+                    <div class="estado-vacio">
+                        <div class="estado-vacio-icono">🔔</div>
+                        <div class="estado-vacio-titulo">No hay notificaciones</div>
+                        <div class="estado-vacio-mensaje">No se encontraron notificaciones con los filtros aplicados</div>
+                    </div>
+                `;
+                contador_mostradas.textContent = '0';
+                document.getElementById('paginacion').innerHTML = '';
+                return;
+            }
+            
+            // Calcular paginación
+            const inicio = (pagina_actual - 1) * notificaciones_por_pagina;
+            const fin = inicio + notificaciones_por_pagina;
+            const notificaciones_pagina = notificaciones_filtradas.slice(inicio, fin);
+            
+            contador_mostradas.textContent = notificaciones_pagina.length;
+            
+            // Renderizar según vista actual
+            if (vista_actual === 'lista') {
+                renderizar_vista_lista(notificaciones_pagina, contenedor);
+            } else {
+                renderizar_vista_tarjeta(notificaciones_pagina, contenedor);
+            }
+            
+            // Renderizar paginación
+            renderizar_paginacion();
+        }
+
+        function renderizar_vista_lista(notificaciones_pagina, contenedor) {
+            let html = '<div class="notificaciones-lista">';
+            
+            notificaciones_pagina.forEach(notif => {
+                const clase_no_leida = notif.leida ? '' : 'no-leida';
+                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
+                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
+                
+                html += `
+                    <div class="notificacion-item ${clase_no_leida}" data-id="${notif.id}">
+                        <div class="notificacion-cabecera">
+                            <div>
+                                <div class="notificacion-titulo">${notif.titulo}</div>
+                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
+                            </div>
+                        </div>
+                        <div class="notificacion-mensaje">${notif.mensaje}</div>
+                        <div class="notificacion-acciones">
+                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
+                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            contenedor.innerHTML = html;
+        }
+
+        function renderizar_vista_tarjeta(notificaciones_pagina, contenedor) {
+            let html = '<div class="notificaciones-grid">';
+            
+            notificaciones_pagina.forEach(notif => {
+                const clase_no_leida = notif.leida ? '' : 'no-leida';
+                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
+                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
+                
+                html += `
+                    <div class="notificacion-tarjeta ${clase_no_leida}" data-id="${notif.id}">
+                        <div class="notificacion-cabecera">
+                            <div>
+                                <div class="notificacion-titulo">${notif.titulo}</div>
+                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
+                            </div>
+                        </div>
+                        <div class="notificacion-mensaje">${notif.mensaje}</div>
+                        <div class="notificacion-acciones">
+                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
+                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += '</div>';
+            contenedor.innerHTML = html;
+        }
+
+        function renderizar_paginacion() {
+            const contenedor = document.getElementById('paginacion');
+            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
+            
+            if (total_paginas <= 1) {
+                contenedor.innerHTML = '';
+                return;
+            }
+            
+            let html = '';
+            
+            // Botón anterior
+            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual - 1})" ${pagina_actual === 1 ? 'disabled' : ''}>Anterior</button>`;
+            
+            // Números de página
+            for (let i = 1; i <= total_paginas; i++) {
+                if (i === 1 || i === total_paginas || (i >= pagina_actual - 1 && i <= pagina_actual + 1)) {
+                    html += `<button class="paginacion-btn ${i === pagina_actual ? 'activo' : ''}" onclick="cambiar_pagina(${i})">${i}</button>`;
+                } else if (i === pagina_actual - 2 || i === pagina_actual + 2) {
+                    html += '<span>...</span>';
+                }
+            }
+            
+            // Botón siguiente
+            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual + 1})" ${pagina_actual === total_paginas ? 'disabled' : ''}>Siguiente</button>`;
+            
+            contenedor.innerHTML = html;
+        }
+
+        function cambiar_pagina(pagina) {
+            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
+            if (pagina < 1 || pagina > total_paginas) return;
+            
+            pagina_actual = pagina;
+            renderizar_notificaciones();
+            
+            // Scroll al inicio de la lista
+            document.querySelector('.notificaciones-container').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggle_leida(id) {
+            const notificacion = notificaciones.find(n => n.id === id);
+            if (notificacion) {
+                notificacion.leida = !notificacion.leida;
+                guardar_notificaciones();
+                aplicar_filtros();
+            }
+        }
+
+        function eliminar_notificacion(id) {
+            if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
+                notificaciones = notificaciones.filter(n => n.id !== id);
+                guardar_notificaciones();
+                aplicar_filtros();
+            }
+        }
+
+        function marcar_todas_leidas() {
+            const no_leidas = notificaciones.filter(n => !n.leida);
+            if (no_leidas.length === 0) {
+                alert('No hay notificaciones sin leer');
+                return;
+            }
+            
+            if (confirm(`¿Marcar ${no_leidas.length} notificaciones como leídas?`)) {
+                notificaciones.forEach(n => n.leida = true);
+                guardar_notificaciones();
+                aplicar_filtros();
+            }
+        }
+
+        function limpiar_leidas() {
+            const leidas = notificaciones.filter(n => n.leida);
+            if (leidas.length === 0) {
+                alert('No hay notificaciones leídas para eliminar');
+                return;
+            }
+            
+            if (confirm(`¿Eliminar ${leidas.length} notificaciones leídas?`)) {
+                notificaciones = notificaciones.filter(n => !n.leida);
+                guardar_notificaciones();
+                aplicar_filtros();
+            }
+        }
+
+        function limpiar_filtros() {
+            document.getElementById('filtro-estado').value = 'todas';
+            document.getElementById('filtro-tipo').value = 'todos';
+            document.getElementById('filtro-fecha').value = 'todas';
+            document.getElementById('filtro-busqueda').value = '';
+            aplicar_filtros();
+        }
+
+        // FUNCIONES PARA VERIFICAR SESIÓN
+        function verificar_sesion() {
+            const usuario_str = sessionStorage.getItem('usuario');
+            if (usuario_str) {
+                try {
+                    const usuario = JSON.parse(usuario_str);
+                    if (usuario && usuario.nombre && usuario.grupo) {
+                        mostrar_interfaz_con_sesion(usuario);
+                        return true;
+                    }
+                } catch (error) {
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            window.location.href = '../index.html';
+            return false;
+        }
+
+        function mostrar_interfaz_con_sesion(usuario) {
+            document.getElementById('barra-lateral').style.display = 'block';
+            document.getElementById('nombre-usuario').textContent = usuario.nombre;
+            document.getElementById('rol-usuario').textContent = usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
+            configurar_menu_segun_rol(usuario.grupo);
+            
+            const contenedor_contenido = document.getElementById('contenedor-contenido');
+            contenedor_contenido.classList.add('con-barra-lateral');
+        }
+
+        function configurar_menu_segun_rol(rol) {
+            const enlaces = { 'postulaciones': false, 'cursos-usuario': false, 'trabajos': false };
+            switch(rol) {
+                case 'candidato': 
+                    break;
+                case 'reclutador': 
+                    enlaces['cursos-usuario'] = true; 
+                    break;
+                case 'instructor': 
+                    enlaces['postulaciones'] = true; 
+                    break;
+            }
+            
+            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
+                const elemento = document.getElementById(`enlace-${enlace}`);
+                if (elemento) {
+                    if (deshabilitar) {
+                        elemento.classList.add('disabled');
+                        elemento.setAttribute('href', '#');
+                    }
+                }
+            }
+        }
+        
+        function cerrar_sesion() { 
+            sessionStorage.removeItem('usuario'); 
+            window.location.href = '../index.html'; 
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Establecer el año actual en el footer
+            document.getElementById('anio-actual').textContent = new Date().getFullYear();
+
+            // Verificar sesión
+            verificar_sesion();
+            
+            // Cargar notificaciones
+            cargar_notificaciones();
+            
+            // Renderizar notificaciones iniciales
+            renderizar_notificaciones();
+            
+            // Configurar eventos
+            document.getElementById('btn-marcar-todas-leidas').addEventListener('click', marcar_todas_leidas);
+            document.getElementById('btn-limpiar-leidas').addEventListener('click', limpiar_leidas);
+            document.getElementById('btn-aplicar-filtros').addEventListener('click', aplicar_filtros);
+            document.getElementById('btn-limpiar-filtros').addEventListener('click', limpiar_filtros);
+            
+            // Configurar vista toggle
+            document.getElementById('vista-lista').addEventListener('click', function() {
+                vista_actual = 'lista';
+                this.classList.add('activo');
+                document.getElementById('vista-tarjeta').classList.remove('activo');
+                renderizar_notificaciones();
+            });
+            
+            document.getElementById('vista-tarjeta').addEventListener('click', function() {
+                vista_actual = 'tarjeta';
+                this.classList.add('activo');
+                document.getElementById('vista-lista').classList.remove('activo');
+                renderizar_notificaciones();
+            });
+            
+            // Configurar evento de cerrar sesión
+            document.getElementById('cerrar-sesion').addEventListener('click', function(e) { 
+                e.preventDefault(); 
+                cerrar_sesion(); 
+            });
+            
+            // Configurar búsqueda en tiempo real
+            document.getElementById('filtro-busqueda').addEventListener('input', function() {
+                clearTimeout(this.timeout);
+                this.timeout = setTimeout(aplicar_filtros, 500);
+            });
+        });
+    </script>
+</body>
+</html>

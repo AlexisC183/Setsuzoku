@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil - Setsuzoku</title>
+     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <link rel="stylesheet" href="../../css/fuentes.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+            /* El logo ya no es un enlace, por lo que no necesita estilos de enlace */
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .contenido-perfil {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .titulo-perfil {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .perfil-cabecera {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+
+        .perfil-imagen {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-color: #ddd;
+            margin-right: 20px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .perfil-info {
+            flex: 1;
+        }
+
+        .perfil-nombre {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .perfil-rol {
+            font-size: 1rem;
+            color: #7f8c8d;
+        }
+
+        .perfil-seccion {
+            margin-bottom: 30px;
+        }
+
+        .perfil-subtitulo {
+            font-size: 1.3rem;
+            color: #34495e;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+        .perfil-datos {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .perfil-dato {
+            flex: 1;
+            min-width: 250px;
+            margin-bottom: 15px;
+        }
+
+        .perfil-etiqueta {
+            font-weight: bold;
+            color: #34495e;
+            margin-bottom: 5px;
+        }
+
+        .perfil-valor {
+            color: #555;
+        }
+
+        .boton {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+            margin-right: 10px;
+        }
+
+        .boton:hover {
+            background-color: #2980b9;
+        }
+
+        .boton-secundario {
+            background-color: #95a5a6;
+        }
+
+        .boton-secundario:hover {
+            background-color: #7f8c8d;
+        }
+
+        .no-sesion {
+            text-align: center;
+            padding: 40px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin: 20px;
+        }
+
+        .no-sesion h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .no-sesion p {
+            color: #555;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .botones-accion {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+
+        @media (max-width: 768px) {
+            .contenedor-contenido {
+                padding: 10px;
+            }
+            
+            .perfil-cabecera {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .perfil-imagen {
+                margin-right: 0;
+                margin-bottom: 15px;
+            }
+            
+            .perfil-datos {
+                flex-direction: column;
+            }
+            
+            .perfil-dato {
+                min-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver a la página anterior">
+                ←
+            </button>
+        </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+        <!-- El contenedor de enlaces de sesión ha sido eliminado -->
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <!-- CONTENIDO DEL PERFIL -->
+            <div class="contenido-perfil" id="contenido-principal">
+                <h1 class="titulo-perfil">Mi Perfil</h1>
+
+                <div class="perfil-cabecera">
+                    <div class="perfil-imagen" id="perfil-imagen" style="background-image: url('https://picsum.photos/seed/usuario/240/240.jpg')"></div>
+                    <div class="perfil-info">
+                        <h2 class="perfil-nombre" id="perfil-nombre">Cargando...</h2>
+                        <p id="perfil-rol">Cargando...</p>
+                    </div>
+                </div>
+
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Información Personal</h3>
+                    <div class="perfil-datos">
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Nombre Completo</div>
+                            <div class="perfil-valor" id="nombre-completo">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Fecha de Nacimiento</div>
+                            <div class="perfil-valor" id="fecha-nacimiento">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Género</div>
+                            <div class="perfil-valor" id="genero">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Teléfono</div>
+                            <div class="perfil-valor" id="telefono">Cargando...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Información Profesional</h3>
+                    <div class="perfil-datos">
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Estudios</div>
+                            <div class="perfil-valor" id="estudios">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Experiencia</div>
+                            <div class="perfil-valor" id="experiencia">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Habilidades</div>
+                            <div class="perfil-valor" id="habilidades">Cargando...</div>
+                        </div>
+                        <div class="perfil-dato">
+                            <div class="perfil-etiqueta">Correo Electrónico</div>
+                            <div class="perfil-valor" id="correo">Cargando...</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perfil-seccion">
+                    <h3 class="perfil-subtitulo">Acciones</h3>
+                    <div class="botones-accion">
+                        <button class="boton" id="editar-perfil">Editar Perfil</button>
+                        <button class="boton boton-secundario" id="ver-postulaciones">Ver Postulaciones</button>
+                        <button class="boton boton-secundario" id="ver-cursos">Ver Mis Cursos</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MENSAJE PARA USUARIOS NO REGISTRADOS -->
+            <div class="no-sesion" id="no-sesion" style="display: none;">
+                <h2>Debes iniciar sesión</h2>
+                <p>Para ver tu perfil, por favor inicia sesión en tu cuenta.</p>
+                <div class="botones-accion">
+                    <a href="inicio_sesion.html" class="boton">Iniciar sesión</a>
+                    <a href="registro.html" class="boton boton-secundario">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Función para volver a la página anterior
+        function volverPaginaAnterior() {
+            window.history.back();
+        }
+
+        // Función para cargar los datos del perfil
+        function cargarPerfil() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    
+                    // Actualizar la información del usuario en la barra lateral
+                    document.getElementById('nombre-usuario').textContent = 
+                        `${usuario.nombre} ${usuario.apellido_paterno}`;
+                    document.getElementById('rol-usuario').textContent = usuario.grupo;
+                    
+                    // Actualizar la información del perfil
+                    document.getElementById('perfil-nombre').textContent = 
+                        `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
+                    document.getElementById('perfil-rol').textContent = usuario.grupo;
+                    
+                    // Actualizar los datos del perfil
+                    document.getElementById('nombre-completo').textContent = 
+                        `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
+                    document.getElementById('fecha-nacimiento').textContent = usuario.fecha_nacimiento;
+                    document.getElementById('genero').textContent = usuario.genero;
+                    document.getElementById('telefono').textContent = usuario.telefono;
+                    document.getElementById('estudios').textContent = usuario.estudios;
+                    document.getElementById('experiencia').textContent = usuario.experiencia;
+                    document.getElementById('habilidades').textContent = usuario.habilidades;
+                    document.getElementById('correo').textContent = usuario.correo;
+                    
+                    // Actualizar la imagen del perfil si existe
+                    if (usuario.imagen) {
+                        document.getElementById('perfil-imagen').style.backgroundImage = `url('${usuario.imagen}')`;
+                    }
+                    
+                    // Mostrar el contenido del perfil
+                    document.getElementById('contenido-principal').style.display = 'block';
+                    document.getElementById('no-sesion').style.display = 'none';
+                } catch (error) {
+                    console.error('Error al cargar el perfil:', error);
+                    mostrarMensajeNoSesion();
+                }
+            } else {
+                mostrarMensajeNoSesion();
+            }
+        }
+
+        // Función para mostrar el mensaje de no sesión
+        function mostrarMensajeNoSesion() {
+            document.getElementById('contenido-principal').style.display = 'none';
+            document.getElementById('no-sesion').style.display = 'block';
+        }
+
+        // Inicializar la página
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+            
+            // Cargar los datos del perfil
+            cargarPerfil();
+            
+            // Configurar eventos para los botones de acción
+            document.getElementById('editar-perfil').addEventListener('click', function() {
+                alert('Función de edición de perfil no implementada en esta demostración');
+            });
+            
+            document.getElementById('ver-postulaciones').addEventListener('click', function() {
+                window.location.href = 'postulaciones.html';
+            });
+            
+            document.getElementById('ver-cursos').addEventListener('click', function() {
+                window.location.href = 'cursos_usuario.html';
+            });
+        });
+    </script>
+</body>
+</html>

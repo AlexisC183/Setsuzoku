@@ -672,11 +672,6 @@
                             <div class="contenedor-subida">
                                 <select class="select-tipo-doc" id="select-tipo-doc">
                                     <option value="">Seleccionar tipo</option>
-                                    <option value="CV">CV</option>
-                                    <option value="INE">INE</option>
-                                    <option value="CURP">CURP</option>
-                                    <option value="Comprobante de Domicilio">Comprobante de Domicilio</option>
-                                    <option value="RFC">RFC</option>
                                     <option value="Carta de Recomendación">Carta de Recomendación</option>
                                     <option value="Título Profesional">Título Profesional</option>
                                     <option value="Cédula Profesional">Cédula Profesional</option>
@@ -702,11 +697,6 @@
                 </div>
 
                 <div class="perfil-seccion">
-                    <h3 class="perfil-subtitulo">Acciones</h3>
-                    <div class="botones-accion">
-                        <button class="boton boton-secundario" id="ver-postulaciones">Ver Postulaciones</button>
-                        <button class="boton boton-secundario" id="ver-cursos">Ver Mis Cursos</button>
-                    </div>
                     <div class="botones-edicion" id="botones-edicion">
                         <button class="boton boton-guardar" id="guardar-cambios">Guardar Cambios</button>
                         <button class="boton boton-cancelar" id="cancelar-edicion">Cancelar</button>
@@ -1131,26 +1121,7 @@
             document.getElementById('guardar-cambios').addEventListener('click', guardarCambios);
             document.getElementById('cancelar-edicion').addEventListener('click', cancelarEdicion);
             
-            // Configurar eventos para los botones de acción
-            document.getElementById('ver-postulaciones').addEventListener('click', function() {
-                const usuarioStr = sessionStorage.getItem('usuario');
-                
-                if (usuarioStr) {
-                    window.location.href = 'Mispostulaciones.html';
-                } else {
-                    window.location.href = 'inicio_sesion.html';
-                }
-            });
-            
-            document.getElementById('ver-cursos').addEventListener('click', function() {
-                const usuarioStr = sessionStorage.getItem('usuario');
-                
-                if (usuarioStr) {
-                    window.location.href = 'Miscursos.html';
-                } else {
-                    window.location.href = 'inicio_sesion.html';
-                }
-            });
+
         });
     </script>
 </body>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Curso - Setsuzoku</title>
+     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ESTILOS PARA LA BARRA SUPERIOR */
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+        }
+
+        .contenido-crear-curso {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .titulo-crear-curso {
+            font-size: 2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .formulario-curso {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .grupo-formulario {
+            margin-bottom: 20px;
+        }
+
+        .etiqueta-formulario {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .campo-formulario {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .campo-formulario:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .campo-formulario textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .acciones-formulario {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .boton {
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .boton:hover {
+            background-color: #2980b9;
+        }
+
+        .boton-secundario {
+            background-color: transparent;
+            color: #3498db;
+            border: 2px solid #3498db;
+        }
+
+        .boton-secundario:hover {
+            background-color: #f0f7ff;
+        }
+
+        .boton-cancelar {
+            background-color: #e74c3c;
+        }
+
+        .boton-cancelar:hover {
+            background-color: #c0392b;
+        }
+
+        .mensaje-exito {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #d4edda;
+            color: #155724;
+            display: none;
+        }
+
+        .mensaje-error {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            background-color: #f8d7da;
+            color: #721c24;
+            display: none;
+        }
+
+        /* ESTILOS RESPONSIVOS */
+        @media (max-width: 768px) {
+            .acciones-formulario {
+                flex-direction: column;
+            }
+            
+            .contenedor-contenido {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver a la página anterior">
+                ←
+            </button>
+        </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <div class="contenido-crear-curso">
+                <h1 class="titulo-crear-curso">Crear Nuevo Curso</h1>
+
+                <div class="mensaje-exito" id="mensaje-exito"></div>
+                <div class="mensaje-error" id="mensaje-error"></div>
+
+                <form class="formulario-curso" id="formulario-curso">
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="titulo-curso">Título del Curso</label>
+                        <input type="text" id="titulo-curso" class="campo-formulario" placeholder="Ej: Desarrollo Web con JavaScript" required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="descripcion-curso">Descripción</label>
+                        <textarea id="descripcion-curso" class="campo-formulario" placeholder="Describe el contenido del curso, objetivos y requisitos previos" required></textarea>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="duracion-curso">Duración (en horas)</label>
+                        <input type="number" id="duracion-curso" class="campo-formulario" placeholder="Ej: 40" min="1" required>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="categoria-curso">Categoría</label>
+                        <select id="categoria-curso" class="campo-formulario" required>
+                            <option value="">Seleccionar una categoría</option>
+                            <option value="desarrollo-web">Desarrollo Web</option>
+                            <option value="diseno-ux-ui">Diseño UX/UI</option>
+                            <option value="datos-ciencia">Ciencia de Datos</option>
+                            <option value="movilidad">Movilidad</option>
+                            <option value="marketing">Marketing Digital</option>
+                            <option value="negocios">Negocios</option>
+                            <option value="otros">Otros</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="nivel-curso">Nivel</label>
+                        <select id="nivel-curso" class="campo-formulario" required>
+                            <option value="">Seleccionar un nivel</option>
+                            <option value="principiante">Principiante</option>
+                            <option value="intermedio">Intermedio</option>
+                            <option value="avanzado">Avanzado</option>
+                            <option value="experto">Experto</option>
+                        </select>
+                    </div>
+
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="precio-curso">Precio</label>
+                        <input type="number" id="precio-curso" class="campo-formulario" placeholder="Ej: 99.99" min="0" step="0.01" required>
+                    </div>
+
+                    <div class="acciones-formulario">
+                        <button type="button" class="boton boton-secundario" id="cancelar-crear-curso">Cancelar</button>
+                        <button type="submit" class="boton" id="guardar-curso">Guardar Curso</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
+        function volverPaginaAnterior() {
+            window.history.back();
+        }
+
+        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    
+                    // Verificar que tenga las propiedades mínimas necesarias
+                    if (usuario && usuario.nombre && usuario.grupo) {
+                        // Verificar si el usuario es instructor
+                        if (usuario.grupo === 'instructor') {
+                            return true;
+                        } else {
+                            window.location.href = 'index.html';
+                            return false;
+                        }
+                    } else {
+                        sessionStorage.removeItem('usuario');
+                        window.location.href = 'index.html';
+                        return false;
+                    }
+                } catch (error) {
+                    sessionStorage.removeItem('usuario');
+                    window.location.href = 'index.html';
+                    return false;
+                }
+            }
+            
+            window.location.href = 'index.html';
+            return false;
+        }
+
+        // FUNCIÓN PARA MOSTRAR MENSAJE DE ÉXITO
+        function mostrarMensajeExito(mensaje) {
+            const mensajeExito = document.getElementById('mensaje-exito');
+            mensajeExito.textContent = mensaje;
+            mensajeExito.style.display = 'block';
+            
+            // Ocultar mensaje de error si está visible
+            document.getElementById('mensaje-error').style.display = 'none';
+            
+            // Ocultar mensaje después de 3 segundos
+            setTimeout(() => {
+                mensajeExito.style.display = 'none';
+            }, 3000);
+        }
+
+        // FUNCIÓN PARA MOSTRAR MENSAJE DE ERROR
+        function mostrarMensajeError(mensaje) {
+            const mensajeError = document.getElementById('mensaje-error');
+            mensajeError.textContent = mensaje;
+            mensajeError.style.display = 'block';
+            
+            // Ocultar mensaje de éxito si está visible
+            document.getElementById('mensaje-exito').style.display = 'none';
+            
+            // Ocultar mensaje después de 5 segundos
+            setTimeout(() => {
+                mensajeError.style.display = 'none';
+            }, 5000);
+        }
+
+        // FUNCIÓN PARA GUARDAR CURSO
+        function guardarCurso(event) {
+            event.preventDefault();
+            
+            const titulo = document.getElementById('titulo-curso').value.trim();
+            const descripcion = document.getElementById('descripcion-curso').value.trim();
+            const duracion = document.getElementById('duracion-curso').value;
+            const categoria = document.getElementById('categoria-curso').value;
+            const nivel = document.getElementById('nivel-curso').value;
+            const precio = document.getElementById('precio-curso').value;
+            
+            // Validar que todos los campos requeridos estén completos
+            if (!titulo || !descripcion || !duracion || !categoria || !nivel) {
+                mostrarMensajeError('Por favor, completa todos los campos requeridos');
+                return;
+            }
+            
+            // Obtener cursos existentes o crear array vacío
+            const cursosGuardados = localStorage.getItem('cursos');
+            let cursos = cursosGuardados ? JSON.parse(cursosGuardados) : [];
+            
+            // Crear nuevo curso
+            const nuevoCurso = {
+                id: Date.now(),
+                titulo: titulo,
+                descripcion: descripcion,
+                duracion: duracion,
+                categoria: categoria,
+                nivel: nivel,
+                precio: precio,
+                instructor: JSON.parse(sessionStorage.getItem('usuario')).nombre,
+                fecha_creacion: new Date().toISOString(),
+                estudiantes: [],
+                estado: 'activo'
+            };
+            
+            // Agregar curso a la lista
+            cursos.push(nuevoCurso);
+            
+            // Guardar en localStorage
+            localStorage.setItem('cursos', JSON.stringify(cursos));
+            
+            // Mostrar mensaje de éxito
+            mostrarMensajeExito('Curso guardado exitosamente');
+            
+            // Limpiar formulario
+            document.getElementById('formulario-curso').reset();
+        }
+
+        // FUNCIÓN PARA CANCELAR CREACIÓN
+        function cancelarCreacion() {
+            document.getElementById('formulario-curso').reset();
+            document.getElementById('mensaje-exito').style.display = 'none';
+            document.getElementById('mensaje-error').style.display = 'none';
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            verificarSesion();
+            
+            // Configurar eventos del formulario
+            document.getElementById('formulario-curso').addEventListener('submit', guardarCurso);
+            document.getElementById('cancelar-crear-curso').addEventListener('click', cancelarCreacion);
+            
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+        });
+    </script>
+</body>
+</html>

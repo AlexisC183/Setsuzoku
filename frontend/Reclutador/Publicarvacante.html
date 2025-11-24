@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setsuzoku - Publicar Vacante</title>
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .contenedor-principal {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        /* ESTILOS PARA FORMULARIOS */
+        .seccion-formulario {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .seccion-titulo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .formulario-grupo {
+            margin-bottom: 20px;
+        }
+
+        .formulario-etiqueta {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .formulario-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .formulario-control:focus {
+            outline: none;
+            border-color: #2A5CAA;
+            box-shadow: 0 0 0 3px rgba(42, 92, 170, 0.1);
+        }
+
+        .formulario-control-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .formulario-select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .formulario-grupo-inline {
+            display: flex;
+            gap: 20px;
+        }
+
+        .formulario-grupo-inline .formulario-grupo {
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #2A5CAA;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            background-color: #1e3f7a;
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: #2A5CAA;
+            border: 2px solid #2A5CAA;
+        }
+
+        .btn-secundario:hover {
+            background-color: #f0f7ff;
+        }
+
+        .btn-grupo {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        /* ESTILOS PARA MENSAJES */
+        .mensaje-exito, .mensaje-error {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .mensaje-exito { background-color: #d4edda; color: #155724; }
+        .mensaje-error { background-color: #f8d7da; color: #721c24; }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .formulario-grupo-inline {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="contenedor-principal">
+        <div id="mensaje-exito" class="mensaje-exito"></div>
+        <div id="mensaje-error" class="mensaje-error"></div>
+
+        <!-- SECCIÓN FORMULARIO PUBLICAR VACANTE -->
+        <section>
+            <div class="seccion-formulario">
+                <h2 class="seccion-titulo">Publicar Nueva Vacante</h2>
+                
+                <form id="formulario-vacante">
+                    <!-- Información básica -->
+                    <div class="formulario-grupo">
+                        <label for="puesto" class="formulario-etiqueta">Puesto *</label>
+                        <input type="text" id="puesto" name="puesto" class="formulario-control" required placeholder="Ej: Desarrollador Full Stack">
+                    </div>
+
+                    <div class="formulario-grupo">
+                        <label for="departamento" class="formulario-etiqueta">Departamento *</label>
+                        <select id="departamento" name="departamento" class="formulario-select" required>
+                            <option value="">Seleccionar departamento</option>
+                            <option value="tecnologia">Tecnología</option>
+                            <option value="marketing">Marketing</option>
+                            <option value="ventas">Ventas</option>
+                            <option value="rrhh">Recursos Humanos</option>
+                            <option value="finanzas">Finanzas</option>
+                            <option value="operaciones">Operaciones</option>
+                        </select>
+                    </div>
+
+                    <div class="formulario-grupo-inline">
+                        <div class="formulario-grupo">
+                            <label for="tipo_contrato" class="formulario-etiqueta">Tipo de Contrato *</label>
+                            <select id="tipo_contrato" name="tipo_contrato" class="formulario-select" required>
+                                <option value="">Seleccionar tipo</option>
+                                <option value="tiempo_completo">Tiempo Completo</option>
+                                <option value="medio_tiempo">Medio Tiempo</option>
+                                <option value="freelance">Freelance</option>
+                                <option value="practicas">Prácticas</option>
+                                <option value="temporal">Temporal</option>
+                            </select>
+                        </div>
+
+                        <div class="formulario-grupo">
+                            <label for="modalidad" class="formulario-etiqueta">Modalidad *</label>
+                            <select id="modalidad" name="modalidad" class="formulario-select" required>
+                                <option value="">Seleccionar modalidad</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="remoto">Remoto</option>
+                                <option value="hibrido">Híbrido</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="formulario-grupo-inline">
+                        <div class="formulario-grupo">
+                            <label for="salario_min" class="formulario-etiqueta">Salario Mínimo *</label>
+                            <input type="number" id="salario_min" name="salario_min" class="formulario-control" required placeholder="Ej: 25000">
+                        </div>
+
+                        <div class="formulario-grupo">
+                            <label for="salario_max" class="formulario-etiqueta">Salario Máximo *</label>
+                            <input type="number" id="salario_max" name="salario_max" class="formulario-control" required placeholder="Ej: 35000">
+                        </div>
+                    </div>
+
+                    <div class="formulario-grupo">
+                        <label for="ubicacion" class="formulario-etiqueta">Ubicación *</label>
+                        <input type="text" id="ubicacion" name="ubicacion" class="formulario-control" required placeholder="Ej: Ciudad de México, México">
+                    </div>
+
+                    <!-- Descripción -->
+                    <div class="formulario-grupo">
+                        <label for="descripcion" class="formulario-etiqueta">Descripción del Puesto *</label>
+                        <textarea id="descripcion" name="descripcion" class="formulario-control formulario-control-textarea" required placeholder="Describe las responsabilidades y funciones del puesto..."></textarea>
+                    </div>
+
+                    <div class="formulario-grupo">
+                        <label for="requisitos" class="formulario-etiqueta">Requisitos *</label>
+                        <textarea id="requisitos" name="requisitos" class="formulario-control formulario-control-textarea" required placeholder="Lista los requisitos mínimos y deseados..."></textarea>
+                    </div>
+
+                    <div class="formulario-grupo">
+                        <label for="beneficios" class="formulario-etiqueta">Beneficios</label>
+                        <textarea id="beneficios" name="beneficios" class="formulario-control formulario-control-textarea" placeholder="Describe los beneficios ofrecidos (seguro médico, vacaciones, etc)..."></textarea>
+                    </div>
+
+                    <!-- Fechas -->
+                    <div class="formulario-grupo">
+                        <label for="fecha_publicacion" class="formulario-etiqueta">Fecha de Publicación *</label>
+                        <input type="date" id="fecha_publicacion" name="fecha_publicacion" class="formulario-control" required>
+                    </div>
+
+                    <!-- Botones -->
+                    <div class="btn-grupo">
+                        <button type="submit" class="btn">Publicar Vacante</button>
+                        <button type="button" class="btn btn-secundario" onclick="cancelar()">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // VARIABLES GLOBALES
+        let vacantes = [];
+
+        // FUNCIONES PARA FORMULARIO
+        function cancelar() {
+            window.location.href = "Misvacantes.html";
+        }
+
+        function mostrarMensaje(tipo, mensaje) {
+            ocultarMensajes();
+            const elementoMensaje = document.getElementById(`mensaje-${tipo}`);
+            elementoMensaje.textContent = mensaje;
+            elementoMensaje.style.display = 'block';
+            
+            setTimeout(() => {
+                elementoMensaje.style.display = 'none';
+            }, 5000);
+        }
+
+        function ocultarMensajes() {
+            document.getElementById('mensaje-exito').style.display = 'none';
+            document.getElementById('mensaje-error').style.display = 'none';
+        }
+
+        function guardarVacante(datos) {
+            // Obtener vacantes existentes
+            const vacantesStr = localStorage.getItem('vacantes');
+            let vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
+            
+            // Crear nueva vacante
+            const nuevaVacante = {
+                id: Date.now(),
+                ...datos,
+                reclutador_id: 1, // ID predeterminado para este ejemplo
+                fecha_creacion: new Date().toISOString(),
+                estado: 'activa',
+                postulaciones: 0
+            };
+            
+            // Agregar vacante
+            vacantes.push(nuevaVacante);
+            
+            // Guardar en localStorage
+            localStorage.setItem('vacantes', JSON.stringify(vacantes));
+            
+            return nuevaVacante;
+        }
+
+        function validarFormulario(datos) {
+            // Validar que el salario mínimo no sea mayor al máximo
+            if (parseFloat(datos.salario_min) > parseFloat(datos.salario_max)) {
+                mostrarMensaje('error', 'El salario mínimo no puede ser mayor al salario máximo');
+                return false;
+            }
+            
+            return true;
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Configurar evento de envío del formulario
+            document.getElementById('formulario-vacante').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Obtener datos del formulario
+                const formData = new FormData(this);
+                const datos = Object.fromEntries(formData.entries());
+                
+                // Validar formulario
+                if (!validarFormulario(datos)) {
+                    return;
+                }
+                
+                // Guardar vacante
+                try {
+                    const vacanteGuardada = guardarVacante(datos);
+                    
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje('exito', `Vacante "${vacanteGuardada.puesto}" publicada correctamente`);
+                    
+                    // Limpiar formulario
+                    setTimeout(() => {
+                        this.reset();
+                        // Redirigir a Misvacantes.html después de un breve retraso
+                        setTimeout(() => {
+                            window.location.href = "Misvacantes.html";
+                        }, 2000);
+                    }, 1000);
+                    
+                } catch (error) {
+                    mostrarMensaje('error', 'Error al publicar la vacante. Inténtalo nuevamente');
+                }
+            });
+            
+            // Establecer fecha de publicación por defecto a hoy
+            document.getElementById('fecha_publicacion').valueAsDate = new Date();
+        });
+    </script>
+</body>
+</html>

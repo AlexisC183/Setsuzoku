@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setsuzoku - Postulaciones Recibidas</title>
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ESTILOS PARA LA BARRA SUPERIOR */
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+            padding-bottom: 40px;
+        }
+
+        /* ESTILOS GENERALES PARA SECCIONES */
+        .contenido-principal {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .seccion_pagina {
+            margin-bottom: 40px;
+        }
+
+        /* ESTILOS PARA POSTULACIONES */
+        .seccion-postulaciones {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .seccion-titulo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .controles-superiores {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .buscador {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .buscador-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .buscador-input:focus {
+            outline: none;
+            border-color: #2A5CAA;
+            box-shadow: 0 0 0 3px rgba(42, 92, 170, 0.1);
+        }
+
+        .filtro-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2A5CAA;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #1e3f7a;
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: #2A5CAA;
+            border: 2px solid #2A5CAA;
+        }
+
+        .btn-secundario:hover {
+            background-color: #f0f7ff;
+        }
+
+        .btn-pequeno {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-success {
+            background-color: #28a745;
+        }
+
+        .btn-success:hover {
+            background-color: #218838;
+        }
+
+        .btn-warning {
+            background-color: #ffc107;
+            color: #333;
+        }
+
+        .btn-warning:hover {
+            background-color: #e0a800;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+        }
+
+        .btn-info:hover {
+            background-color: #138496;
+        }
+
+        /* ESTILOS PARA TARJETAS DE CANDIDATOS */
+        .postulaciones-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .postulacion-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #2A5CAA;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .postulacion-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .postulacion-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .candidato-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2A5CAA;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .candidato-info {
+            flex: 1;
+        }
+
+        .candidato-nombre {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .candidato-email {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .postulacion-vacante {
+            background-color: #e9ecef;
+            padding: 8px 12px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            color: #495057;
+            margin-bottom: 15px;
+        }
+
+        .postulacion-detalle {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .postulacion-etiqueta {
+            color: #666;
+        }
+
+        .postulacion-valor {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .postulacion-estado {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .postulacion-acciones {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+
+        .estado-pendiente {
+            color: #ffc107;
+            font-weight: bold;
+        }
+
+        .estado-revision {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+
+        .estado-entrevista {
+            color: #6f42c1;
+            font-weight: bold;
+        }
+
+        .estado-aceptado {
+            color: #28a745;
+            font-weight: bold;
+        }
+
+        .estado-rechazado {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .estado-contactado {
+            color: #17a2b8;
+            font-weight: bold;
+        }
+
+        /* ESTILOS PARA MENSAJES */
+        .mensaje-exito, .mensaje-error {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .mensaje-exito { background-color: #d4edda; color: #155724; }
+        .mensaje-error { background-color: #f8d7da; color: #721c24; }
+
+        /* ESTILOS PARA MODAL */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-titulo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-pie {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        /* ESTILOS PARA ESTADÍSTICAS */
+        .estadisticas-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .estadistica-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid #4A90E2;
+        }
+
+        .estadistica-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .estadistica-valor {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2A5CAA;
+            margin-bottom: 10px;
+        }
+
+        .estadistica-etiqueta {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .controles-superiores {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .buscador {
+                max-width: 100%;
+            }
+
+            .postulaciones-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contenedor-contenido {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver al panel principal">
+                ←
+            </button>
+        </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <main class="contenido-principal">
+                <div id="mensaje-exito" class="mensaje-exito"></div>
+                <div id="mensaje-error" class="mensaje-error"></div>
+
+                <!-- SECCIÓN DE ESTADÍSTICAS -->
+                <section class="seccion_pagina">
+                    <div class="seccion-postulaciones">
+                        <h2 class="seccion-titulo">Resumen de Postulaciones</h2>
+                        
+                        <div class="estadisticas-container">
+                            <div class="estadistica-card">
+                                <div class="estadistica-valor" id="total-postulaciones">0</div>
+                                <div class="estadistica-etiqueta">Total de Postulaciones</div>
+                            </div>
+                            <div class="estadistica-card">
+                                <div class="estadistica-valor" id="postulaciones-pendientes">0</div>
+                                <div class="estadistica-etiqueta">Pendientes de Revisión</div>
+                            </div>
+                            <div class="estadistica-card">
+                                <div class="estadistica-valor" id="postulaciones-entrevista">0</div>
+                                <div class="estadistica-etiqueta">En Entrevista</div>
+                            </div>
+                            <div class="estadistica-card">
+                                <div class="estadistica-valor" id="postulaciones-aceptadas">0</div>
+                                <div class="estadistica-etiqueta">Aceptadas</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN DE POSTULACIONES -->
+                <section class="seccion_pagina">
+                    <div class="seccion-postulaciones">
+                        <h2 class="seccion-titulo">Postulaciones Recibidas</h2>
+                        
+                        <div class="controles-superiores">
+                            <div class="buscador">
+                                <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar candidatos...">
+                                <button class="btn btn-pequeno" onclick="buscarPostulaciones()">Buscar</button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 10px;">
+                                <select id="filtro-estado" class="filtro-select" onchange="filtrarPostulaciones()">
+                                    <option value="">Todos los estados</option>
+                                    <option value="pendiente">Pendientes</option>
+                                    <option value="revision">En revisión</option>
+                                    <option value="entrevista">Entrevista</option>
+                                    <option value="aceptado">Aceptados</option>
+                                    <option value="rechazado">Rechazados</option>
+                                    <option value="contactado">Contactados</option>
+                                </select>
+                                
+                                <select id="filtro-vacante" class="filtro-select" onchange="filtrarPostulaciones()">
+                                    <option value="">Todas las vacantes</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="postulaciones-grid" id="postulaciones-container">
+                            <!-- Las postulaciones se cargarán dinámicamente aquí -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL PARA CAMBIAR ESTADO -->
+    <div id="modal-estado" class="modal">
+        <div class="modal-contenido">
+            <h3 class="modal-titulo">Cambiar Estado de Postulación</h3>
+            <div class="modal-cuerpo">
+                <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
+                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
+                    <option value="pendiente">Pendiente</option>
+                    <option value="revision">En revisión</option>
+                    <option value="entrevista">Entrevista</option>
+                    <option value="aceptado">Aceptado</option>
+                    <option value="rechazado">Rechazado</option>
+                    <option value="contactado">Contactado</option>
+                </select>
+                
+                <label for="comentario-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Comentario (opcional):</label>
+                <textarea id="comentario-estado" class="buscador-input" style="width: 100%; min-height: 80px; resize: vertical;" placeholder="Agrega un comentario sobre este cambio..."></textarea>
+            </div>
+            <div class="modal-pie">
+                <button class="btn btn-secundario" onclick="cerrarModalEstado()">Cancelar</button>
+                <button class="btn" onclick="confirmarCambioEstado()">Guardar Cambio</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABLES GLOBALES
+        let postulaciones = [];
+        let postulacionIdActual = null;
+        let vacantes = [];
+
+        // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
+        function volverPaginaAnterior() {
+            window.location.href = "IndexReclutador.html";
+        }
+
+        // FUNCIONES PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    if (usuario && usuario.nombre) {
+                        return true;
+                    }
+                } catch (error) {
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            window.location.href = '../index.html';
+            return false;
+        }
+
+        // FUNCIONES PARA POSTULACIONES
+        function cargarDatos() {
+            // Cargar vacantes
+            const vacantesStr = localStorage.getItem('vacantes');
+            vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
+            
+            // Si no hay vacantes, agregar datos de ejemplo
+            if (vacantes.length === 0) {
+                vacantes = [
+                    {
+                        id: 1,
+                        puesto: "Desarrollador Web Full Stack",
+                        departamento: "Tecnología",
+                        ubicacion: "Remoto",
+                        tipo_contrato: "Tiempo completo",
+                        salario: "$25,000 - $35,000",
+                        descripcion: "Buscamos un desarrollador web full stack con experiencia en React y Node.js para unirse a nuestro equipo.",
+                        requisitos: "Experiencia mínima de 3 años en desarrollo web, conocimiento de React, Node.js y bases de datos SQL.",
+                        beneficios: "Seguro médico, días de vacaciones flexibles, oportunidades de crecimiento profesional.",
+                        fecha_publicacion: new Date(Date.now() - 604800000).toISOString(),
+                        estado: "activa",
+                        postulaciones: 5
+                    },
+                    {
+                        id: 2,
+                        puesto: "Diseñador UX/UI",
+                        departamento: "Diseño",
+                        ubicacion: "Híbrido",
+                        tipo_contrato: "Tiempo completo",
+                        salario: "$20,000 - $28,000",
+                        descripcion: "Buscamos un diseñador UX/UI creativo con experiencia en herramientas de diseño moderno.",
+                        requisitos: "Experiencia mínima de 2 años en diseño UX/UI, portafolio sólido, conocimiento de Figma, Sketch o Adobe XD.",
+                        beneficios: "Seguro médico, días de vacaciones flexibles, presupuesto para formación continua.",
+                        fecha_publicacion: new Date(Date.now() - 1209600000).toISOString(),
+                        estado: "activa",
+                        postulaciones: 3
+                    },
+                    {
+                        id: 3,
+                        puesto: "Especialista en Marketing Digital",
+                        departamento: "Marketing",
+                        ubicacion: "Presencial",
+                        tipo_contrato: "Tiempo completo",
+                        salario: "$18,000 - $25,000",
+                        descripcion: "Buscamos un especialista en marketing digital con experiencia en SEO y campañas publicitarias.",
+                        requisitos: "Experiencia mínima de 3 años en marketing digital, conocimiento de SEO, SEM y redes sociales.",
+                        beneficios: "Seguro médico, días de vacaciones flexibles, bonos por desempeño.",
+                        fecha_publicacion: new Date(Date.now() - 1814400000).toISOString(),
+                        estado: "activa",
+                        postulaciones: 4
+                    }
+                ];
+                
+                localStorage.setItem('vacantes', JSON.stringify(vacantes));
+            }
+            
+            // Cargar postulaciones
+            const postulacionesStr = localStorage.getItem('postulaciones');
+            postulaciones = postulacionesStr ? JSON.parse(postulacionesStr) : [];
+            
+            // Si no hay postulaciones, agregar datos de ejemplo
+            if (postulaciones.length === 0) {
+                postulaciones = [
+                    {
+                        id: 1,
+                        vacante_id: 1,
+                        candidato_id: 1,
+                        candidato_nombre: "Juan Pérez",
+                        candidato_email: "juan.perez@email.com",
+                        candidato_telefono: "55-1234-5678",
+                        candidato_experiencia: "5 años en desarrollo web",
+                        candidato_educacion: "Ingeniería en Sistemas",
+                        candidato_direccion: "Calle Falsa 123, Col. Juárez, Tijuana, B.C.",
+                        candidato_habilidades: "JavaScript, React, Node.js, Python, SQL",
+                        candidato_presentacion: "Desarrollador Full Stack con experiencia en React y Node.js. Busco oportunidades donde pueda aplicar mis conocimientos en desarrollo web full stack.",
+                        candidato_salario: "$25,000 - $35,000",
+                        candidato_disponibilidad: "Inmediata",
+                        fecha_postulacion: new Date(Date.now() - 86400000).toISOString(),
+                        estado: "revision",
+                        comentario: "Perfil interesante, experiencia relevante en React y Node.js. Buen dominio de patrones de diseño y arquitectura de software.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 2,
+                        vacante_id: 1,
+                        candidato_id: 2,
+                        candidato_nombre: "María González",
+                        candidato_email: "maria.gonzalez@email.com",
+                        candidato_telefono: "55-8765-4321",
+                        candidato_experiencia: "3 años en UX/UI",
+                        candidato_educacion: "Diseño Gráfico",
+                        candidato_direccion: "Av. Revolución 456, Col. Libertad, Tijuana, B.C.",
+                        candidato_habilidades: "Figma, Adobe Creative Suite, Sketch, Principle, Framer",
+                        candidato_presentacion: "Diseñadora UX/UI creativa con experiencia en herramientas de diseño moderno. Especializada en diseño de interfaces intuitivas y experiencia de usuario.",
+                        candidato_salario: "$20,000 - $28,000",
+                        candidato_disponibilidad: "2 semanas",
+                        fecha_postulacion: new Date(Date.now() - 172800000).toISOString(),
+                        estado: "entrevista",
+                        comentario: "Portafolio sólido con proyectos de diseño de interfaces. Buen balance entre estética y funcionalidad.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 3,
+                        vacante_id: 1,
+                        candidato_id: 3,
+                        candidato_nombre: "Carlos Rodríguez",
+                        candidato_email: "carlos.rodriguez@email.com",
+                        candidato_telefono: "55-2468-1357",
+                        candidato_experiencia: "4 años en diseño frontend",
+                        candidato_educacion: "Licenciatura en Diseño",
+                        candidato_direccion: "Calle Principal 789, Zona Centro, Tijuana, B.C.",
+                        candidato_habilidades: "HTML, CSS, JavaScript, Vue.js, React, Bootstrap",
+                        candidato_presentacion: "Desarrollador frontend con experiencia en frameworks modernos. Conocimientos sólidos en responsive design y desarrollo de aplicaciones web.",
+                        candidato_salario: "$22,000 - $30,000",
+                        candidato_disponibilidad: "Inmediata",
+                        fecha_postulacion: new Date(Date.now() - 259200000).toISOString(),
+                        estado: "aceptado",
+                        comentario: "Excelente candidato con habilidades técnicas y buen portafolio. Aceptado para el puesto de Desarrollador Frontend.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 4,
+                        vacante_id: 2,
+                        candidato_id: 4,
+                        candidato_nombre: "Ana Martínez",
+                        candidato_email: "ana.martinez@email.com",
+                        candidato_telefono: "55-3456-7890",
+                        candidato_experiencia: "6 años en marketing digital",
+                        candidato_educacion: "Licenciatura en Mercadotecnia",
+                        candidato_direccion: "Calle Comercio 234, Zona Río, Tijuana, B.C.",
+                        candidato_habilidades: "SEO, SEM, Google Analytics, Facebook Ads, Google Ads, Mailchimp",
+                        candidato_presentacion: "Especialista en marketing digital con experiencia en SEO y campañas publicitarias. Gestión de campañas exitosas con ROI medible.",
+                        candidato_salario: "$18,000 - $25,000",
+                        candidato_disponibilidad: "1 mes",
+                        fecha_postulacion: new Date(Date.now() - 345600000).toISOString(),
+                        estado: "contactado",
+                        comentario: "Excelente perfil con experiencia en marketing digital. Contactado para coordinar entrevista.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 5,
+                        vacante_id: 2,
+                        candidato_id: 5,
+                        candidato_nombre: "Luis Hernández",
+                        candidato_email: "luis.hernandez@email.com",
+                        candidato_telefono: "55-9876-2345",
+                        candidato_experiencia: "8 años en recursos humanos",
+                        candidato_educacion: "Maestría en Recursos Humanos",
+                        candidato_direccion: "Calle Empresarial 567, Zona Zona Centro, Tijuana, B.C.",
+                        candidato_habilidades: "Reclutamiento, selección, evaluación, capacitación, gestión de personal",
+                        candidato_presentacion: "Profesional en recursos humanos con experiencia en reclutamiento técnico y gestión de talento. Especializado en evaluación por competencias.",
+                        candidato_salario: "$35,000 - $45,000",
+                        candidato_disponibilidad: "Inmediata",
+                        fecha_postulacion: new Date(Date.now() - 432000000).toISOString(),
+                        estado: "pendiente",
+                        comentario: "Candidato senior con amplia experiencia en RRHH. Busca posición similar.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 6,
+                        vacante_id: 3,
+                        candidato_id: 6,
+                        candidato_nombre: "Sofía López",
+                        candidato_email: "sofia.lopez@email.com",
+                        candidato_telefono: "55-5555-1234",
+                        candidato_experiencia: "3 años en contabilidad",
+                        candidato_educacion: "Contador Público",
+                        candidato_direccion: "Calle Fiscalía 890, Zona Zona Centro, Tijuana, B.C.",
+                        candidato_habilidades: "Excel, SAP, análisis financiero, contabilidad de costos, Excel, PowerPoint",
+                        candidato_presentacion: "Contador público con experiencia en SAP y análisis financiero. Certificación en contabilidad de costos.",
+                        candidato_salario: "$25,000 - $35,000",
+                        candidato_disponibilidad: "2 semanas",
+                        fecha_postulacion: new Date(Date.now() - 86400000).toISOString(),
+                        estado: "pendiente",
+                        comentario: "Reciente graduado con excelentes conocimientos técnicos.",
+                        cv_url: "#"
+                    },
+                    {
+                        id: 7,
+                        vacante_id: 3,
+                        candidato_id: 7,
+                        candidato_nombre: "Roberto Silva",
+                        candidato_email: "roberto.silva@email.com",
+                        candidato_telefono: "55-2345-6789",
+                        candidato_experiencia: "10 años en desarrollo backend",
+                        candidato_educacion: "Ingeniería en Sistemas Computacionales",
+                        candidato_direccion: "Calle Software 123, Zona Zona Tecnológica, Tijuana, B.C.",
+                        candidato_habilidades: "Java, Python, C++, SQL, Docker, Kubernetes, AWS, Microservicios",
+                        candidato_presentacion: "Arquitecto de software con experiencia en desarrollo backend y microservicios. Especializado en arquitectura de sistemas escalables.",
+                        candidato_salario: "$45,000 - $65,000",
+                        candidato_disponibilidad: "1 mes",
+                        fecha_postulacion: new Date(Date.now() - 129600000).toISOString(),
+                        estado: "revision",
+                        comentario: "Perfil técnico sólido con experiencia en arquitectura de sistemas. Considerando para posición senior.",
+                        cv_url: "#"
+                    }
+                ];
+                
+                localStorage.setItem('postulaciones', JSON.stringify(postulaciones));
+            }
+            
+            // Cargar filtro de vacantes
+            cargarFiltroVacantes();
+            
+            // Actualizar estadísticas
+            actualizarEstadisticas();
+            
+            // Renderizar postulaciones
+            renderizarPostulaciones();
+        }
+
+        function cargarFiltroVacantes() {
+            const filtroVacante = document.getElementById('filtro-vacante');
+            
+            // Obtener vacantes únicas de las postulaciones
+            const vacantesUnicas = [...new Set(postulaciones.map(p => p.vacante_id))];
+            
+            let html = '<option value="">Todas las vacantes</option>';
+            vacantesUnicas.forEach(vacanteId => {
+                const vacante = vacantes.find(v => v.id === vacanteId);
+                if (vacante) {
+                    html += `<option value="${vacanteId}">${vacante.puesto}</option>`;
+                }
+            });
+            
+            filtroVacante.innerHTML = html;
+        }
+
+        function actualizarEstadisticas() {
+            const totalPostulaciones = postulaciones.length;
+            const postulacionesPendientes = postulaciones.filter(p => p.estado === 'pendiente').length;
+            const postulacionesEntrevista = postulaciones.filter(p => p.estado === 'entrevista').length;
+            const postulacionesAceptadas = postulaciones.filter(p => p.estado === 'aceptado').length;
+            
+            document.getElementById('total-postulaciones').textContent = totalPostulaciones;
+            document.getElementById('postulaciones-pendientes').textContent = postulacionesPendientes;
+            document.getElementById('postulaciones-entrevista').textContent = postulacionesEntrevista;
+            document.getElementById('postulaciones-aceptadas').textContent = postulacionesAceptadas;
+        }
+
+        function renderizarPostulaciones(postulacionesFiltradas = null) {
+            const container = document.getElementById('postulaciones-container');
+            const postulacionesAMostrar = postulacionesFiltradas || postulaciones;
+            
+            if (postulacionesAMostrar.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No se encontraron postulaciones</div>';
+                return;
+            }
+            
+            let html = '';
+            postulacionesAMostrar.forEach(postulacion => {
+                const vacante = vacantes.find(v => v.id === postulacion.vacante_id);
+                const vacanteNombre = vacante ? vacante.puesto : 'Vacante no encontrada';
+                const iniciales = postulacion.candidato_nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+                const estadoClase = `estado-${postulacion.estado}`;
+                const estadoTexto = postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1);
+                
+                html += `
+                    <div class="postulacion-card">
+                        <div class="postulacion-header">
+                            <div class="candidato-avatar">${iniciales}</div>
+                            <div class="candidato-info">
+                                <div class="candidato-nombre">${postulacion.candidato_nombre}</div>
+                                <div class="candidato-email">${postulacion.candidato_email}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="postulacion-vacante">
+                            <strong>Vacante:</strong> ${vacanteNombre}
+                        </div>
+                        
+                        <div class="postulacion-detalle">
+                            <span class="postulacion-etiqueta">Teléfono:</span>
+                            <span class="postulacion-valor">${postulacion.candidato_telefono}</span>
+                        </div>
+                        
+                        <div class="postulacion-detalle">
+                            <span class="postulacion-etiqueta">Experiencia:</span>
+                            <span class="postulacion-valor">${postulacion.candidato_experiencia}</span>
+                        </div>
+                        
+                        <div class="postulacion-detalle">
+                            <span class="postulacion-etiqueta">Educación:</span>
+                            <span class="postulacion-valor">${postulacion.candidato_educacion}</span>
+                        </div>
+                        
+                        <div class="postulacion-detalle">
+                            <span class="postulacion-etiqueta">Fecha:</span>
+                            <span class="postulacion-valor">${formatearFecha(postulacion.fecha_postulacion)}</span>
+                        </div>
+                        
+                        <div class="postulacion-estado ${estadoClase}">
+                            ${estadoTexto}
+                        </div>
+                        
+                        ${postulacion.comentario ? `
+                            <div style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-radius: 4px; font-size: 0.9rem; color: #666;">
+                                <strong>Comentario:</strong> ${postulacion.comentario}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="postulacion-acciones">
+                            <button class="btn btn-pequeno btn-secundario" onclick="abrirModalEstado(${postulacion.id})">Cambiar Estado</button>
+                            <button class="btn btn-pequeno" onclick="descargarCV(${postulacion.id})">Descargar CV</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function buscarPostulaciones() {
+            const termino = document.getElementById('buscador-input').value.toLowerCase();
+            
+            if (!termino) {
+                renderizarPostulaciones();
+                return;
+            }
+            
+            const postulacionesFiltradas = postulaciones.filter(postulacion => 
+                postulacion.candidato_nombre.toLowerCase().includes(termino) ||
+                postulacion.candidato_email.toLowerCase().includes(termino) ||
+                postulacion.candidato_experiencia.toLowerCase().includes(termino) ||
+                postulacion.candidato_educacion.toLowerCase().includes(termino)
+            );
+            
+            renderizarPostulaciones(postulacionesFiltradas);
+        }
+
+        function filtrarPostulaciones() {
+            const estado = document.getElementById('filtro-estado').value;
+            const vacanteId = document.getElementById('filtro-vacante').value;
+            
+            let postulacionesFiltradas = postulaciones;
+            
+            if (estado) {
+                postulacionesFiltradas = postulacionesFiltradas.filter(p => p.estado === estado);
+            }
+            
+            if (vacanteId) {
+                postulacionesFiltradas = postulacionesFiltradas.filter(p => p.vacante_id == vacanteId);
+            }
+            
+            renderizarPostulaciones(postulacionesFiltradas);
+        }
+
+        function abrirModalEstado(id) {
+            postulacionIdActual = id;
+            const postulacion = postulaciones.find(p => p.id === id);
+            
+            if (postulacion) {
+                document.getElementById('nuevo-estado').value = postulacion.estado;
+                document.getElementById('comentario-estado').value = postulacion.comentario || '';
+            }
+            
+            document.getElementById('modal-estado').style.display = 'block';
+        }
+
+        function cerrarModalEstado() {
+            postulacionIdActual = null;
+            document.getElementById('modal-estado').style.display = 'none';
+        }
+
+        function confirmarCambioEstado() {
+            if (!postulacionIdActual) return;
+            
+            const nuevoEstado = document.getElementById('nuevo-estado').value;
+            const comentario = document.getElementById('comentario-estado').value;
+            
+            try {
+                // Actualizar postulación
+                const postulacionIndex = postulaciones.findIndex(p => p.id === postulacionIdActual);
+                if (postulacionIndex !== -1) {
+                    const estadoAnterior = postulaciones[postulacionIndex].estado;
+                    postulaciones[postulacionIndex].estado = nuevoEstado;
+                    postulaciones[postulacionIndex].comentario = comentario;
+                    
+                    // Actualizar localStorage
+                    localStorage.setItem('postulaciones', JSON.stringify(postulaciones));
+                    
+                    // Actualizar estadísticas
+                    actualizarEstadisticas();
+                    
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje('exito', 'Estado actualizado correctamente');
+                    
+                    // Recargar la lista
+                    renderizarPostulaciones();
+                    
+                    // Cerrar modal
+                    cerrarModalEstado();
+                }
+            } catch (error) {
+                mostrarMensaje('error', 'Error al actualizar el estado. Inténtalo nuevamente');
+            }
+        }
+
+        function descargarCV(id) {
+            mostrarMensaje('exito', `Descargando CV del candidato ${id}`);
+        }
+
+        function mostrarMensaje(tipo, mensaje) {
+            const elementoMensaje = document.getElementById(`mensaje-${tipo}`);
+            elementoMensaje.textContent = mensaje;
+            elementoMensaje.style.display = 'block';
+            
+            setTimeout(() => {
+                elementoMensaje.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatearFecha(fechaISO) {
+            const fecha = new Date(fechaISO);
+            const ahora = new Date();
+            const diferencia = ahora - fecha;
+            
+            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
+                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            const ayer = new Date(ahora);
+            ayer.setDate(ayer.getDate() - 1);
+            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
+                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            if (diferencia < 604800000) {
+                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
+            }
+            
+            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            verificarSesion();
+            
+            // Cargar datos
+            cargarDatos();
+            
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+            
+            // Configurar evento de búsqueda con Enter
+            document.getElementById('buscador-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    buscarPostulaciones();
+                }
+            });
+            
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modalEstado = document.getElementById('modal-estado');
+                
+                if (event.target === modalEstado) {
+                    cerrarModalEstado();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setsuzoku - Buscar Candidatos</title>
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ESTILOS PARA LA BARRA SUPERIOR */
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+            padding-bottom: 40px;
+        }
+
+        /* ESTILOS GENERALES PARA SECCIONES */
+        .contenido-principal {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .seccion_pagina {
+            margin-bottom: 40px;
+        }
+
+        /* ESTILOS PARA BÚSQUEDA Y FILTROS */
+        .seccion-busqueda {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .seccion-titulo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .filtros-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .filtro {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .etiqueta-filtro {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .campo-filtro {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .campo-filtro:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2A5CAA;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #1e3f7a;
+        }
+
+        .btn-secundario {
+            background-color: #6c757d;
+        }
+
+        .btn-secundario:hover {
+            background-color: #5a6268;
+        }
+
+        /* ESTILOS PARA LA LISTA DE CANDIDATOS */
+        .candidatos-lista {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .candidato-item {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #2A5CAA;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .candidato-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .candidato-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background-color: #2A5CAA;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            flex-shrink: 0; /* Evita que el avatar se encoja */
+        }
+
+        .candidato-info {
+            flex-grow: 1; /* Ocupa el espacio disponible */
+        }
+
+        .candidato-nombre {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .candidato-email {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .candidato-detalles {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .candidato-detalles span {
+            margin-right: 15px;
+        }
+        
+        .candidato-habilidades {
+            margin-top: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 5px;
+        }
+
+        .habilidad-tag {
+            display: inline-block;
+            background-color: #e9ecef;
+            color: #495057;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+        }
+
+        .candidato-acciones {
+            flex-shrink: 0; /* Evita que el botón se encoja */
+        }
+        
+        /* ESTILOS PARA MODAL DE DETALLES */
+        .modal-detalles {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido-detalles {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-titulo-detalles {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo-detalles {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-pie-detalles {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .info-grupo {
+            margin-bottom: 15px;
+        }
+
+        .info-etiqueta {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .info-valor {
+            color: #666;
+        }
+
+        .info-texto {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .mensaje-vacio {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.1rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .filtros-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .candidato-item {
+                flex-direction: column;
+                align-items: flex-start;
+                text-align: center;
+            }
+
+            .candidato-detalles {
+                text-align: left;
+            }
+
+            .candidato-detalles span {
+                display: block;
+                margin-bottom: 5px;
+            }
+
+            .candidato-acciones {
+                width: 100%;
+                margin-top: 15px;
+            }
+
+            .candidato-acciones .btn {
+                width: 100%;
+            }
+
+            .contenedor-contenido {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver al panel principal">
+                ←
+            </button>
+        </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <main class="contenido-principal">
+                <!-- SECCIÓN DE BÚSQUEDA Y FILTROS -->
+                <section class="seccion_pagina">
+                    <div class="seccion-busqueda">
+                        <h2 class="seccion-titulo">Buscar Candidatos</h2>
+                        
+                        <div class="filtros-grid">
+                            <div class="filtro">
+                                <label class="etiqueta-filtro" for="buscar-nombre">Buscar por Nombre o Email</label>
+                                <input type="text" id="buscar-nombre" class="campo-filtro" placeholder="Ej: Juan Pérez">
+                            </div>
+                            
+                            <div class="filtro">
+                                <label class="etiqueta-filtro" for="filtrar-habilidad">Filtrar por Habilidad</label>
+                                <input type="text" id="filtrar-habilidad" class="campo-filtro" placeholder="Ej: JavaScript">
+                            </div>
+
+                            <div class="filtro">
+                                <label class="etiqueta-filtro" for="filtrar-ubicacion">Filtrar por Ubicación</label>
+                                <input type="text" id="filtrar-ubicacion" class="campo-filtro" placeholder="Ej: Tijuana">
+                            </div>
+                            
+                            <div class="filtro">
+                                <label class="etiqueta-filtro" for="filtrar-experiencia">Experiencia Mínima (años)</label>
+                                <input type="number" id="filtrar-experiencia" class="campo-filtro" placeholder="Ej: 3" min="0">
+                            </div>
+
+                            <div class="filtro">
+                                <label class="etiqueta-filtro" for="filtrar-educacion">Nivel Educativo</label>
+                                <select id="filtrar-educacion" class="campo-filtro">
+                                    <option value="">Todos los niveles</option>
+                                    <option value="Secundaria">Secundaria</option>
+                                    <option value="Preparatoria">Preparatoria</option>
+                                    <option value="Licenciatura">Licenciatura</option>
+                                    <option value="Maestría">Maestría</option>
+                                    <option value="Doctorado">Doctorado</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div style="display: flex; gap: 10px;">
+                            <button class="btn" onclick="aplicarFiltros()">Aplicar Filtros</button>
+                            <button class="btn btn-secundario" onclick="limpiarFiltros()">Limpiar Filtros</button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECCIÓN DE RESULTADOS -->
+                <section class="seccion_pagina">
+                    <div class="seccion-busqueda">
+                        <h2 class="seccion-titulo">Resultados de la Búsqueda</h2>
+                        <div class="candidatos-lista" id="candidatos-container">
+                            <!-- Los candidatos se cargarán dinámicamente aquí -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL PARA VER DETALLES -->
+    <div id="modal-detalles" class="modal-detalles">
+        <div class="modal-contenido-detalles">
+            <h3 class="modal-titulo-detalles">Detalles del Candidato</h3>
+            <div class="modal-cuerpo-detalles">
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Nombre:</div>
+                    <div class="info-valor" id="detalles-nombre"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Email:</div>
+                    <div class="info-valor" id="detalles-email"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Teléfono:</div>
+                    <div class="info-valor" id="detalles-telefono"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Ubicación:</div>
+                    <div class="info-valor" id="detalles-ubicacion"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Experiencia:</div>
+                    <div class="info-valor" id="detalles-experiencia"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Educación:</div>
+                    <div class="info-valor" id="detalles-educacion"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Habilidades:</div>
+                    <div class="info-valor" id="detalles-habilidades"></div>
+                </div>
+            </div>
+            <div class="modal-pie-detalles">
+                <button class="btn btn-secundario" onclick="cerrarModalDetalles()">Cerrar</button>
+                <button class="btn" onclick="descargarCV()">Descargar CV</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABLES GLOBALES
+        let candidatos = [];
+        let candidatoIdDetalles = null;
+
+        // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
+        function volverPaginaAnterior() {
+            window.location.href = "IndexReclutador.html";
+        }
+
+        // FUNCIONES PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    if (usuario && usuario.nombre) {
+                        return true;
+                    }
+                } catch (error) {
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            window.location.href = '../index.html';
+            return false;
+        }
+
+        // FUNCIONES PARA CANDIDATOS
+        function cargarDatos() {
+            const candidatosStr = localStorage.getItem('candidatos');
+            candidatos = candidatosStr ? JSON.parse(candidatosStr) : [];
+            
+            // Si no hay candidatos, agregar datos de ejemplo
+            if (candidatos.length === 0) {
+                candidatos = [
+                    {
+                        id: 1,
+                        nombre: "Ana Sofía Ramírez",
+                        email: "ana.ramirez@email.com",
+                        telefono: "664-123-4567",
+                        ubicacion: "Tijuana, B.C.",
+                        experiencia_anios: 5,
+                        experiencia_texto: "5 años desarrollando aplicaciones web full stack.",
+                        educacion: "Licenciatura",
+                        habilidades: ["JavaScript", "React", "Node.js", "MongoDB", "CSS"]
+                    },
+                    {
+                        id: 2,
+                        nombre: "Carlos Eduardo Vargas",
+                        email: "carlos.vargas@email.com",
+                        telefono: "664-987-6543",
+                        ubicacion: "Mexicali, B.C.",
+                        experiencia_anios: 8,
+                        experiencia_texto: "Más de 8 años de experiencia en la gestión de proyectos de tecnología y liderazgo de equipos de desarrollo.",
+                        educacion: "Maestría",
+                        habilidades: ["Gestión de Proyectos", "Agile", "Scrum", "Liderazgo", "Comunicación"]
+                    },
+                    {
+                        id: 3,
+                        nombre: "María Fernanda López",
+                        email: "mf.lopez@email.com",
+                        telefono: "664-555-4433",
+                        ubicacion: "Ensenada, B.C.",
+                        experiencia_anios: 3,
+                        experiencia_texto: "3 años de experiencia en el diseño de experiencias de usuario para aplicaciones móviles y web.",
+                        educacion: "Licenciatura",
+                        habilidades: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "Prototipado"]
+                    },
+                    {
+                        id: 4,
+                        nombre: "Jorge Alberto Hernández",
+                        email: "jorge.hdz@email.com",
+                        telefono: "664-222-1100",
+                        ubicacion: "Tijuana, B.C.",
+                        experiencia_anios: 12,
+                        experiencia_texto: "12 años de experiencia en ciberseguridad, especializado en pruebas de penetración y auditoría de sistemas.",
+                        educacion: "Maestría",
+                        habilidades: ["Ciberseguridad", "Ethical Hacking", "Análisis de Riesgos", "Python", "Linux"]
+                    },
+                    {
+                        id: 5,
+                        nombre: "Lucía Gutiérrez",
+                        email: "lucia.gutierrez@email.com",
+                        telefono: "664-333-2211",
+                        ubicacion: "Tijuana, B.C.",
+                        experiencia_anios: 6,
+                        experiencia_texto: "6 años en marketing digital, con enfoque en SEO, SEM y estrategias de contenido.",
+                        educacion: "Licenciatura",
+                        habilidades: ["SEO", "SEM", "Google Analytics", "Redes Sociales", "Copywriting"]
+                    }
+                ];
+                
+                localStorage.setItem('candidatos', JSON.stringify(candidatos));
+            }
+            
+            // Renderizar candidatos inicialmente
+            renderizarCandidatos();
+        }
+
+        function renderizarCandidatos(candidatosFiltrados = null) {
+            const container = document.getElementById('candidatos-container');
+            const candidatosAMostrar = candidatosFiltrados || candidatos;
+            
+            if (candidatosAMostrar.length === 0) {
+                container.innerHTML = '<div class="mensaje-vacio">No se encontraron candidatos con los criterios seleccionados.</div>';
+                return;
+            }
+            
+            let html = '';
+            candidatosAMostrar.forEach(candidato => {
+                const iniciales = candidato.nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+                
+                html += `
+                    <div class="candidato-item">
+                        <div class="candidato-avatar">${iniciales}</div>
+                        <div class="candidato-info">
+                            <div class="candidato-nombre">${candidato.nombre}</div>
+                            <div class="candidato-email">${candidato.email}</div>
+                            <div class="candidato-detalles">
+                                <span><strong>Ubicación:</strong> ${candidato.ubicacion}</span>
+                                <span><strong>Experiencia:</strong> ${candidato.experiencia_texto}</span>
+                            </div>
+                            <div class="candidato-habilidades">
+                                ${candidato.habilidades.map(habilidad => `<span class="habilidad-tag">${habilidad}</span>`).join('')}
+                            </div>
+                        </div>
+                        <div class="candidato-acciones">
+                            <button class="btn btn-pequeno" onclick="verDetalles(${candidato.id})">Ver Detalles</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function aplicarFiltros() {
+            const nombre = document.getElementById('buscar-nombre').value.toLowerCase();
+            const habilidad = document.getElementById('filtrar-habilidad').value.toLowerCase();
+            const ubicacion = document.getElementById('filtrar-ubicacion').value.toLowerCase();
+            const experienciaMinima = parseInt(document.getElementById('filtrar-experiencia').value) || 0;
+            const educacion = document.getElementById('filtrar-educacion').value;
+
+            const candidatosFiltrados = candidatos.filter(candidato => {
+                const coincideNombre = !nombre || candidato.nombre.toLowerCase().includes(nombre) || candidato.email.toLowerCase().includes(nombre);
+                const coincideHabilidad = !habilidad || candidato.habilidades.some(h => h.toLowerCase().includes(habilidad));
+                const coincideUbicacion = !ubicacion || candidato.ubicacion.toLowerCase().includes(ubicacion);
+                const cumpleExperiencia = candidato.experiencia_anios >= experienciaMinima;
+                const coincideEducacion = !educacion || candidato.educacion === educacion;
+
+                return coincideNombre && coincideHabilidad && coincideUbicacion && cumpleExperiencia && coincideEducacion;
+            });
+
+            renderizarCandidatos(candidatosFiltrados);
+        }
+
+        function limpiarFiltros() {
+            document.getElementById('buscar-nombre').value = '';
+            document.getElementById('filtrar-habilidad').value = '';
+            document.getElementById('filtrar-ubicacion').value = '';
+            document.getElementById('filtrar-experiencia').value = '';
+            document.getElementById('filtrar-educacion').value = '';
+            
+            renderizarCandidatos();
+        }
+
+        function verDetalles(id) {
+            candidatoIdDetalles = id;
+            const candidato = candidatos.find(c => c.id === id);
+            
+            if (candidato) {
+                document.getElementById('detalles-nombre').textContent = candidato.nombre;
+                document.getElementById('detalles-email').textContent = candidato.email;
+                document.getElementById('detalles-telefono').textContent = candidato.telefono;
+                document.getElementById('detalles-ubicacion').textContent = candidato.ubicacion;
+                document.getElementById('detalles-experiencia').textContent = candidato.experiencia_texto;
+                document.getElementById('detalles-educacion').textContent = candidato.educacion;
+                document.getElementById('detalles-habilidades').textContent = candidato.habilidades.join(', ');
+                
+                document.getElementById('modal-detalles').style.display = 'block';
+            }
+        }
+
+        function cerrarModalDetalles() {
+            candidatoIdDetalles = null;
+            document.getElementById('modal-detalles').style.display = 'none';
+        }
+
+        function descargarCV() {
+            if (candidatoIdDetalles) {
+                const candidato = candidatos.find(c => c.id === candidatoIdDetalles);
+                alert(`Descargando CV para ${candidato.nombre}. (Función de ejemplo)`);
+            }
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            verificarSesion();
+            
+            // Cargar datos de candidatos
+            cargarDatos();
+            
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+            
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modalDetalles = document.getElementById('modal-detalles');
+                if (event.target === modalDetalles) {
+                    cerrarModalDetalles();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

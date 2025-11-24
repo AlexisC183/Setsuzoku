@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setsuzoku - Mis Vacantes</title>
+    <link rel="stylesheet" href="../../css/fuentes.css">
+
+    <style>
+        /* ESTILOS CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            color: #333333;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* ESTILOS PARA LA BARRA SUPERIOR */
+        .barra-superior {
+            background-color: #2c3e50;
+            padding: 0.8rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            z-index: 1000;
+        }
+
+        .contenedor-izquierdo {
+            display: flex;
+            align-items: center;
+        }
+
+        .contenedor-central {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .boton-volver {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+            transition: background-color 0.2s;
+        }
+
+        .boton-volver:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .logo {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .contenedor-principal {
+            display: flex;
+            flex: 1;
+            margin-top: 60px;
+            position: relative;
+        }
+
+        .contenedor-contenido {
+            flex: 1;
+            padding: 20px;
+            width: 100%;
+            padding-bottom: 40px;
+        }
+
+        /* ESTILOS GENERALES PARA SECCIONES */
+        .contenido-principal {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .seccion_pagina {
+            margin-bottom: 40px;
+        }
+
+        /* ESTILOS PARA VACANTES */
+        .seccion-vacantes {
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .seccion-titulo {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: #2A5CAA;
+            margin-bottom: 20px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .controles-superiores {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .buscador {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .buscador-input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .buscador-input:focus {
+            outline: none;
+            border-color: #2A5CAA;
+            box-shadow: 0 0 0 3px rgba(42, 92, 170, 0.1);
+        }
+
+        .filtro-select {
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2A5CAA;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #1e3f7a;
+        }
+
+        .btn-secundario {
+            background-color: transparent;
+            color: #2A5CAA;
+            border: 2px solid #2A5CAA;
+        }
+
+        .btn-secundario:hover {
+            background-color: #f0f7ff;
+        }
+
+        .btn-pequeno {
+            padding: 6px 12px;
+            font-size: 0.85rem;
+        }
+
+        .btn-danger {
+            background-color: #dc3545;
+        }
+
+        .btn-danger:hover {
+            background-color: #c82333;
+        }
+
+        /* ESTILOS PARA TARJETAS DE VACANTES */
+        .vacantes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .vacante-card {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            border-left: 4px solid #2A5CAA;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .vacante-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .vacante-titulo {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .vacante-departamento {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+        }
+
+        .vacante-info {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .vacante-dato {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .vacante-estadisticas {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .estadistica-item {
+            text-align: center;
+        }
+
+        .estadistica-valor {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2A5CAA;
+        }
+
+        .estadistica-etiqueta {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        .vacante-acciones {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* ESTILOS PARA MENSAJES */
+        .mensaje-exito, .mensaje-error {
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+        .mensaje-exito { background-color: #d4edda; color: #155724; }
+        .mensaje-error { background-color: #f8d7da; color: #721c24; }
+
+        /* ESTILOS PARA MODALES */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido {
+            background-color: white;
+            margin: 10% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal-titulo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-pie {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+        
+        /* ESTILOS PARA MODAL DE DETALLES */
+        .modal-detalles {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido-detalles {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-titulo-detalles {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo-detalles {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .modal-pie-detalles {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .info-grupo {
+            margin-bottom: 15px;
+        }
+
+        .info-etiqueta {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .info-valor {
+            color: #666;
+        }
+
+        .info-texto {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .controles-superiores {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .buscador {
+                max-width: 100%;
+            }
+
+            .vacantes-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contenedor-contenido {
+                padding: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- BARRA SUPERIOR -->
+    <nav class="barra-superior">
+        <div class="contenedor-izquierdo">
+            <button class="boton-volver" id="boton-volver" title="Volver al panel principal">
+                ←
+            </button>
+        </div>
+        <div class="contenedor-central">
+            <span class="logo">Setsuzoku</span>
+        </div>
+    </nav>
+
+    <div class="contenedor-principal">
+        <!-- CONTENEDOR DE CONTENIDO -->
+        <div class="contenedor-contenido" id="contenedor-contenido">
+            <main class="contenido-principal">
+                <div id="mensaje-exito" class="mensaje-exito"></div>
+                <div id="mensaje-error" class="mensaje-error"></div>
+
+                <!-- SECCIÓN DE VACANTES -->
+                <section class="seccion_pagina">
+                    <div class="seccion-vacantes">
+                        <h2 class="seccion-titulo">Mis Vacantes</h2>
+                        
+                        <div class="controles-superiores">
+                            <div class="buscador">
+                                <input type="text" id="buscador-input" class="buscador-input" placeholder="Buscar vacantes...">
+                                <button class="btn btn-pequeno" onclick="buscarVacantes()">Buscar</button>
+                            </div>
+                            
+                            <div style="display: flex; gap: 10px;">
+                                <select id="filtro-estado" class="filtro-select" onchange="filtrarVacantes()">
+                                    <option value="">Todos los estados</option>
+                                    <option value="activa">Activas</option>
+                                    <option value="pausada">Pausadas</option>
+                                    <option value="cerrada">Cerradas</option>
+                                </select>
+                                
+                                <select id="filtro-departamento" class="filtro-select" onchange="filtrarVacantes()">
+                                    <option value="">Todos los departamentos</option>
+                                    <option value="tecnologia">Tecnología</option>
+                                    <option value="marketing">Marketing</option>
+                                    <option value="ventas">Ventas</option>
+                                    <option value="rrhh">Recursos Humanos</option>
+                                    <option value="finanzas">Finanzas</option>
+                                    <option value="operaciones">Operaciones</option>
+                                </select>
+                                
+                                <a href="Publicarvacante.html" class="btn">+ Nueva Vacante</a>
+                            </div>
+                        </div>
+
+                        <div class="vacantes-grid" id="vacantes-container">
+                            <!-- Las vacantes se cargarán dinámicamente aquí -->
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- MODAL PARA VER DETALLES -->
+    <div id="modal-detalles" class="modal-detalles">
+        <div class="modal-contenido-detalles">
+            <h3 class="modal-titulo-detalles">Detalles de la Vacante</h3>
+            <div class="modal-cuerpo-detalles">
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Puesto:</div>
+                    <div class="info-valor" id="detalles-puesto"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Departamento:</div>
+                    <div class="info-valor" id="detalles-departamento"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Tipo de Contrato:</div>
+                    <div class="info-valor" id="detalles-tipo-contrato"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Modalidad:</div>
+                    <div class="info-valor" id="detalles-modalidad"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Salario:</div>
+                    <div class="info-valor" id="detalles-salario"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Ubicación:</div>
+                    <div class="info-valor" id="detalles-ubicacion"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Descripción:</div>
+                    <div class="info-texto" id="detalles-descripcion"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Requisitos:</div>
+                    <div class="info-texto" id="detalles-requisitos"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Beneficios:</div>
+                    <div class="info-texto" id="detalles-beneficios"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Fecha de Publicación:</div>
+                    <div class="info-valor" id="detalles-fecha-publicacion"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Fecha de Cierre:</div>
+                    <div class="info-valor" id="detalles-fecha-cierre"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Estado:</div>
+                    <div class="info-valor" id="detalles-estado"></div>
+                </div>
+                
+                <div class="info-grupo">
+                    <div class="info-etiqueta">Postulaciones:</div>
+                    <div class="info-valor" id="detalles-postulaciones"></div>
+                </div>
+            </div>
+            <div class="modal-pie-detalles">
+                <button class="btn btn-secundario" onclick="cerrarModalDetalles()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA EDITAR ESTADO -->
+    <div id="modal-editar-estado" class="modal">
+        <div class="modal-contenido">
+            <h3 class="modal-titulo">Cambiar Estado de la Vacante</h3>
+            <div class="modal-cuerpo">
+                <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
+                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
+                    <option value="activa">Activa</option>
+                    <option value="pausada">Pausada</option>
+                    <option value="cerrada">Cerrada</option>
+                </select>
+                
+                <label for="comentario-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Comentario (opcional):</label>
+                <textarea id="comentario-estado" class="buscador-input" style="width: 100%; min-height: 80px; resize: vertical;" placeholder="Agrega un comentario sobre este cambio..."></textarea>
+            </div>
+            <div class="modal-pie">
+                <button class="btn btn-secundario" onclick="cerrarModalEditarEstado()">Cancelar</button>
+                <button class="btn" onclick="confirmarCambioEstado()">Guardar Cambio</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL PARA ELIMINAR VACANTE -->
+    <div id="modal-eliminar" class="modal">
+        <div class="modal-contenido">
+            <h3 class="modal-titulo">Confirmar Eliminación</h3>
+            <div class="modal-cuerpo">
+                ¿Estás seguro de que deseas eliminar esta vacante? Esta acción no se puede deshacer.
+            </div>
+            <div class="modal-pie">
+                <button class="btn btn-secundario" onclick="cerrarModalEliminar()">Cancelar</button>
+                <button class="btn btn-danger" onclick="confirmarEliminarVacante()">Eliminar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // VARIABLES GLOBALES
+        let vacantes = [];
+        let vacanteIdDetalles = null;
+        let vacanteIdEditar = null;
+        let vacanteIdEliminar = null;
+
+        // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
+        function volverPaginaAnterior() {
+            window.location.href = "IndexReclutador.html";
+        }
+
+        // FUNCIONES PARA VERIFICAR SESIÓN
+        function verificarSesion() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            if (usuarioStr) {
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    if (usuario && usuario.nombre) {
+                        return true;
+                    }
+                } catch (error) {
+                    sessionStorage.removeItem('usuario');
+                }
+            }
+            window.location.href = '../index.html';
+            return false;
+        }
+
+        // FUNCIONES PARA VACANTES
+        function cargarVacantes() {
+            const vacantesStr = localStorage.getItem('vacantes');
+            vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
+            
+            // Si no hay vacantes, agregar datos de ejemplo
+            if (vacantes.length === 0) {
+                vacantes = [
+                    {
+                        id: 1,
+                        puesto: "Desarrollador Full Stack",
+                        departamento: "tecnologia",
+                        tipo_contrato: "tiempo_completo",
+                        modalidad: "hibrido",
+                        salario_min: 25000,
+                        salario_max: 35000,
+                        ubicacion: "Ciudad de México, México",
+                        descripcion: "Buscamos un desarrollador full stack con experiencia en React y Node.js para unirse a nuestro equipo de desarrollo.",
+                        requisitos: "Experiencia mínima de 3 años en desarrollo web, conocimiento de React, Node.js y bases de datos SQL.",
+                        beneficios: "Seguro médico, 20 días de vacaciones, trabajo remoto parcial, presupuesto para capacitación.",
+                        fecha_publicacion: "2023-05-15",
+                        fecha_cierre: "2023-06-15",
+                        reclutador_id: 1,
+                        fecha_creacion: new Date().toISOString(),
+                        estado: "activa",
+                        postulaciones: 12
+                    },
+                    {
+                        id: 2,
+                        puesto: "Diseñador UX/UI",
+                        departamento: "tecnologia",
+                        tipo_contrato: "tiempo_completo",
+                        modalidad: "remoto",
+                        salario_min: 20000,
+                        salario_max: 28000,
+                        ubicacion: "Remoto",
+                        descripcion: "Buscamos un diseñador UX/UI creativo con experiencia en herramientas de diseño moderno para mejorar la experiencia de usuario en nuestros productos.",
+                        requisitos: "Experiencia mínima de 2 años en diseño UX/UI, portafolio sólido, conocimiento de Figma, Sketch o Adobe XD.",
+                        beneficios: "Trabajo 100% remoto, horario flexible, presupuesto para equipo, seguro médico.",
+                        fecha_publicacion: "2023-05-10",
+                        fecha_cierre: "2023-06-10",
+                        reclutador_id: 1,
+                        fecha_creacion: new Date().toISOString(),
+                        estado: "activa",
+                        postulaciones: 8
+                    },
+                    {
+                        id: 3,
+                        puesto: "Especialista en Marketing Digital",
+                        departamento: "marketing",
+                        tipo_contrato: "tiempo_completo",
+                        modalidad: "presencial",
+                        salario_min: 18000,
+                        salario_max: 25000,
+                        ubicacion: "Guadalajara, Jalisco",
+                        descripcion: "Buscamos un especialista en marketing digital con experiencia en SEO y campañas publicitarias para aumentar nuestra presencia en línea.",
+                        requisitos: "Experiencia mínima de 3 años en marketing digital, conocimiento de SEO, SEM y redes sociales.",
+                        beneficios: "Seguro médico, días de vacaciones flexibles, bonos por desempeño, presupuesto para cursos.",
+                        fecha_publicacion: "2023-05-05",
+                        fecha_cierre: "2023-06-05",
+                        reclutador_id: 1,
+                        fecha_creacion: new Date().toISOString(),
+                        estado: "pausada",
+                        postulaciones: 15
+                    }
+                ];
+                
+                localStorage.setItem('vacantes', JSON.stringify(vacantes));
+            }
+            
+            renderizarVacantes();
+        }
+
+        function renderizarVacantes(vacantesFiltradas = null) {
+            const container = document.getElementById('vacantes-container');
+            const vacantesAMostrar = vacantesFiltradas || vacantes;
+            
+            if (vacantesAMostrar.length === 0) {
+                container.innerHTML = '<div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #666;">No se encontraron vacantes</div>';
+                return;
+            }
+            
+            let html = '';
+            vacantesAMostrar.forEach(vacante => {
+                const estadoClase = `estado-${vacante.estado}`;
+                const estadoTexto = vacante.estado.charAt(0).toUpperCase() + vacante.estado.slice(1);
+                
+                html += `
+                    <div class="vacante-card">
+                        <h3 class="vacante-titulo">${vacante.puesto}</h3>
+                        <div class="vacante-departamento">${getNombreDepartamento(vacante.departamento)}</div>
+                        
+                        <div class="vacante-info">
+                            <div class="vacante-dato">
+                                <span>💰</span>
+                                <span>$${vacante.salario_min.toLocaleString()} - $${vacante.salario_max.toLocaleString()}</span>
+                            </div>
+                            <div class="vacante-dato">
+                                <span>📍</span>
+                                <span>${vacante.ubicacion}</span>
+                            </div>
+                            <div class="vacante-dato">
+                                <span>💼</span>
+                                <span>${getNombreTipoContrato(vacante.tipo_contrato)}</span>
+                            </div>
+                            <div class="vacante-dato">
+                                <span>🏠</span>
+                                <span>${getNombreModalidad(vacante.modalidad)}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="vacante-estadisticas">
+                            <div class="estadistica-item">
+                                <div class="estadistica-valor">${vacante.postulaciones}</div>
+                                <div class="estadistica-etiqueta">Postulaciones</div>
+                            </div>
+                            <div class="estadistica-item">
+                                <div class="estadistica-valor">${estadoTexto}</div>
+                                <div class="estadistica-etiqueta">Estado</div>
+                            </div>
+                        </div>
+                        
+                        <div class="vacante-acciones">
+                            <button class="btn btn-pequeno" onclick="verDetallesVacante(${vacante.id})">Ver Detalles</button>
+                            <button class="btn btn-pequeno btn-secundario" onclick="abrirModalEditarEstado(${vacante.id})">Editar</button>
+                            <button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Eliminar</button>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        function buscarVacantes() {
+            const termino = document.getElementById('buscador-input').value.toLowerCase();
+            
+            if (!termino) {
+                renderizarVacantes();
+                return;
+            }
+            
+            const vacantesFiltradas = vacantes.filter(vacante => 
+                vacante.puesto.toLowerCase().includes(termino) ||
+                vacante.descripcion.toLowerCase().includes(termino) ||
+                vacante.ubicacion.toLowerCase().includes(termino)
+            );
+            
+            renderizarVacantes(vacantesFiltradas);
+        }
+
+        function filtrarVacantes() {
+            const estado = document.getElementById('filtro-estado').value;
+            const departamento = document.getElementById('filtro-departamento').value;
+            
+            let vacantesFiltradas = vacantes;
+            
+            if (estado) {
+                vacantesFiltradas = vacantesFiltradas.filter(v => v.estado === estado);
+            }
+            
+            if (departamento) {
+                vacantesFiltradas = vacantesFiltradas.filter(v => v.departamento === departamento);
+            }
+            
+            renderizarVacantes(vacantesFiltradas);
+        }
+
+        function verDetallesVacante(id) {
+            vacanteIdDetalles = id;
+            const vacante = vacantes.find(v => v.id === id);
+            
+            if (vacante) {
+                document.getElementById('detalles-puesto').textContent = vacante.puesto;
+                document.getElementById('detalles-departamento').textContent = getNombreDepartamento(vacante.departamento);
+                document.getElementById('detalles-tipo-contrato').textContent = getNombreTipoContrato(vacante.tipo_contrato);
+                document.getElementById('detalles-modalidad').textContent = getNombreModalidad(vacante.modalidad);
+                document.getElementById('detalles-salario').textContent = `$${vacante.salario_min.toLocaleString()} - $${vacante.salario_max.toLocaleString()}`;
+                document.getElementById('detalles-ubicacion').textContent = vacante.ubicacion;
+                document.getElementById('detalles-descripcion').textContent = vacante.descripcion;
+                document.getElementById('detalles-requisitos').textContent = vacante.requisitos;
+                document.getElementById('detalles-beneficios').textContent = vacante.beneficios;
+                document.getElementById('detalles-fecha-publicacion').textContent = formatearFecha(vacante.fecha_publicacion);
+                document.getElementById('detalles-fecha-cierre').textContent = formatearFecha(vacante.fecha_cierre);
+                document.getElementById('detalles-estado').textContent = vacante.estado.charAt(0).toUpperCase() + vacante.estado.slice(1);
+                document.getElementById('detalles-postulaciones').textContent = vacante.postulaciones;
+                
+                document.getElementById('modal-detalles').style.display = 'block';
+            }
+        }
+
+        function cerrarModalDetalles() {
+            vacanteIdDetalles = null;
+            document.getElementById('modal-detalles').style.display = 'none';
+        }
+
+        function abrirModalEditarEstado(id) {
+            // Si se llama desde el botón "Editar" de la tarjeta, cerramos el modal de detalles primero
+            if (vacanteIdDetalles) {
+                cerrarModalDetalles();
+            }
+            
+            vacanteIdEditar = id;
+            const vacante = vacantes.find(v => v.id === id);
+            
+            if (vacante) {
+                document.getElementById('nuevo-estado').value = vacante.estado;
+                document.getElementById('comentario-estado').value = '';
+                
+                document.getElementById('modal-editar-estado').style.display = 'block';
+            }
+        }
+
+        function cerrarModalEditarEstado() {
+            vacanteIdEditar = null;
+            document.getElementById('modal-editar-estado').style.display = 'none';
+        }
+
+        function confirmarCambioEstado() {
+            if (!vacanteIdEditar) return;
+            
+            const nuevoEstado = document.getElementById('nuevo-estado').value;
+            const comentario = document.getElementById('comentario-estado').value;
+            
+            try {
+                // Actualizar vacante
+                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEditar);
+                if (vacanteIndex !== -1) {
+                    const estadoAnterior = vacantes[vacanteIndex].estado;
+                    vacantes[vacanteIndex].estado = nuevoEstado;
+                    
+                    // Actualizar localStorage
+                    localStorage.setItem('vacantes', JSON.stringify(vacantes));
+                    
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje('exito', 'Estado actualizado correctamente');
+                    
+                    // Recargar la lista
+                    renderizarVacantes();
+                    
+                    // Cerrar modal
+                    cerrarModalEditarEstado();
+                }
+            } catch (error) {
+                mostrarMensaje('error', 'Error al actualizar el estado. Inténtalo nuevamente');
+            }
+        }
+
+        function abrirModalEliminar(id) {
+            // Si se llama desde el botón "Eliminar" de la tarjeta, cerramos el modal de detalles primero
+            if (vacanteIdDetalles) {
+                cerrarModalDetalles();
+            }
+            
+            vacanteIdEliminar = id;
+            document.getElementById('modal-eliminar').style.display = 'block';
+        }
+
+        function cerrarModalEliminar() {
+            vacanteIdEliminar = null;
+            document.getElementById('modal-eliminar').style.display = 'none';
+        }
+
+        function confirmarEliminarVacante() {
+            if (!vacanteIdEliminar) return;
+            
+            try {
+                // Eliminar vacante del array
+                vacantes = vacantes.filter(v => v.id !== vacanteIdEliminar);
+                
+                // Actualizar localStorage
+                localStorage.setItem('vacantes', JSON.stringify(vacantes));
+                
+                // Mostrar mensaje de éxito
+                mostrarMensaje('exito', 'Vacante eliminada correctamente');
+                
+                // Recargar la lista
+                renderizarVacantes();
+                
+                // Cerrar modal
+                cerrarModalEliminar();
+                
+            } catch (error) {
+                mostrarMensaje('error', 'Error al eliminar la vacante. Inténtalo nuevamente');
+            }
+        }
+
+        function mostrarMensaje(tipo, mensaje) {
+            const elementoMensaje = document.getElementById(`mensaje-${tipo}`);
+            elementoMensaje.textContent = mensaje;
+            elementoMensaje.style.display = 'block';
+            
+            setTimeout(() => {
+                elementoMensaje.style.display = 'none';
+            }, 5000);
+        }
+
+        function formatearFecha(fechaStr) {
+            const fecha = new Date(fechaStr);
+            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
+        }
+
+        // FUNCIONES AUXILIARES
+        function getNombreDepartamento(departamento) {
+            const nombres = {
+                'tecnologia': 'Tecnología',
+                'marketing': 'Marketing',
+                'ventas': 'Ventas',
+                'rrhh': 'Recursos Humanos',
+                'finanzas': 'Finanzas',
+                'operaciones': 'Operaciones'
+            };
+            return nombres[departamento] || departamento;
+        }
+
+        function getNombreTipoContrato(tipo) {
+            const nombres = {
+                'tiempo_completo': 'Tiempo Completo',
+                'medio_tiempo': 'Medio Tiempo',
+                'freelance': 'Freelance',
+                'practicas': 'Prácticas',
+                'temporal': 'Temporal'
+            };
+            return nombres[tipo] || tipo;
+        }
+
+        function getNombreModalidad(modalidad) {
+            const nombres = {
+                'presencial': 'Presencial',
+                'remoto': 'Remoto',
+                'hibrido': 'Híbrido'
+            };
+            return nombres[modalidad] || modalidad;
+        }
+
+        // INICIALIZACIÓN
+        document.addEventListener('DOMContentLoaded', function() {
+            // Verificar sesión
+            verificarSesion();
+            
+            // Cargar vacantes
+            cargarVacantes();
+            
+            // Configurar evento para el botón de volver
+            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
+            
+            // Configurar evento de búsqueda con Enter
+            document.getElementById('buscador-input').addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    buscarVacantes();
+                }
+            });
+            
+            // Cerrar modales al hacer clic fuera de ellos
+            window.addEventListener('click', function(event) {
+                const modalDetalles = document.getElementById('modal-detalles');
+                const modalEditarEstado = document.getElementById('modal-editar-estado');
+                const modalEliminar = document.getElementById('modal-eliminar');
+                
+                if (event.target === modalDetalles) {
+                    cerrarModalDetalles();
+                }
+                if (event.target === modalEditarEstado) {
+                    cerrarModalEditarEstado();
+                }
+                if (event.target === modalEliminar) {
+                    cerrarModalEliminar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

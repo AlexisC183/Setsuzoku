@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setsuzoku - Candidato</title>
+    <title>Setsuzoku - Reclutador</title>
      <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../../css/fuentes.css">
 
@@ -80,15 +80,6 @@
 
         .menu-opciones a:hover {
             background-color: #2c3e50;
-        }
-
-        .menu-opciones a.disabled {
-            color: #7f8c8d;
-            cursor: not-allowed;
-        }
-
-        .menu-opciones a.disabled:hover {
-            background-color: transparent;
         }
 
         .contenedor-contenido {
@@ -306,8 +297,8 @@
             margin-top: 10px;
         }
 
-        /* ESTILOS PARA SECCIONES DE CANDIDATO */
-        .seccion-candidato {
+        /* ESTILOS PARA SECCIONES DE RECLUTADOR */
+        .seccion-reclutador {
             background-color: #ffffff;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -566,15 +557,14 @@
         <div class="barra-lateral" id="barra-lateral">
             <div class="menu-usuario">
                 <div class="nombre-usuario" id="nombre-usuario">Usuario</div>
-                <div class="rol-usuario" id="rol-usuario">Rol</div>
+                <div class="rol-usuario">Reclutador</div>
             </div>
 
             <ul class="menu-opciones">
                 <li><a href="perfil.html"> 👤 Perfil </a></li>
-                <!-- MODIFICACIÓN: Agregado enlace a notificaciones en la barra lateral -->
-                <li><a href="Notificaciones.html" id="enlace-notificaciones"> 🔔 Notificaciones </a></li>
-                <li><a href="Mispostulaciones.html" id="enlace-postulaciones"> 📑 Tus postulaciones </a></li>
-                <li><a href="Miscursos.html" id="enlace-cursos-usuario"> 📖 Tus cursos </a></li>
+                <li><a href="Notificaciones.html"> 🔔 Notificaciones </a></li>
+                <li><a href="Misvacantes.html"> 📋 Mis vacantes </a></li>
+                <li><a href="Postulacionesrecibidas.html"> 📨 Postulaciones recibidas </a></li>
                 <li><a href="#" id="cerrar-sesion"> Cerrar sesión </a></li>
             </ul>
         </div>
@@ -615,88 +605,104 @@
                     </div>
                 </section>
 
-                <!-- SECCIÓN DE OPCIONES PRINCIPALES -->
+                <!-- SECCIÓN DE OPCIONES PRINCIPALES PARA RECLUTADORES -->
                 <section class="seccion_pagina">
-                    <div class="seccion-candidato">
-                        <h2 class="seccion-titulo">Panel de Candidato</h2>
+                    <div class="seccion-reclutador">
+                        <h2 class="seccion-titulo">Panel de Reclutador</h2>
                         <div class="grid-opciones">
-                            <!-- Opción 1: Ver cursos -->
+                            <!-- Opción 1: Publicar vacante -->
                             <div class="opcion-card">
-                                <div class="opcion-icono">📚</div>
-                                <h3 class="opcion-titulo">Buscar Cursos</h3>
-                                <p class="opcion-descripcion">Accede a tus cursos y sigue tu progreso</p>
-                                <a href="../../frontend/cursos.html" class="btn">Ver Cursos</a>
+                                <div class="opcion-icono">➕</div>
+                                <h3 class="opcion-titulo">Publicar Vacante</h3>
+                                <p class="opcion-descripcion">Crea y publica nuevas ofertas de empleo</p>
+                                <a href="publicar_vacante.html" class="btn">Publicar Vacante</a>
                             </div>
 
-                            <!-- Opción 2: Buscar trabajos -->
+                            <!-- Opción 2: Ver vacantes -->
+                            <div class="opcion-card">
+                                <div class="opcion-icono">📋</div>
+                                <h3 class="opcion-titulo">Mis Vacantes</h3>
+                                <p class="opcion-descripcion">Gestiona tus ofertas de empleo publicadas</p>
+                                <a href="Misvacantes.html" class="btn">Ver Vacantes</a>
+                            </div>
+
+                            <!-- Opción 3: Ver postulaciones -->
+                            <div class="opcion-card">
+                                <div class="opcion-icono">📨</div>
+                                <h3 class="opcion-titulo">Postulaciones Recibidas</h3>
+                                <p class="opcion-descripcion">Revisa los candidatos aplicados a tus vacantes</p>
+                                <a href="Postulacionesrecibidas.html" class="btn">Ver Postulaciones</a>
+                            </div>
+
+                            <!-- Opción 4: Buscar candidatos -->
                             <div class="opcion-card">
                                 <div class="opcion-icono">🔍</div>
-                                <h3 class="opcion-titulo">Buscar Trabajos</h3>
-                                <p class="opcion-descripcion">Explora nuevas oportunidades laborales</p>
-                                <a href="../Trabajos.html" class="btn" id="enlace-trabajos-principal">Buscar Trabajos</a>
+                                <h3 class="opcion-titulo">Buscar Candidatos</h3>
+                                <p class="opcion-descripcion">Encuentra talento en nuestra base de datos</p>
+                                <a href="buscador_candidatos.html" class="btn">Buscar Candidatos</a>
                             </div>
                         </div>
                     </div>
                 </section>
 
-                <!-- SECCIÓN DE ÚLTIMAS ACTIVIDADES -->
+                <!-- SECCIÓN DE ÚLTIMAS ACTIVIDADES PARA RECLUTADORES -->
                 <section class="seccion_pagina">
-                    <div class="seccion-candidato">
-                        <h2 class="seccion-titulo">Últimas Actividades</h2>
+                    <div class="seccion-reclutador">
+                        <h2 class="seccion-titulo">Actividades Recientes</h2>
                         
-                        <!-- Tabla de postulaciones recientes -->
-                        <h3 style="margin-bottom: 15px; color: #2A5CAA;">Postulaciones Recientes</h3>
+                        <!-- Tabla de vacantes publicadas -->
+                        <h3 style="margin-bottom: 15px; color: #2A5CAA;">Vacantes Publicadas</h3>
                         <div class="tabla-container">
                             <table class="tabla">
                                 <thead>
                                     <tr>
-                                        <th>Empresa</th>
                                         <th>Puesto</th>
-                                        <th>Fecha</th>
+                                        <th>Fecha Publicación</th>
+                                        <th>Postulaciones</th>
                                         <th>Estado</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tabla-postulaciones-recientes">
+                                <tbody id="tabla-vacantes-recientes">
                                     <tr>
-                                        <td>Tech Solutions</td>
-                                        <td>Desarrollador Frontend</td>
+                                        <td>Desarrollador Full Stack</td>
                                         <td>15/05/2023</td>
-                                        <td><span class="estado-pendiente">En revisión</span></td>
+                                        <td>12</td>
+                                        <td><span class="estado-activo">Activa</span></td>
                                     </tr>
                                     <tr>
-                                        <td>Digital Marketing Co.</td>
-                                        <td>Especialista en SEO</td>
+                                        <td>Diseñador UX/UI</td>
                                         <td>10/05/2023</td>
-                                        <td><span class="estado-activo">Entrevista programada</span></td>
+                                        <td>8</td>
+                                        <td><span class="estado-activo">Activa</span></td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                         
-                        <!-- Tabla de cursos en progreso -->
-                        <h3 style="margin: 30px 0 15px; color: #2A5CAA;">Cursos en Progreso</h3>
+                        <!-- Tabla de entrevistas programadas -->
+                        <h3 style="margin: 30px 0 15px; color: #2A5CAA;">Entrevistas Programadas</h3>
                         <div class="tabla-container">
                             <table class="tabla">
                                 <thead>
                                     <tr>
-                                        <th>Curso</th>
-                                        <th>Instructor</th>
-                                        <th>Progreso</th>
+                                        <th>Candidato</th>
+                                        <th>Puesto</th>
+                                        <th>Fecha</th>
                                         <th>Acciones</th>
                                     </tr>
                                 </thead>
-                                <tbody id="tabla-cursos-progreso">
+                                <tbody id="tabla-entrevistas-programadas">
                                     <tr>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>Carlos Martínez</td>
-                                        <td>65%</td>
-                                        <td><a href="#" class="btn btn-secundario">Continuar</a></td>
+                                        <td>Juan Pérez</td>
+                                        <td>Desarrollador Full Stack</td>
+                                        <td>18/05/2023 10:00</td>
+                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
                                     </tr>
                                     <tr>
-                                        <td>Marketing Digital</td>
                                         <td>María González</td>
-                                        <td>30%</td>
-                                        <td><a href="#" class="btn btn-secundario">Continuar</a></td>
+                                        <td>Diseñador UX/UI</td>
+                                        <td>19/05/2023 14:30</td>
+                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -733,7 +739,7 @@
             if (usuarioStr) {
                 try {
                     const usuario = JSON.parse(usuarioStr);
-                    if (usuario && usuario.nombre && usuario.grupo) {
+                    if (usuario && usuario.nombre) {
                         mostrarInterfazConSesion(usuario);
                         return true;
                     }
@@ -749,34 +755,9 @@
         function mostrarInterfazConSesion(usuario) {
             document.getElementById('barra-lateral').style.display = 'block';
             document.getElementById('nombre-usuario').textContent = usuario.nombre;
-            document.getElementById('rol-usuario').textContent = usuario.grupo.charAt(0).toUpperCase() + usuario.grupo.slice(1);
-            configurarMenuSegunRol(usuario.grupo);
             
             const contenedorContenido = document.getElementById('contenedor-contenido');
             contenedorContenido.classList.add('con-barra-lateral');
-        }
-
-        function configurarMenuSegunRol(rol) {
-            const enlaces = { 'postulaciones': false, 'cursos-usuario': false, 'trabajos': false };
-            switch(rol) {
-                case 'candidato': 
-                    // Para candidatos, todos los enlaces están habilitados
-                    break;
-                case 'reclutador': 
-                    enlaces['cursos-usuario'] = true; 
-                    break;
-                case 'instructor': 
-                    enlaces['postulaciones'] = true; 
-                    break;
-            }
-            
-            for (const [enlace, deshabilitar] of Object.entries(enlaces)) {
-                const elemento = document.getElementById(`enlace-${enlace}`);
-                if (deshabilitar) {
-                    elemento.classList.add('disabled');
-                    elemento.setAttribute('href', '#');
-                }
-            }
         }
         
         function cerrarSesion() { 
@@ -792,26 +773,26 @@
             if (notificacionesGuardadas) {
                 notificaciones = JSON.parse(notificacionesGuardadas);
             } else {
-                // Notificaciones de ejemplo
+                // Notificaciones de ejemplo para reclutadores
                 notificaciones = [
                     {
                         id: 1,
-                        titulo: "Nueva vacante disponible",
-                        mensaje: "Tech Solutions está buscando Desarrollador Frontend",
+                        titulo: "Nueva postulación recibida",
+                        mensaje: "Juan Pérez ha aplicado a la vacante de Desarrollador Full Stack",
                         fecha: new Date().toISOString(),
                         leida: false
                     },
                     {
                         id: 2,
-                        titulo: "Entrevista programada",
-                        mensaje: "Tienes una entrevista programada para el viernes a las 10:00 AM",
+                        titulo: "Entrevista confirmada",
+                        mensaje: "María González ha confirmado su entrevista para mañana a las 10:00 AM",
                         fecha: new Date(Date.now() - 86400000).toISOString(), // Ayer
                         leida: false
                     },
                     {
                         id: 3,
-                        titulo: "Curso actualizado",
-                        mensaje: "El curso 'Desarrollo Web Completo' ha sido actualizado con nuevo contenido",
+                        titulo: "Vacante por expirar",
+                        mensaje: "La vacante de Diseñador UX/UI expirará en 3 días",
                         fecha: new Date(Date.now() - 172800000).toISOString(), // Hace 2 días
                         leida: true
                     }

@@ -428,8 +428,20 @@
         }
 
         function postularseTrabajo(usuario, trabajoId) {
-            // Simulación de postulación
-            alert(`¡Te has postulado al trabajo correctamente! (Usuario: ${usuario.nombre}, Trabajo ID: ${trabajoId})`);
+            // Datos requeridos por la API para postulaciones a trabajos
+            // Ver backend/server.js a partir de la línea 338
+            const datosPostulacion = {
+                usuario_id : usuario.id,
+                trabajo_id : trabajoId,
+                mensaje : '¡Me animé a postularme! Espero ser un excelente candidato.'
+            };
+
+            fetch('/api/postularse-trabajo', {
+                method : 'POST',
+                body : JSON.stringify(datosPostulacion)
+            })
+            .then(raw => raw.json())
+            .then(res => alert(res.mensaje));
         }
 
         function configurarFiltros(trabajos, usuario) {

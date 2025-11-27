@@ -335,7 +335,18 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         });
     }
 
-    // API para postulaciones a trabajos
+    // APIs para postulaciones a trabajos
+    else if (pathname === '/api/postulaciones' && metodo === 'GET') {
+        // Obtener todas las postulaciones
+        try {
+            const postulaciones = database.leer_postulaciones();
+            respuesta.end(JSON.stringify(postulaciones));
+        } catch (error) {
+            console.error('Error al leer postulaciones:', error);
+            respuesta.statusCode = 500;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las postulaciones' }));
+        }
+    }
     else if (pathname === '/api/postularse-trabajo' && metodo === 'POST') {
         let cuerpo = '';
 

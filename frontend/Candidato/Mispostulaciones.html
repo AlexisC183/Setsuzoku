@@ -425,7 +425,7 @@
         }
 
         // Datos de ejemplo para simular postulaciones
-        const datosPostulaciones = [
+        /*const datosPostulaciones = [
             {
                 id: 1,
                 usuario_id: 1,
@@ -485,7 +485,7 @@
                 empresa: "Project Masters",
                 descripcion: "Buscamos un gerente de proyecto con experiencia en metodologías ágiles para liderar equipos multidisciplinarios en proyectos de tecnología."
             }
-        ];
+        ];*/
 
         // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -533,101 +533,102 @@
         }
 
         // Función para cargar las postulaciones del usuario
-        function cargarPostulaciones(usuario) {
+        async function cargarPostulaciones(usuario) {
             const listaPostulaciones = document.getElementById('lista-postulaciones');
             
             // Mostrar mensaje de carga
             listaPostulaciones.innerHTML = '<div class="mensaje-carga">Cargando tus postulaciones...</div>';
             
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Filtrar postulaciones del usuario
-                const postulacionesUsuario = datosPostulaciones.filter(postulacion => postulacion.usuario_id === usuario.id);
+            // Carga asíncrona
+            const [ rawPostulaciones, rawTrabajos ] = await Promise.all([ fetch('/api/postulaciones'), fetch('/api/trabajos') ]);
+            const [ datosPostulaciones, datosTrabajos ] = await Promise.all([ rawPostulaciones.json(), rawTrabajos.json() ]);
+
+            // Filtrar postulaciones del usuario
+            const postulacionesUsuario = datosPostulaciones.filter(postulacion => postulacion.usuario_id === usuario.id);
+            
+            // Verificar si el usuario tiene postulaciones
+            if (postulacionesUsuario.length === 0) {
+                listaPostulaciones.innerHTML = '<div class="mensaje-vacio">Aún no te has postulado a ningún trabajo. <a href="../trabajos.html">Explora nuestras ofertas</a></div>';
+                return;
+            }
+            
+            // Obtener los trabajos del usuario
+            const postulacionesConTrabajo = postulacionesUsuario.map(postulacion => {
+                const trabajo = datosTrabajos.find(t => t.id === postulacion.trabajo_id);
+                return {
+                    ...postulacion,
+                    trabajo: trabajo
+                };
+            }).filter(postulacion => postulacion.trabajo); // Filtrar postulaciones con trabajo existente
+            
+            // Verificar si se encontraron trabajos
+            if (postulacionesConTrabajo.length === 0) {
+                listaPostulaciones.innerHTML = '<div class="mensaje-error">No se encontraron los trabajos a los que te postulaste.</div>';
+                return;
+            }
+            
+            // Limpiar lista de postulaciones
+            listaPostulaciones.innerHTML = '';
+            
+            // Mostrar postulaciones del usuario
+            postulacionesConTrabajo.forEach(postulacion => {
+                const postulacionElemento = document.createElement('div');
+                postulacionElemento.className = 'postulacion';
                 
-                // Verificar si el usuario tiene postulaciones
-                if (postulacionesUsuario.length === 0) {
-                    listaPostulaciones.innerHTML = '<div class="mensaje-vacio">Aún no te has postulado a ningún trabajo. <a href="../trabajos.html">Explora nuestras ofertas</a></div>';
-                    return;
+                // Determinar la clase CSS según el estado
+                let estadoClass = 'estado-pendiente';
+                if (postulacion.estado === 'revisada') {
+                    estadoClass = 'estado-revisada';
+                } else if (postulacion.estado === 'aceptada') {
+                    estadoClass = 'estado-aceptada';
+                } else if (postulacion.estado === 'rechazada') {
+                    estadoClass = 'estado-rechazada';
                 }
                 
-                // Obtener los trabajos del usuario
-                const postulacionesConTrabajo = postulacionesUsuario.map(postulacion => {
-                    const trabajo = datosTrabajos.find(t => t.id === postulacion.trabajo_id);
-                    return {
-                        ...postulacion,
-                        trabajo: trabajo
-                    };
-                }).filter(postulacion => postulacion.trabajo); // Filtrar postulaciones con trabajo existente
-                
-                // Verificar si se encontraron trabajos
-                if (postulacionesConTrabajo.length === 0) {
-                    listaPostulaciones.innerHTML = '<div class="mensaje-error">No se encontraron los trabajos a los que te postulaste.</div>';
-                    return;
-                }
-                
-                // Limpiar lista de postulaciones
-                listaPostulaciones.innerHTML = '';
-                
-                // Mostrar postulaciones del usuario
-                postulacionesConTrabajo.forEach(postulacion => {
-                    const postulacionElemento = document.createElement('div');
-                    postulacionElemento.className = 'postulacion';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-pendiente';
-                    if (postulacion.estado === 'revisada') {
-                        estadoClass = 'estado-revisada';
-                    } else if (postulacion.estado === 'aceptada') {
-                        estadoClass = 'estado-aceptada';
-                    } else if (postulacion.estado === 'rechazada') {
-                        estadoClass = 'estado-rechazada';
-                    }
-                    
-                    postulacionElemento.innerHTML = `
-                        <div class="encabezado-postulacion">
-                            <div>
-                                <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
-                                <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
-                            </div>
-                            <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
+                postulacionElemento.innerHTML = `
+                    <div class="encabezado-postulacion">
+                        <div>
+                            <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
+                            <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
                         </div>
-                        <div class="cuerpo-postulacion">
-                            <p class="descripcion-trabajo">${postulacion.trabajo.descripcion}</p>
-                            <div class="detalles-postulacion">
-                                <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
-                            </div>
-                            ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
-                            <div class="acciones-postulacion">
-                                <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
-                                ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
-                                    `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
-                            </div>
+                        <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
+                    </div>
+                    <div class="cuerpo-postulacion">
+                        <p class="descripcion-trabajo">${postulacion.trabajo.descripcion}</p>
+                        <div class="detalles-postulacion">
+                            <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
                         </div>
-                    `;
-                    
-                    listaPostulaciones.appendChild(postulacionElemento);
-                    
-                    // Configurar evento para el botón de ver trabajo
-                    const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                    botonVerTrabajo.addEventListener('click', function() {
-                        // Redirigir a la página del trabajo
-                        window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                    });
-                    
-                    // Configurar evento para el botón de cancelar postulación (si existe)
-                    const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
-                    if (botonCancelar) {
-                        botonCancelar.addEventListener('click', function() {
-                            if (confirm('¿Estás seguro de que deseas cancelar esta postulación?')) {
-                                cancelarPostulacion(postulacion.id);
-                            }
-                        });
-                    }
+                        ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
+                        <div class="acciones-postulacion">
+                            <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
+                            ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
+                                `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                listaPostulaciones.appendChild(postulacionElemento);
+                
+                // Configurar evento para el botón de ver trabajo
+                const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
+                botonVerTrabajo.addEventListener('click', function() {
+                    // Redirigir a la página del trabajo
+                    window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
                 });
                 
-                // Configurar filtros
-                configurarFiltros(postulacionesConTrabajo);
-            }, 1000); // Simular tiempo de carga
+                // Configurar evento para el botón de cancelar postulación (si existe)
+                const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
+                if (botonCancelar) {
+                    botonCancelar.addEventListener('click', function() {
+                        if (confirm('¿Estás seguro de que deseas cancelar esta postulación?')) {
+                            cancelarPostulacion(postulacion.id);
+                        }
+                    });
+                }
+            });
+            
+            // Configurar filtros
+            configurarFiltros(postulacionesConTrabajo);
         }
 
         // Función para cancelar una postulación

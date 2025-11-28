@@ -398,6 +398,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             }
         });
     }
+    else if (pathname.match(/^\/api\/postulaciones\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una postulación
+
+        const postulacionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer postulaciones existentes
+                let postulaciones = database.leer_postulaciones();
+
+                // Encontrar el índice de la postulación
+                const indice = postulaciones.findIndex(p => p.id === postulacionId);
+
+                if (indice !== -1) {
+                    // Actualizar la postulación
+                    postulaciones[indice] = { ...postulaciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_postulaciones(postulaciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Postulación actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Postulación no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar postulación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la postulación' })); 
+            }
+        });
+    }
 
     else {
         console.log(`Ruta no encontrada: ${pathname}`);

@@ -405,8 +405,19 @@
 
         // Función para inscribirse a un curso
         function inscribirseCurso(usuario, cursoId) {
-            // Simulación de inscripción
-            alert(`¡Te has inscrito al curso correctamente! (Usuario: ${usuario.nombre}, Curso ID: ${cursoId})`);
+            // Datos requeridos por la API para inscripciones a cursos
+            // Ver backend/server.js a partir de la línea 314
+            const datosInscripcion = {
+                usuario_id : usuario.id,
+                curso_id : cursoId,
+            };
+
+            fetch('/api/inscribir-curso', {
+                method : 'POST',
+                body : JSON.stringify(datosInscripcion)
+            })
+            .then(raw => raw.json())
+            .then(res => alert(res.mensaje));
         }
 
         // Función para configurar los filtros

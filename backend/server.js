@@ -516,14 +516,16 @@ function servir_archivo(respuesta, ruta_completa) {
 function es_ruta_html_frontend(ruta) {
     // Lista de archivos HTML en el frontend
     const archivos_html_frontend = [
+        '/acerca_de.html',
+        '/ayuda.html',
+        '/contacto.html',
+        '/cursos.html',
+        '/faq.html',
         '/index.html',
         '/inicio_sesion.html',
         '/registro.html',
-        '/perfil.html',
-        '/postulaciones.html',
-        '/cursos_usuario.html',
-        '/trabajos.html',
-        '/cursos.html'
+        '/terminos.html',
+        '/trabajos.html'
     ];
 
     return archivos_html_frontend.includes(ruta);

@@ -360,154 +360,10 @@
     </div>
 
     <script>
-        // DATOS SIMULADOS (en una aplicación real, estos vendrían de archivos JSON)
-        const cursosSimulados = [
-            {
-                "id": 1,
-                "titulo": "Desarrollo Web con JavaScript",
-                "descripcion": "Aprende a desarrollar aplicaciones web modernas utilizando JavaScript, HTML5 y CSS3.",
-                "instructor": "Carlos Rodríguez",
-                "instructor_id": 1763876370902,
-                "duracion": "144 horas",
-                "precio": "$99.99",
-                "imagen": "javascript",
-                "fecha_creacion": "2023-06-15T10:30:00.000Z",
-                "activo": true
-            },
-            {
-                "id": 2,
-                "titulo": "Python para Ciencia de Datos",
-                "descripcion": "Domina Python y sus librerías para análisis y visualización de datos.",
-                "instructor": "Carlos Rodríguez",
-                "instructor_id": 3,
-                "duracion": "120 horas",
-                "precio": "$89.99",
-                "imagen": "python",
-                "fecha_creacion": "2023-07-20T14:15:00.000Z",
-                "activo": true
-            },
-            {
-                "id": 3,
-                "titulo": "Marketing Digital Avanzado",
-                "descripcion": "Estrategias avanzadas de marketing digital para profesionales.",
-                "instructor": "Ana Martínez",
-                "instructor_id": 2,
-                "duracion": "96 horas",
-                "precio": "$79.99",
-                "imagen": "marketing",
-                "fecha_creacion": "2023-08-10T09:45:00.000Z",
-                "activo": true
-            },
-            {
-                "id": 4,
-                "titulo": "React JS desde Cero",
-                "descripcion": "Aprende React JS y desarrolla aplicaciones web modernas.",
-                "instructor": "Carlos Rodríguez",
-                "instructor_id": 3,
-                "duracion": "80 horas",
-                "precio": "$69.99",
-                "imagen": "react",
-                "fecha_creacion": "2023-09-05T11:20:00.000Z",
-                "activo": true
-            }
-        ];
-
-        const inscripcionesSimuladas = [
-            {
-                "id": 1,
-                "usuario_id": 1763876316632,
-                "curso_id": 1,
-                "fecha_inscripcion": "2025-11-30T15:42:41.971Z",
-                "estado": "en-curso",
-                "progreso": 65
-            },
-            {
-                "id": 2,
-                "usuario_id": 1763876316632,
-                "curso_id": 2,
-                "fecha_inscripcion": "2025-10-15T10:20:30.000Z",
-                "estado": "completado",
-                "progreso": 100
-            },
-            {
-                "id": 3,
-                "usuario_id": 1763876316633,
-                "curso_id": 1,
-                "fecha_inscripcion": "2025-09-20T08:15:22.000Z",
-                "estado": "en-curso",
-                "progreso": 42
-            },
-            {
-                "id": 4,
-                "usuario_id": 1763876316633,
-                "curso_id": 4,
-                "fecha_inscripcion": "2025-11-10T14:30:10.000Z",
-                "estado": "en-curso",
-                "progreso": 88
-            },
-            {
-                "id": 5,
-                "usuario_id": 1763876316634,
-                "curso_id": 2,
-                "fecha_inscripcion": "2025-08-05T11:45:33.000Z",
-                "estado": "completado",
-                "progreso": 100
-            },
-            {
-                "id": 6,
-                "usuario_id": 1763876316635,
-                "curso_id": 1,
-                "fecha_inscripcion": "2025-10-25T16:20:15.000Z",
-                "estado": "en-curso",
-                "progreso": 15
-            },
-            {
-                "id": 7,
-                "usuario_id": 1763876316636,
-                "curso_id": 3,
-                "fecha_inscripcion": "2025-09-12T13:10:05.000Z",
-                "estado": "completado",
-                "progreso": 100
-            }
-        ];
-
-        const estudiantesSimulados = [
-            {
-                "id": 1763876316632,
-                "nombre": "María García",
-                "email": "maria.garcia@example.com",
-                "fecha_registro": "2025-08-01T09:30:00.000Z",
-                "avatar": "maria-garcia"
-            },
-            {
-                "id": 1763876316633,
-                "nombre": "Juan Pérez",
-                "email": "juan.perez@example.com",
-                "fecha_registro": "2025-07-15T14:20:00.000Z",
-                "avatar": "juan-perez"
-            },
-            {
-                "id": 1763876316634,
-                "nombre": "Ana López",
-                "email": "ana.lopez@example.com",
-                "fecha_registro": "2025-09-10T11:45:00.000Z",
-                "avatar": "ana-lopez"
-            },
-            {
-                "id": 1763876316635,
-                "nombre": "Carlos Rodríguez",
-                "email": "carlos.rodriguez@example.com",
-                "fecha_registro": "2025-10-20T16:10:00.000Z",
-                "avatar": "carlos-rodriguez"
-            },
-            {
-                "id": 1763876316636,
-                "nombre": "Laura Martínez",
-                "email": "laura.martinez@example.com",
-                "fecha_registro": "2025-08-25T10:15:00.000Z",
-                "avatar": "laura-martinez"
-            }
-        ];
+        // DATOS REALES (luego se consultarán)
+        let cursosReales = [];
+        let inscripcionesReales = [];
+        let estudiantesReales = [];
 
         // OBTENER INSTRUCTOR ACTUAL
         function obtenerInstructorActual() {
@@ -568,7 +424,7 @@
         let estudianteCards = [];
 
         // FUNCIÓN PARA CARGAR ESTUDIANTES DEL INSTRUCTOR ACTUAL
-        function cargarEstudiantes() {
+        async function cargarEstudiantes() {
             const listaEstudiantes = document.getElementById('lista-estudiantes');
             const instructorId = obtenerInstructorActual();
             
@@ -584,122 +440,132 @@
             // Mostrar mensaje de carga
             listaEstudiantes.innerHTML = '<div class="mensaje-carga">Cargando estudiantes...</div>';
             
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Obtener cursos del instructor actual
-                const cursosDelInstructor = cursosSimulados.filter(
-                    curso => curso.instructor_id === instructorId
+            // Consultando APIs
+            const [ rawCursos, rawInscripciones, rawUsuarios ] = await Promise.all([
+                fetch('/api/cursos'),
+                fetch('/api/inscripciones-cursos'),
+                fetch('/api/usuarios')
+            ]);
+            
+            // Procesando respuestas
+            cursosReales = await rawCursos.json();
+            inscripcionesReales = await rawInscripciones.json();
+            const usuariosReales = await rawUsuarios.json();
+            estudiantesReales = usuariosReales.filter(u => u.grupo === 'candidato');
+
+            // Obtener cursos del instructor actual
+            const cursosDelInstructor = cursosReales.filter(
+                curso => curso.instructor_id === instructorId
+            );
+            
+            if (cursosDelInstructor.length === 0) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>No tienes cursos asignados como instructor.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Obtener IDs de los cursos del instructor
+            const idsCursosInstructor = cursosDelInstructor.map(curso => curso.id);
+            
+            // Filtrar inscripciones que pertenecen a cursos del instructor
+            const inscripcionesFiltradas = inscripcionesReales.filter(
+                inscripcion => idsCursosInstructor.includes(inscripcion.curso_id)
+            );
+            
+            // Combinar datos de estudiantes con sus inscripciones y cursos
+            const estudiantesConCursos = estudiantesReales.map(estudiante => {
+                // Obtener inscripciones del estudiante en cursos del instructor
+                const inscripciones = inscripcionesFiltradas.filter(
+                    inscripcion => inscripcion.usuario_id === estudiante.id
                 );
                 
-                if (cursosDelInstructor.length === 0) {
-                    listaEstudiantes.innerHTML = `
-                        <div class="mensaje-vacio">
-                            <p>No tienes cursos asignados como instructor.</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // Obtener IDs de los cursos del instructor
-                const idsCursosInstructor = cursosDelInstructor.map(curso => curso.id);
-                
-                // Filtrar inscripciones que pertenecen a cursos del instructor
-                const inscripcionesFiltradas = inscripcionesSimuladas.filter(
-                    inscripcion => idsCursosInstructor.includes(inscripcion.curso_id)
-                );
-                
-                // Combinar datos de estudiantes con sus inscripciones y cursos
-                const estudiantesConCursos = estudiantesSimulados.map(estudiante => {
-                    // Obtener inscripciones del estudiante en cursos del instructor
-                    const inscripciones = inscripcionesFiltradas.filter(
-                        inscripcion => inscripcion.usuario_id === estudiante.id
-                    );
-                    
-                    // Obtener cursos del estudiante (solo los del instructor actual)
-                    const cursos = inscripciones.map(inscripcion => {
-                        const curso = cursosSimulados.find(c => c.id === inscripcion.curso_id);
-                        return {
-                            id: curso.id,
-                            nombre: curso.titulo,
-                            progreso: inscripcion.progreso,
-                            certificado: inscripcion.estado === 'completado',
-                            fecha_inscripcion: inscripcion.fecha_inscripcion,
-                            estado: inscripcion.estado
-                        };
-                    });
-                    
+                // Obtener cursos del estudiante (solo los del instructor actual)
+                const cursos = inscripciones.map(inscripcion => {
+                    const curso = cursosReales.find(c => c.id === inscripcion.curso_id);
                     return {
-                        ...estudiante,
-                        cursos: cursos
+                        id: curso.id,
+                        nombre: curso.titulo,
+                        progreso: inscripcion.progreso,
+                        certificado: inscripcion.estado === 'completado',
+                        fecha_inscripcion: inscripcion.fecha_inscripcion,
+                        estado: inscripcion.estado
                     };
                 });
                 
-                // Filtrar estudiantes que tienen al menos un curso del instructor
-                const estudiantesDelInstructor = estudiantesConCursos.filter(
-                    estudiante => estudiante.cursos.length > 0
-                );
+                return {
+                    ...estudiante,
+                    cursos: cursos
+                };
+            });
+            
+            // Filtrar estudiantes que tienen al menos un curso del instructor
+            const estudiantesDelInstructor = estudiantesConCursos.filter(
+                estudiante => estudiante.cursos.length > 0
+            );
+            
+            // Verificar si hay estudiantes
+            if (estudiantesDelInstructor.length === 0) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>No hay estudiantes inscritos en tus cursos.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Actualizar estadísticas
+            actualizarEstadisticas(estudiantesDelInstructor, cursosDelInstructor);
+            
+            // Limpiar lista de estudiantes
+            listaEstudiantes.innerHTML = '';
+            
+            // Mostrar estudiantes y almacenarlos en el estado de la aplicación
+            estudianteCards = estudiantesDelInstructor.map(estudiante => {
+                // Crear una tarjeta para cada estudiante
+                const estudianteCard = document.createElement('div');
+                estudianteCard.className = 'estudiante-card';
                 
-                // Verificar si hay estudiantes
-                if (estudiantesDelInstructor.length === 0) {
-                    listaEstudiantes.innerHTML = `
-                        <div class="mensaje-vacio">
-                            <p>No hay estudiantes inscritos en tus cursos.</p>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                // Actualizar estadísticas
-                actualizarEstadisticas(estudiantesDelInstructor, cursosDelInstructor);
-                
-                // Limpiar lista de estudiantes
-                listaEstudiantes.innerHTML = '';
-                
-                // Mostrar estudiantes y almacenarlos en el estado de la aplicación
-                estudianteCards = estudiantesDelInstructor.map(estudiante => {
-                    // Crear una tarjeta para cada estudiante
-                    const estudianteCard = document.createElement('div');
-                    estudianteCard.className = 'estudiante-card';
+                // Crear el contenido HTML para la tarjeta del estudiante
+                let cursosHTML = '';
+                estudiante.cursos.forEach(curso => {
+                    const progresoClase = curso.progreso === 100 ? 'completado' : '';
+                    const botonCertificar = curso.progreso === 100 && !curso.certificado ? 
+                        `<button class="boton-certificar" onclick="certificarEstudiante(${estudiante.id}, ${curso.id})">Certificar</button>` : 
+                        curso.certificado ? '<span style="color: #2ecc71; font-weight: bold;">✓ Certificado</span>' : '';
                     
-                    // Crear el contenido HTML para la tarjeta del estudiante
-                    let cursosHTML = '';
-                    estudiante.cursos.forEach(curso => {
-                        const progresoClase = curso.progreso === 100 ? 'completado' : '';
-                        const botonCertificar = curso.progreso === 100 && !curso.certificado ? 
-                            `<button class="boton-certificar" onclick="certificarEstudiante(${estudiante.id}, ${curso.id})">Certificar</button>` : 
-                            curso.certificado ? '<span style="color: #2ecc71; font-weight: bold;">✓ Certificado</span>' : '';
-                        
-                        cursosHTML += `
-                            <div style="margin-bottom: 15px;">
-                                <h4 style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
-                                <div class="estudiante-progreso">
-                                    <div class="barra-progreso">
-                                        <div class="barra-progreso-lleno ${progresoClase}" style="width: ${curso.progreso}%"></div>
-                                    </div>
-                                    <span>${curso.progreso}%</span>
+                    cursosHTML += `
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
+                            <div class="estudiante-progreso">
+                                <div class="barra-progreso">
+                                    <div class="barra-progreso-lleno ${progresoClase}" style="width: ${curso.progreso}%"></div>
                                 </div>
-                                <div class="estudiante-acciones">
-                                    <button class="boton-ver" onclick="verDetalles(${estudiante.id}, ${curso.id})">Ver Detalles</button>
-                                    ${botonCertificar}
-                                </div>
+                                <span>${curso.progreso}%</span>
                             </div>
-                        `;
-                    });
-                    
-                    estudianteCard.innerHTML = `
-                        <div class="estudiante-info">
-                            <h3 class="estudiante-nombre">${estudiante.nombre}</h3>
-                            <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} de tus cursos</p>
-                            <p class="estudiante-curso">Email: ${estudiante.email}</p>
-                            ${cursosHTML}
+                            <div class="estudiante-acciones">
+                                <button class="boton-ver" onclick="verDetalles(${estudiante.id}, ${curso.id})">Ver Detalles</button>
+                                ${botonCertificar}
+                            </div>
                         </div>
                     `;
-
-                    listaEstudiantes.appendChild(estudianteCard);
-                    
-                    return estudianteCard;
                 });
-            }, 1000); // Simular delay de carga
+                
+                estudianteCard.innerHTML = `
+                    <div class="estudiante-info">
+                        <h3 class="estudiante-nombre">${estudiante.nombre} ${estudiante.apellido_paterno} ${estudiante.apellido_materno}</h3>
+                        <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} de tus cursos</p>
+                        <p class="estudiante-curso">Correo: ${estudiante.correo}</p>
+                        ${cursosHTML}
+                    </div>
+                `;
+
+                listaEstudiantes.appendChild(estudianteCard);
+                
+                return estudianteCard;
+            });
         }
 
         // FUNCIÓN PARA ACTUALIZAR ESTADÍSTICAS
@@ -741,7 +607,7 @@
             if (!instructorId) return;
             
             // Obtener cursos del instructor actual
-            const cursosDelInstructor = cursosSimulados.filter(
+            const cursosDelInstructor = cursosReales.filter(
                 curso => curso.instructor_id === instructorId
             );
             
@@ -841,14 +707,16 @@
             if (confirm('¿Estás seguro de que deseas certificar a este estudiante?')) {
                 // En una aplicación real, aquí se haría una llamada a la API para certificar al estudiante
                 // Actualizar el estado de la inscripción a "completado" y certificado
-                const inscripcionIndex = inscripcionesSimuladas.findIndex(
+                const inscripcionIndex = inscripcionesReales.findIndex(
                     inscripcion => inscripcion.usuario_id === idEstudiante && inscripcion.curso_id === idCurso
                 );
                 
                 if (inscripcionIndex !== -1) {
-                    inscripcionesSimuladas[inscripcionIndex].estado = 'completado';
-                    inscripcionesSimuladas[inscripcionIndex].progreso = 100;
+                    inscripcionesReales[inscripcionIndex].estado = 'completado';
+                    inscripcionesReales[inscripcionIndex].progreso = 100;
                 }
+
+                // TODO: Put single obj, with ID via URL
                 
                 alert(`Estudiante con ID: ${idEstudiante} certificado en el curso con ID: ${idCurso}`);
                 

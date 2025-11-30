@@ -1,1 +1,10 @@
-[]
+[
+  {
+    "id": 1,
+    "usuario_id": 1763876316632,
+    "curso_id": 1,
+    "fecha_inscripcion": "2025-11-30T20:27:49.203Z",
+    "estado": "en-curso",
+    "progreso": 0
+  }
+]

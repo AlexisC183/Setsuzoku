@@ -349,7 +349,8 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     usuario_id: datosInscripcion.usuario_id,
                     curso_id: datosInscripcion.curso_id,
                     fecha_inscripcion: new Date().toISOString(),
-                    estado: "en-curso"
+                    estado: "en-curso",
+                    progreso: 0
                 };
 
                 // Agregar a la lista

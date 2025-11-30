@@ -317,7 +317,7 @@
                     </div>
                     <div class="tarjeta-estadistica">
                         <div class="numero-estadistica" id="total-cursos">0</div>
-                        <div class="etiqueta-estadistica">Cursos Activos</div>
+                        <div class="etiqueta-estadistica">Mis Cursos</div>
                     </div>
                     <div class="tarjeta-estadistica">
                         <div class="numero-estadistica" id="estudiantes-completados">0</div>
@@ -367,7 +367,7 @@
                 "titulo": "Desarrollo Web con JavaScript",
                 "descripcion": "Aprende a desarrollar aplicaciones web modernas utilizando JavaScript, HTML5 y CSS3.",
                 "instructor": "Carlos Rodríguez",
-                "instructor_id": 3,
+                "instructor_id": 1763876370902,
                 "duracion": "144 horas",
                 "precio": "$99.99",
                 "imagen": "javascript",
@@ -390,12 +390,24 @@
                 "id": 3,
                 "titulo": "Marketing Digital Avanzado",
                 "descripcion": "Estrategias avanzadas de marketing digital para profesionales.",
-                "instructor": "Carlos Rodríguez",
-                "instructor_id": 3,
+                "instructor": "Ana Martínez",
+                "instructor_id": 2,
                 "duracion": "96 horas",
                 "precio": "$79.99",
                 "imagen": "marketing",
                 "fecha_creacion": "2023-08-10T09:45:00.000Z",
+                "activo": true
+            },
+            {
+                "id": 4,
+                "titulo": "React JS desde Cero",
+                "descripcion": "Aprende React JS y desarrolla aplicaciones web modernas.",
+                "instructor": "Carlos Rodríguez",
+                "instructor_id": 3,
+                "duracion": "80 horas",
+                "precio": "$69.99",
+                "imagen": "react",
+                "fecha_creacion": "2023-09-05T11:20:00.000Z",
                 "activo": true
             }
         ];
@@ -428,7 +440,7 @@
             {
                 "id": 4,
                 "usuario_id": 1763876316633,
-                "curso_id": 3,
+                "curso_id": 4,
                 "fecha_inscripcion": "2025-11-10T14:30:10.000Z",
                 "estado": "en-curso",
                 "progreso": 88
@@ -448,6 +460,14 @@
                 "fecha_inscripcion": "2025-10-25T16:20:15.000Z",
                 "estado": "en-curso",
                 "progreso": 15
+            },
+            {
+                "id": 7,
+                "usuario_id": 1763876316636,
+                "curso_id": 3,
+                "fecha_inscripcion": "2025-09-12T13:10:05.000Z",
+                "estado": "completado",
+                "progreso": 100
             }
         ];
 
@@ -479,8 +499,31 @@
                 "email": "carlos.rodriguez@example.com",
                 "fecha_registro": "2025-10-20T16:10:00.000Z",
                 "avatar": "carlos-rodriguez"
+            },
+            {
+                "id": 1763876316636,
+                "nombre": "Laura Martínez",
+                "email": "laura.martinez@example.com",
+                "fecha_registro": "2025-08-25T10:15:00.000Z",
+                "avatar": "laura-martinez"
             }
         ];
+
+        // OBTENER INSTRUCTOR ACTUAL
+        function obtenerInstructorActual() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            if (!usuarioStr) {
+                return null;
+            }
+            
+            try {
+                const usuario = JSON.parse(usuarioStr);
+                return usuario.id;
+            } catch (error) {
+                console.error('Error al obtener el instructor actual:', error);
+                return null;
+            }
+        }
 
         // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
         function volverPaginaAnterior() {
@@ -520,23 +563,55 @@
             return false;
         }
 
-        // FUNCIÓN PARA CARGAR ESTUDIANTES
+        // FUNCIÓN PARA CARGAR ESTUDIANTES DEL INSTRUCTOR ACTUAL
         function cargarEstudiantes() {
             const listaEstudiantes = document.getElementById('lista-estudiantes');
+            const instructorId = obtenerInstructorActual();
+            
+            if (!instructorId) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>Error: No se pudo identificar al instructor actual.</p>
+                    </div>
+                `;
+                return;
+            }
             
             // Mostrar mensaje de carga
             listaEstudiantes.innerHTML = '<div class="mensaje-carga">Cargando estudiantes...</div>';
             
             // Simular carga asíncrona
             setTimeout(() => {
+                // Obtener cursos del instructor actual
+                const cursosDelInstructor = cursosSimulados.filter(
+                    curso => curso.instructor_id === instructorId
+                );
+                
+                if (cursosDelInstructor.length === 0) {
+                    listaEstudiantes.innerHTML = `
+                        <div class="mensaje-vacio">
+                            <p>No tienes cursos asignados como instructor.</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Obtener IDs de los cursos del instructor
+                const idsCursosInstructor = cursosDelInstructor.map(curso => curso.id);
+                
+                // Filtrar inscripciones que pertenecen a cursos del instructor
+                const inscripcionesFiltradas = inscripcionesSimuladas.filter(
+                    inscripcion => idsCursosInstructor.includes(inscripcion.curso_id)
+                );
+                
                 // Combinar datos de estudiantes con sus inscripciones y cursos
                 const estudiantesConCursos = estudiantesSimulados.map(estudiante => {
-                    // Obtener inscripciones del estudiante
-                    const inscripciones = inscripcionesSimuladas.filter(
+                    // Obtener inscripciones del estudiante en cursos del instructor
+                    const inscripciones = inscripcionesFiltradas.filter(
                         inscripcion => inscripcion.usuario_id === estudiante.id
                     );
                     
-                    // Obtener cursos del estudiante
+                    // Obtener cursos del estudiante (solo los del instructor actual)
                     const cursos = inscripciones.map(inscripcion => {
                         const curso = cursosSimulados.find(c => c.id === inscripcion.curso_id);
                         return {
@@ -555,13 +630,13 @@
                     };
                 });
                 
-                // Filtrar estudiantes que tienen al menos un curso
-                const estudiantesConCursosActivos = estudiantesConCursos.filter(
+                // Filtrar estudiantes que tienen al menos un curso del instructor
+                const estudiantesDelInstructor = estudiantesConCursos.filter(
                     estudiante => estudiante.cursos.length > 0
                 );
                 
                 // Verificar si hay estudiantes
-                if (estudiantesConCursosActivos.length === 0) {
+                if (estudiantesDelInstructor.length === 0) {
                     listaEstudiantes.innerHTML = `
                         <div class="mensaje-vacio">
                             <p>No hay estudiantes inscritos en tus cursos.</p>
@@ -571,13 +646,13 @@
                 }
                 
                 // Actualizar estadísticas
-                actualizarEstadisticas(estudiantesConCursosActivos);
+                actualizarEstadisticas(estudiantesDelInstructor, cursosDelInstructor);
                 
                 // Limpiar lista de estudiantes
                 listaEstudiantes.innerHTML = '';
                 
                 // Mostrar estudiantes
-                estudiantesConCursosActivos.forEach(estudiante => {
+                estudiantesDelInstructor.forEach(estudiante => {
                     // Crear una tarjeta para cada estudiante
                     const estudianteCard = document.createElement('div');
                     estudianteCard.className = 'estudiante-card';
@@ -610,7 +685,7 @@
                     estudianteCard.innerHTML = `
                         <div class="estudiante-info">
                             <h3 class="estudiante-nombre">${estudiante.nombre}</h3>
-                            <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} cursos</p>
+                            <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} de tus cursos</p>
                             <p class="estudiante-curso">Email: ${estudiante.email}</p>
                             ${cursosHTML}
                         </div>
@@ -622,10 +697,10 @@
         }
 
         // FUNCIÓN PARA ACTUALIZAR ESTADÍSTICAS
-        function actualizarEstadisticas(estudiantes) {
+        function actualizarEstadisticas(estudiantes, cursosDelInstructor) {
             // Calcular estadísticas
             const totalEstudiantes = estudiantes.length;
-            const totalCursos = cursosSimulados.length;
+            const totalCursos = cursosDelInstructor.length;
             
             // Contar cursos completados
             let cursosCompletados = 0;
@@ -655,12 +730,20 @@
         // FUNCIÓN PARA CARGAR OPCIONES DE FILTRO DE CURSOS
         function cargarFiltrosCursos() {
             const filtroCurso = document.getElementById('filtrar-curso');
+            const instructorId = obtenerInstructorActual();
+            
+            if (!instructorId) return;
+            
+            // Obtener cursos del instructor actual
+            const cursosDelInstructor = cursosSimulados.filter(
+                curso => curso.instructor_id === instructorId
+            );
             
             // Limpiar opciones existentes
             filtroCurso.innerHTML = '<option value="">Todos los cursos</option>';
             
-            // Agregar opciones de cursos
-            cursosSimulados.forEach(curso => {
+            // Agregar opciones de cursos del instructor
+            cursosDelInstructor.forEach(curso => {
                 const option = document.createElement('option');
                 option.value = curso.titulo;
                 option.textContent = curso.titulo;
@@ -674,7 +757,7 @@
             const filtroCurso = document.getElementById('filtrar-curso').value.toLowerCase();
             const filtroProgreso = document.getElementById('filtrar-progreso').value;
             const listaEstudiantes = document.getElementById('lista-estudiantes');
-            const estudiantes = Array.from(listaEstudiantes.children);
+            const estudiantes = Array.from(document.querySelectorAll('#lista-estudiantes .estudiante-card'));
             
             // Filtrar estudiantes según los criterios seleccionados
             const estudiantesFiltrados = estudiantes.filter(estudianteCard => {

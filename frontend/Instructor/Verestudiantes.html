@@ -563,6 +563,10 @@
             return false;
         }
 
+        // Estado de la aplicación para filtrar estudiantes.
+        // Este arreglo contendrá elementos HTML (nodos).
+        let estudianteCards = [];
+
         // FUNCIÓN PARA CARGAR ESTUDIANTES DEL INSTRUCTOR ACTUAL
         function cargarEstudiantes() {
             const listaEstudiantes = document.getElementById('lista-estudiantes');
@@ -651,8 +655,8 @@
                 // Limpiar lista de estudiantes
                 listaEstudiantes.innerHTML = '';
                 
-                // Mostrar estudiantes
-                estudiantesDelInstructor.forEach(estudiante => {
+                // Mostrar estudiantes y almacenarlos en el estado de la aplicación
+                estudianteCards = estudiantesDelInstructor.map(estudiante => {
                     // Crear una tarjeta para cada estudiante
                     const estudianteCard = document.createElement('div');
                     estudianteCard.className = 'estudiante-card';
@@ -690,8 +694,10 @@
                             ${cursosHTML}
                         </div>
                     `;
-                    
+
                     listaEstudiantes.appendChild(estudianteCard);
+                    
+                    return estudianteCard;
                 });
             }, 1000); // Simular delay de carga
         }
@@ -757,10 +763,9 @@
             const filtroCurso = document.getElementById('filtrar-curso').value.toLowerCase();
             const filtroProgreso = document.getElementById('filtrar-progreso').value;
             const listaEstudiantes = document.getElementById('lista-estudiantes');
-            const estudiantes = Array.from(document.querySelectorAll('#lista-estudiantes .estudiante-card'));
             
             // Filtrar estudiantes según los criterios seleccionados
-            const estudiantesFiltrados = estudiantes.filter(estudianteCard => {
+            const estudiantesFiltrados = estudianteCards.filter(estudianteCard => {
                 const nombreEstudiante = estudianteCard.querySelector('.estudiante-nombre').textContent.toLowerCase();
                 const cursos = Array.from(estudianteCard.querySelectorAll('.estudiante-curso'));
                 
@@ -806,7 +811,7 @@
             });
             
             // Ocultar todos los estudiantes
-            estudiantes.forEach(estudianteCard => {
+            estudianteCards.forEach(estudianteCard => {
                 estudianteCard.style.display = 'none';
             });
             

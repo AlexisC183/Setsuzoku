@@ -314,6 +314,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las inscripciones' }));
         }
     }
+    else if (pathname.match(/^\/api\/inscripciones-cursos\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una inscripción
+
+        const inscripcionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer inscripciones existentes
+                let inscripciones = database.leer_inscripciones();
+
+                // Encontrar el índice de la inscripción
+                const indice = inscripciones.findIndex(i => i.id === inscripcionId);
+
+                if (indice !== -1) {
+                    // Actualizar la inscripción
+                    inscripciones[indice] = { ...inscripciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_inscripciones(inscripciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Inscripción no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar inscripción:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la inscripción' })); 
+            }
+        });
+    }
     else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';

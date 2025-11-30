@@ -705,23 +705,29 @@
         // FUNCIÓN PARA CERTIFICAR ESTUDIANTE
         function certificarEstudiante(idEstudiante, idCurso) {
             if (confirm('¿Estás seguro de que deseas certificar a este estudiante?')) {
-                // En una aplicación real, aquí se haría una llamada a la API para certificar al estudiante
-                // Actualizar el estado de la inscripción a "completado" y certificado
-                const inscripcionIndex = inscripcionesReales.findIndex(
+                const { id } = inscripcionesReales.find(
                     inscripcion => inscripcion.usuario_id === idEstudiante && inscripcion.curso_id === idCurso
                 );
-                
-                if (inscripcionIndex !== -1) {
-                    inscripcionesReales[inscripcionIndex].estado = 'completado';
-                    inscripcionesReales[inscripcionIndex].progreso = 100;
-                }
+                const datosActualizados = {
+                    estado : 'completado',
+                    progreso : 100
+                };
 
-                // TODO: Put single obj, with ID via URL
-                
-                alert(`Estudiante con ID: ${idEstudiante} certificado en el curso con ID: ${idCurso}`);
-                
-                // Recargar la lista de estudiantes para reflejar los cambios
-                cargarEstudiantes();
+                // Llamada a la API para certificar al estudiante.
+                // Actualizando el estado de la inscripción a "completado" y certificado.
+                fetch(`/api/inscripciones-cursos/${ id }`, {
+                    method : 'PUT',
+                    body : JSON.stringify(datosActualizados)
+                })
+                .then(raw => raw.json())
+                .then(res => {
+                    alert(res.mensaje);
+
+                    if (res.exito) {
+                        // Recargar la lista de estudiantes para reflejar los cambios
+                        cargarEstudiantes();
+                    }
+                });
             }
         }
 

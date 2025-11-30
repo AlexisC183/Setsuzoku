@@ -357,105 +357,102 @@
         }
 
         // Función para cargar los cursos del usuario
-        function cargarCursosUsuario(usuario) {
+        async function cargarCursosUsuario(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando tus cursos...</div>';
             
-            // Simulación de datos de cursos del usuario (en una aplicación real, esto vendría de una API)
-            const cursosUsuarioSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    estado: "en-curso",
-                    imagen: "javascript",
-                    fecha_inscripcion: "2023-06-15"
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    estado: "completado",
-                    imagen: "uxui",
-                    fecha_inscripcion: "2023-05-10"
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    estado: "en-curso",
-                    imagen: "python",
-                    fecha_inscripcion: "2023-06-20"
-                }
-            ];
+            // Carga asíncrona
+            const [ rawCursos, rawInscripciones ] = await Promise.all([ fetch('/api/cursos'), fetch('/api/inscripciones-cursos') ]);
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Verificar si el usuario tiene cursos
-                if (cursosUsuarioSimulados.length === 0) {
-                    listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="cursos.html">Explora nuestros cursos</a></div>';
-                    return;
+            // Procesando respuestas
+            const [ datosCursos, datosInscripciones ] = await Promise.all([ rawCursos.json(), rawInscripciones.json() ]);
+
+            // Filtrar inscripciones del usuario
+            const inscripcionesUsuario = datosInscripciones.filter(inscripcion => inscripcion.usuario_id === usuario.id);
+
+            // Verificar si el usuario tiene inscripciones
+            if (inscripcionesUsuario.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="cursos.html">Explora nuestros cursos</a></div>';
+                return;
+            }
+
+            // Obtener los cursos del usuario
+            const inscripcionesConCurso = inscripcionesUsuario.map(inscripcion => {
+                const curso = datosCursos.find(c => c.id === inscripcion.curso_id);
+
+                if (curso) {
+                    return {
+                        ...inscripcion,
+                        titulo: curso.titulo,
+                        descripcion: curso.descripcion,
+                        instructor: curso.instructor,
+                        duracion: curso.duracion,
+                        imagen: curso.imagen
+                    };
+                }
+                else {
+                    return null;
+                }
+            }).filter(ic => ic); // Filtrar inscripciones con curso existente
+
+            // Verificar si el usuario tiene cursos
+            if (inscripcionesConCurso.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="cursos.html">Explora nuestros cursos</a></div>';
+                return;
+            }
+            
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Mostrar cursos del usuario
+            inscripcionesConCurso.forEach(curso => {
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
+                
+                // Determinar la URL de la imagen
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
+                
+                // Determinar la clase CSS según el estado
+                let estadoClass = 'estado-en-curso';
+                let estadoTexto = 'En curso';
+                if (curso.estado === 'completado') {
+                    estadoClass = 'estado-completado';
+                    estadoTexto = 'Completado';
+                } else if (curso.estado === 'cancelado') {
+                    estadoClass = 'estado-cancelado';
+                    estadoTexto = 'Cancelado';
                 }
                 
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
-                
-                // Mostrar cursos del usuario
-                cursosUsuarioSimulados.forEach(curso => {
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    
-                    // Determinar la URL de la imagen
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-en-curso';
-                    let estadoTexto = 'En curso';
-                    if (curso.estado === 'completado') {
-                        estadoClass = 'estado-completado';
-                        estadoTexto = 'Completado';
-                    } else if (curso.estado === 'cancelado') {
-                        estadoClass = 'estado-cancelado';
-                        estadoTexto = 'Cancelado';
-                    }
-                    
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">${curso.instructor}</span>
-                                <span>${curso.duracion}</span>
-                            </div>
-                            <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
-                            <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">${curso.instructor}</span>
+                            <span>${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de ver curso
-                    const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
-                    botonVerCurso.addEventListener('click', function() {
-                        // En una aplicación real, aquí se redirigiría a la página del curso
-                        alert(`Redirigiendo al curso: ${curso.titulo}`);
-                    });
-                });
+                        <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
+                        <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(cursosUsuarioSimulados);
-            }, 1000); // Simular delay de carga
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de ver curso
+                const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
+                botonVerCurso.addEventListener('click', function() {
+                    // En una aplicación real, aquí se redirigiría a la página del curso
+                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(inscripcionesConCurso);
         }
 
         // Función para configurar los filtros

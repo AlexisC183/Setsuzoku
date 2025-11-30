@@ -406,7 +406,8 @@
         // Función para inscribirse a un curso
         function inscribirseCurso(usuario, cursoId) {
             // Datos requeridos por la API para inscripciones a cursos
-            // Ver backend/server.js a partir de la línea 314
+            // Ver backend/server.js a partir de
+            // pathname === '/api/inscribir-curso' && metodo === 'POST'
             const datosInscripcion = {
                 usuario_id : usuario.id,
                 curso_id : cursoId,

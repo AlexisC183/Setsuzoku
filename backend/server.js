@@ -84,8 +84,29 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
     // Configurar cabeceras para respuestas JSON
     respuesta.setHeader('Content-Type', 'application/json');
 
+    // API para usuarios
+    if (pathname.startsWith('/api/usuarios')) {
+        if (pathname === '/api/usuarios' && metodo === 'GET') {
+            console.log('Obteniendo todos los usuarios...');
+            // Obtener todos los usuarios
+            try {
+                const usuarios = database.leer_usuarios();
+                console.log(`Usuarios encontrados: ${usuarios.length}`);
+                respuesta.end(JSON.stringify(usuarios));
+            } catch (error) {
+                console.error('Error al leer usuarios:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener los usuarios' }));
+            }
+        } else {
+            console.log(`Ruta no encontrada: ${pathname}`);
+            respuesta.statusCode = 404;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
+        }
+    }
+
     // API para cursos
-    if (pathname.startsWith('/api/cursos')) {
+    else if (pathname.startsWith('/api/cursos')) {
         if (pathname === '/api/cursos' && metodo === 'GET') {
             console.log('Obteniendo todos los cursos...');
             // Obtener todos los cursos
@@ -281,7 +302,18 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para inscripciones a cursos
+    // APIs para inscripciones a cursos
+    else if (pathname === '/api/inscripciones-cursos' && metodo === 'GET') {
+        // Obtener todas las inscripciones
+        try {
+            const inscripciones = database.leer_inscripciones();
+            respuesta.end(JSON.stringify(inscripciones));
+        } catch (error) {
+            console.error('Error al leer inscripciones:', error);
+            respuesta.statusCode = 500;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las inscripciones' }));
+        }
+    }
     else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';

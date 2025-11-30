@@ -382,20 +382,31 @@
             // Obtener cursos existentes o crear array vacío
             const cursosGuardados = localStorage.getItem('cursos');
             let cursos = cursosGuardados ? JSON.parse(cursosGuardados) : [];
+
+            // Instructor actual
+            const instructor = JSON.parse(sessionStorage.getItem('usuario'));
+
+            // Posibles imágenes del curso
+            const imagenes = [ 'javascript', 'uxui', 'python', 'marketing' ];
+
+            // Determinando imagen del curso
+            const indiceImagen = parseInt(localStorage.getItem('indiceImagen') ?? '0');
+            localStorage.setItem('indiceImagen', indiceImagen === 3 ? 0 : indiceImagen + 1);
             
             // Crear nuevo curso
             const nuevoCurso = {
-                id: Date.now(),
                 titulo: titulo,
                 descripcion: descripcion,
-                duracion: duracion,
+                duracion: duracion + ' horas',
                 categoria: categoria,
                 nivel: nivel,
-                precio: precio,
-                instructor: JSON.parse(sessionStorage.getItem('usuario')).nombre,
+                precio: '$' + precio,
+                instructor: instructor.nombre,
+                instructor_id: instructor.id,
                 fecha_creacion: new Date().toISOString(),
                 estudiantes: [],
-                estado: 'activo'
+                activo: true,
+                imagen: imagenes[indiceImagen]
             };
             
             // Agregar curso a la lista

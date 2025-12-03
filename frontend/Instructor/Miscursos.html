@@ -210,17 +210,12 @@
             margin-bottom: 15px;
         }
 
-        .estado-en-curso {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .estado-completado {
+        .activo-verdadero {
             background-color: #2ecc71;
             color: white;
         }
 
-        .estado-cancelado {
+        .activo-falso {
             background-color: #e74c3c;
             color: white;
         }
@@ -361,11 +356,18 @@
         }
 
         // FUNCIÓN PARA CARGAR CURSOS DEL USUARIO
-        function cargarCursosUsuario(usuario) {
+        async function cargarCursosUsuario(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando tus cursos...</div>';
+
+            // Carga síncrona
+            const rawCursos = await fetch('/api/cursos');
+            const cursosReales = await rawCursos.json();
+
+            // Filtrar cursos del instructor
+            const cursosInstructor = cursosReales.filter(curso => curso.instructor_id === usuario.id);
             
             // Simulación de datos de cursos del usuario (en una aplicación real, esto vendría de una API)
             const cursosUsuarioSimulados = [
@@ -410,7 +412,7 @@
                 if (cursosUsuarioSimulados.length === 0) {
                     listaCursos.innerHTML = `
                         <div class="mensaje-vacio">
-                            <p>Aún no te has inscrito a ningún curso. <a href="index.html">Explora nuestros cursos</a></p>
+                            <p>Aún no has creado ningún curso. <a href="Crearcurso.html">Crea cursos</a></p>
                         </div>
                     `;
                     return;
@@ -426,14 +428,15 @@
                         : 'https://picsum.photos/seed/curso/600/400.jpg';
                     
                     // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-en-curso';
-                    let estadoTexto = 'En curso';
-                    if (curso.estado === 'completado') {
-                        estadoClass = 'estado-completado';
-                        estadoTexto = 'Completado';
-                    } else if (curso.estado === 'cancelado') {
-                        estadoClass = 'estado-cancelado';
-                        estadoTexto = 'Cancelado';
+                    let estadoClass;
+                    let estadoTexto;
+                    if (curso.activo) {
+                        estadoClass = 'activo-true';
+                        estadoTexto = 'Activo';
+                    }
+                    else {
+                        estadoClass = 'activo-false';
+                        estadoTexto = 'Inactivo';
                     }
                     
                     const cursoElemento = document.createElement('div');

@@ -164,7 +164,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para trabajos
+    // APIs para trabajos
     else if (pathname.startsWith('/api/trabajos')) {
         if (pathname === '/api/trabajos' && metodo === 'GET') {
             // Obtener todos los trabajos

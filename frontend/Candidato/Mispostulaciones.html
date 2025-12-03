@@ -480,7 +480,7 @@
             // Mostrar mensaje de carga
             listaPostulaciones.innerHTML = '<div class="mensaje-carga">Cargando tus postulaciones...</div>';
             
-            // Carga asíncrona
+            // Carga síncrona
             const [ rawPostulaciones, rawTrabajos ] = await Promise.all([ fetch('/api/postulaciones'), fetch('/api/trabajos') ]);
             datosPostulaciones = await rawPostulaciones.json();
             datosTrabajos = await rawTrabajos.json();

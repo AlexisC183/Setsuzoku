@@ -363,7 +363,7 @@
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando tus cursos...</div>';
             
-            // Carga asíncrona
+            // Carga síncrona
             const [ rawCursos, rawInscripciones ] = await Promise.all([ fetch('/api/cursos'), fetch('/api/inscripciones-cursos') ]);
 
             // Procesando respuestas

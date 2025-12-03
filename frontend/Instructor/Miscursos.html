@@ -291,9 +291,8 @@
                         <label class="etiqueta-filtro" for="filtrar-estado">Estado</label>
                         <select class="campo-filtro" id="filtrar-estado">
                             <option value="">Todos los estados</option>
-                            <option value="en-curso">En curso</option>
-                            <option value="completado">Completado</option>
-                            <option value="cancelado">Cancelado</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
                         </select>
                     </div>
                 </div>
@@ -369,103 +368,62 @@
             // Filtrar cursos del instructor
             const cursosInstructor = cursosReales.filter(curso => curso.instructor_id === usuario.id);
             
-            // Simulación de datos de cursos del usuario (en una aplicación real, esto vendría de una API)
-            const cursosUsuarioSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    estado: "en-curso",
-                    imagen: "javascript",
-                    fecha_inscripcion: "2023-06-15",
-                    progreso: 65
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    estado: "completado",
-                    imagen: "uxui",
-                    fecha_inscripcion: "2023-05-10",
-                    progreso: 100
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    estado: "en-curso",
-                    imagen: "python",
-                    fecha_inscripcion: "2023-06-20",
-                    progreso: 30
-                }
-            ];
+            // Verificar si el usuario tiene cursos
+            if (cursosInstructor.length === 0) {
+                listaCursos.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>Aún no has creado ningún curso. <a href="Crearcurso.html">Crea cursos</a></p>
+                    </div>
+                `;
+                return;
+            }
             
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Verificar si el usuario tiene cursos
-                if (cursosUsuarioSimulados.length === 0) {
-                    listaCursos.innerHTML = `
-                        <div class="mensaje-vacio">
-                            <p>Aún no has creado ningún curso. <a href="Crearcurso.html">Crea cursos</a></p>
-                        </div>
-                    `;
-                    return;
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Mostrar cursos del usuario
+            cursosInstructor.forEach(curso => {
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
+                
+                // Determinar la clase CSS según el estado
+                let estadoClass;
+                let estadoTexto;
+                if (curso.activo) {
+                    estadoClass = 'activo-verdadero';
+                    estadoTexto = 'Activo';
+                }
+                else {
+                    estadoClass = 'activo-falso';
+                    estadoTexto = 'Inactivo';
                 }
                 
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
-                
-                // Mostrar cursos del usuario
-                cursosUsuarioSimulados.forEach(curso => {
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass;
-                    let estadoTexto;
-                    if (curso.activo) {
-                        estadoClass = 'activo-true';
-                        estadoTexto = 'Activo';
-                    }
-                    else {
-                        estadoClass = 'activo-false';
-                        estadoTexto = 'Inactivo';
-                    }
-                    
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">Instructor: ${curso.instructor}</span>
-                                <span>Duración: ${curso.duracion}</span>
-                            </div>
-                            <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
-                            <div class="progreso-curso">Progreso: ${curso.progreso}%</div>
-                            <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">Instructor: ${curso.instructor}</span>
+                            <span>Duración: ${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de ver curso
-                    const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
-                    botonVerCurso.addEventListener('click', function() {
-                        // En una aplicación real, aquí se redirigiría a la página del curso
-                        alert(`Redirigiendo al curso: ${curso.titulo}`);
-                    });
+                        <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
+                        <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                    </div>
+                `;
+                
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de ver curso
+                const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
+                botonVerCurso.addEventListener('click', function() {
+                    // En una aplicación real, aquí se redirigiría a la página del curso
+                    alert(`Redirigiendo al curso: ${curso.titulo}`);
                 });
-            }, 1000); // Simular delay de carga
+            });
         }
 
         // FUNCIÓN PARA FILTRAR CURSOS
@@ -476,7 +434,7 @@
             const cursos = Array.from(listaCursos.children);
             
             // Filtrar cursos según los criterios seleccionados
-            const cursosFiltrados = cursos.filter(cursoElement => {
+            const cursosFiltrados = cursos.filter(cursoElemento => {
                 const titulo = cursoElemento.querySelector('.titulo-curso').textContent.toLowerCase();
                 const descripcion = cursoElemento.querySelector('.descripcion-curso').textContent.toLowerCase();
                 const estado = cursoElemento.querySelector('.estado-curso').textContent.toLowerCase();

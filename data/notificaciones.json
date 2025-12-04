@@ -1,85 +1,83 @@
 [
   {
-    "id": 1764812309340,
-    "id_usuario": 1764812309337,
+    "id": 1764880086398,
+    "id_usuario": 1764880086396,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola m, tu cuenta ha sido creada exitosamente.",
+    "mensaje": "Hola Chuy, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T01:38:29.340Z"
+    "fecha_creacion": "2025-12-04T20:28:06.398Z"
   },
   {
-    "id": 1764822980805,
-    "id_usuario": 1763876370902,
-    "tipo": "info",
-    "titulo": "Nueva inscripción",
-    "mensaje": "a a se ha inscrito en tu curso \"mm\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T04:36:20.805Z",
-    "tipo_referencia": "curso",
-    "id_referencia": "mm"
-  },
-  {
-    "id": 1764825381907,
-    "id_usuario": 1763876346710,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T05:16:21.908Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1764826266575,
-    "id_usuario": 1763876346710,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T05:31:06.575Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1764826326291,
-    "id_usuario": 1763876316632,
+    "id": 1764880221988,
+    "id_usuario": 1764880221986,
     "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"ejemplo notificacion\" en Empresa no especificada ha sido aprobada.",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Elena, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T05:32:06.291Z",
-    "tipo_referencia": "vacante",
-    "id_referencia": "ejemplo notificacion"
+    "fecha_creacion": "2025-12-04T20:30:21.989Z"
   },
   {
-    "id": 1764878624951,
-    "id_usuario": 1763876346710,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:03:44.951Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1764878688755,
-    "id_usuario": 1763876316632,
+    "id": 1764880365209,
+    "id_usuario": 1764880365207,
     "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Mario, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T20:04:48.755Z",
-    "tipo_referencia": "vacante",
-    "id_referencia": "Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS"
+    "fecha_creacion": "2025-12-04T20:32:45.209Z"
   },
   {
-    "id": 1764879117137,
-    "id_usuario": 1763876316632,
+    "id": 1764880509766,
+    "id_usuario": 1764880509764,
     "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Alexis, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T20:11:57.137Z",
-    "tipo_referencia": "vacante",
-    "id_referencia": "Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS"
+    "fecha_creacion": "2025-12-04T20:35:09.766Z"
+  },
+  {
+    "id": 1764880617455,
+    "id_usuario": 1764880617453,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Sandra, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:36:57.455Z"
+  },
+  {
+    "id": 1764880730980,
+    "id_usuario": 1764880730978,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Sergio Ángel, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:38:50.980Z"
+  },
+  {
+    "id": 1764880827526,
+    "id_usuario": 1764880827525,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Ray, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:40:27.526Z"
+  },
+  {
+    "id": 1764881061062,
+    "id_usuario": 1764881061028,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Alberto, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:44:21.062Z"
+  },
+  {
+    "id": 1764881219173,
+    "id_usuario": 1764881219172,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Héctor Alonso, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:46:59.173Z"
   }
 ]

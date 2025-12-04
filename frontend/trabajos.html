@@ -328,108 +328,84 @@
         }
 
         // Función para cargar trabajos desde la API
-        function cargarTrabajos(usuario) {
+        async function cargarTrabajos(usuario) {
             const listaTrabajos = document.getElementById('lista-trabajos');
             
             // Mostrar mensaje de carga
             listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
             
-            // Simulación de datos de trabajos (en una aplicación real, esto vendría de una API)
-            const trabajosSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollador Frontend",
-                    empresa: "Tech Solutions",
-                    descripcion: "Buscamos un desarrollador frontend con experiencia en React y JavaScript para unirse a nuestro equipo de desarrollo.",
-                    requisitos: ["Experiencia en React", "Conocimientos de JavaScript ES6+", "Familiaridad con CSS3 y HTML5"],
-                    fecha_publicacion: "2023-05-15"
-                },
-                {
-                    id: 2,
-                    titulo: "Especialista en SEO",
-                    empresa: "Digital Marketing Co.",
-                    descripcion: "Buscamos un especialista en SEO para mejorar nuestra visibilidad en línea y aumentar el tráfico orgánico.",
-                    requisitos: ["Experiencia en análisis de palabras clave", "Conocimientos de Google Analytics", "Experiencia con herramientas SEO"],
-                    fecha_publicacion: "2023-05-10"
-                },
-                {
-                    id: 3,
-                    titulo: "Diseñador UX/UI",
-                    empresa: "Creative Studio",
-                    descripcion: "Buscamos un diseñador UX/UI creativo para crear interfaces atractivas y funcionales para nuestros clientes.",
-                    requisitos: ["Experiencia con Figma o Sketch", "Conocimientos de principios de diseño", "Portafolio sólido"],
-                    fecha_publicacion: "2023-05-08"
-                }
-            ];
+            // Consultando API trabajos
+            const rawTrabajos = await fetch('/api/trabajos');
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Limpiar lista de trabajos
-                listaTrabajos.innerHTML = '';
+            // Procesando respuesta
+            const trabajosReales = await rawTrabajos.json();
+
+            // Limpiar lista de trabajos
+            listaTrabajos.innerHTML = '';
+            
+            // Verificar si hay trabajos
+            if (trabajosReales.length === 0) {
+                listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
+                return;
+            }
+            
+            // Llenar el filtro de empresas
+            const selectEmpresa = document.getElementById('filtrar-empresa');
+            const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa))];
+            
+            empresas.forEach(empresa => {
+                const option = document.createElement('option');
+                option.value = empresa;
+                option.textContent = empresa;
+                selectEmpresa.appendChild(option);
+            });
+            
+            // Mostrar trabajos
+            trabajosReales.forEach(trabajo => {
+                const trabajoElemento = document.createElement('div');
+                trabajoElemento.className = 'trabajo';
                 
-                // Verificar si hay trabajos
-                if (trabajosSimulados.length === 0) {
-                    listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
-                    return;
-                }
-                
-                // Llenar el filtro de empresas
-                const selectEmpresa = document.getElementById('filtrar-empresa');
-                const empresas = [...new Set(trabajosSimulados.map(trabajo => trabajo.empresa))];
-                
-                empresas.forEach(empresa => {
-                    const option = document.createElement('option');
-                    option.value = empresa;
-                    option.textContent = empresa;
-                    selectEmpresa.appendChild(option);
-                });
-                
-                // Mostrar trabajos
-                trabajosSimulados.forEach(trabajo => {
-                    const trabajoElemento = document.createElement('div');
-                    trabajoElemento.className = 'trabajo';
-                    
-                    trabajoElemento.innerHTML = `
-                        <div class="encabezado-trabajo">
-                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                trabajoElemento.innerHTML = `
+                    <div class="encabezado-trabajo">
+                        <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                        <div class="empresa-trabajo">${trabajo.empresa}</div>
+                    </div>
+                    <div class="cuerpo-trabajo">
+                        <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                        <div class="requisitos-trabajo">
+                            <div class="titulo-requisitos">Requisitos:</div>
+                            <ul class="lista-requisitos">
+                                ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                            </ul>
                         </div>
-                        <div class="cuerpo-trabajo">
-                            <p class="descripcion-trabajo">${trabajo.descripcion}</p>
-                            <div class="requisitos-trabajo">
-                                <div class="titulo-requisitos">Requisitos:</div>
-                                <ul class="lista-requisitos">
-                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div class="detalles-trabajo">
-                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
-                            </div>
-                            <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                        <div class="detalles-trabajo">
+                            <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
                         </div>
-                    `;
-                    
-                    listaTrabajos.appendChild(trabajoElemento);
-                    
-                    // Configurar evento para el botón de postularse
-                    const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
-                    botonPostularse.addEventListener('click', function() {
-                        if (usuario) {
-                            postularseTrabajo(usuario, trabajo.id);
-                        } else {
-                            window.location.href = 'inicio_sesion.html';
-                        }
-                    });
-                });
+                        <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(trabajosSimulados, usuario);
-            }, 1000);
+                listaTrabajos.appendChild(trabajoElemento);
+                
+                // Configurar evento para el botón de postularse
+                const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                botonPostularse.addEventListener('click', function() {
+                    if (usuario) {
+                        postularseTrabajo(usuario, trabajo.id);
+                    } else {
+                        window.location.href = 'inicio_sesion.html';
+                    }
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(trabajosReales, usuario);
         }
 
         function postularseTrabajo(usuario, trabajoId) {
             // Datos requeridos por la API para postulaciones a trabajos
-            // Ver backend/server.js a partir de la línea 338
+            // Ver backend/server.js a partir de
+            // pathname === '/api/postularse-trabajo' && metodo === 'POST'
             const datosPostulacion = {
                 usuario_id : usuario.id,
                 trabajo_id : trabajoId,

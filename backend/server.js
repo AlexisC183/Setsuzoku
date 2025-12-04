@@ -5,6 +5,7 @@ const path = require('path'); // Manejo de rutas
 const url = require('url'); // Parseo de URLs
 const auth = require('./auth'); // Módulo de autenticación
 const database = require('./database'); // Módulo de base de datos
+const notificaciones = require('./notificaciones'); // Módulo de notificaciones
 
 // VARIABLES GLOBALES
 const puerto = 8000; // Puerto del servidor
@@ -84,8 +85,29 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
     // Configurar cabeceras para respuestas JSON
     respuesta.setHeader('Content-Type', 'application/json');
 
+    // API para usuarios
+    if (pathname.startsWith('/api/usuarios')) {
+        if (pathname === '/api/usuarios' && metodo === 'GET') {
+            console.log('Obteniendo todos los usuarios...');
+            // Obtener todos los usuarios
+            try {
+                const usuarios = database.leer_usuarios();
+                console.log(`Usuarios encontrados: ${usuarios.length}`);
+                respuesta.end(JSON.stringify(usuarios));
+            } catch (error) {
+                console.error('Error al leer usuarios:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener los usuarios' }));
+            }
+        } else {
+            console.log(`Ruta no encontrada: ${pathname}`);
+            respuesta.statusCode = 404;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
+        }
+    }
+
     // API para cursos
-    if (pathname.startsWith('/api/cursos')) {
+    else if (pathname.startsWith('/api/cursos')) {
         if (pathname === '/api/cursos' && metodo === 'GET') {
             console.log('Obteniendo todos los cursos...');
             // Obtener todos los cursos
@@ -143,7 +165,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para trabajos
+    // APIs para trabajos
     else if (pathname.startsWith('/api/trabajos')) {
         if (pathname === '/api/trabajos' && metodo === 'GET') {
             // Obtener todos los trabajos
@@ -281,7 +303,175 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para inscripciones a cursos
+    // API para notificaciones
+    else if (pathname.startsWith('/api/notificaciones')) {
+        if (pathname === '/api/notificaciones' && metodo === 'GET') {
+            // Obtener notificaciones de un usuario
+            const url_params = new URLSearchParams(ruta_parseada.search);
+            const id_usuario = url_params.get('id_usuario');
+            const solo_no_leidas = url_params.get('solo_no_leidas') === 'true';
+            
+            if (!id_usuario) {
+                respuesta.statusCode = 400;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de usuario requerido' }));
+                return;
+            }
+            
+            try {
+                const notificaciones_usuario = notificaciones.obtener_notificaciones_usuario(parseInt(id_usuario), solo_no_leidas);
+                respuesta.end(JSON.stringify(notificaciones_usuario));
+            } catch (error) {
+                console.error('Error al obtener notificaciones:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las notificaciones' }));
+            }
+        } else if (pathname === '/api/notificaciones/marcar-leida' && metodo === 'POST') {
+            // Marcar notificación como leída
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datos = JSON.parse(cuerpo);
+                    const id_notificacion = datos.id_notificacion;
+                    
+                    if (!id_notificacion) {
+                        respuesta.statusCode = 400;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de notificación requerido' }));
+                        return;
+                    }
+                    
+                    const resultado = notificaciones.marcar_como_leida(parseInt(id_notificacion));
+                    
+                    if (resultado) {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación marcada como leída' }));
+                    } else {
+                        respuesta.statusCode = 404;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'Notificación no encontrada' }));
+                    }
+                } catch (error) {
+                    console.error('Error al marcar notificación como leída:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al marcar la notificación como leída' }));
+                }
+            });
+        } else if (pathname === '/api/notificaciones/marcar-todas-leidas' && metodo === 'POST') {
+            // Marcar todas las notificaciones de un usuario como leídas
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datos = JSON.parse(cuerpo);
+                    const id_usuario = datos.id_usuario;
+                    
+                    if (!id_usuario) {
+                        respuesta.statusCode = 400;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de usuario requerido' }));
+                        return;
+                    }
+                    
+                    const resultado = notificaciones.marcar_todas_como_leidas(parseInt(id_usuario));
+                    
+                    if (resultado) {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Todas las notificaciones marcadas como leídas' }));
+                    } else {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'No había notificaciones sin leer' }));
+                    }
+                } catch (error) {
+                    console.error('Error al marcar notificaciones como leídas:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al marcar las notificaciones como leídas' }));
+                }
+            });
+        } else if (pathname === '/api/notificaciones' && metodo === 'DELETE') {
+            // Eliminar notificación
+            const url_params = new URLSearchParams(ruta_parseada.search);
+            const id_notificacion = url_params.get('id_notificacion');
+            
+            if (!id_notificacion) {
+                respuesta.statusCode = 400;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de notificación requerido' }));
+                return;
+            }
+            
+            try {
+                const resultado = notificaciones.eliminar_notificacion(parseInt(id_notificacion));
+                
+                if (resultado) {
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación eliminada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Notificación no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al eliminar notificación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al eliminar la notificación' }));
+            }
+        } else {
+            respuesta.statusCode = 404;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
+        }
+    }
+
+    // APIs para inscripciones a cursos
+    else if (pathname === '/api/inscripciones-cursos' && metodo === 'GET') {
+        // Obtener todas las inscripciones
+        try {
+            const inscripciones = database.leer_inscripciones();
+            respuesta.end(JSON.stringify(inscripciones));
+        } catch (error) {
+            console.error('Error al leer inscripciones:', error);
+            respuesta.statusCode = 500;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las inscripciones' }));
+        }
+    }
+    else if (pathname.match(/^\/api\/inscripciones-cursos\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una inscripción
+
+        const inscripcionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer inscripciones existentes
+                let inscripciones = database.leer_inscripciones();
+
+                // Encontrar el índice de la inscripción
+                const indice = inscripciones.findIndex(i => i.id === inscripcionId);
+
+                if (indice !== -1) {
+                    // Actualizar la inscripción
+                    inscripciones[indice] = { ...inscripciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_inscripciones(inscripciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Inscripción no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar inscripción:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la inscripción' })); 
+            }
+        });
+    }
     else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';
@@ -317,7 +507,8 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     usuario_id: datosInscripcion.usuario_id,
                     curso_id: datosInscripcion.curso_id,
                     fecha_inscripcion: new Date().toISOString(),
-                    estado: "en-curso"
+                    estado: "en-curso",
+                    progreso: 0
                 };
 
                 // Agregar a la lista
@@ -398,6 +589,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             }
         });
     }
+    else if (pathname.match(/^\/api\/postulaciones\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una postulación
+
+        const postulacionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer postulaciones existentes
+                let postulaciones = database.leer_postulaciones();
+
+                // Encontrar el índice de la postulación
+                const indice = postulaciones.findIndex(p => p.id === postulacionId);
+
+                if (indice !== -1) {
+                    // Actualizar la postulación
+                    postulaciones[indice] = { ...postulaciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_postulaciones(postulaciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Postulación actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Postulación no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar postulación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la postulación' })); 
+            }
+        });
+    }
 
     else {
         console.log(`Ruta no encontrada: ${pathname}`);
@@ -445,14 +675,16 @@ function servir_archivo(respuesta, ruta_completa) {
 function es_ruta_html_frontend(ruta) {
     // Lista de archivos HTML en el frontend
     const archivos_html_frontend = [
+        '/acerca_de.html',
+        '/ayuda.html',
+        '/contacto.html',
+        '/cursos.html',
+        '/faq.html',
         '/index.html',
         '/inicio_sesion.html',
         '/registro.html',
-        '/perfil.html',
-        '/postulaciones.html',
-        '/cursos_usuario.html',
-        '/trabajos.html',
-        '/cursos.html'
+        '/terminos.html',
+        '/trabajos.html'
     ];
 
     return archivos_html_frontend.includes(ruta);

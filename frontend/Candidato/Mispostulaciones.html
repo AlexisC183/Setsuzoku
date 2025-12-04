@@ -424,68 +424,9 @@
             window.history.back();
         }
 
-        // Datos de ejemplo para simular postulaciones
-        /*const datosPostulaciones = [
-            {
-                id: 1,
-                usuario_id: 1,
-                trabajo_id: 1,
-                estado: "pendiente",
-                fecha_postulacion: "2023-10-15",
-                mensaje: "Me interesa mucho esta oportunidad y creo que mis habilidades son adecuadas para el puesto."
-            },
-            {
-                id: 2,
-                usuario_id: 1,
-                trabajo_id: 2,
-                estado: "revisada",
-                fecha_postulacion: "2023-10-10",
-                mensaje: "Tengo experiencia en proyectos similares y estoy emocionado por la posibilidad de trabajar con su equipo."
-            },
-            {
-                id: 3,
-                usuario_id: 1,
-                trabajo_id: 3,
-                estado: "aceptada",
-                fecha_postulacion: "2023-10-05",
-                mensaje: ""
-            },
-            {
-                id: 4,
-                usuario_id: 1,
-                trabajo_id: 4,
-                estado: "rechazada",
-                fecha_postulacion: "2023-10-01",
-                mensaje: "Aunque no fui seleccionado, agradezco la oportunidad y espero futuras colaboraciones."
-            }
-        ];
-
-        const datosTrabajos = [
-            {
-                id: 1,
-                titulo: "Desarrollador Frontend Senior",
-                empresa: "Tech Solutions Inc.",
-                descripcion: "Buscamos un desarrollador frontend con experiencia en React, Vue o Angular para unirse a nuestro equipo de desarrollo de productos innovadores."
-            },
-            {
-                id: 2,
-                titulo: "Diseñador UX/UI",
-                empresa: "Creative Studio",
-                descripcion: "Estamos buscando un diseñador UX/UI creativo y apasionado para diseñar experiencias de usuario excepcionales para nuestras aplicaciones móviles y web."
-            },
-            {
-                id: 3,
-                titulo: "Analista de Datos",
-                empresa: "Data Insights Corp",
-                descripcion: "Únete a nuestro equipo de análisis de datos para ayudar a las empresas a tomar decisiones basadas en datos mediante el uso de herramientas avanzadas de análisis."
-            },
-            {
-                id: 4,
-                titulo: "Gerente de Proyecto",
-                empresa: "Project Masters",
-                descripcion: "Buscamos un gerente de proyecto con experiencia en metodologías ágiles para liderar equipos multidisciplinarios en proyectos de tecnología."
-            }
-        ];*/
+        // Datos a consultar más tarde
+        let datosPostulaciones = [];
+        let datosTrabajos = [];
 
         // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -539,9 +480,10 @@
             // Mostrar mensaje de carga
             listaPostulaciones.innerHTML = '<div class="mensaje-carga">Cargando tus postulaciones...</div>';
             
-            // Carga asíncrona
+            // Carga síncrona
             const [ rawPostulaciones, rawTrabajos ] = await Promise.all([ fetch('/api/postulaciones'), fetch('/api/trabajos') ]);
-            const [ datosPostulaciones, datosTrabajos ] = await Promise.all([ rawPostulaciones.json(), rawTrabajos.json() ]);
+            datosPostulaciones = await rawPostulaciones.json();
+            datosTrabajos = await rawTrabajos.json();
 
             // Filtrar postulaciones del usuario
             const postulacionesUsuario = datosPostulaciones.filter(postulacion => postulacion.usuario_id === usuario.id);
@@ -633,16 +575,25 @@
 
         // Función para cancelar una postulación
         function cancelarPostulacion(postulacionId) {
-            // En una aplicación real, aquí se enviaría una petición al servidor para cancelar la postulación
-            // Por ahora, simulamos la cancelación
-            const index = datosPostulaciones.findIndex(p => p.id === postulacionId);
-            if (index !== -1) {
-                datosPostulaciones[index].estado = 'cancelada';
-                alert('Postulación cancelada correctamente');
-                window.location.reload();
-            } else {
-                alert('Error al cancelar la postulación. Por favor, intenta de nuevo más tarde.');
-            }
+            // Recuperando objeto de tipo postulación seleccionado
+            const postulacion = datosPostulaciones.find(p => p.id === postulacionId);
+
+            // Estableciendo postulación como cancelada
+            postulacion.estado = 'cancelada';
+
+            // Petición al servidor para cancelar
+            fetch(`/api/postulaciones/${ postulacionId }`, {
+                method : 'PUT',
+                body : JSON.stringify(postulacion)
+            })
+            .then(raw => raw.json())
+            .then(res => {
+                alert(res.mensaje);
+
+                if (res.exito) {
+                    window.location.reload();
+                }
+            });
         }
 
         // Función para configurar los filtros

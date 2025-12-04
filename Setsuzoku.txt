@@ -28,230 +28,35 @@ Setsuzoku
 │   │   │           └── Sandra
 │   │   └── HEAD
 │   ├── objects
-│   │   ├── 00
-│   │   │   └── 6a58d48b98fc5d38e0a903e86d41348db636b5
-│   │   ├── 02
-│   │   │   └── 44c49327c4e8b6847541b2bbfde78f159617a2
-│   │   ├── 04
-│   │   │   ├── 07c51457d928b79f0250b93229f81ea58d4471
-│   │   │   └── 4521987474db53207b885be93ea349e388811a
-│   │   ├── 06
-│   │   │   └── 0bc99923a76d89c61767168009c370217fbda9
-│   │   ├── 0e
-│   │   │   └── f8597ef885b8e24491ab0e8233015a30173c79
-│   │   ├── 11
-│   │   │   └── e5a1170ae2d41b321e977d3db7dcaa2ede5eed
-│   │   ├── 12
-│   │   │   └── 26828e80a2b3af168edbcbfc6d338757307fa0
-│   │   ├── 18
-│   │   │   └── a1b30e55f37bc3257230ceb22fb8d6d65de954
-│   │   ├── 19
-│   │   │   ├── 3da8a4d223f760022c463a245fc025d487e03f
-│   │   │   └── c71a92e08e02462d4bc1c675d411919d749274
-│   │   ├── 1c
-│   │   │   ├── 2511db395bcdba05495fd3bef660e01383defe
-│   │   │   └── e91cfd99275ef0531f9eedf8f24d3305199234
-│   │   ├── 21
-│   │   │   └── 87dcffe0e273d8b495ef8af317ef639425ceb4
+│   │   ├── 1d
+│   │   │   └── d7a6fc47c40b85d9cc88b1690ddfcec86903e6
 │   │   ├── 24
-│   │   │   └── edcaff8041fe9d2783e844588d4b6e61245110
-│   │   ├── 26
-│   │   │   └── 008b1aa626ee39eb7c9d8280bf9d07d2ded12d
-│   │   ├── 27
-│   │   │   └── 1a71f4f81997dae7a4b9e9be6ada582f09cb7d
-│   │   ├── 29
-│   │   │   └── 160a0536266893bf1200998472899e785fc16e
-│   │   ├── 2d
-│   │   │   ├── 9ab5e2fccc478d250b5c9530db504e7bcd5c28
-│   │   │   ├── d47bf80873c635ed061ce22de7a77ca792603f
-│   │   │   └── f32b0ccf9a4e9485a180cbb512b1e5d4b7224e
-│   │   ├── 2e
-│   │   │   └── 840fb650015847b93613d96d38db2f324cbf0c
-│   │   ├── 30
-│   │   │   └── fa2bb5e1eb63abbb82126b786abc0699bfaaef
-│   │   ├── 31
-│   │   │   ├── b751ef3975f588c6eff06ed030c4e56dade5b7
-│   │   │   └── cedb7a1eeed3caf34f1b78c65e40d907da89a3
-│   │   ├── 46
-│   │   │   └── 3f8e6ce298249ad6906087b54906daebbe9260
-│   │   ├── 48
-│   │   │   └── f62443430138d0deab507a31a35b2b4def3511
-│   │   ├── 4a
-│   │   │   ├── 4df8bfc09b975fe1d4ee9b9e8ec29a9e609046
-│   │   │   └── 9557e0759c7f01d0058fd79b67c7efb9831a18
-│   │   ├── 4c
-│   │   │   └── d649fdbadb80cb65e96caff1ce198f9fdfe0e5
-│   │   ├── 4d
-│   │   │   ├── 172b42e880d9d129578cd96a833f9dc5c9ce9b
-│   │   │   └── 2cc2b3494429c8c4609d5837189a86e8405ecb
-│   │   ├── 51
-│   │   │   ├── 35e85debdef177c6997f1671cbcfd749f09af2
-│   │   │   └── d36e484efec696c81c6d8a56ad1ce3172a2f01
-│   │   ├── 54
-│   │   │   └── 54f7aca99439161e619c6e142e9cf5765cc4d9
-│   │   ├── 55
-│   │   │   └── ab463e8f5e8004f49dd5ac4a328c115398c3b5
-│   │   ├── 5b
-│   │   │   └── 5773c679b57f89495ac1db305108be29ef1078
-│   │   ├── 5f
-│   │   │   ├── 31c5e0ac2699b9837b5c8c40ab4642c5c09bc8
-│   │   │   └── 71005b6053ffab5abebb22b471ebfba302f17a
-│   │   ├── 63
-│   │   │   ├── 26f63ccad99ef1bdf6bdde3436f7c51a19e94e
-│   │   │   └── 28b691729b684b60890477ea151faa8dc79b11
-│   │   ├── 64
-│   │   │   └── 02979acd57cb26ef3e100c233ac1f046aa3978
-│   │   ├── 65
-│   │   │   └── 43e476fc9bcbb9c47e2fa6d00e464ec88e68ab
-│   │   ├── 66
-│   │   │   └── 1feb76c444bca6ccda854504d5320a8faaaede
-│   │   ├── 67
-│   │   │   └── da9abfdaf3c0c497a4fdb5547523a5f20c1c1f
-│   │   ├── 69
-│   │   │   ├── 4561eac5c4ea9e5b3e51d76969b8ed4497e94c
-│   │   │   ├── 4fe535ef7c822aafd86c96c541c93111314cc4
-│   │   │   └── 56078c0a60c9aff02fb5e966a8a41c8d79811c
-│   │   ├── 6a
-│   │   │   └── ab982acec6a0266b165c1bc60694de373922c7
-│   │   ├── 6f
-│   │   │   └── e7dd3fca0b307b431016c33e6aa1f1c1eb1587
-│   │   ├── 70
-│   │   │   └── df24a83428ab144b0d5e08ad1c2499ad99dad3
-│   │   ├── 71
-│   │   │   ├── 47cdb48ce44c17e62d834c717565ea01726d0c
-│   │   │   └── f052b8ebec294034d4fb1258e364d535f03d4a
-│   │   ├── 72
-│   │   │   └── 56d98456ed7a941a443ec492d51b1862a96679
-│   │   ├── 73
-│   │   │   └── 4536f319b147129dbc422ff0bd416bc1a26aaf
-│   │   ├── 74
-│   │   │   └── 23d14afe24ad01db412af473d442c02036d608
-│   │   ├── 75
-│   │   │   ├── 32705038b3b8bc68a85a4c889b790dc897003f
-│   │   │   ├── 8212f6d7ae67c32bf1ab3ab7f686e62d797f17
-│   │   │   └── 824dab5613516ca03ce2907ab72ef39dd7f974
-│   │   ├── 76
-│   │   │   ├── 19b9598e85db08c6fdfed475d8b15722391b08
-│   │   │   └── d9b6173eeaed34e3f9bfe2c174bf7d8e6c5c5a
-│   │   ├── 78
-│   │   │   └── 341323a7d947d21773e809d0d7e12e54d93f77
-│   │   ├── 7f
-│   │   │   ├── 39def678c046136399b55373e1e72e066364e5
-│   │   │   └── 661d5dc45c98c794727c8da3faf51946ea362b
-│   │   ├── 81
-│   │   │   └── c111b95301970721e6df585eca25f9950b8072
-│   │   ├── 87
-│   │   │   ├── 0e3786e31294a191ed8cf883e1871a3e14246f
-│   │   │   └── c5d97ac00621788c7db1ccd239382a0b84d9d3
-│   │   ├── 88
-│   │   │   └── 34030deb59428a3fbed6cdd5cb5979553d365b
-│   │   ├── 89
-│   │   │   └── c1b7826894eff5ff165418022e19b351f8d6cf
-│   │   ├── 8b
-│   │   │   └── 717aacc20997377fa3c53c601a307ffce9516a
-│   │   ├── 92
-│   │   │   ├── 287294f346ba0fe188153ca77db93729e4c755
-│   │   │   ├── 39d09a81c6085fbe01e523ea713261d41da519
-│   │   │   └── ad843cd086cef149a4927b5732253b0d648fe0
-│   │   ├── 95
-│   │   │   └── 2a513d23b75d12507774bb7c7119d3e8865117
-│   │   ├── 96
-│   │   │   └── bb7c4ceb36f55e131717a5c91574e24980a042
-│   │   ├── 99
-│   │   │   └── ed517544132896eacf73758513878d08d439a0
-│   │   ├── 9e
-│   │   │   └── d348db59f5dc71ee8dbb5682a89eafcf6fc1a7
-│   │   ├── 9f
-│   │   │   └── b76404cfb19f642dcbd4cc3df94c0e378b11e3
-│   │   ├── a3
-│   │   │   └── ac7a62153a7b1746c97d78f0a9cb7355634649
-│   │   ├── a6
-│   │   │   ├── 78d8391d34766e370c5b216a3df2b3a1fd14b4
-│   │   │   └── c93b7f245a28ad28a9f48f2f93299b91e3793a
-│   │   ├── a8
-│   │   │   └── 45ffa12f6584aba2407fd89ec8e7d7ff968b47
-│   │   ├── a9
-│   │   │   └── 8930768fe75193d8aa8fe83431187aecaedc03
-│   │   ├── b4
-│   │   │   └── a5766cd791516137f3175a504b1707d28be436
-│   │   ├── b7
-│   │   │   └── 630637e277ad8372f8531f2a3aca0d1a0419e2
-│   │   ├── b8
-│   │   │   ├── 7352c52e2b1ab28e23d824f2bd249d8364f57f
-│   │   │   └── ef84b1e90a5fcacd0fd12a247cb0efe2ce9d83
-│   │   ├── c2
-│   │   │   └── bba53078a0c0a88c2976b559d6e2800e884966
-│   │   ├── c6
-│   │   │   ├── aa84616f251bc6ffcfbdd5c14d07619c355030
-│   │   │   └── d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf
-│   │   ├── d0
-│   │   │   ├── 058c3752b96a678228a15503182321cb5e34e0
-│   │   │   └── 51effc8ba4fb6664c71c16b5cf1b33fac8f2ac
-│   │   ├── d2
-│   │   │   └── 8061019db9c4ea687f86e6a3e8bb9f8ca7684f
-│   │   ├── d5
-│   │   │   └── 4967c51e8c4362216d0a9782c900aadb73adeb
-│   │   ├── d6
-│   │   │   ├── 33205961ca1fb2891cd483d9849f8a8ef7f7c8
-│   │   │   └── 8b4207788682428c682a72ac6cf88c73ff9e7c
-│   │   ├── d7
-│   │   │   └── bfd0e5b968484d501c4291ca17885ce3db5f12
+│   │   │   └── 82b59e976dc3e523440f4d9deeda58d86fe8d7
+│   │   ├── 4e
+│   │   │   └── bb8ea309d724970844b05c3fdcf1584fe1f6dd
+│   │   ├── 59
+│   │   │   └── fa69820d79c4d2102a3de7f76d033e23396cb8
+│   │   ├── 5a
+│   │   │   └── 5b828b9f52fcc0055023e2225659ad4288f16c
+│   │   ├── 82
+│   │   │   └── ef679943d9be32e7bfee146c0a64f29a3da579
+│   │   ├── ad
+│   │   │   └── bc43455033b3c9b2010415fb68d23b75e874c4
+│   │   ├── b0
+│   │   │   └── d08c4180ab45f51a2367ac2e3857e7f4070bb4
+│   │   ├── bf
+│   │   │   └── 7eb036fe3c562f5e1d2caa77ce9b6b910de869
+│   │   ├── c7
+│   │   │   └── 4582bb610fe5edaceddcdcfcb68208c0b06f4f
 │   │   ├── da
-│   │   │   ├── 0fa6d2f3421c61eecc8d9ce740385c54de104f
-│   │   │   └── 357804e12af769f5f071845f65142590c1f9a5
-│   │   ├── db
-│   │   │   └── 7c30901b7107908637fc14a36ab481a538f46b
-│   │   ├── df
-│   │   │   └── 0ef35cfb6911e03f935fad211a74f0678eacdd
-│   │   ├── e0
-│   │   │   └── 82bbd422601f990ef2ece533abff74fe02f577
-│   │   ├── e1
-│   │   │   └── a52f2c59714d5202786dcb53b28829e249d8f0
-│   │   ├── e2
-│   │   │   └── 8f413a2950c60b74cd3b3069e147cc358db745
-│   │   ├── e3
-│   │   │   ├── 5ad91dea210f1200a83bb8d0df51896972206e
-│   │   │   └── d51dc0fbb04ce807c392225df925712511c138
-│   │   ├── e4
-│   │   │   └── 0f44ea7d242be061feb367c76e793689b1101f
-│   │   ├── e6
-│   │   │   └── 9de29bb2d1d6434b8b29ae775ad8c2e48c5391
-│   │   ├── e7
-│   │   │   └── 0470f2ca5010e1f1e1b8cf0aebe418d4996e88
-│   │   ├── e9
-│   │   │   └── 394ed968e9274126dd3d6c309b5f4b6ebc7e19
-│   │   ├── ec
-│   │   │   └── dc537614e7a644c8ec11a353ed0f17a14d4383
-│   │   ├── ef
-│   │   │   └── 3c7f842b1810da3bd5e86d9b4698ce2bc54d79
-│   │   ├── f0
-│   │   │   ├── 087d35c917aca78437cc581cc295cbea3551b1
-│   │   │   └── 0ed49257908b85a823ce54fc43b24993dd3a68
-│   │   ├── f2
-│   │   │   ├── 129801bae9d96d57a77cbd199bc83f4a1c3d2b
-│   │   │   └── 9c92a4b7d5b7a4e812a3e7c983c36659b77505
-│   │   ├── f3
-│   │   │   ├── 25e57bea0098571bcf12b98bd58b42effa973e
-│   │   │   └── de2a60aabeb13402f595b0dacf4309023472f4
-│   │   ├── f6
-│   │   │   ├── 58319657f78d621de2e29abe04f157b0b84135
-│   │   │   └── 89b446b4e7fe633feec30d6ca968ae21934771
-│   │   ├── f7
-│   │   │   └── 62701ee5b28fc68596edd864485d0c85d27909
-│   │   ├── f9
-│   │   │   ├── 8ca67bfaeb2910c916743ba9c2b571fcc4c473
-│   │   │   └── e0245d6e7aae63b3c436b9419bc2dfc3797775
-│   │   ├── fb
-│   │   │   └── de7386250679a68d2cec62b89cd4737330512c
-│   │   ├── fe
-│   │   │   ├── 11cf29bd00743a43087eb496874109e8c00060
-│   │   │   ├── 34d457f83ae82b0da3566abae0f0a1827f8a44
-│   │   │   └── f42a5052b5d20dbbf6cfd9bcf37b72a3f06afb
+│   │   │   └── 37867c112556233fad3b1518a88e08df7381ac
+│   │   ├── f1
+│   │   │   └── 185029f6dcc5aab2196d73eb203747caaabe88
 │   │   ├── info
 │   │   └── pack
-│   │       ├── pack-e80bba224bfa1045b7be314588a8a7cdfc7e269d.idx
-│   │       ├── pack-e80bba224bfa1045b7be314588a8a7cdfc7e269d.pack
-│   │       └── pack-e80bba224bfa1045b7be314588a8a7cdfc7e269d.rev
+│   │       ├── pack-7d46968397459078fa4f278b1efc449e71bf51d3.idx
+│   │       ├── pack-7d46968397459078fa4f278b1efc449e71bf51d3.pack
+│   │       └── pack-7d46968397459078fa4f278b1efc449e71bf51d3.rev
 │   ├── refs
 │   │   ├── heads
 │   │   │   ├── Sandra
@@ -262,7 +67,9 @@ Setsuzoku
 │   │   │       └── Sandra
 │   │   └── tags
 │   ├── COMMIT_EDITMSG
+│   ├── FETCH_HEAD
 │   ├── HEAD
+│   ├── ORIG_HEAD
 │   ├── config
 │   ├── description
 │   ├── index
@@ -315,14 +122,15 @@ Setsuzoku
 │   ├── Logo.png
 │   ├── alexis_contreras.png
 │   ├── christopher_garcia.jpg
+│   ├── jesus_mejia.jpg
 │   ├── sandra_salazar.jpg
 │   └── sergio_sanchez.jpg
-├── .gitignore
+├── README.md
 └── Setsuzoku.bat
 ------------------------------------
 COMMIT_EDITMSG
 
-Termine de agregar los codigos en las paginas del reclutador
+Nuevas imagenes
 
 ------------------------------------
 config
@@ -343,13 +151,18 @@ config
 	vscode-merge-base = origin/main
 [branch "Sandra"]
 	remote = origin
-	vscode-merge-base = origin/main
 	merge = refs/heads/Sandra
+	vscode-merge-base = origin/Sandra
 
 ------------------------------------
 description
 
 Unnamed repository; edit this file 'description' to name the repository.
+
+------------------------------------
+FETCH_HEAD
+
+f6809e6d247a18aa17ad8e5181f359b7754234ae		branch 'Sandra' of https://github.com/AlexisC183/Setsuzoku
 
 ------------------------------------
 HEAD
@@ -1293,95 +1106,59 @@ exclude
 ------------------------------------
 HEAD
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 Megumi Gamer <sandr@La_Poderosa_uwu.(none)> 1762737669 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
-9fe3db48fa33ed641a69ed12eaf350c8f508ee48 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762750161 -0800	commit: Agrege una carpeta de css, de imagenes y además, modifique el index.html
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762750543 -0800	checkout: moving from main to Sandra
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762752255 -0800	checkout: moving from Sandra to Sandra
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5 7619b9598e85db08c6fdfed475d8b15722391b08 MegumiUwU <l22211927@tectijuana.edu.mx> 1762752317 -0800	commit: Modificación del index.html
-7619b9598e85db08c6fdfed475d8b15722391b08 6956078c0a60c9aff02fb5e966a8a41c8d79811c MegumiUwU <l22211927@tectijuana.edu.mx> 1762760348 -0800	commit: Deje mucho mejor lo que se ve antes de iniciar sesión
-6956078c0a60c9aff02fb5e966a8a41c8d79811c f689b446b4e7fe633feec30d6ca968ae21934771 MegumiUwU <l22211927@tectijuana.edu.mx> 1762760648 -0800	commit: Agregue las fotos
-f689b446b4e7fe633feec30d6ca968ae21934771 f98ca67bfaeb2910c916743ba9c2b571fcc4c473 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851546 -0800	commit: Modifique el registro y algunas barras superiores de las paginas
-f98ca67bfaeb2910c916743ba9c2b571fcc4c473 48f62443430138d0deab507a31a35b2b4def3511 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851639 -0800	commit: Agrege la imagen logo
-48f62443430138d0deab507a31a35b2b4def3511 060bc99923a76d89c61767168009c370217fbda9 MegumiUwU <l22211927@tectijuana.edu.mx> 1763877301 -0800	commit: Modifique un poco la estructura de las carpetas para que funcione para cada grupo de usuario al iniciar sesion
-060bc99923a76d89c61767168009c370217fbda9 060bc99923a76d89c61767168009c370217fbda9 MegumiUwU <l22211927@tectijuana.edu.mx> 1763877459 -0800	checkout: moving from Sandra to Sandra
-060bc99923a76d89c61767168009c370217fbda9 c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf MegumiUwU <l22211927@tectijuana.edu.mx> 1763877639 -0800	commit: Agrege carpetas separadas para cada tipo de grupo en la carpeta front end y una imagen tambien
-c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf 006a58d48b98fc5d38e0a903e86d41348db636b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1763887346 -0800	commit: Continue con todo lo que tiene que ver en el Candidato
-006a58d48b98fc5d38e0a903e86d41348db636b5 5f71005b6053ffab5abebb22b471ebfba302f17a MegumiUwU <l22211927@tectijuana.edu.mx> 1763887494 -0800	commit: Agrege mas archivos
-5f71005b6053ffab5abebb22b471ebfba302f17a 11e5a1170ae2d41b321e977d3db7dcaa2ede5eed MegumiUwU <l22211927@tectijuana.edu.mx> 1763890529 -0800	commit: Agrege paginas del instructor
-11e5a1170ae2d41b321e977d3db7dcaa2ede5eed 9239d09a81c6085fbe01e523ea713261d41da519 MegumiUwU <l22211927@tectijuana.edu.mx> 1763890607 -0800	commit: Agrege paginas del instructor
-9239d09a81c6085fbe01e523ea713261d41da519 7532705038b3b8bc68a85a4c889b790dc897003f MegumiUwU <l22211927@tectijuana.edu.mx> 1763890711 -0800	commit: Agrege una pagina del reclutador
-7532705038b3b8bc68a85a4c889b790dc897003f f0087d35c917aca78437cc581cc295cbea3551b1 MegumiUwU <l22211927@tectijuana.edu.mx> 1763893746 -0800	commit: agrege y modifique las paginas del instructor
-f0087d35c917aca78437cc581cc295cbea3551b1 db7c30901b7107908637fc14a36ab481a538f46b MegumiUwU <l22211927@tectijuana.edu.mx> 1763951076 -0800	commit: Agrege nuevas paginas para el reclutador
-db7c30901b7107908637fc14a36ab481a538f46b e28f413a2950c60b74cd3b3069e147cc358db745 MegumiUwU <l22211927@tectijuana.edu.mx> 1763951156 -0800	commit: Agrege nuevas paginas para el reclutador
-e28f413a2950c60b74cd3b3069e147cc358db745 8834030deb59428a3fbed6cdd5cb5979553d365b MegumiUwU <l22211927@tectijuana.edu.mx> 1763961058 -0800	commit: Termine de agregar los codigos en las paginas del reclutador
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279522 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
+9fe3db48fa33ed641a69ed12eaf350c8f508ee48 f6809e6d247a18aa17ad8e5181f359b7754234ae MegumiUwU <l22211927@tectijuana.edu.mx> 1764279618 -0800	checkout: moving from main to Sandra
+f6809e6d247a18aa17ad8e5181f359b7754234ae 82ef679943d9be32e7bfee146c0a64f29a3da579 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279774 -0800	commit: Cambios de alexis-1 a la rama Sandra
+82ef679943d9be32e7bfee146c0a64f29a3da579 da37867c112556233fad3b1518a88e08df7381ac MegumiUwU <l22211927@tectijuana.edu.mx> 1764280630 -0800	commit: Las fotos de los integrantes y el logo
+da37867c112556233fad3b1518a88e08df7381ac 59fa69820d79c4d2102a3de7f76d033e23396cb8 MegumiUwU <l22211927@tectijuana.edu.mx> 1764281156 -0800	commit: Nuevas imagenes
 
 ------------------------------------
 main
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 Megumi Gamer <sandr@La_Poderosa_uwu.(none)> 1762737669 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
-9fe3db48fa33ed641a69ed12eaf350c8f508ee48 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762750161 -0800	commit: Agrege una carpeta de css, de imagenes y además, modifique el index.html
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279522 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
 
 ------------------------------------
 Sandra
 
-0000000000000000000000000000000000000000 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762750413 -0800	branch: Created from main
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5 7619b9598e85db08c6fdfed475d8b15722391b08 MegumiUwU <l22211927@tectijuana.edu.mx> 1762752317 -0800	commit: Modificación del index.html
-7619b9598e85db08c6fdfed475d8b15722391b08 6956078c0a60c9aff02fb5e966a8a41c8d79811c MegumiUwU <l22211927@tectijuana.edu.mx> 1762760348 -0800	commit: Deje mucho mejor lo que se ve antes de iniciar sesión
-6956078c0a60c9aff02fb5e966a8a41c8d79811c f689b446b4e7fe633feec30d6ca968ae21934771 MegumiUwU <l22211927@tectijuana.edu.mx> 1762760648 -0800	commit: Agregue las fotos
-f689b446b4e7fe633feec30d6ca968ae21934771 f98ca67bfaeb2910c916743ba9c2b571fcc4c473 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851546 -0800	commit: Modifique el registro y algunas barras superiores de las paginas
-f98ca67bfaeb2910c916743ba9c2b571fcc4c473 48f62443430138d0deab507a31a35b2b4def3511 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851639 -0800	commit: Agrege la imagen logo
-48f62443430138d0deab507a31a35b2b4def3511 060bc99923a76d89c61767168009c370217fbda9 MegumiUwU <l22211927@tectijuana.edu.mx> 1763877301 -0800	commit: Modifique un poco la estructura de las carpetas para que funcione para cada grupo de usuario al iniciar sesion
-060bc99923a76d89c61767168009c370217fbda9 c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf MegumiUwU <l22211927@tectijuana.edu.mx> 1763877639 -0800	commit: Agrege carpetas separadas para cada tipo de grupo en la carpeta front end y una imagen tambien
-c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf 006a58d48b98fc5d38e0a903e86d41348db636b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1763887346 -0800	commit: Continue con todo lo que tiene que ver en el Candidato
-006a58d48b98fc5d38e0a903e86d41348db636b5 5f71005b6053ffab5abebb22b471ebfba302f17a MegumiUwU <l22211927@tectijuana.edu.mx> 1763887494 -0800	commit: Agrege mas archivos
-5f71005b6053ffab5abebb22b471ebfba302f17a 11e5a1170ae2d41b321e977d3db7dcaa2ede5eed MegumiUwU <l22211927@tectijuana.edu.mx> 1763890529 -0800	commit: Agrege paginas del instructor
-11e5a1170ae2d41b321e977d3db7dcaa2ede5eed 9239d09a81c6085fbe01e523ea713261d41da519 MegumiUwU <l22211927@tectijuana.edu.mx> 1763890607 -0800	commit: Agrege paginas del instructor
-9239d09a81c6085fbe01e523ea713261d41da519 7532705038b3b8bc68a85a4c889b790dc897003f MegumiUwU <l22211927@tectijuana.edu.mx> 1763890711 -0800	commit: Agrege una pagina del reclutador
-7532705038b3b8bc68a85a4c889b790dc897003f f0087d35c917aca78437cc581cc295cbea3551b1 MegumiUwU <l22211927@tectijuana.edu.mx> 1763893746 -0800	commit: agrege y modifique las paginas del instructor
-f0087d35c917aca78437cc581cc295cbea3551b1 db7c30901b7107908637fc14a36ab481a538f46b MegumiUwU <l22211927@tectijuana.edu.mx> 1763951076 -0800	commit: Agrege nuevas paginas para el reclutador
-db7c30901b7107908637fc14a36ab481a538f46b e28f413a2950c60b74cd3b3069e147cc358db745 MegumiUwU <l22211927@tectijuana.edu.mx> 1763951156 -0800	commit: Agrege nuevas paginas para el reclutador
-e28f413a2950c60b74cd3b3069e147cc358db745 8834030deb59428a3fbed6cdd5cb5979553d365b MegumiUwU <l22211927@tectijuana.edu.mx> 1763961058 -0800	commit: Termine de agregar los codigos en las paginas del reclutador
+0000000000000000000000000000000000000000 f6809e6d247a18aa17ad8e5181f359b7754234ae MegumiUwU <l22211927@tectijuana.edu.mx> 1764279618 -0800	branch: Created from refs/remotes/origin/Sandra
+f6809e6d247a18aa17ad8e5181f359b7754234ae 82ef679943d9be32e7bfee146c0a64f29a3da579 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279774 -0800	commit: Cambios de alexis-1 a la rama Sandra
+82ef679943d9be32e7bfee146c0a64f29a3da579 da37867c112556233fad3b1518a88e08df7381ac MegumiUwU <l22211927@tectijuana.edu.mx> 1764280630 -0800	commit: Las fotos de los integrantes y el logo
+da37867c112556233fad3b1518a88e08df7381ac 59fa69820d79c4d2102a3de7f76d033e23396cb8 MegumiUwU <l22211927@tectijuana.edu.mx> 1764281156 -0800	commit: Nuevas imagenes
 
 ------------------------------------
 HEAD
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 Megumi Gamer <sandr@La_Poderosa_uwu.(none)> 1762737669 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279522 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
 
 ------------------------------------
 Sandra
 
-0000000000000000000000000000000000000000 55ab463e8f5e8004f49dd5ac4a328c115398c3b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1762750575 -0800	update by push
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5 6956078c0a60c9aff02fb5e966a8a41c8d79811c MegumiUwU <l22211927@tectijuana.edu.mx> 1762760400 -0800	update by push
-6956078c0a60c9aff02fb5e966a8a41c8d79811c f689b446b4e7fe633feec30d6ca968ae21934771 MegumiUwU <l22211927@tectijuana.edu.mx> 1762760667 -0800	update by push
-f689b446b4e7fe633feec30d6ca968ae21934771 f98ca67bfaeb2910c916743ba9c2b571fcc4c473 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851591 -0800	update by push
-f98ca67bfaeb2910c916743ba9c2b571fcc4c473 48f62443430138d0deab507a31a35b2b4def3511 MegumiUwU <l22211927@tectijuana.edu.mx> 1762851650 -0800	update by push
-48f62443430138d0deab507a31a35b2b4def3511 060bc99923a76d89c61767168009c370217fbda9 MegumiUwU <l22211927@tectijuana.edu.mx> 1763877483 -0800	update by push
-060bc99923a76d89c61767168009c370217fbda9 c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf MegumiUwU <l22211927@tectijuana.edu.mx> 1763877679 -0800	update by push
-c6d788d3f1fcc3d8252508f2c0f7cd4c9f7bc9cf 006a58d48b98fc5d38e0a903e86d41348db636b5 MegumiUwU <l22211927@tectijuana.edu.mx> 1763887356 -0800	update by push
-006a58d48b98fc5d38e0a903e86d41348db636b5 5f71005b6053ffab5abebb22b471ebfba302f17a MegumiUwU <l22211927@tectijuana.edu.mx> 1763887504 -0800	update by push
-5f71005b6053ffab5abebb22b471ebfba302f17a 11e5a1170ae2d41b321e977d3db7dcaa2ede5eed MegumiUwU <l22211927@tectijuana.edu.mx> 1763890535 -0800	update by push
-11e5a1170ae2d41b321e977d3db7dcaa2ede5eed 9239d09a81c6085fbe01e523ea713261d41da519 MegumiUwU <l22211927@tectijuana.edu.mx> 1763890616 -0800	update by push
-9239d09a81c6085fbe01e523ea713261d41da519 7532705038b3b8bc68a85a4c889b790dc897003f MegumiUwU <l22211927@tectijuana.edu.mx> 1763890717 -0800	update by push
-7532705038b3b8bc68a85a4c889b790dc897003f f0087d35c917aca78437cc581cc295cbea3551b1 MegumiUwU <l22211927@tectijuana.edu.mx> 1763893754 -0800	update by push
-f0087d35c917aca78437cc581cc295cbea3551b1 db7c30901b7107908637fc14a36ab481a538f46b MegumiUwU <l22211927@tectijuana.edu.mx> 1763951082 -0800	update by push
-db7c30901b7107908637fc14a36ab481a538f46b e28f413a2950c60b74cd3b3069e147cc358db745 MegumiUwU <l22211927@tectijuana.edu.mx> 1763951162 -0800	update by push
-e28f413a2950c60b74cd3b3069e147cc358db745 8834030deb59428a3fbed6cdd5cb5979553d365b MegumiUwU <l22211927@tectijuana.edu.mx> 1763961064 -0800	update by push
+f6809e6d247a18aa17ad8e5181f359b7754234ae 82ef679943d9be32e7bfee146c0a64f29a3da579 MegumiUwU <l22211927@tectijuana.edu.mx> 1764279782 -0800	update by push
+82ef679943d9be32e7bfee146c0a64f29a3da579 59fa69820d79c4d2102a3de7f76d033e23396cb8 MegumiUwU <l22211927@tectijuana.edu.mx> 1764281161 -0800	update by push
+
+------------------------------------
+ORIG_HEAD
+
+f6809e6d247a18aa17ad8e5181f359b7754234ae
 
 ------------------------------------
 packed-refs
 
 # pack-refs with: peeled fully-peeled sorted 
+f6809e6d247a18aa17ad8e5181f359b7754234ae refs/remotes/origin/Sandra
+be77339f8be3076a7c47296ce979bea0d11c41d2 refs/remotes/origin/alexis
+4857339795a9c51da8718a03518a64468f0c3898 refs/remotes/origin/alexis-1
 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 refs/remotes/origin/main
 
 ------------------------------------
 main
 
-55ab463e8f5e8004f49dd5ac4a328c115398c3b5
+9fe3db48fa33ed641a69ed12eaf350c8f508ee48
 
 ------------------------------------
 Sandra
 
-8834030deb59428a3fbed6cdd5cb5979553d365b
+59fa69820d79c4d2102a3de7f76d033e23396cb8
 
 ------------------------------------
 HEAD
@@ -1391,15 +1168,7 @@ ref: refs/remotes/origin/main
 ------------------------------------
 Sandra
 
-8834030deb59428a3fbed6cdd5cb5979553d365b
-
-------------------------------------
-.gitignore
-
-imagenes/christopher_garcia.jpg
-imagenes/sergio_sanchez.jpg
-imagenes/sandra_salazar.jpg
-imagenes/Logo.png
+59fa69820d79c4d2102a3de7f76d033e23396cb8
 
 ------------------------------------
 auth.js
@@ -1732,8 +1501,29 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
     // Configurar cabeceras para respuestas JSON
     respuesta.setHeader('Content-Type', 'application/json');
 
+    // API para usuarios
+    if (pathname.startsWith('/api/usuarios')) {
+        if (pathname === '/api/usuarios' && metodo === 'GET') {
+            console.log('Obteniendo todos los usuarios...');
+            // Obtener todos los usuarios
+            try {
+                const usuarios = database.leer_usuarios();
+                console.log(`Usuarios encontrados: ${usuarios.length}`);
+                respuesta.end(JSON.stringify(usuarios));
+            } catch (error) {
+                console.error('Error al leer usuarios:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener los usuarios' }));
+            }
+        } else {
+            console.log(`Ruta no encontrada: ${pathname}`);
+            respuesta.statusCode = 404;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
+        }
+    }
+
     // API para cursos
-    if (pathname.startsWith('/api/cursos')) {
+    else if (pathname.startsWith('/api/cursos')) {
         if (pathname === '/api/cursos' && metodo === 'GET') {
             console.log('Obteniendo todos los cursos...');
             // Obtener todos los cursos
@@ -1791,7 +1581,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para trabajos
+    // APIs para trabajos
     else if (pathname.startsWith('/api/trabajos')) {
         if (pathname === '/api/trabajos' && metodo === 'GET') {
             // Obtener todos los trabajos
@@ -1929,7 +1719,57 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
-    // API para inscripciones a cursos
+    // APIs para inscripciones a cursos
+    else if (pathname === '/api/inscripciones-cursos' && metodo === 'GET') {
+        // Obtener todas las inscripciones
+        try {
+            const inscripciones = database.leer_inscripciones();
+            respuesta.end(JSON.stringify(inscripciones));
+        } catch (error) {
+            console.error('Error al leer inscripciones:', error);
+            respuesta.statusCode = 500;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las inscripciones' }));
+        }
+    }
+    else if (pathname.match(/^\/api\/inscripciones-cursos\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una inscripción
+
+        const inscripcionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer inscripciones existentes
+                let inscripciones = database.leer_inscripciones();
+
+                // Encontrar el índice de la inscripción
+                const indice = inscripciones.findIndex(i => i.id === inscripcionId);
+
+                if (indice !== -1) {
+                    // Actualizar la inscripción
+                    inscripciones[indice] = { ...inscripciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_inscripciones(inscripciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Inscripción no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar inscripción:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la inscripción' })); 
+            }
+        });
+    }
     else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';
@@ -1965,7 +1805,8 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     usuario_id: datosInscripcion.usuario_id,
                     curso_id: datosInscripcion.curso_id,
                     fecha_inscripcion: new Date().toISOString(),
-                    estado: "en-curso"
+                    estado: "en-curso",
+                    progreso: 0
                 };
 
                 // Agregar a la lista
@@ -1983,7 +1824,18 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         });
     }
 
-    // API para postulaciones a trabajos
+    // APIs para postulaciones a trabajos
+    else if (pathname === '/api/postulaciones' && metodo === 'GET') {
+        // Obtener todas las postulaciones
+        try {
+            const postulaciones = database.leer_postulaciones();
+            respuesta.end(JSON.stringify(postulaciones));
+        } catch (error) {
+            console.error('Error al leer postulaciones:', error);
+            respuesta.statusCode = 500;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las postulaciones' }));
+        }
+    }
     else if (pathname === '/api/postularse-trabajo' && metodo === 'POST') {
         let cuerpo = '';
 
@@ -2035,6 +1887,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             }
         });
     }
+    else if (pathname.match(/^\/api\/postulaciones\/\d+$/) && metodo === 'PUT') {
+        // Actualizar una postulación
+
+        const postulacionId = parseInt(pathname.split('/').pop());
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datosActualizados = JSON.parse(cuerpo);
+
+                // Leer postulaciones existentes
+                let postulaciones = database.leer_postulaciones();
+
+                // Encontrar el índice de la postulación
+                const indice = postulaciones.findIndex(p => p.id === postulacionId);
+
+                if (indice !== -1) {
+                    // Actualizar la postulación
+                    postulaciones[indice] = { ...postulaciones[indice], ...datosActualizados };
+
+                    // Guardar en el archivo
+                    database.escribir_postulaciones(postulaciones);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Postulación actualizada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Postulación no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al actualizar postulación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la postulación' })); 
+            }
+        });
+    }
 
     else {
         console.log(`Ruta no encontrada: ${pathname}`);
@@ -2082,14 +1973,16 @@ function servir_archivo(respuesta, ruta_completa) {
 function es_ruta_html_frontend(ruta) {
     // Lista de archivos HTML en el frontend
     const archivos_html_frontend = [
+        '/acerca_de.html',
+        '/ayuda.html',
+        '/contacto.html',
+        '/cursos.html',
+        '/faq.html',
         '/index.html',
         '/inicio_sesion.html',
         '/registro.html',
-        '/perfil.html',
-        '/postulaciones.html',
-        '/cursos_usuario.html',
-        '/trabajos.html',
-        '/cursos.html'
+        '/terminos.html',
+        '/trabajos.html'
     ];
 
     return archivos_html_frontend.includes(ruta);
@@ -2351,8 +2244,8 @@ cursos.json
     "titulo": "Desarrollo Web con JavaScript",
     "descripcion": "Aprende a desarrollar aplicaciones web modernas utilizando JavaScript, HTML5 y CSS3.",
     "instructor": "Carlos Rodríguez",
-    "instructor_id": 3,
-    "duracion": "8 semanas",
+    "instructor_id": 1763876370902,
+    "duracion": "144 horas",
     "precio": "$99.99",
     "imagen": "javascript",
     "fecha_creacion": "2023-06-15T10:30:00.000Z",
@@ -2364,7 +2257,7 @@ cursos.json
     "descripcion": "Curso completo sobre los principios fundamentales del diseño de experiencia de usuario.",
     "instructor": "Ana Martínez",
     "instructor_id": 8,
-    "duracion": "6 semanas",
+    "duracion": "108 horas",
     "precio": "$79.99",
     "imagen": "uxui",
     "fecha_creacion": "2023-06-10T14:20:00.000Z",
@@ -2376,7 +2269,7 @@ cursos.json
     "descripcion": "Domina el uso de Python para el análisis de datos, visualización y machine learning.",
     "instructor": "Miguel Ángel López",
     "instructor_id": 5,
-    "duracion": "10 semanas",
+    "duracion": "180 horas",
     "precio": "$129.99",
     "imagen": "python",
     "fecha_creacion": "2023-06-20T09:45:00.000Z",
@@ -2388,7 +2281,7 @@ cursos.json
     "descripcion": "Aprende a desarrollar estrategias de marketing digital efectivas para impulsar el crecimiento de negocios.",
     "instructor": "Laura Gómez",
     "instructor_id": 7,
-    "duracion": "7 semanas",
+    "duracion": "126 horas",
     "precio": "$89.99",
     "imagen": "marketing",
     "fecha_creacion": "2023-06-18T16:30:00.000Z",
@@ -4260,7 +4153,7 @@ IndexCandidato.html
                                 <div class="opcion-icono">🔍</div>
                                 <h3 class="opcion-titulo">Buscar Trabajos</h3>
                                 <p class="opcion-descripcion">Explora nuevas oportunidades laborales</p>
-                                <a href="../Trabajos.html" class="btn" id="enlace-trabajos-principal">Buscar Trabajos</a>
+                                <a href="../trabajos.html" class="btn" id="enlace-trabajos-principal">Buscar Trabajos</a>
                             </div>
                         </div>
                     </div>
@@ -5044,105 +4937,102 @@ Miscursos.html
         }
 
         // Función para cargar los cursos del usuario
-        function cargarCursosUsuario(usuario) {
+        async function cargarCursosUsuario(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando tus cursos...</div>';
             
-            // Simulación de datos de cursos del usuario (en una aplicación real, esto vendría de una API)
-            const cursosUsuarioSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    estado: "en-curso",
-                    imagen: "javascript",
-                    fecha_inscripcion: "2023-06-15"
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    estado: "completado",
-                    imagen: "uxui",
-                    fecha_inscripcion: "2023-05-10"
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    estado: "en-curso",
-                    imagen: "python",
-                    fecha_inscripcion: "2023-06-20"
-                }
-            ];
+            // Carga síncrona
+            const [ rawCursos, rawInscripciones ] = await Promise.all([ fetch('/api/cursos'), fetch('/api/inscripciones-cursos') ]);
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Verificar si el usuario tiene cursos
-                if (cursosUsuarioSimulados.length === 0) {
-                    listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="cursos.html">Explora nuestros cursos</a></div>';
-                    return;
+            // Procesando respuestas
+            const [ datosCursos, datosInscripciones ] = await Promise.all([ rawCursos.json(), rawInscripciones.json() ]);
+
+            // Filtrar inscripciones del usuario
+            const inscripcionesUsuario = datosInscripciones.filter(inscripcion => inscripcion.usuario_id === usuario.id);
+
+            // Verificar si el usuario tiene inscripciones
+            if (inscripcionesUsuario.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="../cursos.html">Explora nuestros cursos</a></div>';
+                return;
+            }
+
+            // Obtener los cursos del usuario
+            const inscripcionesConCurso = inscripcionesUsuario.map(inscripcion => {
+                const curso = datosCursos.find(c => c.id === inscripcion.curso_id);
+
+                if (curso) {
+                    return {
+                        ...inscripcion,
+                        titulo: curso.titulo,
+                        descripcion: curso.descripcion,
+                        instructor: curso.instructor,
+                        duracion: curso.duracion,
+                        imagen: curso.imagen
+                    };
+                }
+                else {
+                    return null;
+                }
+            }).filter(ic => ic); // Filtrar inscripciones con curso existente
+
+            // Verificar si el usuario tiene cursos
+            if (inscripcionesConCurso.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-vacio">Aún no te has inscrito a ningún curso. <a href="cursos.html">Explora nuestros cursos</a></div>';
+                return;
+            }
+            
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Mostrar cursos del usuario
+            inscripcionesConCurso.forEach(curso => {
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
+                
+                // Determinar la URL de la imagen
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
+                
+                // Determinar la clase CSS según el estado
+                let estadoClass = 'estado-en-curso';
+                let estadoTexto = 'En curso';
+                if (curso.estado === 'completado') {
+                    estadoClass = 'estado-completado';
+                    estadoTexto = 'Completado';
+                } else if (curso.estado === 'cancelado') {
+                    estadoClass = 'estado-cancelado';
+                    estadoTexto = 'Cancelado';
                 }
                 
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
-                
-                // Mostrar cursos del usuario
-                cursosUsuarioSimulados.forEach(curso => {
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    
-                    // Determinar la URL de la imagen
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-en-curso';
-                    let estadoTexto = 'En curso';
-                    if (curso.estado === 'completado') {
-                        estadoClass = 'estado-completado';
-                        estadoTexto = 'Completado';
-                    } else if (curso.estado === 'cancelado') {
-                        estadoClass = 'estado-cancelado';
-                        estadoTexto = 'Cancelado';
-                    }
-                    
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">${curso.instructor}</span>
-                                <span>${curso.duracion}</span>
-                            </div>
-                            <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
-                            <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">${curso.instructor}</span>
+                            <span>${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de ver curso
-                    const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
-                    botonVerCurso.addEventListener('click', function() {
-                        // En una aplicación real, aquí se redirigiría a la página del curso
-                        alert(`Redirigiendo al curso: ${curso.titulo}`);
-                    });
-                });
+                        <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
+                        <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(cursosUsuarioSimulados);
-            }, 1000); // Simular delay de carga
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de ver curso
+                const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
+                botonVerCurso.addEventListener('click', function() {
+                    // En una aplicación real, aquí se redirigiría a la página del curso
+                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(inscripcionesConCurso);
         }
 
         // Función para configurar los filtros
@@ -5664,68 +5554,9 @@ Mispostulaciones.html
             window.history.back();
         }
 
-        // Datos de ejemplo para simular postulaciones
-        const datosPostulaciones = [
-            {
-                id: 1,
-                usuario_id: 1,
-                trabajo_id: 1,
-                estado: "pendiente",
-                fecha_postulacion: "2023-10-15",
-                mensaje: "Me interesa mucho esta oportunidad y creo que mis habilidades son adecuadas para el puesto."
-            },
-            {
-                id: 2,
-                usuario_id: 1,
-                trabajo_id: 2,
-                estado: "revisada",
-                fecha_postulacion: "2023-10-10",
-                mensaje: "Tengo experiencia en proyectos similares y estoy emocionado por la posibilidad de trabajar con su equipo."
-            },
-            {
-                id: 3,
-                usuario_id: 1,
-                trabajo_id: 3,
-                estado: "aceptada",
-                fecha_postulacion: "2023-10-05",
-                mensaje: ""
-            },
-            {
-                id: 4,
-                usuario_id: 1,
-                trabajo_id: 4,
-                estado: "rechazada",
-                fecha_postulacion: "2023-10-01",
-                mensaje: "Aunque no fui seleccionado, agradezco la oportunidad y espero futuras colaboraciones."
-            }
-        ];
-
-        const datosTrabajos = [
-            {
-                id: 1,
-                titulo: "Desarrollador Frontend Senior",
-                empresa: "Tech Solutions Inc.",
-                descripcion: "Buscamos un desarrollador frontend con experiencia en React, Vue o Angular para unirse a nuestro equipo de desarrollo de productos innovadores."
-            },
-            {
-                id: 2,
-                titulo: "Diseñador UX/UI",
-                empresa: "Creative Studio",
-                descripcion: "Estamos buscando un diseñador UX/UI creativo y apasionado para diseñar experiencias de usuario excepcionales para nuestras aplicaciones móviles y web."
-            },
-            {
-                id: 3,
-                titulo: "Analista de Datos",
-                empresa: "Data Insights Corp",
-                descripcion: "Únete a nuestro equipo de análisis de datos para ayudar a las empresas a tomar decisiones basadas en datos mediante el uso de herramientas avanzadas de análisis."
-            },
-            {
-                id: 4,
-                titulo: "Gerente de Proyecto",
-                empresa: "Project Masters",
-                descripcion: "Buscamos un gerente de proyecto con experiencia en metodologías ágiles para liderar equipos multidisciplinarios en proyectos de tecnología."
-            }
-        ];
+        // Datos a consultar más tarde
+        let datosPostulaciones = [];
+        let datosTrabajos = [];
 
         // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -5773,115 +5604,126 @@ Mispostulaciones.html
         }
 
         // Función para cargar las postulaciones del usuario
-        function cargarPostulaciones(usuario) {
+        async function cargarPostulaciones(usuario) {
             const listaPostulaciones = document.getElementById('lista-postulaciones');
             
             // Mostrar mensaje de carga
             listaPostulaciones.innerHTML = '<div class="mensaje-carga">Cargando tus postulaciones...</div>';
             
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Filtrar postulaciones del usuario
-                const postulacionesUsuario = datosPostulaciones.filter(postulacion => postulacion.usuario_id === usuario.id);
+            // Carga síncrona
+            const [ rawPostulaciones, rawTrabajos ] = await Promise.all([ fetch('/api/postulaciones'), fetch('/api/trabajos') ]);
+            datosPostulaciones = await rawPostulaciones.json();
+            datosTrabajos = await rawTrabajos.json();
+
+            // Filtrar postulaciones del usuario
+            const postulacionesUsuario = datosPostulaciones.filter(postulacion => postulacion.usuario_id === usuario.id);
+            
+            // Verificar si el usuario tiene postulaciones
+            if (postulacionesUsuario.length === 0) {
+                listaPostulaciones.innerHTML = '<div class="mensaje-vacio">Aún no te has postulado a ningún trabajo. <a href="../trabajos.html">Explora nuestras ofertas</a></div>';
+                return;
+            }
+            
+            // Obtener los trabajos del usuario
+            const postulacionesConTrabajo = postulacionesUsuario.map(postulacion => {
+                const trabajo = datosTrabajos.find(t => t.id === postulacion.trabajo_id);
+                return {
+                    ...postulacion,
+                    trabajo: trabajo
+                };
+            }).filter(postulacion => postulacion.trabajo); // Filtrar postulaciones con trabajo existente
+            
+            // Verificar si se encontraron trabajos
+            if (postulacionesConTrabajo.length === 0) {
+                listaPostulaciones.innerHTML = '<div class="mensaje-error">No se encontraron los trabajos a los que te postulaste.</div>';
+                return;
+            }
+            
+            // Limpiar lista de postulaciones
+            listaPostulaciones.innerHTML = '';
+            
+            // Mostrar postulaciones del usuario
+            postulacionesConTrabajo.forEach(postulacion => {
+                const postulacionElemento = document.createElement('div');
+                postulacionElemento.className = 'postulacion';
                 
-                // Verificar si el usuario tiene postulaciones
-                if (postulacionesUsuario.length === 0) {
-                    listaPostulaciones.innerHTML = '<div class="mensaje-vacio">Aún no te has postulado a ningún trabajo. <a href="trabajos.html">Explora nuestras ofertas</a></div>';
-                    return;
+                // Determinar la clase CSS según el estado
+                let estadoClass = 'estado-pendiente';
+                if (postulacion.estado === 'revisada') {
+                    estadoClass = 'estado-revisada';
+                } else if (postulacion.estado === 'aceptada') {
+                    estadoClass = 'estado-aceptada';
+                } else if (postulacion.estado === 'rechazada') {
+                    estadoClass = 'estado-rechazada';
                 }
                 
-                // Obtener los trabajos del usuario
-                const postulacionesConTrabajo = postulacionesUsuario.map(postulacion => {
-                    const trabajo = datosTrabajos.find(t => t.id === postulacion.trabajo_id);
-                    return {
-                        ...postulacion,
-                        trabajo: trabajo
-                    };
-                }).filter(postulacion => postulacion.trabajo); // Filtrar postulaciones con trabajo existente
-                
-                // Verificar si se encontraron trabajos
-                if (postulacionesConTrabajo.length === 0) {
-                    listaPostulaciones.innerHTML = '<div class="mensaje-error">No se encontraron los trabajos a los que te postulaste.</div>';
-                    return;
-                }
-                
-                // Limpiar lista de postulaciones
-                listaPostulaciones.innerHTML = '';
-                
-                // Mostrar postulaciones del usuario
-                postulacionesConTrabajo.forEach(postulacion => {
-                    const postulacionElemento = document.createElement('div');
-                    postulacionElemento.className = 'postulacion';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-pendiente';
-                    if (postulacion.estado === 'revisada') {
-                        estadoClass = 'estado-revisada';
-                    } else if (postulacion.estado === 'aceptada') {
-                        estadoClass = 'estado-aceptada';
-                    } else if (postulacion.estado === 'rechazada') {
-                        estadoClass = 'estado-rechazada';
-                    }
-                    
-                    postulacionElemento.innerHTML = `
-                        <div class="encabezado-postulacion">
-                            <div>
-                                <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
-                                <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
-                            </div>
-                            <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
+                postulacionElemento.innerHTML = `
+                    <div class="encabezado-postulacion">
+                        <div>
+                            <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
+                            <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
                         </div>
-                        <div class="cuerpo-postulacion">
-                            <p class="descripcion-trabajo">${postulacion.trabajo.descripcion}</p>
-                            <div class="detalles-postulacion">
-                                <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
-                            </div>
-                            ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
-                            <div class="acciones-postulacion">
-                                <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
-                                ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
-                                    `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
-                            </div>
+                        <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
+                    </div>
+                    <div class="cuerpo-postulacion">
+                        <p class="descripcion-trabajo">${postulacion.trabajo.descripcion}</p>
+                        <div class="detalles-postulacion">
+                            <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
                         </div>
-                    `;
-                    
-                    listaPostulaciones.appendChild(postulacionElemento);
-                    
-                    // Configurar evento para el botón de ver trabajo
-                    const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                    botonVerTrabajo.addEventListener('click', function() {
-                        // Redirigir a la página del trabajo
-                        window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                    });
-                    
-                    // Configurar evento para el botón de cancelar postulación (si existe)
-                    const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
-                    if (botonCancelar) {
-                        botonCancelar.addEventListener('click', function() {
-                            if (confirm('¿Estás seguro de que deseas cancelar esta postulación?')) {
-                                cancelarPostulacion(postulacion.id);
-                            }
-                        });
-                    }
+                        ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
+                        <div class="acciones-postulacion">
+                            <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
+                            ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
+                                `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
+                        </div>
+                    </div>
+                `;
+                
+                listaPostulaciones.appendChild(postulacionElemento);
+                
+                // Configurar evento para el botón de ver trabajo
+                const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
+                botonVerTrabajo.addEventListener('click', function() {
+                    // Redirigir a la página del trabajo
+                    window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
                 });
                 
-                // Configurar filtros
-                configurarFiltros(postulacionesConTrabajo);
-            }, 1000); // Simular tiempo de carga
+                // Configurar evento para el botón de cancelar postulación (si existe)
+                const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
+                if (botonCancelar) {
+                    botonCancelar.addEventListener('click', function() {
+                        if (confirm('¿Estás seguro de que deseas cancelar esta postulación?')) {
+                            cancelarPostulacion(postulacion.id);
+                        }
+                    });
+                }
+            });
+            
+            // Configurar filtros
+            configurarFiltros(postulacionesConTrabajo);
         }
 
         // Función para cancelar una postulación
         function cancelarPostulacion(postulacionId) {
-            // En una aplicación real, aquí se enviaría una petición al servidor para cancelar la postulación
-            // Por ahora, simulamos la cancelación
-            const index = datosPostulaciones.findIndex(p => p.id === postulacionId);
-            if (index !== -1) {
-                datosPostulaciones[index].estado = 'cancelada';
-                alert('Postulación cancelada correctamente');
-                window.location.reload();
-            } else {
-                alert('Error al cancelar la postulación. Por favor, intenta de nuevo más tarde.');
-            }
+            // Recuperando objeto de tipo postulación seleccionado
+            const postulacion = datosPostulaciones.find(p => p.id === postulacionId);
+
+            // Estableciendo postulación como cancelada
+            postulacion.estado = 'cancelada';
+
+            // Petición al servidor para cancelar
+            fetch(`/api/postulaciones/${ postulacionId }`, {
+                method : 'PUT',
+                body : JSON.stringify(postulacion)
+            })
+            .then(raw => raw.json())
+            .then(res => {
+                alert(res.mensaje);
+
+                if (res.exito) {
+                    window.location.reload();
+                }
+            });
         }
 
         // Función para configurar los filtros
@@ -5995,7 +5837,7 @@ Notificaciones.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Notificaciones - Setsuzoku</title>
-     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../../css/fuentes.css">
 
     <style>
@@ -6557,424 +6399,12 @@ Notificaciones.html
         </div>
     </div>
 
+    <!-- CONEXIÓN A ARCHIVO JAVASCRIPT -->
+    <script src="../../js/notificaciones.js"></script>
+    
     <script>
-        // VARIABLES GLOBALES
-        let notificaciones = [];
-        let notificaciones_filtradas = [];
-        let pagina_actual = 1;
-        let notificaciones_por_pagina = 10;
-        let vista_actual = 'lista';
-
-        // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
-        function volverPaginaAnterior() {
-            window.history.back();
-        }
-
-        // FUNCIONES AUXILIARES
-        function formatear_fecha(fecha_iso) {
-            const fecha = new Date(fecha_iso);
-            const ahora = new Date();
-            const diferencia = ahora - fecha;
-            
-            // Si es hoy
-            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
-                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si fue ayer
-            const ayer = new Date(ahora);
-            ayer.setDate(ayer.getDate() - 1);
-            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
-                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si es esta semana
-            if (diferencia < 604800000) {
-                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si no, mostrar fecha completa
-            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-        }
-
-        function obtener_tipo_notificacion(titulo) {
-            const titulo_lower = titulo.toLowerCase();
-            if (titulo_lower.includes('vacante') || titulo_lower.includes('trabajo')) return 'vacante';
-            if (titulo_lower.includes('entrevista')) return 'entrevista';
-            if (titulo_lower.includes('curso')) return 'curso';
-            if (titulo_lower.includes('postulacion')) return 'postulacion';
-            return 'sistema';
-        }
-
-        function guardar_notificaciones() {
-            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-        }
-
-        // FUNCIONES DE GESTIÓN DE NOTIFICACIONES
-        function cargar_notificaciones() {
-            const notificaciones_guardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificaciones_guardadas) {
-                notificaciones = JSON.parse(notificaciones_guardadas);
-            } else {
-                // Notificaciones de ejemplo
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nueva vacante disponible",
-                        mensaje: "Tech Solutions está buscando Desarrollador Frontend con experiencia en React y Node.js",
-                        fecha: new Date().toISOString(),
-                        leida: false,
-                        tipo: 'vacante'
-                    },
-                    {
-                        id: 2,
-                        titulo: "Entrevista programada",
-                        mensaje: "Tienes una entrevista programada para el viernes a las10:00 AM con Digital Marketing Co.",
-                        fecha: new Date(Date.now() - 86400000).toISOString(),
-                        leida: false,
-                        tipo: 'entrevista'
-                    },
-                    {
-                        id: 3,
-                        titulo: "Curso actualizado",
-                        mensaje: "El curso 'Desarrollo Web Completo' ha sido actualizado con nuevo contenido sobre React 18",
-                        fecha: new Date(Date.now() - 172800000).toISOString(),
-                        leida: true,
-                        tipo: 'curso'
-                    },
-                    {
-                        id: 4,
-                        titulo: "Postulación recibida",
-                        mensaje: "Tu postulación para el puesto de Desarrollador Junior ha sido recibida exitosamente",
-                        fecha: new Date(Date.now() - 259200000).toISOString(),
-                        leida: true,
-                        tipo: 'postulacion'
-                    },
-                    {
-                        id: 5,
-                        titulo: "Bienvenido a Setsuzoku",
-                        mensaje: "Gracias por unirte a nuestra plataforma. Explora las oportunidades que tenemos para ti",
-                        fecha: new Date(Date.now() - 604800000).toISOString(),
-                        leida: true,
-                        tipo: 'sistema'
-                    }
-                ];
-                
-                // Asignar tipos si no existen
-                notificaciones = notificaciones.map(notif => ({
-                    ...notif,
-                    tipo: notif.tipo || obtener_tipo_notificacion(notif.titulo)
-                }));
-                
-                guardar_notificaciones();
-            }
-            
-            notificaciones_filtradas = [...notificaciones];
-        }
-
-        function aplicar_filtros() {
-            const estado = document.getElementById('filtro-estado').value;
-            const tipo = document.getElementById('filtro-tipo').value;
-            const fecha = document.getElementById('filtro-fecha').value;
-            const busqueda = document.getElementById('filtro-busqueda').value.toLowerCase();
-            
-            notificaciones_filtradas = notificaciones.filter(notif => {
-                // Filtro por estado
-                if (estado === 'no-leidas' && notif.leida) return false;
-                if (estado === 'leidas' && !notif.leida) return false;
-                
-                // Filtro por tipo
-                if (tipo !== 'todos' && notif.tipo !== tipo) return false;
-                
-                // Filtro por fecha
-                const notif_fecha = new Date(notif.fecha);
-                const ahora = new Date();
-                
-                if (fecha === 'hoy') {
-                    if (notif_fecha.toDateString() !== ahora.toDateString()) return false;
-                } else if (fecha === 'semana') {
-                    const semana_pasada = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < semana_pasada) return false;
-                } else if (fecha === 'mes') {
-                    const mes_pasado = new Date(ahora.getTime() - 30 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < mes_pasado) return false;
-                }
-                
-                // Filtro por búsqueda
-                if (busqueda && !notif.titulo.toLowerCase().includes(busqueda) && 
-                    !notif.mensaje.toLowerCase().includes(busqueda)) {
-                    return false;
-                }
-                
-                return true;
-            });
-            
-            pagina_actual = 1;
-            renderizar_notificaciones();
-        }
-
-        function renderizar_notificaciones() {
-            const contenedor = document.getElementById('notificaciones-contenido');
-            const contador_mostradas = document.getElementById('contador-mostradas');
-            const contador_total = document.getElementById('contador-total');
-            
-            // Actualizar contadores
-            contador_total.textContent = notificaciones_filtradas.length;
-            
-            if (notificaciones_filtradas.length === 0) {
-                contenedor.innerHTML = `
-                    <div class="estado-vacio">
-                        <div class="estado-vacio-icono">🔔</div>
-                        <div class="estado-vacio-titulo">No hay notificaciones</div>
-                        <div class="estado-vacio-mensaje">No se encontraron notificaciones con los filtros aplicados</div>
-                    </div>
-                `;
-                contador_mostradas.textContent = '0';
-                document.getElementById('paginacion').innerHTML = '';
-                return;
-            }
-            
-            // Calcular paginación
-            const inicio = (pagina_actual - 1) * notificaciones_por_pagina;
-            const fin = inicio + notificaciones_por_pagina;
-            const notificaciones_pagina = notificaciones_filtradas.slice(inicio, fin);
-            
-            contador_mostradas.textContent = notificaciones_pagina.length;
-            
-            // Renderizar según vista actual
-            if (vista_actual === 'lista') {
-                renderizar_vista_lista(notificaciones_pagina, contenedor);
-            } else {
-                renderizar_vista_tarjeta(notificaciones_pagina, contenedor);
-            }
-            
-            // Renderizar paginación
-            renderizar_paginacion();
-        }
-
-        function renderizar_vista_lista(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-lista">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-item ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_vista_tarjeta(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-grid">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-tarjeta ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_paginacion() {
-            const contenedor = document.getElementById('paginacion');
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            
-            if (total_paginas <= 1) {
-                contenedor.innerHTML = '';
-                return;
-            }
-            
-            let html = '';
-            
-            // Botón anterior
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual - 1})" ${pagina_actual === 1 ? 'disabled' : ''}>Anterior</button>`;
-            
-            // Números de página
-            for (let i = 1; i <= total_paginas; i++) {
-                if (i === 1 || i === total_paginas || (i >= pagina_actual - 1 && i <= pagina_actual + 1)) {
-                    html += `<button class="paginacion-btn ${i === pagina_actual ? 'activo' : ''}" onclick="cambiar_pagina(${i})">${i}</button>`;
-                } else if (i === pagina_actual - 2 || i === pagina_actual + 2) {
-                    html += '<span>...</span>';
-                }
-            }
-            
-            // Botón siguiente
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual + 1})" ${pagina_actual === total_paginas ? 'disabled' : ''}>Siguiente</button>`;
-            
-            contenedor.innerHTML = html;
-        }
-
-        function cambiar_pagina(pagina) {
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            if (pagina < 1 || pagina > total_paginas) return;
-            
-            pagina_actual = pagina;
-            renderizar_notificaciones();
-            
-            // Scroll al inicio de la lista
-            document.querySelector('.notificaciones-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggle_leida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion) {
-                notificacion.leida = !notificacion.leida;
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function eliminar_notificacion(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
-                notificaciones = notificaciones.filter(n => n.id !== id);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function marcar_todas_leidas() {
-            const no_leidas = notificaciones.filter(n => !n.leida);
-            if (no_leidas.length === 0) {
-                alert('No hay notificaciones sin leer');
-                return;
-            }
-            
-            if (confirm(`¿Marcar ${no_leidas.length} notificaciones como leídas?`)) {
-                notificaciones.forEach(n => n.leida = true);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_leidas() {
-            const leidas = notificaciones.filter(n => n.leida);
-            if (leidas.length === 0) {
-                alert('No hay notificaciones leídas para eliminar');
-                return;
-            }
-            
-            if (confirm(`¿Eliminar ${leidas.length} notificaciones leídas?`)) {
-                notificaciones = notificaciones.filter(n => !n.leida);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_filtros() {
-            document.getElementById('filtro-estado').value = 'todas';
-            document.getElementById('filtro-tipo').value = 'todos';
-            document.getElementById('filtro-fecha').value = 'todas';
-            document.getElementById('filtro-busqueda').value = '';
-            aplicar_filtros();
-        }
-
-        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
-        function verificarSesion() {
-            const usuarioStr = sessionStorage.getItem('usuario');
-            console.log('Datos en sessionStorage:', usuarioStr);
-
-            if (usuarioStr) {
-                try {
-                    const usuario = JSON.parse(usuarioStr);
-                    console.log('Usuario parseado:', usuario);
-                    
-                    // Verificar que tenga las propiedades mínimas necesarias
-                    if (usuario && usuario.nombre && usuario.grupo) {
-                        // Sesión válida encontrada
-                        return true;
-                    } else {
-                        console.error('Usuario incompleto:', usuario);
-                        sessionStorage.removeItem('usuario');
-                    }
-                } catch (error) {
-                    console.error('Error parseando usuario:', error);
-                    sessionStorage.removeItem('usuario');
-                }
-            }
-            
-            // No hay sesión válida - redirigir a la página de inicio
-            window.location.href = '../index.html';
-            return false;
-        }
-
         // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar sesión
-            verificarSesion();
-            
-            // Cargar notificaciones
-            cargar_notificaciones();
-            
-            // Renderizar notificaciones iniciales
-            renderizar_notificaciones();
-            
-            // Configurar evento para el botón de volver
-            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
-            
-            // Configurar eventos
-            document.getElementById('btn-marcar-todas-leidas').addEventListener('click', marcar_todas_leidas);
-            document.getElementById('btn-limpiar-leidas').addEventListener('click', limpiar_leidas);
-            document.getElementById('btn-aplicar-filtros').addEventListener('click', aplicar_filtros);
-            document.getElementById('btn-limpiar-filtros').addEventListener('click', limpiar_filtros);
-            
-            // Configurar vista toggle
-            document.getElementById('vista-lista').addEventListener('click', function() {
-                vista_actual = 'lista';
-                this.classList.add('activo');
-                document.getElementById('vista-tarjeta').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            document.getElementById('vista-tarjeta').addEventListener('click', function() {
-                vista_actual = 'tarjeta';
-                this.classList.add('activo');
-                document.getElementById('vista-lista').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            // Configurar búsqueda en tiempo real
-            document.getElementById('filtro-busqueda').addEventListener('input', function() {
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(aplicar_filtros, 500);
-            });
-        });
+        document.addEventListener('DOMContentLoaded', inicializar);
     </script>
 </body>
 </html>
@@ -9043,126 +8473,101 @@ cursos.html
         }
 
         // Función para cargar cursos desde la API
-        function cargarCursos(usuario) {
+        async function cargarCursos(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando cursos...</div>';
             
-            // Simulación de datos de cursos (en una aplicación real, esto vendría de una API)
-            const cursosSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    precio: "$299",
-                    imagen: "javascript"
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    precio: "$249",
-                    imagen: "uxui"
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    precio: "$399",
-                    imagen: "python"
-                },
-                {
-                    id: 4,
-                    titulo: "Marketing Digital Avanzado",
-                    descripcion: "Estrategias avanzadas de marketing digital para empresas y emprendedores.",
-                    instructor: "Roberto Sánchez",
-                    duracion: "35 horas",
-                    precio: "$279",
-                    imagen: "marketing"
-                }
-            ];
+            // Consultando API cursos
+            const rawCursos = await fetch('/api/cursos');
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
+            // Procesando respuesta
+            const cursosReales = await rawCursos.json();
+
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Verificar si hay cursos
+            if (cursosReales.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
+                return;
+            }
+            
+            // Llenar el filtro de instructores
+            const selectInstructor = document.getElementById('filtrar-instructor');
+            const instructores = [...new Set(cursosReales.map(curso => curso.instructor))];
+            
+            instructores.forEach(instructor => {
+                const option = document.createElement('option');
+                option.value = instructor;
+                option.textContent = instructor;
+                selectInstructor.appendChild(option);
+            });
+            
+            // Mostrar cursos
+            cursosReales.forEach(curso => {
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
                 
-                // Verificar si hay cursos
-                if (cursosSimulados.length === 0) {
-                    listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
-                    return;
-                }
+                // Determinar la URL de la imagen
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
                 
-                // Llenar el filtro de instructores
-                const selectInstructor = document.getElementById('filtrar-instructor');
-                const instructores = [...new Set(cursosSimulados.map(curso => curso.instructor))];
+                // Verificar si hay usuario para habilitar/deshabilitar botón
+                const botonTexto = usuario ? "Inscribirse" : "Iniciar sesión para inscribirse";
+                const botonDisabled = !usuario;
                 
-                instructores.forEach(instructor => {
-                    const option = document.createElement('option');
-                    option.value = instructor;
-                    option.textContent = instructor;
-                    selectInstructor.appendChild(option);
-                });
-                
-                // Mostrar cursos
-                cursosSimulados.forEach(curso => {
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    
-                    // Determinar la URL de la imagen
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Verificar si hay usuario para habilitar/deshabilitar botón
-                    const botonTexto = usuario ? "Inscribirse" : "Iniciar sesión para inscribirse";
-                    const botonDisabled = !usuario;
-                    
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">${curso.instructor}</span>
-                                <span>${curso.duracion}</span>
-                            </div>
-                            <div class="precio-curso">${curso.precio}</div>
-                            <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
-                                ${botonTexto}
-                            </button>
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">${curso.instructor}</span>
+                            <span>${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de inscribirse
-                    const botonInscribirse = cursoElemento.querySelector('.boton-inscribirse');
-                    botonInscribirse.addEventListener('click', function() {
-                        if (usuario) {
-                            inscribirseCurso(usuario, curso.id);
-                        } else {
-                            window.location.href = 'inicio_sesion.html';
-                        }
-                    });
-                });
+                        <div class="precio-curso">${curso.precio}</div>
+                        <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
+                            ${botonTexto}
+                        </button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(cursosSimulados, usuario);
-            }, 1000); // Simular delay de carga
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de inscribirse
+                const botonInscribirse = cursoElemento.querySelector('.boton-inscribirse');
+                botonInscribirse.addEventListener('click', function() {
+                    if (usuario) {
+                        inscribirseCurso(usuario, curso.id);
+                    } else {
+                        window.location.href = 'inicio_sesion.html';
+                    }
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(cursosReales, usuario);
         }
 
         // Función para inscribirse a un curso
         function inscribirseCurso(usuario, cursoId) {
-            // Simulación de inscripción
-            alert(`¡Te has inscrito al curso correctamente! (Usuario: ${usuario.nombre}, Curso ID: ${cursoId})`);
+            // Datos requeridos por la API para inscripciones a cursos
+            // Ver backend/server.js a partir de
+            // pathname === '/api/inscribir-curso' && metodo === 'POST'
+            const datosInscripcion = {
+                usuario_id : usuario.id,
+                curso_id : cursoId,
+            };
+
+            fetch('/api/inscribir-curso', {
+                method : 'POST',
+                body : JSON.stringify(datosInscripcion)
+            })
+            .then(raw => raw.json())
+            .then(res => alert(res.mensaje));
         }
 
         // Función para configurar los filtros
@@ -12087,20 +11492,31 @@ Crearcurso.html
             // Obtener cursos existentes o crear array vacío
             const cursosGuardados = localStorage.getItem('cursos');
             let cursos = cursosGuardados ? JSON.parse(cursosGuardados) : [];
+
+            // Instructor actual
+            const instructor = JSON.parse(sessionStorage.getItem('usuario'));
+
+            // Posibles imágenes del curso
+            const imagenes = [ 'javascript', 'uxui', 'python', 'marketing' ];
+
+            // Determinando imagen del curso
+            const indiceImagen = parseInt(localStorage.getItem('indiceImagen') ?? '0');
+            localStorage.setItem('indiceImagen', indiceImagen === 3 ? 0 : indiceImagen + 1);
             
             // Crear nuevo curso
             const nuevoCurso = {
-                id: Date.now(),
                 titulo: titulo,
                 descripcion: descripcion,
-                duracion: duracion,
+                duracion: duracion + ' horas',
                 categoria: categoria,
                 nivel: nivel,
-                precio: precio,
-                instructor: JSON.parse(sessionStorage.getItem('usuario')).nombre,
+                precio: '$' + precio,
+                instructor: instructor.nombre,
+                instructor_id: instructor.id,
                 fecha_creacion: new Date().toISOString(),
                 estudiantes: [],
-                estado: 'activo'
+                activo: true,
+                imagen: imagenes[indiceImagen]
             };
             
             // Agregar curso a la lista
@@ -13505,17 +12921,12 @@ Miscursos.html
             margin-bottom: 15px;
         }
 
-        .estado-en-curso {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .estado-completado {
+        .activo-verdadero {
             background-color: #2ecc71;
             color: white;
         }
 
-        .estado-cancelado {
+        .activo-falso {
             background-color: #e74c3c;
             color: white;
         }
@@ -13591,9 +13002,8 @@ Miscursos.html
                         <label class="etiqueta-filtro" for="filtrar-estado">Estado</label>
                         <select class="campo-filtro" id="filtrar-estado">
                             <option value="">Todos los estados</option>
-                            <option value="en-curso">En curso</option>
-                            <option value="completado">Completado</option>
-                            <option value="cancelado">Cancelado</option>
+                            <option value="activo">Activo</option>
+                            <option value="inactivo">Inactivo</option>
                         </select>
                     </div>
                 </div>
@@ -13656,108 +13066,75 @@ Miscursos.html
         }
 
         // FUNCIÓN PARA CARGAR CURSOS DEL USUARIO
-        function cargarCursosUsuario(usuario) {
+        async function cargarCursosUsuario(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando tus cursos...</div>';
+
+            // Carga síncrona
+            const rawCursos = await fetch('/api/cursos');
+            const cursosReales = await rawCursos.json();
+
+            // Filtrar cursos del instructor
+            const cursosInstructor = cursosReales.filter(curso => curso.instructor_id === usuario.id);
             
-            // Simulación de datos de cursos del usuario (en una aplicación real, esto vendría de una API)
-            const cursosUsuarioSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    estado: "en-curso",
-                    imagen: "javascript",
-                    fecha_inscripcion: "2023-06-15",
-                    progreso: 65
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    estado: "completado",
-                    imagen: "uxui",
-                    fecha_inscripcion: "2023-05-10",
-                    progreso: 100
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    estado: "en-curso",
-                    imagen: "python",
-                    fecha_inscripcion: "2023-06-20",
-                    progreso: 30
+            // Verificar si el usuario tiene cursos
+            if (cursosInstructor.length === 0) {
+                listaCursos.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>Aún no has creado ningún curso. <a href="Crearcurso.html">Crea cursos</a></p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Mostrar cursos del usuario
+            cursosInstructor.forEach(curso => {
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
+                
+                // Determinar la clase CSS según el estado
+                let estadoClass;
+                let estadoTexto;
+                if (curso.activo) {
+                    estadoClass = 'activo-verdadero';
+                    estadoTexto = 'Activo';
                 }
-            ];
-            
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Verificar si el usuario tiene cursos
-                if (cursosUsuarioSimulados.length === 0) {
-                    listaCursos.innerHTML = `
-                        <div class="mensaje-vacio">
-                            <p>Aún no te has inscrito a ningún curso. <a href="index.html">Explora nuestros cursos</a></p>
-                        </div>
-                    `;
-                    return;
+                else {
+                    estadoClass = 'activo-falso';
+                    estadoTexto = 'Inactivo';
                 }
                 
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
-                
-                // Mostrar cursos del usuario
-                cursosUsuarioSimulados.forEach(curso => {
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Determinar la clase CSS según el estado
-                    let estadoClass = 'estado-en-curso';
-                    let estadoTexto = 'En curso';
-                    if (curso.estado === 'completado') {
-                        estadoClass = 'estado-completado';
-                        estadoTexto = 'Completado';
-                    } else if (curso.estado === 'cancelado') {
-                        estadoClass = 'estado-cancelado';
-                        estadoTexto = 'Cancelado';
-                    }
-                    
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">Instructor: ${curso.instructor}</span>
-                                <span>Duración: ${curso.duracion}</span>
-                            </div>
-                            <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
-                            <div class="progreso-curso">Progreso: ${curso.progreso}%</div>
-                            <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">Instructor: ${curso.instructor}</span>
+                            <span>Duración: ${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de ver curso
-                    const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
-                    botonVerCurso.addEventListener('click', function() {
-                        // En una aplicación real, aquí se redirigiría a la página del curso
-                        alert(`Redirigiendo al curso: ${curso.titulo}`);
-                    });
+                        <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
+                        <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                    </div>
+                `;
+                
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de ver curso
+                const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
+                botonVerCurso.addEventListener('click', function() {
+                    // En una aplicación real, aquí se redirigiría a la página del curso
+                    alert(`Redirigiendo al curso: ${curso.titulo}`);
                 });
-            }, 1000); // Simular delay de carga
+            });
         }
 
         // FUNCIÓN PARA FILTRAR CURSOS
@@ -13768,7 +13145,7 @@ Miscursos.html
             const cursos = Array.from(listaCursos.children);
             
             // Filtrar cursos según los criterios seleccionados
-            const cursosFiltrados = cursos.filter(cursoElement => {
+            const cursosFiltrados = cursos.filter(cursoElemento => {
                 const titulo = cursoElemento.querySelector('.titulo-curso').textContent.toLowerCase();
                 const descripcion = cursoElemento.querySelector('.descripcion-curso').textContent.toLowerCase();
                 const estado = cursoElemento.querySelector('.estado-curso').textContent.toLowerCase();
@@ -13829,11 +13206,11 @@ Notificaciones.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Notificaciones - Setsuzoku</title>
-     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../../css/fuentes.css">
 
     <style>
-        /* ESTILOS CSS */
+        /* ESTILOS CSS - IGUALES QUE EN LAS PÁGINAS ANTERIORES */
         * {
             margin: 0;
             padding: 0;
@@ -14391,424 +13768,12 @@ Notificaciones.html
         </div>
     </div>
 
+    <!-- CONEXIÓN A ARCHIVO JAVASCRIPT -->
+    <script src="../../js/notificaciones.js"></script>
+    
     <script>
-        // VARIABLES GLOBALES
-        let notificaciones = [];
-        let notificaciones_filtradas = [];
-        let pagina_actual = 1;
-        let notificaciones_por_pagina = 10;
-        let vista_actual = 'lista';
-
-        // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
-        function volverPaginaAnterior() {
-            window.history.back();
-        }
-
-        // FUNCIONES AUXILIARES
-        function formatear_fecha(fecha_iso) {
-            const fecha = new Date(fecha_iso);
-            const ahora = new Date();
-            const diferencia = ahora - fecha;
-            
-            // Si es hoy
-            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
-                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si fue ayer
-            const ayer = new Date(ahora);
-            ayer.setDate(ayer.getDate() - 1);
-            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
-                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si es esta semana
-            if (diferencia < 604800000) {
-                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si no, mostrar fecha completa
-            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-        }
-
-        function obtener_tipo_notificacion(titulo) {
-            const titulo_lower = titulo.toLowerCase();
-            if (titulo_lower.includes('vacante') || titulo_lower.includes('trabajo')) return 'vacante';
-            if (titulo_lower.includes('entrevista')) return 'entrevista';
-            if (titulo_lower.includes('curso')) return 'curso';
-            if (titulo_lower.includes('postulacion')) return 'postulacion';
-            return 'sistema';
-        }
-
-        function guardar_notificaciones() {
-            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-        }
-
-        // FUNCIONES DE GESTIÓN DE NOTIFICACIONES
-        function cargar_notificaciones() {
-            const notificaciones_guardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificaciones_guardadas) {
-                notificaciones = JSON.parse(notificaciones_guardadas);
-            } else {
-                // Notificaciones de ejemplo
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nueva vacante disponible",
-                        mensaje: "Tech Solutions está buscando Desarrollador Frontend con experiencia en React y Node.js",
-                        fecha: new Date().toISOString(),
-                        leida: false,
-                        tipo: 'vacante'
-                    },
-                    {
-                        id: 2,
-                        titulo: "Entrevista programada",
-                        mensaje: "Tienes una entrevista programada para el viernes a las10:00 AM con Digital Marketing Co.",
-                        fecha: new Date(Date.now() - 86400000).toISOString(),
-                        leida: false,
-                        tipo: 'entrevista'
-                    },
-                    {
-                        id: 3,
-                        titulo: "Curso actualizado",
-                        mensaje: "El curso 'Desarrollo Web Completo' ha sido actualizado con nuevo contenido sobre React 18",
-                        fecha: new Date(Date.now() - 172800000).toISOString(),
-                        leida: true,
-                        tipo: 'curso'
-                    },
-                    {
-                        id: 4,
-                        titulo: "Postulación recibida",
-                        mensaje: "Tu postulación para el puesto de Desarrollador Junior ha sido recibida exitosamente",
-                        fecha: new Date(Date.now() - 259200000).toISOString(),
-                        leida: true,
-                        tipo: 'postulacion'
-                    },
-                    {
-                        id: 5,
-                        titulo: "Bienvenido a Setsuzoku",
-                        mensaje: "Gracias por unirte a nuestra plataforma. Explora las oportunidades que tenemos para ti",
-                        fecha: new Date(Date.now() - 604800000).toISOString(),
-                        leida: true,
-                        tipo: 'sistema'
-                    }
-                ];
-                
-                // Asignar tipos si no existen
-                notificaciones = notificaciones.map(notif => ({
-                    ...notif,
-                    tipo: notif.tipo || obtener_tipo_notificacion(notif.titulo)
-                }));
-                
-                guardar_notificaciones();
-            }
-            
-            notificaciones_filtradas = [...notificaciones];
-        }
-
-        function aplicar_filtros() {
-            const estado = document.getElementById('filtro-estado').value;
-            const tipo = document.getElementById('filtro-tipo').value;
-            const fecha = document.getElementById('filtro-fecha').value;
-            const busqueda = document.getElementById('filtro-busqueda').value.toLowerCase();
-            
-            notificaciones_filtradas = notificaciones.filter(notif => {
-                // Filtro por estado
-                if (estado === 'no-leidas' && notif.leida) return false;
-                if (estado === 'leidas' && !notif.leida) return false;
-                
-                // Filtro por tipo
-                if (tipo !== 'todos' && notif.tipo !== tipo) return false;
-                
-                // Filtro por fecha
-                const notif_fecha = new Date(notif.fecha);
-                const ahora = new Date();
-                
-                if (fecha === 'hoy') {
-                    if (notif_fecha.toDateString() !== ahora.toDateString()) return false;
-                } else if (fecha === 'semana') {
-                    const semana_pasada = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < semana_pasada) return false;
-                } else if (fecha === 'mes') {
-                    const mes_pasado = new Date(ahora.getTime() - 30 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < mes_pasado) return false;
-                }
-                
-                // Filtro por búsqueda
-                if (busqueda && !notif.titulo.toLowerCase().includes(busqueda) && 
-                    !notif.mensaje.toLowerCase().includes(busqueda)) {
-                    return false;
-                }
-                
-                return true;
-            });
-            
-            pagina_actual = 1;
-            renderizar_notificaciones();
-        }
-
-        function renderizar_notificaciones() {
-            const contenedor = document.getElementById('notificaciones-contenido');
-            const contador_mostradas = document.getElementById('contador-mostradas');
-            const contador_total = document.getElementById('contador-total');
-            
-            // Actualizar contadores
-            contador_total.textContent = notificaciones_filtradas.length;
-            
-            if (notificaciones_filtradas.length === 0) {
-                contenedor.innerHTML = `
-                    <div class="estado-vacio">
-                        <div class="estado-vacio-icono">🔔</div>
-                        <div class="estado-vacio-titulo">No hay notificaciones</div>
-                        <div class="estado-vacio-mensaje">No se encontraron notificaciones con los filtros aplicados</div>
-                    </div>
-                `;
-                contador_mostradas.textContent = '0';
-                document.getElementById('paginacion').innerHTML = '';
-                return;
-            }
-            
-            // Calcular paginación
-            const inicio = (pagina_actual - 1) * notificaciones_por_pagina;
-            const fin = inicio + notificaciones_por_pagina;
-            const notificaciones_pagina = notificaciones_filtradas.slice(inicio, fin);
-            
-            contador_mostradas.textContent = notificaciones_pagina.length;
-            
-            // Renderizar según vista actual
-            if (vista_actual === 'lista') {
-                renderizar_vista_lista(notificaciones_pagina, contenedor);
-            } else {
-                renderizar_vista_tarjeta(notificaciones_pagina, contenedor);
-            }
-            
-            // Renderizar paginación
-            renderizar_paginacion();
-        }
-
-        function renderizar_vista_lista(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-lista">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-item ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_vista_tarjeta(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-grid">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-tarjeta ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_paginacion() {
-            const contenedor = document.getElementById('paginacion');
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            
-            if (total_paginas <= 1) {
-                contenedor.innerHTML = '';
-                return;
-            }
-            
-            let html = '';
-            
-            // Botón anterior
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual - 1})" ${pagina_actual === 1 ? 'disabled' : ''}>Anterior</button>`;
-            
-            // Números de página
-            for (let i = 1; i <= total_paginas; i++) {
-                if (i === 1 || i === total_paginas || (i >= pagina_actual - 1 && i <= pagina_actual + 1)) {
-                    html += `<button class="paginacion-btn ${i === pagina_actual ? 'activo' : ''}" onclick="cambiar_pagina(${i})">${i}</button>`;
-                } else if (i === pagina_actual - 2 || i === pagina_actual + 2) {
-                    html += '<span>...</span>';
-                }
-            }
-            
-            // Botón siguiente
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual + 1})" ${pagina_actual === total_paginas ? 'disabled' : ''}>Siguiente</button>`;
-            
-            contenedor.innerHTML = html;
-        }
-
-        function cambiar_pagina(pagina) {
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            if (pagina < 1 || pagina > total_paginas) return;
-            
-            pagina_actual = pagina;
-            renderizar_notificaciones();
-            
-            // Scroll al inicio de la lista
-            document.querySelector('.notificaciones-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggle_leida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion) {
-                notificacion.leida = !notificacion.leida;
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function eliminar_notificacion(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
-                notificaciones = notificaciones.filter(n => n.id !== id);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function marcar_todas_leidas() {
-            const no_leidas = notificaciones.filter(n => !n.leida);
-            if (no_leidas.length === 0) {
-                alert('No hay notificaciones sin leer');
-                return;
-            }
-            
-            if (confirm(`¿Marcar ${no_leidas.length} notificaciones como leídas?`)) {
-                notificaciones.forEach(n => n.leida = true);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_leidas() {
-            const leidas = notificaciones.filter(n => n.leida);
-            if (leidas.length === 0) {
-                alert('No hay notificaciones leídas para eliminar');
-                return;
-            }
-            
-            if (confirm(`¿Eliminar ${leidas.length} notificaciones leídas?`)) {
-                notificaciones = notificaciones.filter(n => !n.leida);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_filtros() {
-            document.getElementById('filtro-estado').value = 'todas';
-            document.getElementById('filtro-tipo').value = 'todos';
-            document.getElementById('filtro-fecha').value = 'todas';
-            document.getElementById('filtro-busqueda').value = '';
-            aplicar_filtros();
-        }
-
-        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
-        function verificarSesion() {
-            const usuarioStr = sessionStorage.getItem('usuario');
-            console.log('Datos en sessionStorage:', usuarioStr);
-
-            if (usuarioStr) {
-                try {
-                    const usuario = JSON.parse(usuarioStr);
-                    console.log('Usuario parseado:', usuario);
-                    
-                    // Verificar que tenga las propiedades mínimas necesarias
-                    if (usuario && usuario.nombre && usuario.grupo) {
-                        // Sesión válida encontrada
-                        return true;
-                    } else {
-                        console.error('Usuario incompleto:', usuario);
-                        sessionStorage.removeItem('usuario');
-                    }
-                } catch (error) {
-                    console.error('Error parseando usuario:', error);
-                    sessionStorage.removeItem('usuario');
-                }
-            }
-            
-            // No hay sesión válida - redirigir a la página de inicio
-            window.location.href = '../index.html';
-            return false;
-        }
-
         // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar sesión
-            verificarSesion();
-            
-            // Cargar notificaciones
-            cargar_notificaciones();
-            
-            // Renderizar notificaciones iniciales
-            renderizar_notificaciones();
-            
-            // Configurar evento para el botón de volver
-            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
-            
-            // Configurar eventos
-            document.getElementById('btn-marcar-todas-leidas').addEventListener('click', marcar_todas_leidas);
-            document.getElementById('btn-limpiar-leidas').addEventListener('click', limpiar_leidas);
-            document.getElementById('btn-aplicar-filtros').addEventListener('click', aplicar_filtros);
-            document.getElementById('btn-limpiar-filtros').addEventListener('click', limpiar_filtros);
-            
-            // Configurar vista toggle
-            document.getElementById('vista-lista').addEventListener('click', function() {
-                vista_actual = 'lista';
-                this.classList.add('activo');
-                document.getElementById('vista-tarjeta').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            document.getElementById('vista-tarjeta').addEventListener('click', function() {
-                vista_actual = 'tarjeta';
-                this.classList.add('activo');
-                document.getElementById('vista-lista').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            // Configurar búsqueda en tiempo real
-            document.getElementById('filtro-busqueda').addEventListener('input', function() {
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(aplicar_filtros, 500);
-            });
-        });
+        document.addEventListener('DOMContentLoaded', inicializar);
     </script>
 </body>
 </html>
@@ -15951,8 +14916,8 @@ Verestudiantes.html
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ver Estudiantes - Setsuzoku</title>
-     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <title>Dashboard Estudiantes - Setsuzoku</title>
+    <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../../css/fuentes.css">
 
     <style>
@@ -16052,6 +15017,34 @@ Verestudiantes.html
             margin-bottom: 30px;
             border-bottom: 1px solid #eee;
             padding-bottom: 10px;
+        }
+
+        /* ESTILOS PARA LAS ESTADÍSTICAS */
+        .estadisticas-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .tarjeta-estadistica {
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .numero-estadistica {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+
+        .etiqueta-estadistica {
+            font-size: 0.9rem;
+            color: #7f8c8d;
         }
 
         .filtros-estudiantes {
@@ -16203,6 +15196,10 @@ Verestudiantes.html
             .contenedor-contenido {
                 padding: 10px;
             }
+            
+            .estadisticas-dashboard {
+                grid-template-columns: 1fr 1fr;
+            }
         }
     </style>
 </head>
@@ -16223,7 +15220,27 @@ Verestudiantes.html
         <!-- CONTENEDOR DE CONTENIDO -->
         <div class="contenedor-contenido" id="contenedor-contenido">
             <div class="contenido-estudiantes">
-                <h1 class="titulo-estudiantes">Ver Estudiantes</h1>
+                <h1 class="titulo-estudiantes">Dashboard de Estudiantes</h1>
+
+                <!-- ESTADÍSTICAS DEL DASHBOARD -->
+                <div class="estadisticas-dashboard" id="estadisticas-dashboard">
+                    <div class="tarjeta-estadistica">
+                        <div class="numero-estadistica" id="total-estudiantes">0</div>
+                        <div class="etiqueta-estadistica">Total Estudiantes</div>
+                    </div>
+                    <div class="tarjeta-estadistica">
+                        <div class="numero-estadistica" id="total-cursos">0</div>
+                        <div class="etiqueta-estadistica">Mis Cursos</div>
+                    </div>
+                    <div class="tarjeta-estadistica">
+                        <div class="numero-estadistica" id="estudiantes-completados">0</div>
+                        <div class="etiqueta-estadistica">Cursos Completados</div>
+                    </div>
+                    <div class="tarjeta-estadistica">
+                        <div class="numero-estadistica" id="tasa-completacion">0%</div>
+                        <div class="etiqueta-estadistica">Tasa de Completación</div>
+                    </div>
+                </div>
 
                 <div class="filtros-estudiantes">
                     <div class="filtro">
@@ -16232,7 +15249,19 @@ Verestudiantes.html
                     </div>
                     <div class="filtro">
                         <label class="etiqueta-filtro" for="filtrar-curso">Filtrar por curso</label>
-                        <input type="text" id="filtrar-curso" class="campo-filtro" placeholder="Nombre del curso">
+                        <select id="filtrar-curso" class="campo-filtro">
+                            <option value="">Todos los cursos</option>
+                        </select>
+                    </div>
+                    <div class="filtro">
+                        <label class="etiqueta-filtro" for="filtrar-progreso">Filtrar por progreso</label>
+                        <select id="filtrar-progreso" class="campo-filtro">
+                            <option value="">Todos</option>
+                            <option value="completado">Completados (100%)</option>
+                            <option value="avanzado">Avanzados (75-99%)</option>
+                            <option value="intermedio">Intermedios (25-74%)</option>
+                            <option value="principiante">Principiantes (0-24%)</option>
+                        </select>
                     </div>
                 </div>
 
@@ -16244,6 +15273,27 @@ Verestudiantes.html
     </div>
 
     <script>
+        // DATOS REALES (luego se consultarán)
+        let cursosReales = [];
+        let inscripcionesReales = [];
+        let estudiantesReales = [];
+
+        // OBTENER INSTRUCTOR ACTUAL
+        function obtenerInstructorActual() {
+            const usuarioStr = sessionStorage.getItem('usuario');
+            if (!usuarioStr) {
+                return null;
+            }
+            
+            try {
+                const usuario = JSON.parse(usuarioStr);
+                return usuario.id;
+            } catch (error) {
+                console.error('Error al obtener el instructor actual:', error);
+                return null;
+            }
+        }
+
         // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
         function volverPaginaAnterior() {
             window.history.back();
@@ -16282,155 +15332,219 @@ Verestudiantes.html
             return false;
         }
 
-        // FUNCIÓN PARA CARGAR ESTUDIANTES
-        function cargarEstudiantes() {
+        // Estado de la aplicación para filtrar estudiantes.
+        // Este arreglo contendrá elementos HTML (nodos).
+        let estudianteCards = [];
+
+        // FUNCIÓN PARA CARGAR ESTUDIANTES DEL INSTRUCTOR ACTUAL
+        async function cargarEstudiantes() {
             const listaEstudiantes = document.getElementById('lista-estudiantes');
+            const instructorId = obtenerInstructorActual();
+            
+            if (!instructorId) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>Error: No se pudo identificar al instructor actual.</p>
+                    </div>
+                `;
+                return;
+            }
             
             // Mostrar mensaje de carga
             listaEstudiantes.innerHTML = '<div class="mensaje-carga">Cargando estudiantes...</div>';
             
-            // Simulación de datos de estudiantes (en una aplicación real, esto vendría de una API)
-            const estudiantesSimulados = [
-                {
-                    id: 1,
-                    nombre: "María García",
-                    cursos: [
-                        {
-                            id: 1,
-                            nombre: "Desarrollo Web Completo",
-                            progreso: 100,
-                            certificado: false
-                        },
-                        {
-                            id: 2,
-                            nombre: "JavaScript Avanzado",
-                            progreso: 65,
-                            certificado: false
-                        }
-                    ],
-                    avatar: "maria-garcia"
-                },
-                {
-                    id: 2,
-                    nombre: "Juan Pérez",
-                    cursos: [
-                        {
-                            id: 3,
-                            nombre: "Introducción a la Programación",
-                            progreso: 100,
-                            certificado: true
-                        },
-                        {
-                            id: 4,
-                            nombre: "Estructuras de Datos",
-                            progreso: 42,
-                            certificado: false
-                        }
-                    ],
-                    avatar: "juan-perez"
-                },
-                {
-                    id: 3,
-                    nombre: "Ana López",
-                    cursos: [
-                        {
-                            id: 5,
-                            nombre: "Marketing Digital",
-                            progreso: 88,
-                            certificado: false
-                        },
-                        {
-                            id: 6,
-                            nombre: "Redes Sociales",
-                            progreso: 100,
-                            certificado: false
-                        }
-                    ],
-                    avatar: "ana-lopez"
-                },
-                {
-                    id: 4,
-                    nombre: "Carlos Rodríguez",
-                    cursos: [
-                        {
-                            id: 7,
-                            nombre: "Python para Ciencia de Datos",
-                            progreso: 100,
-                            certificado: false
-                        }
-                    ],
-                    avatar: "carlos-rodriguez"
-                }
-            ];
+            // Consultando APIs
+            const [ rawCursos, rawInscripciones, rawUsuarios ] = await Promise.all([
+                fetch('/api/cursos'),
+                fetch('/api/inscripciones-cursos'),
+                fetch('/api/usuarios')
+            ]);
             
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Verificar si hay estudiantes
-                if (estudiantesSimulados.length === 0) {
-                    listaEstudiantes.innerHTML = `
-                        <div class="mensaje-vacio">
-                            <p>No hay estudiantes inscritos en tus cursos.</p>
-                        </div>
-                    `;
-                    return;
-                }
+            // Procesando respuestas
+            cursosReales = await rawCursos.json();
+            inscripcionesReales = await rawInscripciones.json();
+            const usuariosReales = await rawUsuarios.json();
+            estudiantesReales = usuariosReales.filter(u => u.grupo === 'candidato');
+
+            // Obtener cursos del instructor actual
+            const cursosDelInstructor = cursosReales.filter(
+                curso => curso.instructor_id === instructorId
+            );
+            
+            if (cursosDelInstructor.length === 0) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>No tienes cursos asignados como instructor.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Obtener IDs de los cursos del instructor
+            const idsCursosInstructor = cursosDelInstructor.map(curso => curso.id);
+            
+            // Filtrar inscripciones que pertenecen a cursos del instructor
+            const inscripcionesFiltradas = inscripcionesReales.filter(
+                inscripcion => idsCursosInstructor.includes(inscripcion.curso_id)
+            );
+            
+            // Combinar datos de estudiantes con sus inscripciones y cursos
+            const estudiantesConCursos = estudiantesReales.map(estudiante => {
+                // Obtener inscripciones del estudiante en cursos del instructor
+                const inscripciones = inscripcionesFiltradas.filter(
+                    inscripcion => inscripcion.usuario_id === estudiante.id
+                );
                 
-                // Limpiar lista de estudiantes
-                listaEstudiantes.innerHTML = '';
-                
-                // Mostrar estudiantes
-                estudiantesSimulados.forEach(estudiante => {
-                    // Crear una tarjeta para cada estudiante
-                    const estudianteCard = document.createElement('div');
-                    estudianteCard.className = 'estudiante-card';
-                    
-                    // Crear el contenido HTML para la tarjeta del estudiante
-                    let cursosHTML = '';
-                    estudiante.cursos.forEach(curso => {
-                        const progresoClase = curso.progreso === 100 ? 'completado' : '';
-                        const botonCertificar = curso.progreso === 100 && !curso.certificado ? 
-                            `<button class="boton-certificar" onclick="certificarEstudiante(${estudiante.id}, ${curso.id})">Certificar</button>` : 
-                            curso.certificado ? '<span style="color: #2ecc71; font-weight: bold;">✓ Certificado</span>' : '';
-                        
-                        cursosHTML += `
-                            <div style="margin-bottom: 15px;">
-                                <h4 style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
-                                <div class="estudiante-progreso">
-                                    <div class="barra-progreso">
-                                        <div class="barra-progreso-lleno ${progresoClase}" style="width: ${curso.progreso}%"></div>
-                                    </div>
-                                    <span>${curso.progreso}%</span>
-                                </div>
-                                <div class="estudiante-acciones">
-                                    <button class="boton-ver" onclick="verDetalles(${estudiante.id}, ${curso.id})">Ver Detalles</button>
-                                    ${botonCertificar}
-                                </div>
-                            </div>
-                        `;
-                    });
-                    
-                    estudianteCard.innerHTML = `
-                        <div class="estudiante-info">
-                            <h3 class="estudiante-nombre">${estudiante.nombre}</h3>
-                            <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} cursos</p>
-                            ${cursosHTML}
-                        </div>
-                    `;
-                    
-                    listaEstudiantes.appendChild(estudianteCard);
+                // Obtener cursos del estudiante (solo los del instructor actual)
+                const cursos = inscripciones.map(inscripcion => {
+                    const curso = cursosReales.find(c => c.id === inscripcion.curso_id);
+                    return {
+                        id: curso.id,
+                        nombre: curso.titulo,
+                        progreso: inscripcion.progreso,
+                        certificado: inscripcion.estado === 'completado',
+                        fecha_inscripcion: inscripcion.fecha_inscripcion,
+                        estado: inscripcion.estado
+                    };
                 });
-            }, 1000); // Simular delay de carga
+                
+                return {
+                    ...estudiante,
+                    cursos: cursos
+                };
+            });
+            
+            // Filtrar estudiantes que tienen al menos un curso del instructor
+            const estudiantesDelInstructor = estudiantesConCursos.filter(
+                estudiante => estudiante.cursos.length > 0
+            );
+            
+            // Verificar si hay estudiantes
+            if (estudiantesDelInstructor.length === 0) {
+                listaEstudiantes.innerHTML = `
+                    <div class="mensaje-vacio">
+                        <p>No hay estudiantes inscritos en tus cursos.</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            // Actualizar estadísticas
+            actualizarEstadisticas(estudiantesDelInstructor, cursosDelInstructor);
+            
+            // Limpiar lista de estudiantes
+            listaEstudiantes.innerHTML = '';
+            
+            // Mostrar estudiantes y almacenarlos en el estado de la aplicación
+            estudianteCards = estudiantesDelInstructor.map(estudiante => {
+                // Crear una tarjeta para cada estudiante
+                const estudianteCard = document.createElement('div');
+                estudianteCard.className = 'estudiante-card';
+                
+                // Crear el contenido HTML para la tarjeta del estudiante
+                let cursosHTML = '';
+                estudiante.cursos.forEach(curso => {
+                    const progresoClase = curso.progreso === 100 ? 'completado' : '';
+                    const botonCertificar = curso.progreso === 100 && !curso.certificado ? 
+                        `<button class="boton-certificar" onclick="certificarEstudiante(${estudiante.id}, ${curso.id})">Certificar</button>` : 
+                        curso.certificado ? '<span style="color: #2ecc71; font-weight: bold;">✓ Certificado</span>' : '';
+                    
+                    cursosHTML += `
+                        <div style="margin-bottom: 15px;">
+                            <h4 style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
+                            <div class="estudiante-progreso">
+                                <div class="barra-progreso">
+                                    <div class="barra-progreso-lleno ${progresoClase}" style="width: ${curso.progreso}%"></div>
+                                </div>
+                                <span>${curso.progreso}%</span>
+                            </div>
+                            <div class="estudiante-acciones">
+                                <button class="boton-ver" onclick="verDetalles(${estudiante.id}, ${curso.id})">Ver Detalles</button>
+                                ${botonCertificar}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                estudianteCard.innerHTML = `
+                    <div class="estudiante-info">
+                        <h3 class="estudiante-nombre">${estudiante.nombre} ${estudiante.apellido_paterno} ${estudiante.apellido_materno}</h3>
+                        <p class="estudiante-curso">Inscrito en ${estudiante.cursos.length} de tus cursos</p>
+                        <p class="estudiante-curso">Correo: ${estudiante.correo}</p>
+                        ${cursosHTML}
+                    </div>
+                `;
+
+                listaEstudiantes.appendChild(estudianteCard);
+                
+                return estudianteCard;
+            });
+        }
+
+        // FUNCIÓN PARA ACTUALIZAR ESTADÍSTICAS
+        function actualizarEstadisticas(estudiantes, cursosDelInstructor) {
+            // Calcular estadísticas
+            const totalEstudiantes = estudiantes.length;
+            const totalCursos = cursosDelInstructor.length;
+            
+            // Contar cursos completados
+            let cursosCompletados = 0;
+            let totalProgreso = 0;
+            let totalInscripciones = 0;
+            
+            estudiantes.forEach(estudiante => {
+                estudiante.cursos.forEach(curso => {
+                    totalInscripciones++;
+                    totalProgreso += curso.progreso;
+                    if (curso.progreso === 100) {
+                        cursosCompletados++;
+                    }
+                });
+            });
+            
+            const tasaCompletacion = totalInscripciones > 0 ? 
+                Math.round((cursosCompletados / totalInscripciones) * 100) : 0;
+            
+            // Actualizar elementos del DOM
+            document.getElementById('total-estudiantes').textContent = totalEstudiantes;
+            document.getElementById('total-cursos').textContent = totalCursos;
+            document.getElementById('estudiantes-completados').textContent = cursosCompletados;
+            document.getElementById('tasa-completacion').textContent = `${tasaCompletacion}%`;
+        }
+
+        // FUNCIÓN PARA CARGAR OPCIONES DE FILTRO DE CURSOS
+        function cargarFiltrosCursos() {
+            const filtroCurso = document.getElementById('filtrar-curso');
+            const instructorId = obtenerInstructorActual();
+            
+            if (!instructorId) return;
+            
+            // Obtener cursos del instructor actual
+            const cursosDelInstructor = cursosReales.filter(
+                curso => curso.instructor_id === instructorId
+            );
+            
+            // Limpiar opciones existentes
+            filtroCurso.innerHTML = '<option value="">Todos los cursos</option>';
+            
+            // Agregar opciones de cursos del instructor
+            cursosDelInstructor.forEach(curso => {
+                const option = document.createElement('option');
+                option.value = curso.titulo;
+                option.textContent = curso.titulo;
+                filtroCurso.appendChild(option);
+            });
         }
 
         // FUNCIÓN PARA FILTRAR ESTUDIANTES
         function aplicarFiltros() {
             const textoBusqueda = document.getElementById('buscar-estudiante').value.toLowerCase();
             const filtroCurso = document.getElementById('filtrar-curso').value.toLowerCase();
+            const filtroProgreso = document.getElementById('filtrar-progreso').value;
             const listaEstudiantes = document.getElementById('lista-estudiantes');
-            const estudiantes = Array.from(listaEstudiantes.children);
             
             // Filtrar estudiantes según los criterios seleccionados
-            const estudiantesFiltrados = estudiantes.filter(estudianteCard => {
+            const estudiantesFiltrados = estudianteCards.filter(estudianteCard => {
                 const nombreEstudiante = estudianteCard.querySelector('.estudiante-nombre').textContent.toLowerCase();
                 const cursos = Array.from(estudianteCard.querySelectorAll('.estudiante-curso'));
                 
@@ -16438,13 +15552,45 @@ Verestudiantes.html
                 const coincideNombre = !textoBusqueda || nombreEstudiante.includes(textoBusqueda);
                 
                 // Filtrar por curso
-                const coincideCurso = !filtroCurso || cursos.some(curso => curso.textContent.toLowerCase().includes(filtroCurso));
+                const coincideCurso = !filtroCurso || cursos.some(curso => {
+                    const textoCurso = curso.textContent.toLowerCase();
+                    return textoCurso.includes(filtroCurso);
+                });
                 
-                return coincideNombre && coincideCurso;
+                // Filtrar por progreso
+                let coincideProgreso = true;
+                if (filtroProgreso) {
+                    const barrasProgreso = Array.from(estudianteCard.querySelectorAll('.barra-progreso-lleno'));
+                    switch(filtroProgreso) {
+                        case 'completado':
+                            coincideProgreso = barrasProgreso.some(barra => barra.style.width === '100%');
+                            break;
+                        case 'avanzado':
+                            coincideProgreso = barrasProgreso.some(barra => {
+                                const progreso = parseInt(barra.style.width);
+                                return progreso >= 75 && progreso < 100;
+                            });
+                            break;
+                        case 'intermedio':
+                            coincideProgreso = barrasProgreso.some(barra => {
+                                const progreso = parseInt(barra.style.width);
+                                return progreso >= 25 && progreso < 75;
+                            });
+                            break;
+                        case 'principiante':
+                            coincideProgreso = barrasProgreso.some(barra => {
+                                const progreso = parseInt(barra.style.width);
+                                return progreso < 25;
+                            });
+                            break;
+                    }
+                }
+                
+                return coincideNombre && coincideCurso && coincideProgreso;
             });
             
             // Ocultar todos los estudiantes
-            estudiantes.forEach(estudianteCard => {
+            estudianteCards.forEach(estudianteCard => {
                 estudianteCard.style.display = 'none';
             });
             
@@ -16472,11 +15618,29 @@ Verestudiantes.html
         // FUNCIÓN PARA CERTIFICAR ESTUDIANTE
         function certificarEstudiante(idEstudiante, idCurso) {
             if (confirm('¿Estás seguro de que deseas certificar a este estudiante?')) {
-                // En una aplicación real, aquí se haría una llamada a la API para certificar al estudiante
-                alert(`Estudiante con ID: ${idEstudiante} certificado en el curso con ID: ${idCurso}`);
-                
-                // Recargar la lista de estudiantes para reflejar los cambios
-                cargarEstudiantes();
+                const { id } = inscripcionesReales.find(
+                    inscripcion => inscripcion.usuario_id === idEstudiante && inscripcion.curso_id === idCurso
+                );
+                const datosActualizados = {
+                    estado : 'completado',
+                    progreso : 100
+                };
+
+                // Llamada a la API para certificar al estudiante.
+                // Actualizando el estado de la inscripción a "completado" y certificado.
+                fetch(`/api/inscripciones-cursos/${ id }`, {
+                    method : 'PUT',
+                    body : JSON.stringify(datosActualizados)
+                })
+                .then(raw => raw.json())
+                .then(res => {
+                    alert(res.mensaje);
+
+                    if (res.exito) {
+                        // Recargar la lista de estudiantes para reflejar los cambios
+                        cargarEstudiantes();
+                    }
+                });
             }
         }
 
@@ -16488,9 +15652,13 @@ Verestudiantes.html
             // Cargar estudiantes
             cargarEstudiantes();
             
+            // Cargar filtros de cursos
+            cargarFiltrosCursos();
+            
             // Configurar eventos para los filtros
             document.getElementById('buscar-estudiante').addEventListener('input', aplicarFiltros);
-            document.getElementById('filtrar-curso').addEventListener('input', aplicarFiltros);
+            document.getElementById('filtrar-curso').addEventListener('change', aplicarFiltros);
+            document.getElementById('filtrar-progreso').addEventListener('change', aplicarFiltros);
             
             // Configurar evento para el botón de volver
             document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
@@ -19245,11 +18413,11 @@ Notificaciones.html
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mis Notificaciones - Setsuzoku</title>
-     <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
+    <!-- CONEXIÓN A ARCHIVO CSS DE TIPOGRAFÍA -->
     <link rel="stylesheet" href="../../css/fuentes.css">
 
     <style>
-        /* ESTILOS CSS */
+        /* ESTILOS CSS - IGUALES QUE EN LA PÁGINA DEL CANDIDATO */
         * {
             margin: 0;
             padding: 0;
@@ -19807,424 +18975,12 @@ Notificaciones.html
         </div>
     </div>
 
+    <!-- CONEXIÓN A ARCHIVO JAVASCRIPT -->
+    <script src="../../js/notificaciones.js"></script>
+    
     <script>
-        // VARIABLES GLOBALES
-        let notificaciones = [];
-        let notificaciones_filtradas = [];
-        let pagina_actual = 1;
-        let notificaciones_por_pagina = 10;
-        let vista_actual = 'lista';
-
-        // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
-        function volverPaginaAnterior() {
-            window.history.back();
-        }
-
-        // FUNCIONES AUXILIARES
-        function formatear_fecha(fecha_iso) {
-            const fecha = new Date(fecha_iso);
-            const ahora = new Date();
-            const diferencia = ahora - fecha;
-            
-            // Si es hoy
-            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
-                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si fue ayer
-            const ayer = new Date(ahora);
-            ayer.setDate(ayer.getDate() - 1);
-            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
-                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si es esta semana
-            if (diferencia < 604800000) {
-                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            // Si no, mostrar fecha completa
-            return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
-        }
-
-        function obtener_tipo_notificacion(titulo) {
-            const titulo_lower = titulo.toLowerCase();
-            if (titulo_lower.includes('vacante') || titulo_lower.includes('trabajo')) return 'vacante';
-            if (titulo_lower.includes('entrevista')) return 'entrevista';
-            if (titulo_lower.includes('curso')) return 'curso';
-            if (titulo_lower.includes('postulacion')) return 'postulacion';
-            return 'sistema';
-        }
-
-        function guardar_notificaciones() {
-            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-        }
-
-        // FUNCIONES DE GESTIÓN DE NOTIFICACIONES
-        function cargar_notificaciones() {
-            const notificaciones_guardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificaciones_guardadas) {
-                notificaciones = JSON.parse(notificaciones_guardadas);
-            } else {
-                // Notificaciones de ejemplo
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nueva vacante disponible",
-                        mensaje: "Tech Solutions está buscando Desarrollador Frontend con experiencia en React y Node.js",
-                        fecha: new Date().toISOString(),
-                        leida: false,
-                        tipo: 'vacante'
-                    },
-                    {
-                        id: 2,
-                        titulo: "Entrevista programada",
-                        mensaje: "Tienes una entrevista programada para el viernes a las10:00 AM con Digital Marketing Co.",
-                        fecha: new Date(Date.now() - 86400000).toISOString(),
-                        leida: false,
-                        tipo: 'entrevista'
-                    },
-                    {
-                        id: 3,
-                        titulo: "Curso actualizado",
-                        mensaje: "El curso 'Desarrollo Web Completo' ha sido actualizado con nuevo contenido sobre React 18",
-                        fecha: new Date(Date.now() - 172800000).toISOString(),
-                        leida: true,
-                        tipo: 'curso'
-                    },
-                    {
-                        id: 4,
-                        titulo: "Postulación recibida",
-                        mensaje: "Tu postulación para el puesto de Desarrollador Junior ha sido recibida exitosamente",
-                        fecha: new Date(Date.now() - 259200000).toISOString(),
-                        leida: true,
-                        tipo: 'postulacion'
-                    },
-                    {
-                        id: 5,
-                        titulo: "Bienvenido a Setsuzoku",
-                        mensaje: "Gracias por unirte a nuestra plataforma. Explora las oportunidades que tenemos para ti",
-                        fecha: new Date(Date.now() - 604800000).toISOString(),
-                        leida: true,
-                        tipo: 'sistema'
-                    }
-                ];
-                
-                // Asignar tipos si no existen
-                notificaciones = notificaciones.map(notif => ({
-                    ...notif,
-                    tipo: notif.tipo || obtener_tipo_notificacion(notif.titulo)
-                }));
-                
-                guardar_notificaciones();
-            }
-            
-            notificaciones_filtradas = [...notificaciones];
-        }
-
-        function aplicar_filtros() {
-            const estado = document.getElementById('filtro-estado').value;
-            const tipo = document.getElementById('filtro-tipo').value;
-            const fecha = document.getElementById('filtro-fecha').value;
-            const busqueda = document.getElementById('filtro-busqueda').value.toLowerCase();
-            
-            notificaciones_filtradas = notificaciones.filter(notif => {
-                // Filtro por estado
-                if (estado === 'no-leidas' && notif.leida) return false;
-                if (estado === 'leidas' && !notif.leida) return false;
-                
-                // Filtro por tipo
-                if (tipo !== 'todos' && notif.tipo !== tipo) return false;
-                
-                // Filtro por fecha
-                const notif_fecha = new Date(notif.fecha);
-                const ahora = new Date();
-                
-                if (fecha === 'hoy') {
-                    if (notif_fecha.toDateString() !== ahora.toDateString()) return false;
-                } else if (fecha === 'semana') {
-                    const semana_pasada = new Date(ahora.getTime() - 7 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < semana_pasada) return false;
-                } else if (fecha === 'mes') {
-                    const mes_pasado = new Date(ahora.getTime() - 30 * 24 * 60 * 60 * 1000);
-                    if (notif_fecha < mes_pasado) return false;
-                }
-                
-                // Filtro por búsqueda
-                if (busqueda && !notif.titulo.toLowerCase().includes(busqueda) && 
-                    !notif.mensaje.toLowerCase().includes(busqueda)) {
-                    return false;
-                }
-                
-                return true;
-            });
-            
-            pagina_actual = 1;
-            renderizar_notificaciones();
-        }
-
-        function renderizar_notificaciones() {
-            const contenedor = document.getElementById('notificaciones-contenido');
-            const contador_mostradas = document.getElementById('contador-mostradas');
-            const contador_total = document.getElementById('contador-total');
-            
-            // Actualizar contadores
-            contador_total.textContent = notificaciones_filtradas.length;
-            
-            if (notificaciones_filtradas.length === 0) {
-                contenedor.innerHTML = `
-                    <div class="estado-vacio">
-                        <div class="estado-vacio-icono">🔔</div>
-                        <div class="estado-vacio-titulo">No hay notificaciones</div>
-                        <div class="estado-vacio-mensaje">No se encontraron notificaciones con los filtros aplicados</div>
-                    </div>
-                `;
-                contador_mostradas.textContent = '0';
-                document.getElementById('paginacion').innerHTML = '';
-                return;
-            }
-            
-            // Calcular paginación
-            const inicio = (pagina_actual - 1) * notificaciones_por_pagina;
-            const fin = inicio + notificaciones_por_pagina;
-            const notificaciones_pagina = notificaciones_filtradas.slice(inicio, fin);
-            
-            contador_mostradas.textContent = notificaciones_pagina.length;
-            
-            // Renderizar según vista actual
-            if (vista_actual === 'lista') {
-                renderizar_vista_lista(notificaciones_pagina, contenedor);
-            } else {
-                renderizar_vista_tarjeta(notificaciones_pagina, contenedor);
-            }
-            
-            // Renderizar paginación
-            renderizar_paginacion();
-        }
-
-        function renderizar_vista_lista(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-lista">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-item ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_vista_tarjeta(notificaciones_pagina, contenedor) {
-            let html = '<div class="notificaciones-grid">';
-            
-            notificaciones_pagina.forEach(notif => {
-                const clase_no_leida = notif.leida ? '' : 'no-leida';
-                const texto_boton = notif.leida ? 'Marcar como no leída' : 'Marcar como leída';
-                const clase_boton = notif.leida ? 'btn-marcar-no-leida' : 'btn-marcar-leida';
-                
-                html += `
-                    <div class="notificacion-tarjeta ${clase_no_leida}" data-id="${notif.id}">
-                        <div class="notificacion-cabecera">
-                            <div>
-                                <div class="notificacion-titulo">${notif.titulo}</div>
-                                <div class="notificacion-fecha">${formatear_fecha(notif.fecha)}</div>
-                            </div>
-                        </div>
-                        <div class="notificacion-mensaje">${notif.mensaje}</div>
-                        <div class="notificacion-acciones">
-                            <button class="notificacion-btn ${clase_boton}" onclick="toggle_leida(${notif.id})">${texto_boton}</button>
-                            <button class="notificacion-btn btn-eliminar" onclick="eliminar_notificacion(${notif.id})">Eliminar</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            html += '</div>';
-            contenedor.innerHTML = html;
-        }
-
-        function renderizar_paginacion() {
-            const contenedor = document.getElementById('paginacion');
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            
-            if (total_paginas <= 1) {
-                contenedor.innerHTML = '';
-                return;
-            }
-            
-            let html = '';
-            
-            // Botón anterior
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual - 1})" ${pagina_actual === 1 ? 'disabled' : ''}>Anterior</button>`;
-            
-            // Números de página
-            for (let i = 1; i <= total_paginas; i++) {
-                if (i === 1 || i === total_paginas || (i >= pagina_actual - 1 && i <= pagina_actual + 1)) {
-                    html += `<button class="paginacion-btn ${i === pagina_actual ? 'activo' : ''}" onclick="cambiar_pagina(${i})">${i}</button>`;
-                } else if (i === pagina_actual - 2 || i === pagina_actual + 2) {
-                    html += '<span>...</span>';
-                }
-            }
-            
-            // Botón siguiente
-            html += `<button class="paginacion-btn" onclick="cambiar_pagina(${pagina_actual + 1})" ${pagina_actual === total_paginas ? 'disabled' : ''}>Siguiente</button>`;
-            
-            contenedor.innerHTML = html;
-        }
-
-        function cambiar_pagina(pagina) {
-            const total_paginas = Math.ceil(notificaciones_filtradas.length / notificaciones_por_pagina);
-            if (pagina < 1 || pagina > total_paginas) return;
-            
-            pagina_actual = pagina;
-            renderizar_notificaciones();
-            
-            // Scroll al inicio de la lista
-            document.querySelector('.notificaciones-container').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggle_leida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion) {
-                notificacion.leida = !notificacion.leida;
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function eliminar_notificacion(id) {
-            if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
-                notificaciones = notificaciones.filter(n => n.id !== id);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function marcar_todas_leidas() {
-            const no_leidas = notificaciones.filter(n => !n.leida);
-            if (no_leidas.length === 0) {
-                alert('No hay notificaciones sin leer');
-                return;
-            }
-            
-            if (confirm(`¿Marcar ${no_leidas.length} notificaciones como leídas?`)) {
-                notificaciones.forEach(n => n.leida = true);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_leidas() {
-            const leidas = notificaciones.filter(n => n.leida);
-            if (leidas.length === 0) {
-                alert('No hay notificaciones leídas para eliminar');
-                return;
-            }
-            
-            if (confirm(`¿Eliminar ${leidas.length} notificaciones leídas?`)) {
-                notificaciones = notificaciones.filter(n => !n.leida);
-                guardar_notificaciones();
-                aplicar_filtros();
-            }
-        }
-
-        function limpiar_filtros() {
-            document.getElementById('filtro-estado').value = 'todas';
-            document.getElementById('filtro-tipo').value = 'todos';
-            document.getElementById('filtro-fecha').value = 'todas';
-            document.getElementById('filtro-busqueda').value = '';
-            aplicar_filtros();
-        }
-
-        // FUNCIÓN MEJORADA PARA VERIFICAR SESIÓN
-        function verificarSesion() {
-            const usuarioStr = sessionStorage.getItem('usuario');
-            console.log('Datos en sessionStorage:', usuarioStr);
-
-            if (usuarioStr) {
-                try {
-                    const usuario = JSON.parse(usuarioStr);
-                    console.log('Usuario parseado:', usuario);
-                    
-                    // Verificar que tenga las propiedades mínimas necesarias
-                    if (usuario && usuario.nombre && usuario.grupo) {
-                        // Sesión válida encontrada
-                        return true;
-                    } else {
-                        console.error('Usuario incompleto:', usuario);
-                        sessionStorage.removeItem('usuario');
-                    }
-                } catch (error) {
-                    console.error('Error parseando usuario:', error);
-                    sessionStorage.removeItem('usuario');
-                }
-            }
-            
-            // No hay sesión válida - redirigir a la página de inicio
-            window.location.href = '../index.html';
-            return false;
-        }
-
         // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar sesión
-            verificarSesion();
-            
-            // Cargar notificaciones
-            cargar_notificaciones();
-            
-            // Renderizar notificaciones iniciales
-            renderizar_notificaciones();
-            
-            // Configurar evento para el botón de volver
-            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
-            
-            // Configurar eventos
-            document.getElementById('btn-marcar-todas-leidas').addEventListener('click', marcar_todas_leidas);
-            document.getElementById('btn-limpiar-leidas').addEventListener('click', limpiar_leidas);
-            document.getElementById('btn-aplicar-filtros').addEventListener('click', aplicar_filtros);
-            document.getElementById('btn-limpiar-filtros').addEventListener('click', limpiar_filtros);
-            
-            // Configurar vista toggle
-            document.getElementById('vista-lista').addEventListener('click', function() {
-                vista_actual = 'lista';
-                this.classList.add('activo');
-                document.getElementById('vista-tarjeta').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            document.getElementById('vista-tarjeta').addEventListener('click', function() {
-                vista_actual = 'tarjeta';
-                this.classList.add('activo');
-                document.getElementById('vista-lista').classList.remove('activo');
-                renderizar_notificaciones();
-            });
-            
-            // Configurar búsqueda en tiempo real
-            document.getElementById('filtro-busqueda').addEventListener('input', function() {
-                clearTimeout(this.timeout);
-                this.timeout = setTimeout(aplicar_filtros, 500);
-            });
-        });
+        document.addEventListener('DOMContentLoaded', inicializar);
     </script>
 </body>
 </html>
@@ -24512,108 +23268,96 @@ trabajos.html
         }
 
         // Función para cargar trabajos desde la API
-        function cargarTrabajos(usuario) {
+        async function cargarTrabajos(usuario) {
             const listaTrabajos = document.getElementById('lista-trabajos');
             
             // Mostrar mensaje de carga
             listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
             
-            // Simulación de datos de trabajos (en una aplicación real, esto vendría de una API)
-            const trabajosSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollador Frontend",
-                    empresa: "Tech Solutions",
-                    descripcion: "Buscamos un desarrollador frontend con experiencia en React y JavaScript para unirse a nuestro equipo de desarrollo.",
-                    requisitos: ["Experiencia en React", "Conocimientos de JavaScript ES6+", "Familiaridad con CSS3 y HTML5"],
-                    fecha_publicacion: "2023-05-15"
-                },
-                {
-                    id: 2,
-                    titulo: "Especialista en SEO",
-                    empresa: "Digital Marketing Co.",
-                    descripcion: "Buscamos un especialista en SEO para mejorar nuestra visibilidad en línea y aumentar el tráfico orgánico.",
-                    requisitos: ["Experiencia en análisis de palabras clave", "Conocimientos de Google Analytics", "Experiencia con herramientas SEO"],
-                    fecha_publicacion: "2023-05-10"
-                },
-                {
-                    id: 3,
-                    titulo: "Diseñador UX/UI",
-                    empresa: "Creative Studio",
-                    descripcion: "Buscamos un diseñador UX/UI creativo para crear interfaces atractivas y funcionales para nuestros clientes.",
-                    requisitos: ["Experiencia con Figma o Sketch", "Conocimientos de principios de diseño", "Portafolio sólido"],
-                    fecha_publicacion: "2023-05-08"
-                }
-            ];
+            // Consultando API trabajos
+            const rawTrabajos = await fetch('/api/trabajos');
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Limpiar lista de trabajos
-                listaTrabajos.innerHTML = '';
+            // Procesando respuesta
+            const trabajosReales = await rawTrabajos.json();
+
+            // Limpiar lista de trabajos
+            listaTrabajos.innerHTML = '';
+            
+            // Verificar si hay trabajos
+            if (trabajosReales.length === 0) {
+                listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
+                return;
+            }
+            
+            // Llenar el filtro de empresas
+            const selectEmpresa = document.getElementById('filtrar-empresa');
+            const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa))];
+            
+            empresas.forEach(empresa => {
+                const option = document.createElement('option');
+                option.value = empresa;
+                option.textContent = empresa;
+                selectEmpresa.appendChild(option);
+            });
+            
+            // Mostrar trabajos
+            trabajosReales.forEach(trabajo => {
+                const trabajoElemento = document.createElement('div');
+                trabajoElemento.className = 'trabajo';
                 
-                // Verificar si hay trabajos
-                if (trabajosSimulados.length === 0) {
-                    listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
-                    return;
-                }
-                
-                // Llenar el filtro de empresas
-                const selectEmpresa = document.getElementById('filtrar-empresa');
-                const empresas = [...new Set(trabajosSimulados.map(trabajo => trabajo.empresa))];
-                
-                empresas.forEach(empresa => {
-                    const option = document.createElement('option');
-                    option.value = empresa;
-                    option.textContent = empresa;
-                    selectEmpresa.appendChild(option);
-                });
-                
-                // Mostrar trabajos
-                trabajosSimulados.forEach(trabajo => {
-                    const trabajoElemento = document.createElement('div');
-                    trabajoElemento.className = 'trabajo';
-                    
-                    trabajoElemento.innerHTML = `
-                        <div class="encabezado-trabajo">
-                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                trabajoElemento.innerHTML = `
+                    <div class="encabezado-trabajo">
+                        <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                        <div class="empresa-trabajo">${trabajo.empresa}</div>
+                    </div>
+                    <div class="cuerpo-trabajo">
+                        <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                        <div class="requisitos-trabajo">
+                            <div class="titulo-requisitos">Requisitos:</div>
+                            <ul class="lista-requisitos">
+                                ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                            </ul>
                         </div>
-                        <div class="cuerpo-trabajo">
-                            <p class="descripcion-trabajo">${trabajo.descripcion}</p>
-                            <div class="requisitos-trabajo">
-                                <div class="titulo-requisitos">Requisitos:</div>
-                                <ul class="lista-requisitos">
-                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
-                                </ul>
-                            </div>
-                            <div class="detalles-trabajo">
-                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
-                            </div>
-                            <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                        <div class="detalles-trabajo">
+                            <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
                         </div>
-                    `;
-                    
-                    listaTrabajos.appendChild(trabajoElemento);
-                    
-                    // Configurar evento para el botón de postularse
-                    const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
-                    botonPostularse.addEventListener('click', function() {
-                        if (usuario) {
-                            postularseTrabajo(usuario, trabajo.id);
-                        } else {
-                            window.location.href = 'inicio_sesion.html';
-                        }
-                    });
-                });
+                        <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(trabajosSimulados, usuario);
-            }, 1000);
+                listaTrabajos.appendChild(trabajoElemento);
+                
+                // Configurar evento para el botón de postularse
+                const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                botonPostularse.addEventListener('click', function() {
+                    if (usuario) {
+                        postularseTrabajo(usuario, trabajo.id);
+                    } else {
+                        window.location.href = 'inicio_sesion.html';
+                    }
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(trabajosReales, usuario);
         }
 
         function postularseTrabajo(usuario, trabajoId) {
-            // Simulación de postulación
-            alert(`¡Te has postulado al trabajo correctamente! (Usuario: ${usuario.nombre}, Trabajo ID: ${trabajoId})`);
+            // Datos requeridos por la API para postulaciones a trabajos
+            // Ver backend/server.js a partir de
+            // pathname === '/api/postularse-trabajo' && metodo === 'POST'
+            const datosPostulacion = {
+                usuario_id : usuario.id,
+                trabajo_id : trabajoId,
+                mensaje : '¡Me animé a postularme! Espero ser un excelente candidato.'
+            };
+
+            fetch('/api/postularse-trabajo', {
+                method : 'POST',
+                body : JSON.stringify(datosPostulacion)
+            })
+            .then(raw => raw.json())
+            .then(res => alert(res.mensaje));
         }
 
         function configurarFiltros(trabajos, usuario) {
@@ -24698,6 +23442,25 @@ trabajos.html
     </script>
 </body>
 </html>
+------------------------------------
+README.md
+
+# Setsuzoku
+
+## Projecto de Node.js
+
+### Cómo ejecutar (Windows)
+
+1 En la raíz del proyecto, ejecutar `Setsuzoku.bat`
+- Se accede a la app a través del navegador, introduciendo http://localhost:8000 como URL
+2 Para detener, presionar Ctrl+C
+
+### Cómo ejecutar (Linux)
+
+1 En la raíz del proyecto, ejecutar `node backend/server.js`
+- Se accede a la app a través del navegador, introduciendo http://localhost:8000 como URL
+2 Para detener, presionar Ctrl+C
+
 ------------------------------------
 Setsuzoku.bat
 

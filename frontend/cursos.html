@@ -324,126 +324,101 @@
         }
 
         // Función para cargar cursos desde la API
-        function cargarCursos(usuario) {
+        async function cargarCursos(usuario) {
             const listaCursos = document.getElementById('lista-cursos');
             
             // Mostrar mensaje de carga
             listaCursos.innerHTML = '<div class="mensaje-carga">Cargando cursos...</div>';
             
-            // Simulación de datos de cursos (en una aplicación real, esto vendría de una API)
-            const cursosSimulados = [
-                {
-                    id: 1,
-                    titulo: "Desarrollo Web con JavaScript",
-                    descripcion: "Aprende JavaScript desde cero hasta nivel avanzado. Domina el lenguaje más popular para desarrollo web.",
-                    instructor: "María González",
-                    duracion: "40 horas",
-                    precio: "$299",
-                    imagen: "javascript"
-                },
-                {
-                    id: 2,
-                    titulo: "Diseño UX/UI Fundamental",
-                    descripcion: "Domina los principios del diseño de experiencia de usuario e interfaz de usuario.",
-                    instructor: "Carlos López",
-                    duracion: "30 horas",
-                    precio: "$249",
-                    imagen: "uxui"
-                },
-                {
-                    id: 3,
-                    titulo: "Python para Ciencia de Datos",
-                    descripcion: "Aprende Python y sus librerías para análisis de datos y machine learning.",
-                    instructor: "Ana Martínez",
-                    duracion: "50 horas",
-                    precio: "$399",
-                    imagen: "python"
-                },
-                {
-                    id: 4,
-                    titulo: "Marketing Digital Avanzado",
-                    descripcion: "Estrategias avanzadas de marketing digital para empresas y emprendedores.",
-                    instructor: "Roberto Sánchez",
-                    duracion: "35 horas",
-                    precio: "$279",
-                    imagen: "marketing"
-                }
-            ];
+            // Consultando API cursos
+            const rawCursos = await fetch('/api/cursos');
 
-            // Simular carga asíncrona
-            setTimeout(() => {
-                // Limpiar lista de cursos
-                listaCursos.innerHTML = '';
+            // Procesando respuesta
+            const cursosReales = await rawCursos.json();
+
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+            
+            // Verificar si hay cursos
+            if (cursosReales.length === 0) {
+                listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
+                return;
+            }
+            
+            // Llenar el filtro de instructores
+            const selectInstructor = document.getElementById('filtrar-instructor');
+            const instructores = [...new Set(cursosReales.map(curso => curso.instructor))];
+            
+            instructores.forEach(instructor => {
+                const option = document.createElement('option');
+                option.value = instructor;
+                option.textContent = instructor;
+                selectInstructor.appendChild(option);
+            });
+            
+            // Mostrar cursos
+            cursosReales.forEach(curso => {
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
                 
-                // Verificar si hay cursos
-                if (cursosSimulados.length === 0) {
-                    listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
-                    return;
-                }
+                // Determinar la URL de la imagen
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
                 
-                // Llenar el filtro de instructores
-                const selectInstructor = document.getElementById('filtrar-instructor');
-                const instructores = [...new Set(cursosSimulados.map(curso => curso.instructor))];
+                // Verificar si hay usuario para habilitar/deshabilitar botón
+                const botonTexto = usuario ? "Inscribirse" : "Iniciar sesión para inscribirse";
+                const botonDisabled = !usuario;
                 
-                instructores.forEach(instructor => {
-                    const option = document.createElement('option');
-                    option.value = instructor;
-                    option.textContent = instructor;
-                    selectInstructor.appendChild(option);
-                });
-                
-                // Mostrar cursos
-                cursosSimulados.forEach(curso => {
-                    const cursoElemento = document.createElement('div');
-                    cursoElemento.className = 'curso';
-                    
-                    // Determinar la URL de la imagen
-                    const urlImagen = curso.imagen 
-                        ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
-                        : 'https://picsum.photos/seed/curso/600/400.jpg';
-                    
-                    // Verificar si hay usuario para habilitar/deshabilitar botón
-                    const botonTexto = usuario ? "Inscribirse" : "Iniciar sesión para inscribirse";
-                    const botonDisabled = !usuario;
-                    
-                    cursoElemento.innerHTML = `
-                        <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
-                        <div class="informacion-curso">
-                            <h3 class="titulo-curso">${curso.titulo}</h3>
-                            <p class="descripcion-curso">${curso.descripcion}</p>
-                            <div class="detalles-curso">
-                                <span class="instructor-curso">${curso.instructor}</span>
-                                <span>${curso.duracion}</span>
-                            </div>
-                            <div class="precio-curso">${curso.precio}</div>
-                            <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
-                                ${botonTexto}
-                            </button>
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">${curso.instructor}</span>
+                            <span>${curso.duracion}</span>
                         </div>
-                    `;
-                    
-                    listaCursos.appendChild(cursoElemento);
-                    
-                    // Configurar evento para el botón de inscribirse
-                    const botonInscribirse = cursoElemento.querySelector('.boton-inscribirse');
-                    botonInscribirse.addEventListener('click', function() {
-                        if (usuario) {
-                            inscribirseCurso(usuario, curso.id);
-                        } else {
-                            window.location.href = 'inicio_sesion.html';
-                        }
-                    });
-                });
+                        <div class="precio-curso">${curso.precio}</div>
+                        <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
+                            ${botonTexto}
+                        </button>
+                    </div>
+                `;
                 
-                // Configurar filtros
-                configurarFiltros(cursosSimulados, usuario);
-            }, 1000); // Simular delay de carga
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de inscribirse
+                const botonInscribirse = cursoElemento.querySelector('.boton-inscribirse');
+                botonInscribirse.addEventListener('click', function() {
+                    if (usuario) {
+                        inscribirseCurso(usuario, curso.id);
+                    } else {
+                        window.location.href = 'inicio_sesion.html';
+                    }
+                });
+            });
+            
+            // Configurar filtros
+            configurarFiltros(cursosReales, usuario);
         }
 
         // Función para inscribirse a un curso
         function inscribirseCurso(usuario, cursoId) {
-            // Simulación de inscripción
-            alert(`¡Te has inscrito al curso correctamente! (Usuario: ${usuario.nombre}, Curso ID: ${cursoId})`);
+            // Datos requeridos por la API para inscripciones a cursos
+            // Ver backend/server.js a partir de
+            // pathname === '/api/inscribir-curso' && metodo === 'POST'
+            const datosInscripcion = {
+                usuario_id : usuario.id,
+                curso_id : cursoId,
+            };
+
+            fetch('/api/inscribir-curso', {
+                method : 'POST',
+                body : JSON.stringify(datosInscripcion)
+            })
+            .then(raw => raw.json())
+            .then(res => alert(res.mensaje));
         }
 
         // Función para configurar los filtros

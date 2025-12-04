@@ -28,5 +28,26 @@
     "leida": false,
     "fecha_creacion": "2025-12-04T05:16:21.908Z",
     "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1764826266575,
+    "id_usuario": 1763876346710,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T05:31:06.575Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1764826326291,
+    "id_usuario": 1763876316632,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"ejemplo notificacion\" en Empresa no especificada ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T05:32:06.291Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "ejemplo notificacion"
   }
 ]

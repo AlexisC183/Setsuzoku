@@ -489,9 +489,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                         }
                     }
 
-                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
-
-                respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción realizada correctamente' }));
+                    // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
 
                     respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
                 } else {
@@ -505,7 +503,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             }
         });
     }
-        else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
+    else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';
 
@@ -736,6 +734,41 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                 console.error('Error al actualizar postulación:', error);
                 respuesta.statusCode = 500;
                 respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la postulación' })); 
+            }
+        });
+    }
+
+    // API para notificar aprobación de postulación (NUEVO)
+    else if (pathname === '/api/notificar-aprobacion' && metodo === 'POST') {
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datos = JSON.parse(cuerpo);
+                const { usuario_id, titulo_vacante, nombre_empresa } = datos;
+                
+                if (!usuario_id || !titulo_vacante || !nombre_empresa) {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Faltan datos requeridos' }));
+                    return;
+                }
+                
+                // Crear notificación para el candidato
+                notificaciones.notificar_vacante_aprobada(
+                    usuario_id,            // ID del candidato
+                    titulo_vacante,       // Título de la vacante
+                    nombre_empresa         // Nombre de la empresa
+                );
+                
+                respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación enviada correctamente' }));
+            } catch (error) {
+                console.error('Error al notificar aprobación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al enviar la notificación' }));
             }
         });
     }

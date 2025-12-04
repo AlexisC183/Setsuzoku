@@ -12,7 +12,17 @@
     "usuario_id": 1763876316632,
     "trabajo_id": 2,
     "fecha_postulacion": "2025-12-04T05:16:21.905Z",
-    "estado": "pendiente",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+    "estado": "rechazado",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": ""
+  },
+  {
+    "id": 3,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 1,
+    "fecha_postulacion": "2025-12-04T05:31:06.573Z",
+    "estado": "aceptado",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": ""
   }
 ]

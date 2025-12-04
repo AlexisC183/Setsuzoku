@@ -340,18 +340,21 @@
             // Procesando respuesta
             const trabajosReales = await rawTrabajos.json();
 
+            // Obteniendo solo los trabajos activos
+            const trabajosActivos = trabajosReales.filter(t => t.activo);
+
             // Limpiar lista de trabajos
             listaTrabajos.innerHTML = '';
             
             // Verificar si hay trabajos
-            if (trabajosReales.length === 0) {
+            if (trabajosActivos.length === 0) {
                 listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
                 return;
             }
             
             // Llenar el filtro de empresas
             const selectEmpresa = document.getElementById('filtrar-empresa');
-            const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa))];
+            const empresas = [...new Set(trabajosActivos.map(trabajo => trabajo.empresa))];
             
             empresas.forEach(empresa => {
                 const option = document.createElement('option');
@@ -361,13 +364,13 @@
             });
             
             // Mostrar trabajos
-            trabajosReales.forEach(trabajo => {
+            trabajosActivos.forEach(trabajo => {
                 const trabajoElemento = document.createElement('div');
                 trabajoElemento.className = 'trabajo';
                 
                 trabajoElemento.innerHTML = `
                     <div class="encabezado-trabajo">
-                        <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
+                        <h3 class="titulo-trabajo">${trabajo.puesto}</h3>
                         <div class="empresa-trabajo">${trabajo.empresa}</div>
                     </div>
                     <div class="cuerpo-trabajo">
@@ -375,7 +378,7 @@
                         <div class="requisitos-trabajo">
                             <div class="titulo-requisitos">Requisitos:</div>
                             <ul class="lista-requisitos">
-                                ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                ${trabajo.requisitos.split('\n').map(req => `<li class="requisito">${req}</li>`).join('')}
                             </ul>
                         </div>
                         <div class="detalles-trabajo">
@@ -399,7 +402,7 @@
             });
             
             // Configurar filtros
-            configurarFiltros(trabajosReales, usuario);
+            configurarFiltros(trabajosActivos, usuario);
         }
 
         function postularseTrabajo(usuario, trabajoId) {

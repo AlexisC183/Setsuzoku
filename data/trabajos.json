@@ -1,57 +1,70 @@
 [
   {
     "id": 1,
-    "titulo": "Desarrollador Frontend Senior",
+    "puesto": "Desarrollador Frontend Senior",
     "empresa": "Tech Solutions S.A.",
+    "departamento": "tecnologia",
+    "tipo_contrato": "medio_tiempo",
+    "modalidad": "presencial",
     "descripcion": "Buscamos un desarrollador frontend con experiencia en React, Angular y Vue.js.",
-    "requisitos": [
-      "Experiencia mínima de 3 años en desarrollo frontend",
-      "Conocimiento sólido de JavaScript, HTML5 y CSS3",
-      "Experiencia con frameworks como React, Angular o Vue.js"
-    ],
-    "reclutador_id": 2,
+    "requisitos": "Experiencia mínima de 3 años en desarrollo frontend\nConocimiento sólido de JavaScript, HTML5 y CSS3\nExperiencia con frameworks como React, Angular o Vue.js",
+    "salario_min": 8000,
+    "salario_max": 36000,
+    "reclutador_id": 1763876346710,
     "fecha_publicacion": "2023-06-20T09:15:00.000Z",
-    "activo": true
+    "activo": true,
+    "ubicacion": "Los Ángeles, CA",
+    "beneficios": "Aguinaldo"
   },
   {
     "id": 2,
-    "titulo": "Diseñador UX/UI",
+    "puesto": "Diseñador UX/UI",
     "empresa": "Creative Studios",
+    "departamento": "tecnologia",
+    "tipo_contrato": "tiempo_completo",
+    "modalidad": "remoto",
     "descripcion": "Buscamos un diseñador UX/UI creativo y apasionado para unirse a nuestro equipo.",
-    "requisitos": [
-      "Experiencia en diseño de interfaces de usuario",
-      "Conocimiento de herramientas de diseño como Figma, Sketch o Adobe XD"
-    ],
+    "requisitos": "Experiencia en diseño de interfaces de usuario\nConocimiento de herramientas de diseño como Figma, Sketch o Adobe XD",
+    "salario_min": 8000,
+    "salario_max": 25000,
     "reclutador_id": 2,
     "fecha_publicacion": "2023-06-18T11:30:00.000Z",
-    "activo": true
+    "activo": true,
+    "ubicacion": "Tijuana, BC",
+    "beneficios": "Seguro de vida"
   },
   {
     "id": 3,
-    "titulo": "Analista de Datos",
+    "puesto": "Analista de Datos",
     "empresa": "Data Insights Ltd.",
+    "departamento": "tecnologia",
+    "tipo_contrato": "tiempo_completo",
+    "modalidad": "hibrido",
     "descripcion": "Buscamos un analista de datos con experiencia en Python, R y SQL para analizar grandes volúmenes de datos.",
-    "requisitos": [
-      "Experiencia en análisis de datos",
-      "Conocimiento de Python, R y SQL",
-      "Experiencia con herramientas de visualización como Tableau o Power BI"
-    ],
-    "reclutador_id": 2,
+    "requisitos": "Experiencia en análisis de datos\nConocimiento de Python, R y SQL\nExperiencia con herramientas de visualización como Tableau o Power BI",
+    "salario_min": 30000,
+    "salario_max": 55000,
+    "reclutador_id": 1763876346710,
     "fecha_publicacion": "2023-06-22T14:45:00.000Z",
-    "activo": true
+    "activo": false,
+    "ubicacion": "Buenos Aires, Argentina",
+    "beneficios": "Lonche, oficina propia, flexibilidad de horario, se pagan las horas extras"
   },
   {
     "id": 4,
-    "titulo": "Instructor de Programación",
+    "puesto": "Instructor de Programación",
     "empresa": "Code Academy",
+    "departamento": "tecnologia",
+    "tipo_contrato": "tiempo_completo",
+    "modalidad": "remoto",
     "descripcion": "Buscamos un instructor apasionado por la enseñanza de programación con experiencia en desarrollo web.",
-    "requisitos": [
-      "Experiencia en desarrollo web",
-      "Habilidades de enseñanza y comunicación",
-      "Conocimiento de múltiples lenguajes de programación"
-    ],
+    "requisitos": "Experiencia en desarrollo web\nHabilidades de enseñanza y comunicación\nConocimiento de múltiples lenguajes de programación",
+    "salario_min": 5000,
+    "salario_max": 6000,
     "reclutador_id": 2,
     "fecha_publicacion": "2023-06-25T10:20:00.000Z",
-    "activo": true
+    "activo": true,
+    "ubicacion": "Sacramento, CA",
+    "beneficios": "Transporte y uniforme gratuitos"
   }
 ]

@@ -1,13 +1,5 @@
 [
   {
-    "id": 1,
-    "usuario_id": 1763876316632,
-    "trabajo_id": 4,
-    "fecha_postulacion": "2025-12-04T04:25:30.652Z",
-    "estado": "pendiente",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
-  },
-  {
     "id": 2,
     "usuario_id": 1763876316632,
     "trabajo_id": 2,

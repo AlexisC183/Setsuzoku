@@ -130,6 +130,30 @@ function escribir_postulaciones(postulaciones) {
     }
 }
 
+// Lee el archivo de notificaciones
+function leer_notificaciones() {
+    try {
+        if (fs.existsSync(path.join(__dirname, '..', 'data', 'notificaciones.json'))) {
+            const datos = fs.readFileSync(path.join(__dirname, '..', 'data', 'notificaciones.json'), 'utf8');
+            return JSON.parse(datos);
+        }
+    } catch (error) {
+        console.error('Error al leer notificaciones:', error);
+    }
+    return [];
+}
+
+// Escribe las notificaciones en el archivo
+function escribir_notificaciones(notificaciones) {
+    try {
+        fs.writeFileSync(path.join(__dirname, '..', 'data', 'notificaciones.json'), JSON.stringify(notificaciones, null, 2));
+        return true;
+    } catch (error) {
+        console.error('Error al escribir notificaciones:', error);
+        return false;
+    }
+}
+
 // EXPORTAR FUNCIONES
 module.exports = {
     leer_usuarios,
@@ -141,5 +165,7 @@ module.exports = {
     leer_inscripciones,
     escribir_inscripciones,
     leer_postulaciones,
-    escribir_postulaciones
+    escribir_postulaciones,
+    leer_notificaciones,
+    escribir_notificaciones
 };

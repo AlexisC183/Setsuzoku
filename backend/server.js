@@ -5,6 +5,7 @@ const path = require('path'); // Manejo de rutas
 const url = require('url'); // Parseo de URLs
 const auth = require('./auth'); // Módulo de autenticación
 const database = require('./database'); // Módulo de base de datos
+const notificaciones = require('./notificaciones'); // Módulo de notificaciones
 
 // VARIABLES GLOBALES
 const puerto = 8000; // Puerto del servidor
@@ -44,6 +45,14 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada) {
             const resultado = auth.registrar_usuario(datos_usuario);
 
             if (resultado.exito) {
+                console.log('Registro exitoso. Creando notificación de bienvenida...');
+                console.log('Datos del nuevo usuario:', resultado.usuario);
+                // Crear notificación de bienvenida para el nuevo usuario
+                notificaciones.notificar_nuevo_usuario(
+                    resultado.usuario.id,
+                    resultado.usuario.nombre
+                );
+
                 // Redirigir a index con mensaje de éxito
                 respuesta.writeHead(302, { 'Location': '/frontend/index.html?exito=1' });
                 respuesta.end();
@@ -302,6 +311,124 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
+    // API para notificaciones
+    else if (pathname.startsWith('/api/notificaciones')) {
+        if (pathname === '/api/notificaciones' && metodo === 'GET') {
+            // Obtener notificaciones de un usuario
+            const url_params = new URLSearchParams(ruta_parseada.search);
+            const id_usuario = url_params.get('id_usuario');
+            const solo_no_leidas = url_params.get('solo_no_leidas') === 'true';
+            
+            if (!id_usuario) {
+                respuesta.statusCode = 400;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de usuario requerido' }));
+                return;
+            }
+            
+            try {
+                const notificaciones_usuario = notificaciones.obtener_notificaciones_usuario(parseInt(id_usuario), solo_no_leidas);
+                respuesta.end(JSON.stringify(notificaciones_usuario));
+            } catch (error) {
+                console.error('Error al obtener notificaciones:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener las notificaciones' }));
+            }
+        } else if (pathname === '/api/notificaciones/marcar-leida' && metodo === 'POST') {
+            // Marcar notificación como leída
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datos = JSON.parse(cuerpo);
+                    const id_notificacion = datos.id_notificacion;
+                    
+                    if (!id_notificacion) {
+                        respuesta.statusCode = 400;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de notificación requerido' }));
+                        return;
+                    }
+                    
+                    const resultado = notificaciones.marcar_como_leida(parseInt(id_notificacion));
+                    
+                    if (resultado) {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación marcada como leída' }));
+                    } else {
+                        respuesta.statusCode = 404;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'Notificación no encontrada' }));
+                    }
+                } catch (error) {
+                    console.error('Error al marcar notificación como leída:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al marcar la notificación como leída' }));
+                }
+            });
+        } else if (pathname === '/api/notificaciones/marcar-todas-leidas' && metodo === 'POST') {
+            // Marcar todas las notificaciones de un usuario como leídas
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datos = JSON.parse(cuerpo);
+                    const id_usuario = datos.id_usuario;
+                    
+                    if (!id_usuario) {
+                        respuesta.statusCode = 400;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de usuario requerido' }));
+                        return;
+                    }
+                    
+                    const resultado = notificaciones.marcar_todas_como_leidas(parseInt(id_usuario));
+                    
+                    if (resultado) {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Todas las notificaciones marcadas como leídas' }));
+                    } else {
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'No había notificaciones sin leer' }));
+                    }
+                } catch (error) {
+                    console.error('Error al marcar notificaciones como leídas:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al marcar las notificaciones como leídas' }));
+                }
+            });
+        } else if (pathname === '/api/notificaciones' && metodo === 'DELETE') {
+            // Eliminar notificación
+            const url_params = new URLSearchParams(ruta_parseada.search);
+            const id_notificacion = url_params.get('id_notificacion');
+            
+            if (!id_notificacion) {
+                respuesta.statusCode = 400;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'ID de notificación requerido' }));
+                return;
+            }
+            
+            try {
+                const resultado = notificaciones.eliminar_notificacion(parseInt(id_notificacion));
+                
+                if (resultado) {
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación eliminada correctamente' }));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Notificación no encontrada' }));
+                }
+            } catch (error) {
+                console.error('Error al eliminar notificación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al eliminar la notificación' }));
+            }
+        } else {
+            respuesta.statusCode = 404;
+            respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
+        }
+    }
+
     // APIs para inscripciones a cursos
     else if (pathname === '/api/inscripciones-cursos' && metodo === 'GET') {
         // Obtener todas las inscripciones
@@ -340,6 +467,29 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
 
                     // Guardar en el archivo
                     database.escribir_inscripciones(inscripciones);
+
+                    // --- INICIO: CÓDIGO DE NOTIFICACIÓN ---
+                    
+                    // Obtener detalles del curso para encontrar al instructor
+                    const cursos = database.leer_cursos();
+                    const curso_inscrito = cursos.find(c => c.id === datosInscripcion.curso_id);
+
+                    if (curso_inscrito && curso_inscrito.instructor_id) {
+                        // Obtener detalles del estudiante
+                        const usuarios = database.leer_usuarios();
+                        const estudiante = usuarios.find(u => u.id === datosInscripcion.usuario_id);
+
+                        if (estudiante) {
+                            // Crear notificación para el instructor
+                            notificaciones.notificar_nueva_inscripcion_curso(
+                                curso_inscrito.instructor_id,          // ID del instructor
+                                curso_inscrito.titulo,                  // Nombre del curso
+                                `${estudiante.nombre} ${estudiante.apellido_paterno}` // Nombre del estudiante
+                            );
+                        }
+                    }
+
+                    // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
 
                     respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
                 } else {
@@ -397,6 +547,46 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
 
                 // Guardar en el archivo
                 database.escribir_inscripciones(inscripciones);
+
+                // --- INICIO: CÓDIGO DE NOTIFICACIÓN (CORREGIDO) ---
+                
+                console.log('Inscripción exitosa. Buscando datos para la notificación...');
+                console.log('ID del curso inscrito:', datosInscripcion.curso_id);
+                console.log('ID del usuario inscrito:', datosInscripcion.usuario_id);
+
+                // Obtener detalles del curso para encontrar al instructor
+                const cursos = database.leer_cursos();
+                const curso_inscrito = cursos.find(c => c.id === datosInscripcion.curso_id);
+
+                console.log('Curso encontrado:', curso_inscrito);
+
+                if (curso_inscrito && curso_inscrito.instructor_id) {
+                    console.log('ID del instructor encontrado:', curso_inscrito.instructor_id);
+                    
+                    // Obtener detalles del estudiante
+                    const usuarios = database.leer_usuarios();
+                    const estudiante = usuarios.find(u => u.id === datosInscripcion.usuario_id);
+
+                    console.log('Estudiante encontrado:', estudiante);
+
+                    if (estudiante) {
+                        console.log('Llamando a la función de notificación...');
+                        // Crear notificación para el instructor
+                        notificaciones.notificar_nueva_inscripcion_curso(
+                            curso_inscrito.instructor_id,          // ID del instructor
+                            curso_inscrito.titulo,                  // Nombre del curso
+                            `${estudiante.nombre} ${estudiante.apellido_paterno}` // Nombre del estudiante
+                        );
+                        console.log('Función de notificación ejecutada.');
+                    } else {
+                        console.log('ERROR: No se encontró al estudiante con ID:', datosInscripcion.usuario_id);
+                    }
+                } else {
+                    console.log('ERROR: No se encontró el curso o el curso no tiene instructor_id.');
+                    console.log('curso_inscrito:', curso_inscrito);
+                }
+
+                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
 
                 respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción realizada correctamente' }));
             } catch (error) {
@@ -462,6 +652,44 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                 // Guardar en el archivo
                 database.escribir_postulaciones(postulaciones);
 
+                // --- INICIO: CÓDIGO DE NOTIFICACIÓN ---
+                
+                console.log('Postulación exitosa. Buscando datos para la notificación...');
+                
+                // Obtener detalles del trabajo para encontrar al reclutador
+                const trabajos = database.leer_trabajos();
+                const trabajo_postulado = trabajos.find(t => t.id === datosPostulacion.trabajo_id);
+
+                console.log('Trabajo encontrado:', trabajo_postulado);
+
+                if (trabajo_postulado && trabajo_postulado.reclutador_id) {
+                    console.log('ID del reclutador encontrado:', trabajo_postulado.reclutador_id);
+                    
+                    // Obtener detalles del candidato
+                    const usuarios = database.leer_usuarios();
+                    const candidato = usuarios.find(u => u.id === datosPostulacion.usuario_id);
+
+                    console.log('Candidato encontrado:', candidato);
+
+                    if (candidato) {
+                        console.log('Llamando a la función de notificación...');
+                        // Crear notificación para el reclutador
+                        notificaciones.notificar_nueva_postulacion(
+                            trabajo_postulado.reclutador_id,            // ID del reclutador
+                            trabajo_postulado.titulo,                  // Nombre de la vacante
+                            `${candidato.nombre} ${candidato.apellido_paterno}` // Nombre del candidato
+                        );
+                        console.log('Función de notificación ejecutada.');
+                    } else {
+                        console.log('ERROR: No se encontró al candidato con ID:', datosPostulacion.usuario_id);
+                    }
+                } else {
+                    console.log('ERROR: No se encontró el trabajo o el trabajo no tiene reclutador_id.');
+                    console.log('trabajo_postulado:', trabajo_postulado);
+                }
+
+                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
+                
                 respuesta.end(JSON.stringify({ exito: true, mensaje: 'Postulación realizada correctamente' }));
             } catch (error) {
                 console.error('Error al postularse a trabajo:', error);
@@ -506,6 +734,41 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                 console.error('Error al actualizar postulación:', error);
                 respuesta.statusCode = 500;
                 respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar la postulación' })); 
+            }
+        });
+    }
+
+    // API para notificar aprobación de postulación (NUEVO)
+    else if (pathname === '/api/notificar-aprobacion' && metodo === 'POST') {
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+            try {
+                const datos = JSON.parse(cuerpo);
+                const { usuario_id, titulo_vacante, nombre_empresa } = datos;
+                
+                if (!usuario_id || !titulo_vacante || !nombre_empresa) {
+                    respuesta.statusCode = 400;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Faltan datos requeridos' }));
+                    return;
+                }
+                
+                // Crear notificación para el candidato
+                notificaciones.notificar_vacante_aprobada(
+                    usuario_id,            // ID del candidato
+                    titulo_vacante,       // Título de la vacante
+                    nombre_empresa         // Nombre de la empresa
+                );
+                
+                respuesta.end(JSON.stringify({ exito: true, mensaje: 'Notificación enviada correctamente' }));
+            } catch (error) {
+                console.error('Error al notificar aprobación:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al enviar la notificación' }));
             }
         });
     }

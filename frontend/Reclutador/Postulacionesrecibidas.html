@@ -171,6 +171,7 @@
             transition: background-color 0.2s;
             cursor: pointer;
             border: none;
+            font-size: 1rem;
         }
 
         .btn:hover {
@@ -550,7 +551,7 @@
             <h3 class="modal-titulo">Cambiar Estado de Postulación</h3>
             <div class="modal-cuerpo">
                 <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
-                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
+                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom:15px;">
                     <option value="pendiente">Pendiente</option>
                     <option value="revision">En revisión</option>
                     <option value="entrevista">Entrevista</option>
@@ -572,8 +573,10 @@
     <script>
         // VARIABLES GLOBALES
         let postulaciones = [];
-        let postulacionIdActual = null;
         let vacantes = [];
+        let usuarios = [];
+        let postulacionIdActual = null;
+        let usuarioActual = null;
 
         // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
         function volverPaginaAnterior() {
@@ -585,8 +588,8 @@
             const usuarioStr = sessionStorage.getItem('usuario');
             if (usuarioStr) {
                 try {
-                    const usuario = JSON.parse(usuarioStr);
-                    if (usuario && usuario.nombre) {
+                    usuarioActual = JSON.parse(usuarioStr);
+                    if (usuarioActual && usuarioActual.nombre) {
                         return true;
                     }
                 } catch (error) {
@@ -597,232 +600,54 @@
             return false;
         }
 
-        // FUNCIONES PARA POSTULACIONES
-        function cargarDatos() {
-            // Cargar vacantes
-            const vacantesStr = localStorage.getItem('vacantes');
-            vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
-            
-            // Si no hay vacantes, agregar datos de ejemplo
-            if (vacantes.length === 0) {
-                vacantes = [
-                    {
-                        id: 1,
-                        puesto: "Desarrollador Web Full Stack",
-                        departamento: "Tecnología",
-                        ubicacion: "Remoto",
-                        tipo_contrato: "Tiempo completo",
-                        salario: "$25,000 - $35,000",
-                        descripcion: "Buscamos un desarrollador web full stack con experiencia en React y Node.js para unirse a nuestro equipo.",
-                        requisitos: "Experiencia mínima de 3 años en desarrollo web, conocimiento de React, Node.js y bases de datos SQL.",
-                        beneficios: "Seguro médico, días de vacaciones flexibles, oportunidades de crecimiento profesional.",
-                        fecha_publicacion: new Date(Date.now() - 604800000).toISOString(),
-                        estado: "activa",
-                        postulaciones: 5
-                    },
-                    {
-                        id: 2,
-                        puesto: "Diseñador UX/UI",
-                        departamento: "Diseño",
-                        ubicacion: "Híbrido",
-                        tipo_contrato: "Tiempo completo",
-                        salario: "$20,000 - $28,000",
-                        descripcion: "Buscamos un diseñador UX/UI creativo con experiencia en herramientas de diseño moderno.",
-                        requisitos: "Experiencia mínima de 2 años en diseño UX/UI, portafolio sólido, conocimiento de Figma, Sketch o Adobe XD.",
-                        beneficios: "Seguro médico, días de vacaciones flexibles, presupuesto para formación continua.",
-                        fecha_publicacion: new Date(Date.now() - 1209600000).toISOString(),
-                        estado: "activa",
-                        postulaciones: 3
-                    },
-                    {
-                        id: 3,
-                        puesto: "Especialista en Marketing Digital",
-                        departamento: "Marketing",
-                        ubicacion: "Presencial",
-                        tipo_contrato: "Tiempo completo",
-                        salario: "$18,000 - $25,000",
-                        descripcion: "Buscamos un especialista en marketing digital con experiencia en SEO y campañas publicitarias.",
-                        requisitos: "Experiencia mínima de 3 años en marketing digital, conocimiento de SEO, SEM y redes sociales.",
-                        beneficios: "Seguro médico, días de vacaciones flexibles, bonos por desempeño.",
-                        fecha_publicacion: new Date(Date.now() - 1814400000).toISOString(),
-                        estado: "activa",
-                        postulaciones: 4
-                    }
-                ];
+        // --- FUNCIÓN MODIFICADA PARA CARGAR DATOS DESDE EL SERVIDOR ---
+        async function cargarDatos() {
+            try {
+                // Cargar todas las vacantes, postulaciones y usuarios desde el servidor
+                const [rawVacantes, rawPostulaciones, rawUsuarios] = await Promise.all([
+                    fetch('/api/trabajos'),
+                    fetch('/api/postulaciones'),
+                    fetch('/api/usuarios')
+                ]);
+
+                const [todasVacantes, todasPostulaciones, todosUsuarios] = await Promise.all([
+                    rawVacantes.json(),
+                    rawPostulaciones.json(),
+                    rawUsuarios.json()
+                ]);
+
+                // Filtrar vacantes del reclutador actual
+                vacantes = todasVacantes.filter(v => v.reclutador_id === usuarioActual.id);
                 
-                localStorage.setItem('vacantes', JSON.stringify(vacantes));
-            }
-            
-            // Cargar postulaciones
-            const postulacionesStr = localStorage.getItem('postulaciones');
-            postulaciones = postulacionesStr ? JSON.parse(postulacionesStr) : [];
-            
-            // Si no hay postulaciones, agregar datos de ejemplo
-            if (postulaciones.length === 0) {
-                postulaciones = [
-                    {
-                        id: 1,
-                        vacante_id: 1,
-                        candidato_id: 1,
-                        candidato_nombre: "Juan Pérez",
-                        candidato_email: "juan.perez@email.com",
-                        candidato_telefono: "55-1234-5678",
-                        candidato_experiencia: "5 años en desarrollo web",
-                        candidato_educacion: "Ingeniería en Sistemas",
-                        candidato_direccion: "Calle Falsa 123, Col. Juárez, Tijuana, B.C.",
-                        candidato_habilidades: "JavaScript, React, Node.js, Python, SQL",
-                        candidato_presentacion: "Desarrollador Full Stack con experiencia en React y Node.js. Busco oportunidades donde pueda aplicar mis conocimientos en desarrollo web full stack.",
-                        candidato_salario: "$25,000 - $35,000",
-                        candidato_disponibilidad: "Inmediata",
-                        fecha_postulacion: new Date(Date.now() - 86400000).toISOString(),
-                        estado: "revision",
-                        comentario: "Perfil interesante, experiencia relevante en React y Node.js. Buen dominio de patrones de diseño y arquitectura de software.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 2,
-                        vacante_id: 1,
-                        candidato_id: 2,
-                        candidato_nombre: "María González",
-                        candidato_email: "maria.gonzalez@email.com",
-                        candidato_telefono: "55-8765-4321",
-                        candidato_experiencia: "3 años en UX/UI",
-                        candidato_educacion: "Diseño Gráfico",
-                        candidato_direccion: "Av. Revolución 456, Col. Libertad, Tijuana, B.C.",
-                        candidato_habilidades: "Figma, Adobe Creative Suite, Sketch, Principle, Framer",
-                        candidato_presentacion: "Diseñadora UX/UI creativa con experiencia en herramientas de diseño moderno. Especializada en diseño de interfaces intuitivas y experiencia de usuario.",
-                        candidato_salario: "$20,000 - $28,000",
-                        candidato_disponibilidad: "2 semanas",
-                        fecha_postulacion: new Date(Date.now() - 172800000).toISOString(),
-                        estado: "entrevista",
-                        comentario: "Portafolio sólido con proyectos de diseño de interfaces. Buen balance entre estética y funcionalidad.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 3,
-                        vacante_id: 1,
-                        candidato_id: 3,
-                        candidato_nombre: "Carlos Rodríguez",
-                        candidato_email: "carlos.rodriguez@email.com",
-                        candidato_telefono: "55-2468-1357",
-                        candidato_experiencia: "4 años en diseño frontend",
-                        candidato_educacion: "Licenciatura en Diseño",
-                        candidato_direccion: "Calle Principal 789, Zona Centro, Tijuana, B.C.",
-                        candidato_habilidades: "HTML, CSS, JavaScript, Vue.js, React, Bootstrap",
-                        candidato_presentacion: "Desarrollador frontend con experiencia en frameworks modernos. Conocimientos sólidos en responsive design y desarrollo de aplicaciones web.",
-                        candidato_salario: "$22,000 - $30,000",
-                        candidato_disponibilidad: "Inmediata",
-                        fecha_postulacion: new Date(Date.now() - 259200000).toISOString(),
-                        estado: "aceptado",
-                        comentario: "Excelente candidato con habilidades técnicas y buen portafolio. Aceptado para el puesto de Desarrollador Frontend.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 4,
-                        vacante_id: 2,
-                        candidato_id: 4,
-                        candidato_nombre: "Ana Martínez",
-                        candidato_email: "ana.martinez@email.com",
-                        candidato_telefono: "55-3456-7890",
-                        candidato_experiencia: "6 años en marketing digital",
-                        candidato_educacion: "Licenciatura en Mercadotecnia",
-                        candidato_direccion: "Calle Comercio 234, Zona Río, Tijuana, B.C.",
-                        candidato_habilidades: "SEO, SEM, Google Analytics, Facebook Ads, Google Ads, Mailchimp",
-                        candidato_presentacion: "Especialista en marketing digital con experiencia en SEO y campañas publicitarias. Gestión de campañas exitosas con ROI medible.",
-                        candidato_salario: "$18,000 - $25,000",
-                        candidato_disponibilidad: "1 mes",
-                        fecha_postulacion: new Date(Date.now() - 345600000).toISOString(),
-                        estado: "contactado",
-                        comentario: "Excelente perfil con experiencia en marketing digital. Contactado para coordinar entrevista.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 5,
-                        vacante_id: 2,
-                        candidato_id: 5,
-                        candidato_nombre: "Luis Hernández",
-                        candidato_email: "luis.hernandez@email.com",
-                        candidato_telefono: "55-9876-2345",
-                        candidato_experiencia: "8 años en recursos humanos",
-                        candidato_educacion: "Maestría en Recursos Humanos",
-                        candidato_direccion: "Calle Empresarial 567, Zona Zona Centro, Tijuana, B.C.",
-                        candidato_habilidades: "Reclutamiento, selección, evaluación, capacitación, gestión de personal",
-                        candidato_presentacion: "Profesional en recursos humanos con experiencia en reclutamiento técnico y gestión de talento. Especializado en evaluación por competencias.",
-                        candidato_salario: "$35,000 - $45,000",
-                        candidato_disponibilidad: "Inmediata",
-                        fecha_postulacion: new Date(Date.now() - 432000000).toISOString(),
-                        estado: "pendiente",
-                        comentario: "Candidato senior con amplia experiencia en RRHH. Busca posición similar.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 6,
-                        vacante_id: 3,
-                        candidato_id: 6,
-                        candidato_nombre: "Sofía López",
-                        candidato_email: "sofia.lopez@email.com",
-                        candidato_telefono: "55-5555-1234",
-                        candidato_experiencia: "3 años en contabilidad",
-                        candidato_educacion: "Contador Público",
-                        candidato_direccion: "Calle Fiscalía 890, Zona Zona Centro, Tijuana, B.C.",
-                        candidato_habilidades: "Excel, SAP, análisis financiero, contabilidad de costos, Excel, PowerPoint",
-                        candidato_presentacion: "Contador público con experiencia en SAP y análisis financiero. Certificación en contabilidad de costos.",
-                        candidato_salario: "$25,000 - $35,000",
-                        candidato_disponibilidad: "2 semanas",
-                        fecha_postulacion: new Date(Date.now() - 86400000).toISOString(),
-                        estado: "pendiente",
-                        comentario: "Reciente graduado con excelentes conocimientos técnicos.",
-                        cv_url: "#"
-                    },
-                    {
-                        id: 7,
-                        vacante_id: 3,
-                        candidato_id: 7,
-                        candidato_nombre: "Roberto Silva",
-                        candidato_email: "roberto.silva@email.com",
-                        candidato_telefono: "55-2345-6789",
-                        candidato_experiencia: "10 años en desarrollo backend",
-                        candidato_educacion: "Ingeniería en Sistemas Computacionales",
-                        candidato_direccion: "Calle Software 123, Zona Zona Tecnológica, Tijuana, B.C.",
-                        candidato_habilidades: "Java, Python, C++, SQL, Docker, Kubernetes, AWS, Microservicios",
-                        candidato_presentacion: "Arquitecto de software con experiencia en desarrollo backend y microservicios. Especializado en arquitectura de sistemas escalables.",
-                        candidato_salario: "$45,000 - $65,000",
-                        candidato_disponibilidad: "1 mes",
-                        fecha_postulacion: new Date(Date.now() - 129600000).toISOString(),
-                        estado: "revision",
-                        comentario: "Perfil técnico sólido con experiencia en arquitectura de sistemas. Considerando para posición senior.",
-                        cv_url: "#"
-                    }
-                ];
+                // Filtrar postulaciones para las vacantes del reclutador actual
+                postulaciones = todasPostulaciones.filter(p => 
+                    vacantes.some(v => v.id === p.trabajo_id)
+                );
                 
-                localStorage.setItem('postulaciones', JSON.stringify(postulaciones));
+                // Guardar usuarios para obtener nombres de candidatos
+                usuarios = todosUsuarios;
+
+                // Actualizar UI
+                cargarFiltroVacantes();
+                actualizarEstadisticas();
+                renderizarPostulaciones();
+
+            } catch (error) {
+                console.error('Error al cargar datos:', error);
+                mostrarMensaje('error', 'Error al cargar los datos. Por favor, recarga la página.');
             }
-            
-            // Cargar filtro de vacantes
-            cargarFiltroVacantes();
-            
-            // Actualizar estadísticas
-            actualizarEstadisticas();
-            
-            // Renderizar postulaciones
-            renderizarPostulaciones();
         }
 
         function cargarFiltroVacantes() {
             const filtroVacante = document.getElementById('filtro-vacante');
+            filtroVacante.innerHTML = '<option value="">Todas las vacantes</option>';
             
-            // Obtener vacantes únicas de las postulaciones
-            const vacantesUnicas = [...new Set(postulaciones.map(p => p.vacante_id))];
-            
-            let html = '<option value="">Todas las vacantes</option>';
-            vacantesUnicas.forEach(vacanteId => {
-                const vacante = vacantes.find(v => v.id === vacanteId);
-                if (vacante) {
-                    html += `<option value="${vacanteId}">${vacante.puesto}</option>`;
-                }
+            vacantes.forEach(vacante => {
+                const option = document.createElement('option');
+                option.value = vacante.id;
+                option.textContent = vacante.puesto;
+                filtroVacante.appendChild(option);
             });
-            
-            filtroVacante.innerHTML = html;
         }
 
         function actualizarEstadisticas() {
@@ -848,9 +673,11 @@
             
             let html = '';
             postulacionesAMostrar.forEach(postulacion => {
-                const vacante = vacantes.find(v => v.id === postulacion.vacante_id);
+                const vacante = vacantes.find(v => v.id === postulacion.trabajo_id);
                 const vacanteNombre = vacante ? vacante.puesto : 'Vacante no encontrada';
-                const iniciales = postulacion.candidato_nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+                const candidato = usuarios.find(u => u.id === postulacion.usuario_id);
+                const candidatoNombre = candidato ? `${candidato.nombre} ${candidato.apellido_paterno}` : 'Candidato no encontrado';
+                const iniciales = candidatoNombre.split(' ').map(n => n[0]).join('').toUpperCase();
                 const estadoClase = `estado-${postulacion.estado}`;
                 const estadoTexto = postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1);
                 
@@ -859,28 +686,13 @@
                         <div class="postulacion-header">
                             <div class="candidato-avatar">${iniciales}</div>
                             <div class="candidato-info">
-                                <div class="candidato-nombre">${postulacion.candidato_nombre}</div>
-                                <div class="candidato-email">${postulacion.candidato_email}</div>
+                                <div class="candidato-nombre">${candidatoNombre}</div>
+                                <div class="candidato-email">${candidato ? candidato.correo : ''}</div>
                             </div>
                         </div>
                         
                         <div class="postulacion-vacante">
                             <strong>Vacante:</strong> ${vacanteNombre}
-                        </div>
-                        
-                        <div class="postulacion-detalle">
-                            <span class="postulacion-etiqueta">Teléfono:</span>
-                            <span class="postulacion-valor">${postulacion.candidato_telefono}</span>
-                        </div>
-                        
-                        <div class="postulacion-detalle">
-                            <span class="postulacion-etiqueta">Experiencia:</span>
-                            <span class="postulacion-valor">${postulacion.candidato_experiencia}</span>
-                        </div>
-                        
-                        <div class="postulacion-detalle">
-                            <span class="postulacion-etiqueta">Educación:</span>
-                            <span class="postulacion-valor">${postulacion.candidato_educacion}</span>
                         </div>
                         
                         <div class="postulacion-detalle">
@@ -892,15 +704,14 @@
                             ${estadoTexto}
                         </div>
                         
-                        ${postulacion.comentario ? `
+                        ${postulacion.mensaje ? `
                             <div style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-radius: 4px; font-size: 0.9rem; color: #666;">
-                                <strong>Comentario:</strong> ${postulacion.comentario}
+                                <strong>Mensaje:</strong> ${postulacion.mensaje}
                             </div>
                         ` : ''}
                         
                         <div class="postulacion-acciones">
                             <button class="btn btn-pequeno btn-secundario" onclick="abrirModalEstado(${postulacion.id})">Cambiar Estado</button>
-                            <button class="btn btn-pequeno" onclick="descargarCV(${postulacion.id})">Descargar CV</button>
                         </div>
                     </div>
                 `;
@@ -917,12 +728,14 @@
                 return;
             }
             
-            const postulacionesFiltradas = postulaciones.filter(postulacion => 
-                postulacion.candidato_nombre.toLowerCase().includes(termino) ||
-                postulacion.candidato_email.toLowerCase().includes(termino) ||
-                postulacion.candidato_experiencia.toLowerCase().includes(termino) ||
-                postulacion.candidato_educacion.toLowerCase().includes(termino)
-            );
+            const postulacionesFiltradas = postulaciones.filter(postulacion => {
+                const candidato = usuarios.find(u => u.id === postulacion.usuario_id);
+                const candidatoNombre = candidato ? `${candidato.nombre} ${candidato.apellido_paterno}`.toLowerCase() : '';
+                const vacante = vacantes.find(v => v.id === postulacion.trabajo_id);
+                const vacanteNombre = vacante ? vacante.puesto.toLowerCase() : '';
+                
+                return candidatoNombre.includes(termino) || vacanteNombre.includes(termino);
+            });
             
             renderizarPostulaciones(postulacionesFiltradas);
         }
@@ -938,7 +751,7 @@
             }
             
             if (vacanteId) {
-                postulacionesFiltradas = postulacionesFiltradas.filter(p => p.vacante_id == vacanteId);
+                postulacionesFiltradas = postulacionesFiltradas.filter(p => p.trabajo_id == vacanteId);
             }
             
             renderizarPostulaciones(postulacionesFiltradas);
@@ -961,42 +774,64 @@
             document.getElementById('modal-estado').style.display = 'none';
         }
 
-        function confirmarCambioEstado() {
+        // --- FUNCIÓN MODIFICADA PARA COMUNICARSE CON EL SERVIDOR Y ENVIAR NOTIFICACIÓN ---
+        async function confirmarCambioEstado() {
             if (!postulacionIdActual) return;
             
             const nuevoEstado = document.getElementById('nuevo-estado').value;
             const comentario = document.getElementById('comentario-estado').value;
             
             try {
-                // Actualizar postulación
-                const postulacionIndex = postulaciones.findIndex(p => p.id === postulacionIdActual);
-                if (postulacionIndex !== -1) {
-                    const estadoAnterior = postulaciones[postulacionIndex].estado;
-                    postulaciones[postulacionIndex].estado = nuevoEstado;
-                    postulaciones[postulacionIndex].comentario = comentario;
+                // Actualizar postulación en el servidor
+                const respuesta = await fetch(`/api/postulaciones/${postulacionIdActual}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        estado: nuevoEstado, 
+                        comentario: comentario 
+                    })
+                });
+                
+                const resultado = await respuesta.json();
+                
+                if (resultado.exito) {
+                    // Si el estado es "aceptado", enviar notificación al candidato
+                    if (nuevoEstado === 'aceptado') {
+                        const postulacion = postulaciones.find(p => p.id === postulacionIdActual);
+                        const vacante = vacantes.find(v => v.id === postulacion.trabajo_id);
+                        const candidato = usuarios.find(u => u.id === postulacion.usuario_id);
+                        
+                        if (postulacion && vacante && candidato) {
+                            await fetch('/api/notificar-aprobacion', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({
+                                    usuario_id: postulacion.usuario_id,
+                                    titulo_vacante: vacante.puesto,
+                                    nombre_empresa: vacante.empresa || 'Empresa no especificada'
+                                })
+                            });
+                        }
+                    }
                     
-                    // Actualizar localStorage
-                    localStorage.setItem('postulaciones', JSON.stringify(postulaciones));
-                    
-                    // Actualizar estadísticas
-                    actualizarEstadisticas();
-                    
-                    // Mostrar mensaje de éxito
                     mostrarMensaje('exito', 'Estado actualizado correctamente');
                     
-                    // Recargar la lista
-                    renderizarPostulaciones();
+                    // Recargar datos para reflejar cambios
+                    await cargarDatos();
                     
                     // Cerrar modal
                     cerrarModalEstado();
+                } else {
+                    mostrarMensaje('error', resultado.mensaje || 'Error al actualizar el estado');
                 }
             } catch (error) {
-                mostrarMensaje('error', 'Error al actualizar el estado. Inténtalo nuevamente');
+                console.error('Error:', error);
+                mostrarMensaje('error', 'Error de conexión. Por favor, intenta más tarde.');
             }
-        }
-
-        function descargarCV(id) {
-            mostrarMensaje('exito', `Descargando CV del candidato ${id}`);
         }
 
         function mostrarMensaje(tipo, mensaje) {
@@ -1011,33 +846,15 @@
 
         function formatearFecha(fechaISO) {
             const fecha = new Date(fechaISO);
-            const ahora = new Date();
-            const diferencia = ahora - fecha;
-            
-            if (diferencia < 86400000 && fecha.getDate() === ahora.getDate()) {
-                return `Hoy a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            const ayer = new Date(ahora);
-            ayer.setDate(ayer.getDate() - 1);
-            if (fecha.getDate() === ayer.getDate() && fecha.getMonth() === ayer.getMonth() && fecha.getFullYear() === ayer.getFullYear()) {
-                return `Ayer a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
-            if (diferencia < 604800000) {
-                const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
-                return `${dias[fecha.getDay()]} a las ${fecha.getHours()}:${fecha.getMinutes().toString().padStart(2, '0')}`;
-            }
-            
             return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         }
 
         // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
             // Verificar sesión
-            verificarSesion();
+            if (!verificarSesion()) return;
             
-            // Cargar datos
+            // Cargar datos desde el servidor
             cargarDatos();
             
             // Configurar evento para el botón de volver

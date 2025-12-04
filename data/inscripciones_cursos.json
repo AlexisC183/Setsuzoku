@@ -1,1 +1,34 @@
-[]
+[
+  {
+    "id": 1,
+    "usuario_id": 1763876316632,
+    "curso_id": 1,
+    "fecha_inscripcion": "2025-12-04T01:03:57.634Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 2,
+    "usuario_id": 1763876316632,
+    "curso_id": 5,
+    "fecha_inscripcion": "2025-12-04T04:24:02.089Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 3,
+    "usuario_id": 1763876316632,
+    "curso_id": 6,
+    "fecha_inscripcion": "2025-12-04T04:32:39.876Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 4,
+    "usuario_id": 1763876316632,
+    "curso_id": 7,
+    "fecha_inscripcion": "2025-12-04T04:36:20.802Z",
+    "estado": "en-curso",
+    "progreso": 0
+  }
+]

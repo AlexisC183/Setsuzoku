@@ -65,7 +65,6 @@
             color: #ffffff;
             font-size: 1.5rem;
             font-weight: bold;
-            /* El logo ya no es un enlace, por lo que no necesita estilos de enlace */
         }
 
         .contenedor-principal {
@@ -261,7 +260,6 @@
         <div class="contenedor-central">
             <span class="logo">Setsuzoku</span>
         </div>
-        <!-- El contenedor de enlaces de sesión ha sido eliminado -->
     </nav>
 
     <div class="contenedor-principal">
@@ -307,9 +305,7 @@
                     const usuario = JSON.parse(usuarioStr);
                     console.log('Usuario parseado:', usuario);
                     
-                    // Verificar que tenga las propiedades mínimas necesarias
                     if (usuario && usuario.nombre && usuario.grupo) {
-                        // Sesión válida encontrada
                         cargarTrabajos(usuario);
                         return true;
                     } else {
@@ -322,67 +318,78 @@
                 }
             }
             
-            // No hay sesión válida - mostrar interfaz normal sin restricciones
-            cargarTrabajos(null); // Cargar trabajos sin usuario
+            cargarTrabajos(null);
             return false;
         }
 
-        // Función para cargar trabajos desde la API
+        // --- FUNCIÓN MODIFICADA CON MÁS DEPURACIÓN Y MANEJO DE ERRORES ---
         async function cargarTrabajos(usuario) {
             const listaTrabajos = document.getElementById('lista-trabajos');
-            
-            // Mostrar mensaje de carga
             listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
             
-            // Consultando API trabajos
-            const rawTrabajos = await fetch('/api/trabajos');
+            try {
+                console.log('Realizando petición GET a /api/trabajos...');
+                const rawTrabajos = await fetch('/api/trabajos');
+                const trabajosReales = await rawTrabajos.json();
+                console.log('Datos de trabajos parseados:', trabajosReales);
 
-            // Procesando respuesta
-            const trabajosReales = await rawTrabajos.json();
-
-            // Obteniendo solo los trabajos activos
-            const trabajosActivos = trabajosReales.filter(t => t.activo);
-
-            // Limpiar lista de trabajos
-            listaTrabajos.innerHTML = '';
-            
-            // Verificar si hay trabajos
-            if (trabajosActivos.length === 0) {
-                listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
-                return;
+                listaTrabajos.innerHTML = '';
+                
+                if (trabajosReales.length === 0) {
+                    console.log('La API devolvió una lista vacía de trabajos.');
+                    listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
+                    return;
+                }
+                
+                const selectEmpresa = document.getElementById('filtrar-empresa');
+                selectEmpresa.innerHTML = '<option value="">Todas las empresas</option>';
+                
+                const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa || trabajo.ubicacion || 'Empresa no especificada'))];
+                empresas.forEach(empresa => {
+                    const option = document.createElement('option');
+                    option.value = empresa;
+                    option.textContent = empresa;
+                    selectEmpresa.appendChild(option);
+                });
+                
+                renderizarTrabajos(trabajosReales, usuario);
+                
+            } catch (error) {
+                console.error('Error al cargar trabajos:', error);
+                listaTrabajos.innerHTML = '<div class="mensaje-error">Error al cargar los trabajos. Por favor, intenta más tarde.</div>';
             }
-            
-            // Llenar el filtro de empresas
-            const selectEmpresa = document.getElementById('filtrar-empresa');
-            const empresas = [...new Set(trabajosActivos.map(trabajo => trabajo.empresa))];
-            
-            empresas.forEach(empresa => {
-                const option = document.createElement('option');
-                option.value = empresa;
-                option.textContent = empresa;
-                selectEmpresa.appendChild(option);
-            });
-            
-            // Mostrar trabajos
-            trabajosActivos.forEach(trabajo => {
+        }
+
+        // --- FUNCIÓN MODIFICADA CON MANEJO SEGURO DE 'requisitos' ---
+        function renderizarTrabajos(trabajos, usuario) {
+            const listaTrabajos = document.getElementById('lista-trabajos');
+            listaTrabajos.innerHTML = '';
+
+            trabajos.forEach(trabajo => {
                 const trabajoElemento = document.createElement('div');
                 trabajoElemento.className = 'trabajo';
+                
+                // Manejo seguro del campo 'requisitos' para evitar el error .split()
+                let requisitosArray = [];
+                if (typeof trabajo.requisitos === 'string') {
+                    requisitosArray = trabajo.requisitos.split('\n').filter(req => req.trim() !== '');
+                }
                 
                 trabajoElemento.innerHTML = `
                     <div class="encabezado-trabajo">
                         <h3 class="titulo-trabajo">${trabajo.puesto}</h3>
-                        <div class="empresa-trabajo">${trabajo.empresa}</div>
+                        <div class="empresa-trabajo">${trabajo.empresa || 'Empresa no especificada'}</div>
                     </div>
                     <div class="cuerpo-trabajo">
                         <p class="descripcion-trabajo">${trabajo.descripcion}</p>
                         <div class="requisitos-trabajo">
                             <div class="titulo-requisitos">Requisitos:</div>
                             <ul class="lista-requisitos">
-                                ${trabajo.requisitos.split('\n').map(req => `<li class="requisito">${req}</li>`).join('')}
+                                ${requisitosArray.map(req => `<li class="requisito">${req}</li>`).join('')}
                             </ul>
                         </div>
                         <div class="detalles-trabajo">
-                            <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                            <span>Publicado: ${new Date(trabajo.fecha_publicacion || trabajo.fecha_creacion).toLocaleDateString()}</span>
                         </div>
                         <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
                     </div>
@@ -390,7 +397,6 @@
                 
                 listaTrabajos.appendChild(trabajoElemento);
                 
-                // Configurar evento para el botón de postularse
                 const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
                 botonPostularse.addEventListener('click', function() {
                     if (usuario) {
@@ -401,14 +407,10 @@
                 });
             });
             
-            // Configurar filtros
-            configurarFiltros(trabajosActivos, usuario);
+            configurarFiltros(trabajos, usuario);
         }
 
         function postularseTrabajo(usuario, trabajoId) {
-            // Datos requeridos por la API para postulaciones a trabajos
-            // Ver backend/server.js a partir de
-            // pathname === '/api/postularse-trabajo' && metodo === 'POST'
             const datosPostulacion = {
                 usuario_id : usuario.id,
                 trabajo_id : trabajoId,
@@ -417,12 +419,20 @@
 
             fetch('/api/postularse-trabajo', {
                 method : 'POST',
+                headers: { // Es una buena práctica incluir el tipo de contenido
+                    'Content-Type': 'application/json'
+                },
                 body : JSON.stringify(datosPostulacion)
             })
             .then(raw => raw.json())
-            .then(res => alert(res.mensaje));
+            .then(res => alert(res.mensaje))
+            .catch(error => {
+                console.error('Error en la petición de postulación:', error);
+                alert('Ocurrió un error al intentar postularse. Por favor, revisa la consola para más detalles.');
+            });
         }
 
+        // --- FUNCIÓN MODIFICADA CON MANEJO SEGURO DE 'requisitos' ---
         function configurarFiltros(trabajos, usuario) {
             const buscarTrabajo = document.getElementById('buscar-trabajo');
             const filtrarEmpresa = document.getElementById('filtrar-empresa');
@@ -432,44 +442,47 @@
                 const textoBusqueda = buscarTrabajo.value.toLowerCase();
                 const empresaSeleccionada = filtrarEmpresa.value;
                 
-                // Filtrar trabajos
                 const trabajosFiltrados = trabajos.filter(trabajo => {
-                    const coincideTexto = trabajo.titulo.toLowerCase().includes(textoBusqueda) || 
+                    const textoEmpresa = trabajo.empresa || trabajo.ubicacion || '';
+                    const coincideTexto = trabajo.puesto.toLowerCase().includes(textoBusqueda) || 
                                         trabajo.descripcion.toLowerCase().includes(textoBusqueda);
-                    const coincideEmpresa = !empresaSeleccionada || trabajo.empresa === empresaSeleccionada;
+                    const coincideEmpresa = !empresaSeleccionada || textoEmpresa === empresaSeleccionada;
                     
                     return coincideTexto && coincideEmpresa;
                 });
                 
-                // Limpiar lista de trabajos
                 listaTrabajos.innerHTML = '';
                 
-                // Verificar si hay trabajos después de filtrar
                 if (trabajosFiltrados.length === 0) {
                     listaTrabajos.innerHTML = '<div class="mensaje-error">No se encontraron trabajos que coincidan con los filtros.</div>';
                     return;
                 }
                 
-                // Mostrar trabajos filtrados
                 trabajosFiltrados.forEach(trabajo => {
                     const trabajoElemento = document.createElement('div');
                     trabajoElemento.className = 'trabajo';
                     
+                    // Manejo seguro del campo 'requisitos' también aquí
+                    let requisitosArray = [];
+                    if (typeof trabajo.requisitos === 'string') {
+                        requisitosArray = trabajo.requisitos.split('\n').filter(req => req.trim() !== '');
+                    }
+                    
                     trabajoElemento.innerHTML = `
                         <div class="encabezado-trabajo">
-                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                            <h3 class="titulo-trabajo">${trabajo.puesto}</h3>
+                            <div class="empresa-trabajo">${trabajo.empresa || 'Empresa no especificada'}</div>
                         </div>
                         <div class="cuerpo-trabajo">
                             <p class="descripcion-trabajo">${trabajo.descripcion}</p>
                             <div class="requisitos-trabajo">
                                 <div class="titulo-requisitos">Requisitos:</div>
                                 <ul class="lista-requisitos">
-                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                    ${requisitosArray.map(req => `<li class="requisito">${req}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="detalles-trabajo">
-                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                                <span>Publicado: ${new Date(trabajo.fecha_publicacion || trabajo.fecha_creacion).toLocaleDateString()}</span>
                             </div>
                             <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
                         </div>
@@ -477,7 +490,6 @@
                     
                     listaTrabajos.appendChild(trabajoElemento);
                     
-                    // Configurar evento para el botón de postularse
                     const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
                     botonPostularse.addEventListener('click', function() {
                         if (usuario) {
@@ -489,17 +501,13 @@
                 });
             }
             
-            // Configurar eventos para los filtros
             buscarTrabajo.addEventListener('input', aplicarFiltros);
             filtrarEmpresa.addEventListener('change', aplicarFiltros);
         }
 
         // Inicializar la página
         document.addEventListener('DOMContentLoaded', function() {
-            // Configurar evento para el botón de volver
             document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
-            
-            // Verificar sesión al cargar la página
             verificarSesion();
         });
     </script>

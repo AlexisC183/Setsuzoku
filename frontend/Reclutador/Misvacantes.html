@@ -445,9 +445,8 @@
                             <div style="display: flex; gap: 10px;">
                                 <select id="filtro-estado" class="filtro-select" onchange="filtrarVacantes()">
                                     <option value="">Todos los estados</option>
-                                    <option value="activa">Activas</option>
-                                    <option value="pausada">Pausadas</option>
-                                    <option value="cerrada">Cerradas</option>
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
                                 </select>
                                 
                                 <select id="filtro-departamento" class="filtro-select" onchange="filtrarVacantes()">
@@ -529,11 +528,6 @@
                 </div>
                 
                 <div class="info-grupo">
-                    <div class="info-etiqueta">Fecha de Cierre:</div>
-                    <div class="info-valor" id="detalles-fecha-cierre"></div>
-                </div>
-                
-                <div class="info-grupo">
                     <div class="info-etiqueta">Estado:</div>
                     <div class="info-valor" id="detalles-estado"></div>
                 </div>
@@ -556,9 +550,8 @@
             <div class="modal-cuerpo">
                 <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
                 <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
-                    <option value="activa">Activa</option>
-                    <option value="pausada">Pausada</option>
-                    <option value="cerrada">Cerrada</option>
+                    <option value="activo">Activo</option>
+                    <option value="inactivo">Inactivo</option>
                 </select>
                 
                 <label for="comentario-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Comentario (opcional):</label>
@@ -604,6 +597,8 @@
                 try {
                     const usuario = JSON.parse(usuarioStr);
                     if (usuario && usuario.nombre) {
+                        // Cargar vacantes
+                        cargarVacantes(usuario);
                         return true;
                     }
                 } catch (error) {
@@ -615,74 +610,19 @@
         }
 
         // FUNCIONES PARA VACANTES
-        function cargarVacantes() {
-            const vacantesStr = localStorage.getItem('vacantes');
-            vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
-            
-            // Si no hay vacantes, agregar datos de ejemplo
-            if (vacantes.length === 0) {
-                vacantes = [
-                    {
-                        id: 1,
-                        puesto: "Desarrollador Full Stack",
-                        departamento: "tecnologia",
-                        tipo_contrato: "tiempo_completo",
-                        modalidad: "hibrido",
-                        salario_min: 25000,
-                        salario_max: 35000,
-                        ubicacion: "Ciudad de México, México",
-                        descripcion: "Buscamos un desarrollador full stack con experiencia en React y Node.js para unirse a nuestro equipo de desarrollo.",
-                        requisitos: "Experiencia mínima de 3 años en desarrollo web, conocimiento de React, Node.js y bases de datos SQL.",
-                        beneficios: "Seguro médico, 20 días de vacaciones, trabajo remoto parcial, presupuesto para capacitación.",
-                        fecha_publicacion: "2023-05-15",
-                        fecha_cierre: "2023-06-15",
-                        reclutador_id: 1,
-                        fecha_creacion: new Date().toISOString(),
-                        estado: "activa",
-                        postulaciones: 12
-                    },
-                    {
-                        id: 2,
-                        puesto: "Diseñador UX/UI",
-                        departamento: "tecnologia",
-                        tipo_contrato: "tiempo_completo",
-                        modalidad: "remoto",
-                        salario_min: 20000,
-                        salario_max: 28000,
-                        ubicacion: "Remoto",
-                        descripcion: "Buscamos un diseñador UX/UI creativo con experiencia en herramientas de diseño moderno para mejorar la experiencia de usuario en nuestros productos.",
-                        requisitos: "Experiencia mínima de 2 años en diseño UX/UI, portafolio sólido, conocimiento de Figma, Sketch o Adobe XD.",
-                        beneficios: "Trabajo 100% remoto, horario flexible, presupuesto para equipo, seguro médico.",
-                        fecha_publicacion: "2023-05-10",
-                        fecha_cierre: "2023-06-10",
-                        reclutador_id: 1,
-                        fecha_creacion: new Date().toISOString(),
-                        estado: "activa",
-                        postulaciones: 8
-                    },
-                    {
-                        id: 3,
-                        puesto: "Especialista en Marketing Digital",
-                        departamento: "marketing",
-                        tipo_contrato: "tiempo_completo",
-                        modalidad: "presencial",
-                        salario_min: 18000,
-                        salario_max: 25000,
-                        ubicacion: "Guadalajara, Jalisco",
-                        descripcion: "Buscamos un especialista en marketing digital con experiencia en SEO y campañas publicitarias para aumentar nuestra presencia en línea.",
-                        requisitos: "Experiencia mínima de 3 años en marketing digital, conocimiento de SEO, SEM y redes sociales.",
-                        beneficios: "Seguro médico, días de vacaciones flexibles, bonos por desempeño, presupuesto para cursos.",
-                        fecha_publicacion: "2023-05-05",
-                        fecha_cierre: "2023-06-05",
-                        reclutador_id: 1,
-                        fecha_creacion: new Date().toISOString(),
-                        estado: "pausada",
-                        postulaciones: 15
-                    }
-                ];
-                
-                localStorage.setItem('vacantes', JSON.stringify(vacantes));
-            }
+        async function cargarVacantes(usuario) {
+            // Consultando APIs
+            const [ rawVacantes, rawPostulaciones ] = await Promise.all([ fetch('/api/trabajos'), fetch('/api/postulaciones') ]);
+            const [ todasVacantes, todasPostulaciones ] = await Promise.all([ rawVacantes.json(), rawPostulaciones.json() ]);
+
+            // Filtrando vacantes por el reclutador actual
+            const vacantesReclutador = todasVacantes.filter(v => v.reclutador_id === usuario.id);
+
+            // Determinando vacantes con número de postulaciones para propósitos de UI
+            vacantes = vacantesReclutador.map(v => ({
+                ...v,
+                postulaciones: todasPostulaciones.filter(p => p.trabajo_id === v.id).length
+            }));
             
             renderizarVacantes();
         }
@@ -698,8 +638,8 @@
             
             let html = '';
             vacantesAMostrar.forEach(vacante => {
-                const estadoClase = `estado-${vacante.estado}`;
-                const estadoTexto = vacante.estado.charAt(0).toUpperCase() + vacante.estado.slice(1);
+                const estadoClase = `estado-${vacante.activo}`;
+                const estadoTexto = vacante.activo ? 'Activa' : 'Inactiva';
                 
                 html += `
                     <div class="vacante-card">
@@ -772,7 +712,9 @@
             let vacantesFiltradas = vacantes;
             
             if (estado) {
-                vacantesFiltradas = vacantesFiltradas.filter(v => v.estado === estado);
+                const estadoBool = estado === 'activo';
+
+                vacantesFiltradas = vacantesFiltradas.filter(v => v.activo === estadoBool);
             }
             
             if (departamento) {
@@ -797,8 +739,7 @@
                 document.getElementById('detalles-requisitos').textContent = vacante.requisitos;
                 document.getElementById('detalles-beneficios').textContent = vacante.beneficios;
                 document.getElementById('detalles-fecha-publicacion').textContent = formatearFecha(vacante.fecha_publicacion);
-                document.getElementById('detalles-fecha-cierre').textContent = formatearFecha(vacante.fecha_cierre);
-                document.getElementById('detalles-estado').textContent = vacante.estado.charAt(0).toUpperCase() + vacante.estado.slice(1);
+                document.getElementById('detalles-estado').textContent = vacante.activo ? 'Activa' : 'Inactiva';
                 document.getElementById('detalles-postulaciones').textContent = vacante.postulaciones;
                 
                 document.getElementById('modal-detalles').style.display = 'block';
@@ -820,7 +761,7 @@
             const vacante = vacantes.find(v => v.id === id);
             
             if (vacante) {
-                document.getElementById('nuevo-estado').value = vacante.estado;
+                document.getElementById('nuevo-estado').value = vacante.activo ? 'activo' : 'inactivo';
                 document.getElementById('comentario-estado').value = '';
                 
                 document.getElementById('modal-editar-estado').style.display = 'block';
@@ -842,11 +783,8 @@
                 // Actualizar vacante
                 const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEditar);
                 if (vacanteIndex !== -1) {
-                    const estadoAnterior = vacantes[vacanteIndex].estado;
-                    vacantes[vacanteIndex].estado = nuevoEstado;
-                    
-                    // Actualizar localStorage
-                    localStorage.setItem('vacantes', JSON.stringify(vacantes));
+                    const estadoAnterior = vacantes[vacanteIndex].activo;
+                    vacantes[vacanteIndex].activo = nuevoEstado === 'activo';
                     
                     // Mostrar mensaje de éxito
                     mostrarMensaje('exito', 'Estado actualizado correctamente');
@@ -883,9 +821,6 @@
             try {
                 // Eliminar vacante del array
                 vacantes = vacantes.filter(v => v.id !== vacanteIdEliminar);
-                
-                // Actualizar localStorage
-                localStorage.setItem('vacantes', JSON.stringify(vacantes));
                 
                 // Mostrar mensaje de éxito
                 mostrarMensaje('exito', 'Vacante eliminada correctamente');
@@ -953,9 +888,6 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Verificar sesión
             verificarSesion();
-            
-            // Cargar vacantes
-            cargarVacantes();
             
             // Configurar evento para el botón de volver
             document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);

@@ -18,5 +18,15 @@
     "fecha_creacion": "2025-12-04T04:36:20.805Z",
     "tipo_referencia": "curso",
     "id_referencia": "mm"
+  },
+  {
+    "id": 1764825381907,
+    "id_usuario": 1763876346710,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T05:16:21.908Z",
+    "tipo_referencia": "vacante"
   }
 ]

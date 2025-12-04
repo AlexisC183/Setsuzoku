@@ -1,6 +1,6 @@
 # Setsuzoku
 
-## Projecto de Node.js
+## Proyecto de Node.js
 
 ### Cómo ejecutar (Windows)
 

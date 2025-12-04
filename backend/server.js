@@ -45,6 +45,14 @@ function manejar_peticion_post(peticion, respuesta, ruta_parseada) {
             const resultado = auth.registrar_usuario(datos_usuario);
 
             if (resultado.exito) {
+                console.log('Registro exitoso. Creando notificación de bienvenida...');
+                console.log('Datos del nuevo usuario:', resultado.usuario);
+                // Crear notificación de bienvenida para el nuevo usuario
+                notificaciones.notificar_nuevo_usuario(
+                    resultado.usuario.id,
+                    resultado.usuario.nombre
+                );
+
                 // Redirigir a index con mensaje de éxito
                 respuesta.writeHead(302, { 'Location': '/frontend/index.html?exito=1' });
                 respuesta.end();
@@ -460,6 +468,31 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     // Guardar en el archivo
                     database.escribir_inscripciones(inscripciones);
 
+                    // --- INICIO: CÓDIGO DE NOTIFICACIÓN ---
+                    
+                    // Obtener detalles del curso para encontrar al instructor
+                    const cursos = database.leer_cursos();
+                    const curso_inscrito = cursos.find(c => c.id === datosInscripcion.curso_id);
+
+                    if (curso_inscrito && curso_inscrito.instructor_id) {
+                        // Obtener detalles del estudiante
+                        const usuarios = database.leer_usuarios();
+                        const estudiante = usuarios.find(u => u.id === datosInscripcion.usuario_id);
+
+                        if (estudiante) {
+                            // Crear notificación para el instructor
+                            notificaciones.notificar_nueva_inscripcion_curso(
+                                curso_inscrito.instructor_id,          // ID del instructor
+                                curso_inscrito.titulo,                  // Nombre del curso
+                                `${estudiante.nombre} ${estudiante.apellido_paterno}` // Nombre del estudiante
+                            );
+                        }
+                    }
+
+                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
+
+                respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción realizada correctamente' }));
+
                     respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
                 } else {
                     respuesta.statusCode = 404;
@@ -472,7 +505,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
             }
         });
     }
-    else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
+        else if (pathname === '/api/inscribir-curso' && metodo === 'POST') {
         console.log('Recibida petición para inscribirse en curso');
         let cuerpo = '';
 
@@ -516,6 +549,46 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
 
                 // Guardar en el archivo
                 database.escribir_inscripciones(inscripciones);
+
+                // --- INICIO: CÓDIGO DE NOTIFICACIÓN (CORREGIDO) ---
+                
+                console.log('Inscripción exitosa. Buscando datos para la notificación...');
+                console.log('ID del curso inscrito:', datosInscripcion.curso_id);
+                console.log('ID del usuario inscrito:', datosInscripcion.usuario_id);
+
+                // Obtener detalles del curso para encontrar al instructor
+                const cursos = database.leer_cursos();
+                const curso_inscrito = cursos.find(c => c.id === datosInscripcion.curso_id);
+
+                console.log('Curso encontrado:', curso_inscrito);
+
+                if (curso_inscrito && curso_inscrito.instructor_id) {
+                    console.log('ID del instructor encontrado:', curso_inscrito.instructor_id);
+                    
+                    // Obtener detalles del estudiante
+                    const usuarios = database.leer_usuarios();
+                    const estudiante = usuarios.find(u => u.id === datosInscripcion.usuario_id);
+
+                    console.log('Estudiante encontrado:', estudiante);
+
+                    if (estudiante) {
+                        console.log('Llamando a la función de notificación...');
+                        // Crear notificación para el instructor
+                        notificaciones.notificar_nueva_inscripcion_curso(
+                            curso_inscrito.instructor_id,          // ID del instructor
+                            curso_inscrito.titulo,                  // Nombre del curso
+                            `${estudiante.nombre} ${estudiante.apellido_paterno}` // Nombre del estudiante
+                        );
+                        console.log('Función de notificación ejecutada.');
+                    } else {
+                        console.log('ERROR: No se encontró al estudiante con ID:', datosInscripcion.usuario_id);
+                    }
+                } else {
+                    console.log('ERROR: No se encontró el curso o el curso no tiene instructor_id.');
+                    console.log('curso_inscrito:', curso_inscrito);
+                }
+
+                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
 
                 respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción realizada correctamente' }));
             } catch (error) {
@@ -581,6 +654,44 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                 // Guardar en el archivo
                 database.escribir_postulaciones(postulaciones);
 
+                // --- INICIO: CÓDIGO DE NOTIFICACIÓN ---
+                
+                console.log('Postulación exitosa. Buscando datos para la notificación...');
+                
+                // Obtener detalles del trabajo para encontrar al reclutador
+                const trabajos = database.leer_trabajos();
+                const trabajo_postulado = trabajos.find(t => t.id === datosPostulacion.trabajo_id);
+
+                console.log('Trabajo encontrado:', trabajo_postulado);
+
+                if (trabajo_postulado && trabajo_postulado.reclutador_id) {
+                    console.log('ID del reclutador encontrado:', trabajo_postulado.reclutador_id);
+                    
+                    // Obtener detalles del candidato
+                    const usuarios = database.leer_usuarios();
+                    const candidato = usuarios.find(u => u.id === datosPostulacion.usuario_id);
+
+                    console.log('Candidato encontrado:', candidato);
+
+                    if (candidato) {
+                        console.log('Llamando a la función de notificación...');
+                        // Crear notificación para el reclutador
+                        notificaciones.notificar_nueva_postulacion(
+                            trabajo_postulado.reclutador_id,            // ID del reclutador
+                            trabajo_postulado.titulo,                  // Nombre de la vacante
+                            `${candidato.nombre} ${candidato.apellido_paterno}` // Nombre del candidato
+                        );
+                        console.log('Función de notificación ejecutada.');
+                    } else {
+                        console.log('ERROR: No se encontró al candidato con ID:', datosPostulacion.usuario_id);
+                    }
+                } else {
+                    console.log('ERROR: No se encontró el trabajo o el trabajo no tiene reclutador_id.');
+                    console.log('trabajo_postulado:', trabajo_postulado);
+                }
+
+                // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
+                
                 respuesta.end(JSON.stringify({ exito: true, mensaje: 'Postulación realizada correctamente' }));
             } catch (error) {
                 console.error('Error al postularse a trabajo:', error);

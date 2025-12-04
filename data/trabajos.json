@@ -53,5 +53,42 @@
     "reclutador_id": 2,
     "fecha_publicacion": "2023-06-25T10:20:00.000Z",
     "activo": true
+  },
+  {
+    "id": 5,
+    "puesto": "ejemplo notificacion",
+    "departamento": "tecnologia",
+    "tipo_contrato": "tiempo_completo",
+    "modalidad": "presencial",
+    "salario_min": "10",
+    "salario_max": "15",
+    "ubicacion": "En casa",
+    "descripcion": "hola",
+    "requisitos": "hola",
+    "beneficios": "hola",
+    "fecha_publicacion": "2025-12-04",
+    "reclutador_id": 1763876346710,
+    "fecha_creacion": "2025-12-04T04:45:40.692Z",
+    "estado": "activa",
+    "postulaciones": 0
+  },
+  {
+    "id": 6,
+    "empresa": "HOLA",
+    "puesto": "HOLA",
+    "departamento": "tecnologia",
+    "tipo_contrato": "tiempo_completo",
+    "modalidad": "presencial",
+    "salario_min": "10",
+    "salario_max": "15",
+    "ubicacion": "HOLA",
+    "descripcion": "HOLA",
+    "requisitos": "HOLA",
+    "beneficios": "HOLA",
+    "fecha_publicacion": "2025-12-04",
+    "reclutador_id": 1763876346710,
+    "fecha_creacion": "2025-12-04T04:56:19.143Z",
+    "estado": "activa",
+    "postulaciones": 0
   }
 ]

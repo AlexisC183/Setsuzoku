@@ -231,6 +231,26 @@
             font-size: 1.1rem;
         }
 
+        .boton-video {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .boton-video:hover {
+            background-color: #c0392b;
+        }
+
         @media (max-width: 768px) {
             .lista-cursos {
                 grid-template-columns: 1fr;
@@ -239,6 +259,7 @@
             .contenedor-contenido {
                 padding: 10px;
             }
+        
         }
     </style>
 </head>
@@ -380,6 +401,7 @@
                             <span>${curso.duracion}</span>
                         </div>
                         <div class="precio-curso">${curso.precio}</div>
+                        ${curso.video_url ? `<a href="${curso.video_url}" target="_blank" class="boton-video">Ver Video de Introducción</a>` : ''}
                         <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
                             ${botonTexto}
                         </button>
@@ -405,9 +427,9 @@
 
         // Función para inscribirse a un curso
         function inscribirseCurso(usuario, cursoId) {
+            console.log('Intentando inscribir al usuario:', usuario.id, 'en el curso:', cursoId);
+            
             // Datos requeridos por la API para inscripciones a cursos
-            // Ver backend/server.js a partir de
-            // pathname === '/api/inscribir-curso' && metodo === 'POST'
             const datosInscripcion = {
                 usuario_id : usuario.id,
                 curso_id : cursoId,
@@ -415,12 +437,26 @@
 
             fetch('/api/inscribir-curso', {
                 method : 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
                 body : JSON.stringify(datosInscripcion)
             })
-            .then(raw => raw.json())
-            .then(res => alert(res.mensaje));
+            .then(response => {
+                console.log('Respuesta del servidor recibida:', response);
+                return response.json();
+            })
+            .then(res => {
+                console.log('Respuesta JSON:', res);
+                alert(res.mensaje);
+                // Opcional: Recargar la página para actualizar el estado del botón
+                // window.location.reload();
+            })
+            .catch(error => {
+                console.error('Error en la petición de inscripción:', error);
+                alert('Ocurrió un error al intentar inscribirse. Por favor, revisa la consola para más detalles.');
+            });
         }
-
         // Función para configurar los filtros
         function configurarFiltros(cursos, usuario) {
             const buscarCurso = document.getElementById('buscar-curso');

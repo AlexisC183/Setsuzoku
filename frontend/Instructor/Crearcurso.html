@@ -283,6 +283,11 @@
                         <label class="etiqueta-formulario" for="precio-curso">Precio</label>
                         <input type="number" id="precio-curso" class="campo-formulario" placeholder="Ej: 99.99" min="0" step="0.01" required>
                     </div>
+                    
+                    <div class="grupo-formulario">
+                        <label class="etiqueta-formulario" for="video-curso">URL del Video de Introducción (YouTube)</label>
+                        <input type="url" id="video-curso" class="campo-formulario" placeholder="https://www.youtube.com/watch?v=...">
+                    </div>
 
                     <div class="acciones-formulario">
                         <button type="button" class="boton boton-secundario" id="cancelar-crear-curso">Cancelar</button>
@@ -363,63 +368,50 @@
         }
 
         // FUNCIÓN PARA GUARDAR CURSO
-        function guardarCurso(event) {
+        async function guardarCurso(event) {
             event.preventDefault();
             
-            const titulo = document.getElementById('titulo-curso').value.trim();
-            const descripcion = document.getElementById('descripcion-curso').value.trim();
-            const duracion = document.getElementById('duracion-curso').value;
-            const categoria = document.getElementById('categoria-curso').value;
-            const nivel = document.getElementById('nivel-curso').value;
-            const precio = document.getElementById('precio-curso').value;
-            
-            // Validar que todos los campos requeridos estén completos
-            if (!titulo || !descripcion || !duracion || !categoria || !nivel) {
-                mostrarMensajeError('Por favor, completa todos los campos requeridos');
-                return;
-            }
-            
-            // Obtener cursos existentes o crear array vacío
-            const cursosGuardados = localStorage.getItem('cursos');
-            let cursos = cursosGuardados ? JSON.parse(cursosGuardados) : [];
-
-            // Instructor actual
+            // Obtener el instructor actual desde sessionStorage
             const instructor = JSON.parse(sessionStorage.getItem('usuario'));
-
-            // Posibles imágenes del curso
-            const imagenes = [ 'javascript', 'uxui', 'python', 'marketing' ];
-
-            // Determinando imagen del curso
-            const indiceImagen = parseInt(localStorage.getItem('indiceImagen') ?? '0');
-            localStorage.setItem('indiceImagen', indiceImagen === 3 ? 0 : indiceImagen + 1);
             
-            // Crear nuevo curso
-            const nuevoCurso = {
-                titulo: titulo,
-                descripcion: descripcion,
-                duracion: duracion + ' horas',
-                categoria: categoria,
-                nivel: nivel,
-                precio: '$' + precio,
+            // Recopilar datos del formulario
+            const datosCurso = {
+                titulo: document.getElementById('titulo-curso').value.trim(),
+                descripcion: document.getElementById('descripcion-curso').value.trim(),
+                duracion: document.getElementById('duracion-curso').value + ' horas',
+                categoria: document.getElementById('categoria-curso').value,
+                nivel: document.getElementById('nivel-curso').value,
+                precio: '$' + document.getElementById('precio-curso').value,
+                video_url: document.getElementById('video-curso').value.trim(), // Nueva URL de YouTube
                 instructor: instructor.nombre,
-                instructor_id: instructor.id,
+                instructor_id: instructor.id, // ID del instructor para las notificaciones
                 fecha_creacion: new Date().toISOString(),
                 estudiantes: [],
-                activo: true,
-                imagen: imagenes[indiceImagen]
+                activo: true
             };
             
-            // Agregar curso a la lista
-            cursos.push(nuevoCurso);
-            
-            // Guardar en localStorage
-            localStorage.setItem('cursos', JSON.stringify(cursos));
-            
-            // Mostrar mensaje de éxito
-            mostrarMensajeExito('Curso guardado exitosamente');
-            
-            // Limpiar formulario
-            document.getElementById('formulario-curso').reset();
+            try {
+                // Enviar los datos al servidor mediante la API
+                const respuesta = await fetch('/api/cursos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosCurso)
+                });
+                
+                const resultado = await respuesta.json();
+                
+                if (resultado.exito) {
+                    mostrarMensajeExito('Curso guardado exitosamente');
+                    document.getElementById('formulario-curso').reset();
+                } else {
+                    mostrarMensajeError(resultado.mensaje || 'Error al guardar el curso');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarMensajeError('Error de conexión. Por favor, intenta más tarde.');
+            }
         }
 
         // FUNCIÓN PARA CANCELAR CREACIÓN

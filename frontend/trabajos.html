@@ -327,6 +327,7 @@
             return false;
         }
 
+        // --- FUNCIÓN MODIFICADA ---
         // Función para cargar trabajos desde la API
         async function cargarTrabajos(usuario) {
             const listaTrabajos = document.getElementById('lista-trabajos');
@@ -334,72 +335,79 @@
             // Mostrar mensaje de carga
             listaTrabajos.innerHTML = '<div class="mensaje-carga">Cargando trabajos...</div>';
             
-            // Consultando API trabajos
-            const rawTrabajos = await fetch('/api/trabajos');
+            try {
+                // Consultando API trabajos
+                const rawTrabajos = await fetch('/api/trabajos');
+                const trabajosReales = await rawTrabajos.json();
 
-            // Procesando respuesta
-            const trabajosReales = await rawTrabajos.json();
-
-            // Limpiar lista de trabajos
-            listaTrabajos.innerHTML = '';
-            
-            // Verificar si hay trabajos
-            if (trabajosReales.length === 0) {
-                listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
-                return;
-            }
-            
-            // Llenar el filtro de empresas
-            const selectEmpresa = document.getElementById('filtrar-empresa');
-            const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa))];
-            
-            empresas.forEach(empresa => {
-                const option = document.createElement('option');
-                option.value = empresa;
-                option.textContent = empresa;
-                selectEmpresa.appendChild(option);
-            });
-            
-            // Mostrar trabajos
-            trabajosReales.forEach(trabajo => {
-                const trabajoElemento = document.createElement('div');
-                trabajoElemento.className = 'trabajo';
+                // Limpiar lista de trabajos
+                listaTrabajos.innerHTML = '';
                 
-                trabajoElemento.innerHTML = `
-                    <div class="encabezado-trabajo">
-                        <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                        <div class="empresa-trabajo">${trabajo.empresa}</div>
-                    </div>
-                    <div class="cuerpo-trabajo">
-                        <p class="descripcion-trabajo">${trabajo.descripcion}</p>
-                        <div class="requisitos-trabajo">
-                            <div class="titulo-requisitos">Requisitos:</div>
-                            <ul class="lista-requisitos">
-                                ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
-                            </ul>
-                        </div>
-                        <div class="detalles-trabajo">
-                            <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
-                        </div>
-                        <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
-                    </div>
-                `;
+                // Verificar si hay trabajos
+                if (trabajosReales.length === 0) {
+                    listaTrabajos.innerHTML = '<div class="mensaje-error">No hay trabajos disponibles en este momento.</div>';
+                    return;
+                }
                 
-                listaTrabajos.appendChild(trabajoElemento);
+                // Llenar el filtro de empresas
+                const selectEmpresa = document.getElementById('filtrar-empresa');
+                // Usar 'ubicacion' como un proxy para 'empresa' si no existe
+                const empresas = [...new Set(trabajosReales.map(trabajo => trabajo.empresa || trabajo.ubicacion))];
                 
-                // Configurar evento para el botón de postularse
-                const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
-                botonPostularse.addEventListener('click', function() {
-                    if (usuario) {
-                        postularseTrabajo(usuario, trabajo.id);
-                    } else {
-                        window.location.href = 'inicio_sesion.html';
-                    }
+                empresas.forEach(empresa => {
+                    const option = document.createElement('option');
+                    option.value = empresa;
+                    option.textContent = empresa;
+                    selectEmpresa.appendChild(option);
                 });
-            });
-            
-            // Configurar filtros
-            configurarFiltros(trabajosReales, usuario);
+                
+                // Mostrar trabajos
+                trabajosReales.forEach(trabajo => {
+                    const trabajoElemento = document.createElement('div');
+                    trabajoElemento.className = 'trabajo';
+                    
+                    // Convertir la cadena de requisitos en un array
+                    const requisitosArray = trabajo.requisitos ? trabajo.requisitos.split('\n').filter(req => req.trim() !== '') : [];
+                    
+                    trabajoElemento.innerHTML = `
+                        <div class="encabezado-trabajo">
+                            <h3 class="titulo-trabajo">${trabajo.puesto}</h3>
+                            <div class="empresa-trabajo">${trabajo.empresa || 'Empresa no especificada'}</div>
+                        </div>
+                        <div class="cuerpo-trabajo">
+                            <p class="descripcion-trabajo">${trabajo.descripcion}</p>
+                            <div class="requisitos-trabajo">
+                                <div class="titulo-requisitos">Requisitos:</div>
+                                <ul class="lista-requisitos">
+                                    ${requisitosArray.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                </ul>
+                            </div>
+                            <div class="detalles-trabajo">
+                                <span>Publicado: ${new Date(trabajo.fecha_publicacion || trabajo.fecha_creacion).toLocaleDateString()}</span>
+                            </div>
+                            <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
+                        </div>
+                    `;
+                    
+                    listaTrabajos.appendChild(trabajoElemento);
+                    
+                    // Configurar evento para el botón de postularse
+                    const botonPostularse = trabajoElemento.querySelector('.boton-postularse');
+                    botonPostularse.addEventListener('click', function() {
+                        if (usuario) {
+                            postularseTrabajo(usuario, trabajo.id);
+                        } else {
+                            window.location.href = 'inicio_sesion.html';
+                        }
+                    });
+                });
+                
+                // Configurar filtros
+                configurarFiltros(trabajosReales, usuario);
+            } catch (error) {
+                console.error('Error al cargar trabajos:', error);
+                listaTrabajos.innerHTML = '<div class="mensaje-error">Error al cargar los trabajos. Por favor, intenta más tarde.</div>';
+            }
         }
 
         function postularseTrabajo(usuario, trabajoId) {
@@ -420,6 +428,7 @@
             .then(res => alert(res.mensaje));
         }
 
+        // --- FUNCIÓN MODIFICADA ---
         function configurarFiltros(trabajos, usuario) {
             const buscarTrabajo = document.getElementById('buscar-trabajo');
             const filtrarEmpresa = document.getElementById('filtrar-empresa');
@@ -431,9 +440,10 @@
                 
                 // Filtrar trabajos
                 const trabajosFiltrados = trabajos.filter(trabajo => {
-                    const coincideTexto = trabajo.titulo.toLowerCase().includes(textoBusqueda) || 
+                    const textoEmpresa = trabajo.empresa || trabajo.ubicacion || '';
+                    const coincideTexto = trabajo.puesto.toLowerCase().includes(textoBusqueda) || 
                                         trabajo.descripcion.toLowerCase().includes(textoBusqueda);
-                    const coincideEmpresa = !empresaSeleccionada || trabajo.empresa === empresaSeleccionada;
+                    const coincideEmpresa = !empresaSeleccionada || textoEmpresa === empresaSeleccionada;
                     
                     return coincideTexto && coincideEmpresa;
                 });
@@ -452,21 +462,24 @@
                     const trabajoElemento = document.createElement('div');
                     trabajoElemento.className = 'trabajo';
                     
+                    // Convertir la cadena de requisitos en un array
+                    const requisitosArray = trabajo.requisitos ? trabajo.requisitos.split('\n').filter(req => req.trim() !== '') : [];
+                    
                     trabajoElemento.innerHTML = `
                         <div class="encabezado-trabajo">
-                            <h3 class="titulo-trabajo">${trabajo.titulo}</h3>
-                            <div class="empresa-trabajo">${trabajo.empresa}</div>
+                            <h3 class="titulo-trabajo">${trabajo.puesto}</h3>
+                            <div class="empresa-trabajo">${trabajo.empresa || 'Empresa no especificada'}</div>
                         </div>
                         <div class="cuerpo-trabajo">
                             <p class="descripcion-trabajo">${trabajo.descripcion}</p>
                             <div class="requisitos-trabajo">
                                 <div class="titulo-requisitos">Requisitos:</div>
                                 <ul class="lista-requisitos">
-                                    ${trabajo.requisitos.map(req => `<li class="requisito">${req}</li>`).join('')}
+                                    ${requisitosArray.map(req => `<li class="requisito">${req}</li>`).join('')}
                                 </ul>
                             </div>
                             <div class="detalles-trabajo">
-                                <span>Publicado: ${new Date(trabajo.fecha_publicacion).toLocaleDateString()}</span>
+                                <span>Publicado: ${new Date(trabajo.fecha_publicacion || trabajo.fecha_creacion).toLocaleDateString()}</span>
                             </div>
                             <button class="boton-postularse" data-id="${trabajo.id}">Postularme</button>
                         </div>

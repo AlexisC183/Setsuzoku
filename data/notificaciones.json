@@ -1,1 +1,22 @@
-[]
+[
+  {
+    "id": 1764812309340,
+    "id_usuario": 1764812309337,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola m, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T01:38:29.340Z"
+  },
+  {
+    "id": 1764822980805,
+    "id_usuario": 1763876370902,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "a a se ha inscrito en tu curso \"mm\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T04:36:20.805Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "mm"
+  }
+]

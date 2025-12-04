@@ -46,5 +46,50 @@
     "imagen": "marketing",
     "fecha_creacion": "2023-06-18T16:30:00.000Z",
     "activo": true
+  },
+  {
+    "id": 5,
+    "titulo": "a",
+    "descripcion": "a",
+    "duracion": "10 horas",
+    "categoria": "desarrollo-web",
+    "nivel": "principiante",
+    "precio": "$10",
+    "video_url": "https://www.youtube.com/watch?v=ohro2RT2R9g",
+    "instructor": "c",
+    "instructor_id": 1763876370902,
+    "fecha_creacion": "2025-12-04T04:11:52.159Z",
+    "estudiantes": [],
+    "activo": true
+  },
+  {
+    "id": 6,
+    "titulo": "b",
+    "descripcion": "b",
+    "duracion": "10 horas",
+    "categoria": "desarrollo-web",
+    "nivel": "principiante",
+    "precio": "$10",
+    "video_url": "",
+    "instructor": "c",
+    "instructor_id": 1763876370902,
+    "fecha_creacion": "2025-12-04T04:32:27.016Z",
+    "estudiantes": [],
+    "activo": true
+  },
+  {
+    "id": 7,
+    "titulo": "mm",
+    "descripcion": "mm",
+    "duracion": "20 horas",
+    "categoria": "desarrollo-web",
+    "nivel": "principiante",
+    "precio": "$20",
+    "video_url": "",
+    "instructor": "c",
+    "instructor_id": 1763876370902,
+    "fecha_creacion": "2025-12-04T04:36:06.507Z",
+    "estudiantes": [],
+    "activo": true
   }
 ]

@@ -169,6 +169,11 @@
                 <form id="formulario-vacante">
                     <!-- Información básica -->
                     <div class="formulario-grupo">
+                        <label for="empresa" class="formulario-etiqueta">Empresa *</label>
+                        <input type="text" id="empresa" name="empresa" class="formulario-control" required placeholder="Ej: Setsuzoku">
+                    </div>
+
+                    <div class="formulario-grupo">
                         <label for="puesto" class="formulario-etiqueta">Puesto *</label>
                         <input type="text" id="puesto" name="puesto" class="formulario-control" required placeholder="Ej: Desarrollador Full Stack">
                     </div>
@@ -260,10 +265,76 @@
     </div>
 
     <script>
-        // VARIABLES GLOBALES
-        let vacantes = [];
+        // FUNCIÓN MODIFICADA PARA COMUNICARSE CON EL SERVIDOR
+        async function publicarVacante(event) {
+            event.preventDefault();
+            
+            // Obtener el reclutador actual desde sessionStorage
+            const reclutador = JSON.parse(sessionStorage.getItem('usuario'));
+            
+            if (!reclutador || !reclutador.id) {
+                mostrarMensaje('error', 'No se pudo identificar al reclutador. Por favor, inicia sesión nuevamente.');
+                return;
+            }
+            
+            // Recopilar datos del formulario
+            const datosVacante = {
+                empresa: document.getElementById('empresa').value.trim(),
+                puesto: document.getElementById('puesto').value.trim(),
+                departamento: document.getElementById('departamento').value,
+                tipo_contrato: document.getElementById('tipo_contrato').value,
+                modalidad: document.getElementById('modalidad').value,
+                salario_min: document.getElementById('salario_min').value,
+                salario_max: document.getElementById('salario_max').value,
+                ubicacion: document.getElementById('ubicacion').value.trim(),
+                descripcion: document.getElementById('descripcion').value.trim(),
+                requisitos: document.getElementById('requisitos').value.trim(),
+                beneficios: document.getElementById('beneficios').value.trim(),
+                fecha_publicacion: document.getElementById('fecha_publicacion').value,
+                // Datos del sistema
+                reclutador_id: reclutador.id, // ID dinámico del reclutador logueado
+                fecha_creacion: new Date().toISOString(),
+                estado: 'activa',
+                postulaciones: 0
+            };
+            
+            // Validar que el salario mínimo no sea mayor al máximo
+            if (parseFloat(datosVacante.salario_min) > parseFloat(datosVacante.salario_max)) {
+                mostrarMensaje('error', 'El salario mínimo no puede ser mayor al salario máximo');
+                return;
+            }
+            
+            try {
+                // Enviar los datos al servidor mediante la API
+                const respuesta = await fetch('/api/trabajos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosVacante)
+                });
+                
+                const resultado = await respuesta.json();
+                
+                if (resultado.exito) {
+                    mostrarMensaje('exito', `Vacante "${datosVacante.puesto}" publicada correctamente`);
+                    
+                    // Limpiar formulario y redirigir después de un breve retraso
+                    setTimeout(() => {
+                        document.getElementById('formulario-vacante').reset();
+                        setTimeout(() => {
+                            window.location.href = "Misvacantes.html";
+                        }, 2000);
+                    }, 1000);
+                } else {
+                    mostrarMensaje('error', resultado.mensaje || 'Error al publicar la vacante');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                mostrarMensaje('error', 'Error de conexión. Por favor, intenta más tarde.');
+            }
+        }
 
-        // FUNCIONES PARA FORMULARIO
         function cancelar() {
             window.location.href = "Misvacantes.html";
         }
@@ -284,75 +355,10 @@
             document.getElementById('mensaje-error').style.display = 'none';
         }
 
-        function guardarVacante(datos) {
-            // Obtener vacantes existentes
-            const vacantesStr = localStorage.getItem('vacantes');
-            let vacantes = vacantesStr ? JSON.parse(vacantesStr) : [];
-            
-            // Crear nueva vacante
-            const nuevaVacante = {
-                id: Date.now(),
-                ...datos,
-                reclutador_id: 1, // ID predeterminado para este ejemplo
-                fecha_creacion: new Date().toISOString(),
-                estado: 'activa',
-                postulaciones: 0
-            };
-            
-            // Agregar vacante
-            vacantes.push(nuevaVacante);
-            
-            // Guardar en localStorage
-            localStorage.setItem('vacantes', JSON.stringify(vacantes));
-            
-            return nuevaVacante;
-        }
-
-        function validarFormulario(datos) {
-            // Validar que el salario mínimo no sea mayor al máximo
-            if (parseFloat(datos.salario_min) > parseFloat(datos.salario_max)) {
-                mostrarMensaje('error', 'El salario mínimo no puede ser mayor al salario máximo');
-                return false;
-            }
-            
-            return true;
-        }
-
         // INICIALIZACIÓN
         document.addEventListener('DOMContentLoaded', function() {
             // Configurar evento de envío del formulario
-            document.getElementById('formulario-vacante').addEventListener('submit', function(e) {
-                e.preventDefault();
-                
-                // Obtener datos del formulario
-                const formData = new FormData(this);
-                const datos = Object.fromEntries(formData.entries());
-                
-                // Validar formulario
-                if (!validarFormulario(datos)) {
-                    return;
-                }
-                
-                // Guardar vacante
-                try {
-                    const vacanteGuardada = guardarVacante(datos);
-                    
-                    // Mostrar mensaje de éxito
-                    mostrarMensaje('exito', `Vacante "${vacanteGuardada.puesto}" publicada correctamente`);
-                    
-                    // Limpiar formulario
-                    setTimeout(() => {
-                        this.reset();
-                        // Redirigir a Misvacantes.html después de un breve retraso
-                        setTimeout(() => {
-                            window.location.href = "Misvacantes.html";
-                        }, 2000);
-                    }, 1000);
-                    
-                } catch (error) {
-                    mostrarMensaje('error', 'Error al publicar la vacante. Inténtalo nuevamente');
-                }
-            });
+            document.getElementById('formulario-vacante').addEventListener('submit', publicarVacante);
             
             // Establecer fecha de publicación por defecto a hoy
             document.getElementById('fecha_publicacion').valueAsDate = new Date();

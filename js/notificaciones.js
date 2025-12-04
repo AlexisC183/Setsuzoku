@@ -505,9 +505,11 @@ async function eliminar_leidas() {
     }
 }
 
-// Obtiene los datos del usuario actual desde el almacenamiento local
+// Obtiene los datos del usuario actual desde el almacenamiento de sesión
 function obtener_usuario_actual() {
-    const usuario_json = localStorage.getItem('usuario_actual');
+    // Cambiamos de localStorage a sessionStorage y de 'usuario_actual' a 'usuario'
+    const usuario_json = sessionStorage.getItem('usuario');
+    
     if (usuario_json) {
         try {
             usuario_actual = JSON.parse(usuario_json);
@@ -517,7 +519,7 @@ function obtener_usuario_actual() {
         }
     }
     
-    // Si no hay usuario en localStorage, redirigir a inicio de sesión
+    // Si no hay usuario en sessionStorage, redirigir a inicio de sesión
     window.location.href = '../inicio_sesion.html';
     return false;
 }

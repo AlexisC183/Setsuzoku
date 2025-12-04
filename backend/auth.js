@@ -42,7 +42,11 @@ function registrar_usuario(datos_usuario) {
     usuarios.push(nuevo_usuario);
     database.escribir_usuarios(usuarios);
 
-    return { exito: true, mensaje: 'Usuario registrado exitosamente' };
+    return { 
+        exito: true, 
+        mensaje: 'Usuario registrado exitosamente',
+        usuario: nuevo_usuario // <-- ¡Esta es la línea clave!
+    };
 }
 
 // Inicia sesión de un usuario existente

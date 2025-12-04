@@ -49,5 +49,37 @@
     "fecha_creacion": "2025-12-04T05:32:06.291Z",
     "tipo_referencia": "vacante",
     "id_referencia": "ejemplo notificacion"
+  },
+  {
+    "id": 1764878624951,
+    "id_usuario": 1763876346710,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "a a se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:03:44.951Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1764878688755,
+    "id_usuario": 1763876316632,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:04:48.755Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS"
+  },
+  {
+    "id": 1764879117137,
+    "id_usuario": 1763876316632,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-04T20:11:57.137Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "Documentador de especificaciones de proyectos de software de acuerdo a la IEEE SRS"
   }
 ]

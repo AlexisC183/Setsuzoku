@@ -1,20 +1,11 @@
 [
   {
-    "id": 2,
+    "id": 1,
     "usuario_id": 1763876316632,
     "trabajo_id": 2,
-    "fecha_postulacion": "2025-12-04T05:16:21.905Z",
-    "estado": "rechazado",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
-    "comentario": ""
-  },
-  {
-    "id": 3,
-    "usuario_id": 1763876316632,
-    "trabajo_id": 1,
-    "fecha_postulacion": "2025-12-04T05:31:06.573Z",
+    "fecha_postulacion": "2025-12-04T20:03:44.878Z",
     "estado": "aceptado",
     "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
-    "comentario": ""
+    "comentario": "Gracias por elegirnos. Has sido aceptado. Por favor preséntate el lunes de la sig. semana, a las 7:00."
   }
 ]

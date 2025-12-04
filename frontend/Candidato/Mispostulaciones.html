@@ -540,7 +540,8 @@
                         <div class="detalles-postulacion">
                             <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
                         </div>
-                        ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
+                        ${postulacion.mensaje ? `<div class="mensaje-postulacion">Tú: "${postulacion.mensaje}"</div>` : ''}
+                        ${postulacion.comentario ? `<div class="mensaje-postulacion">Reclutador: "${postulacion.comentario}"</div>` : ''}
                         <div class="acciones-postulacion">
                             <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
                             ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 

@@ -272,7 +272,7 @@
                 <div class="filtros-trabajos">
                     <div class="filtro">
                         <label class="etiqueta-filtro" for="buscar-trabajo">Buscar trabajo</label>
-                        <input type="text" id="buscar-trabajo" class="campo-filtro" placeholder="Buscar por título o empresa">
+                        <input type="text" id="buscar-trabajo" class="campo-filtro" placeholder="Buscar por título o descripción">
                     </div>
                     <div class="filtro">
                         <label class="etiqueta-filtro" for="filtrar-empresa">Empresa</label>
@@ -414,7 +414,8 @@
             const datosPostulacion = {
                 usuario_id : usuario.id,
                 trabajo_id : trabajoId,
-                mensaje : '¡Me animé a postularme! Espero ser un excelente candidato.'
+                mensaje : '¡Me animé a postularme! Espero ser un excelente candidato.',
+                comentario : ''
             };
 
             fetch('/api/postularse-trabajo', {

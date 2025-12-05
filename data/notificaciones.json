@@ -1,83 +1,29 @@
 [
   {
-    "id": 1764880086398,
-    "id_usuario": 1764880086396,
+    "id": 1764894367948,
+    "id_usuario": 1764894367943,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Chuy, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T20:28:06.398Z"
+    "fecha_creacion": "2025-12-05T00:26:07.948Z"
   },
   {
-    "id": 1764880221988,
-    "id_usuario": 1764880221986,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Elena, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:30:21.989Z"
-  },
-  {
-    "id": 1764880365209,
-    "id_usuario": 1764880365207,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Mario, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:32:45.209Z"
-  },
-  {
-    "id": 1764880509766,
-    "id_usuario": 1764880509764,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Alexis, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:35:09.766Z"
-  },
-  {
-    "id": 1764880617455,
-    "id_usuario": 1764880617453,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Sandra, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:36:57.455Z"
-  },
-  {
-    "id": 1764880730980,
-    "id_usuario": 1764880730978,
+    "id": 1764894474831,
+    "id_usuario": 1764894474829,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Sergio Ángel, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T20:38:50.980Z"
+    "fecha_creacion": "2025-12-05T00:27:54.831Z"
   },
   {
-    "id": 1764880827526,
-    "id_usuario": 1764880827525,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Ray, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:40:27.526Z"
-  },
-  {
-    "id": 1764881061062,
-    "id_usuario": 1764881061028,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Alberto, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-04T20:44:21.062Z"
-  },
-  {
-    "id": 1764881219173,
-    "id_usuario": 1764881219172,
+    "id": 1764894562749,
+    "id_usuario": 1764894562748,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Héctor Alonso, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-04T20:46:59.173Z"
+    "fecha_creacion": "2025-12-05T00:29:22.749Z"
   }
 ]

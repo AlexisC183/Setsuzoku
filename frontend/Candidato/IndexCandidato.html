@@ -424,17 +424,17 @@
             background-color: #f5f5f5;
         }
 
-        .estado-activo {
+        .estado-aceptado, .estado-contactado {
             color: #28a745;
             font-weight: bold;
         }
 
-        .estado-pendiente {
+        .estado-pendiente, .estado-revision, .estado-entrevista {
             color: #ffc107;
             font-weight: bold;
         }
 
-        .estado-inactivo {
+        .estado-rechazado, .estado-cancelada {
             color: #dc3545;
             font-weight: bold;
         }
@@ -646,60 +646,14 @@
                         
                         <!-- Tabla de postulaciones recientes -->
                         <h3 style="margin-bottom: 15px; color: #2A5CAA;">Postulaciones Recientes</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Empresa</th>
-                                        <th>Puesto</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-postulaciones-recientes">
-                                    <tr>
-                                        <td>Tech Solutions</td>
-                                        <td>Desarrollador Frontend</td>
-                                        <td>15/05/2023</td>
-                                        <td><span class="estado-pendiente">En revisión</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Digital Marketing Co.</td>
-                                        <td>Especialista en SEO</td>
-                                        <td>10/05/2023</td>
-                                        <td><span class="estado-activo">Entrevista programada</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="postulaciones-recientes" class="tabla-container">
+                            Cargando postulaciones...
                         </div>
                         
                         <!-- Tabla de cursos en progreso -->
                         <h3 style="margin: 30px 0 15px; color: #2A5CAA;">Cursos en Progreso</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Curso</th>
-                                        <th>Instructor</th>
-                                        <th>Progreso</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-cursos-progreso">
-                                    <tr>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>Carlos Martínez</td>
-                                        <td>65%</td>
-                                        <td><a href="#" class="btn btn-secundario">Continuar</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Digital</td>
-                                        <td>María González</td>
-                                        <td>30%</td>
-                                        <td><a href="#" class="btn btn-secundario">Continuar</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="cursos-en-progreso" class="tabla-container">
+                            Cargando cursos...
                         </div>
                     </div>
                 </section>
@@ -754,6 +708,12 @@
             
             const contenedorContenido = document.getElementById('contenedor-contenido');
             contenedorContenido.classList.add('con-barra-lateral');
+
+            // Inicializar postulaciones recientes
+            cargarPostulacionesRecientes(usuario);
+
+            // Inicializar cursos en progreso
+            cargarCursosEnProgreso(usuario);
         }
 
         function configurarMenuSegunRol(rol) {
@@ -782,6 +742,148 @@
         function cerrarSesion() { 
             sessionStorage.removeItem('usuario'); 
             window.location.href = '../index.html'; 
+        }
+
+        async function cargarPostulacionesRecientes(usuario) {
+            const contenedor = document.getElementById('postulaciones-recientes');
+
+            // Carga síncrona
+            const [ rawPostulaciones, rawTrabajos ] = await Promise.all([ fetch('/api/postulaciones'), fetch('/api/trabajos') ]);
+            const [ postulaciones, trabajos ] = await Promise.all([ rawPostulaciones.json(), rawTrabajos.json() ]);
+
+            // Filtrar postulaciones del usuario
+            const postulacionesRecientes = postulaciones
+                .filter(p => p.usuario_id === usuario.id)
+                .slice(-5);
+
+            // Verificar si el usuario tiene postulaciones
+            if (postulacionesRecientes.length === 0) {
+                contenedor.textContent = 'Sin postulaciones recientes';
+                return;
+            }
+
+            // Asociando postulaciones con sus trabajos y resumiendo información
+            const postulacionesResumidas = postulacionesRecientes.map(p => {
+                const trabajo = trabajos.find(t => t.id === p.trabajo_id);
+                return {
+                    empresa: trabajo.empresa,
+                    puesto: trabajo.puesto,
+                    fecha: fechaLegible(new Date(p.fecha_postulacion)),
+                    estado: p.estado
+                };
+            });
+
+            // Limpiar postulaciones recientes
+            contenedor.textContent = '';
+
+            // Generando el DOM de las postulaciones
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Puesto</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>    
+                    </thead>
+                    <tbody id="tabla-postulaciones-recientes">
+            `;
+
+            // Estados legibles
+            const estadosLegibles = {
+                cancelada: 'Cancelada',
+                pendiente: 'Pendiente',
+                revision: 'Revisión',
+                entrevista: 'Entrevista',
+                aceptado: 'Aceptado',
+                rechazado: 'Rechazado',
+                contactado: 'Contactado'
+            };
+
+            postulacionesResumidas.forEach(p => {
+                tabla += `
+                    <tr>
+                        <td>${ p.empresa }</td>
+                        <td>${ p.puesto }</td>
+                        <td>${ p.fecha }</td>
+                        <td>
+                            <span class="estado-${ p.estado }">${ estadosLegibles[p.estado] }</span>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            tabla += '</tbody></table>';
+
+
+            // Mostrar postulaciones del usuario
+            contenedor.innerHTML = tabla;
+        }
+
+        async function cargarCursosEnProgreso(usuario) {
+            const contenedor = document.getElementById('cursos-en-progreso');
+
+            // Carga síncrona
+            const [ rawInscripciones, rawCursos ] = await Promise.all([ fetch('/api/inscripciones-cursos'), fetch('/api/cursos') ]);
+            const [ inscripciones, cursos ] = await Promise.all([ rawInscripciones.json(), rawCursos.json() ]);
+
+            // Filtrar cursos del usuario
+            const cursosEnProgreso = inscripciones.filter(i => i.usuario_id === usuario.id && i.estado === 'en-curso');
+
+            // Verificar si el usuario tiene inscripciones
+            if (cursosEnProgreso.length === 0) {
+                contenedor.textContent = 'Sin cursos en progreso';
+                return;
+            }
+
+            // Asociando inscripciones con sus cursos y resumiendo información
+            const inscripcionesResumidas = cursosEnProgreso.map(i => {
+                const curso = cursos.find(c => c.id === i.curso_id);
+                return {
+                    curso: curso.titulo,
+                    instructor: curso.instructor,
+                    progreso: i.progreso + '%'
+                };
+            });
+
+            // Limpiar cursos en progreso
+            contenedor.textContent = '';
+
+            // Generando el DOM de las inscripciones
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Instructor</th>
+                            <th>Progreso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cursos-progreso">
+            `;
+
+            inscripcionesResumidas.forEach(i => {
+                tabla += `
+                    <tr>
+                        <td>${ i.curso }</td>
+                        <td>${ i.instructor }</td>
+                        <td>${ i.progreso }</td>
+                        <td>
+                            <a href="#" class="btn btn-secundario">Continuar</a>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tabla += '</tbody></table>';
+
+            
+            // Mostrar inscripciones del usuario
+            contenedor.innerHTML = tabla;
         }
 
         // FUNCIONES PARA NOTIFICACIONES
@@ -921,6 +1023,12 @@
             });
             
             notificacionesLista.innerHTML = html;
+        }
+
+        function fechaLegible(fecha) {
+            const mes = fecha.getMonth() + 1;
+
+            return `${ fecha.getDate().toString().padStart(2, '0') }/${ mes.toString().padStart(2, '0') }/${ fecha.getFullYear() }`;
         }
 
         function formatearFecha(fechaISO) {

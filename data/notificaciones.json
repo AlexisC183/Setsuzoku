@@ -25,5 +25,26 @@
     "mensaje": "Hola Héctor Alonso, tu cuenta ha sido creada exitosamente.",
     "leida": false,
     "fecha_creacion": "2025-12-05T00:29:22.749Z"
+  },
+  {
+    "id": 1765115477627,
+    "id_usuario": 1764894562748,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Chuy Gómez se ha inscrito en tu curso \"Curso completo de Redes Emergentes\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T13:51:17.627Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso completo de Redes Emergentes"
+  },
+  {
+    "id": 1765118239974,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Chuy Gómez se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T14:37:19.974Z",
+    "tipo_referencia": "vacante"
   }
 ]

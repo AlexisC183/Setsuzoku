@@ -468,29 +468,6 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     // Guardar en el archivo
                     database.escribir_inscripciones(inscripciones);
 
-                    // --- INICIO: CÓDIGO DE NOTIFICACIÓN ---
-                    
-                    // Obtener detalles del curso para encontrar al instructor
-                    const cursos = database.leer_cursos();
-                    const curso_inscrito = cursos.find(c => c.id === datosInscripcion.curso_id);
-
-                    if (curso_inscrito && curso_inscrito.instructor_id) {
-                        // Obtener detalles del estudiante
-                        const usuarios = database.leer_usuarios();
-                        const estudiante = usuarios.find(u => u.id === datosInscripcion.usuario_id);
-
-                        if (estudiante) {
-                            // Crear notificación para el instructor
-                            notificaciones.notificar_nueva_inscripcion_curso(
-                                curso_inscrito.instructor_id,          // ID del instructor
-                                curso_inscrito.titulo,                  // Nombre del curso
-                                `${estudiante.nombre} ${estudiante.apellido_paterno}` // Nombre del estudiante
-                            );
-                        }
-                    }
-
-                    // --- FIN: CÓDIGO DE NOTIFICACIÓN ---
-
                     respuesta.end(JSON.stringify({ exito: true, mensaje: 'Inscripción actualizada correctamente' }));
                 } else {
                     respuesta.statusCode = 404;

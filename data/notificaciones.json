@@ -46,5 +46,67 @@
     "leida": false,
     "fecha_creacion": "2025-12-07T14:37:19.974Z",
     "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765133801286,
+    "id_usuario": 1765133801256,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Elena, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T18:56:41.286Z"
+  },
+  {
+    "id": 1765133904241,
+    "id_usuario": 1764894562748,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Elena Cázarez se ha inscrito en tu curso \"Curso Django Framework Zero-To-Hero\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T18:58:24.241Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso Django Framework Zero-To-Hero"
+  },
+  {
+    "id": 1765133907927,
+    "id_usuario": 1764894562748,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Elena Cázarez se ha inscrito en tu curso \"Curso Bash en Ubuntu\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T18:58:27.927Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso Bash en Ubuntu"
+  },
+  {
+    "id": 1765137188696,
+    "id_usuario": 1765137188657,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Martín, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T19:53:08.696Z"
+  },
+  {
+    "id": 1765137209240,
+    "id_usuario": 1764894562748,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Martín Toledo se ha inscrito en tu curso \"Curso Django Framework Zero-To-Hero\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T19:53:29.240Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso Django Framework Zero-To-Hero"
+  },
+  {
+    "id": 1765137219463,
+    "id_usuario": 1764894562748,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Martín Toledo se ha inscrito en tu curso \"Curso completo de Redes Emergentes\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-07T19:53:39.463Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso completo de Redes Emergentes"
   }
 ]

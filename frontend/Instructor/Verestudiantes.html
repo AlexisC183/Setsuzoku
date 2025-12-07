@@ -332,7 +332,7 @@
                 <div class="filtros-estudiantes">
                     <div class="filtro">
                         <label class="etiqueta-filtro" for="buscar-estudiante">Buscar estudiante</label>
-                        <input type="text" id="buscar-estudiante" class="campo-filtro" placeholder="Buscar por nombre o curso">
+                        <input type="text" id="buscar-estudiante" class="campo-filtro" placeholder="Buscar por nombre">
                     </div>
                     <div class="filtro">
                         <label class="etiqueta-filtro" for="filtrar-curso">Filtrar por curso</label>
@@ -538,7 +538,7 @@
                     
                     cursosHTML += `
                         <div style="margin-bottom: 15px;">
-                            <h4 style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
+                            <h4 class="nombre-curso" style="margin-bottom: 5px; color: #2c3e50;">${curso.nombre}</h4>
                             <div class="estudiante-progreso">
                                 <div class="barra-progreso">
                                     <div class="barra-progreso-lleno ${progresoClase}" style="width: ${curso.progreso}%"></div>
@@ -566,6 +566,9 @@
                 
                 return estudianteCard;
             });
+
+            // Cargar filtros de cursos
+            cargarFiltrosCursos();
         }
 
         // FUNCIÓN PARA ACTUALIZAR ESTADÍSTICAS
@@ -633,7 +636,7 @@
             // Filtrar estudiantes según los criterios seleccionados
             const estudiantesFiltrados = estudianteCards.filter(estudianteCard => {
                 const nombreEstudiante = estudianteCard.querySelector('.estudiante-nombre').textContent.toLowerCase();
-                const cursos = Array.from(estudianteCard.querySelectorAll('.estudiante-curso'));
+                const cursos = Array.from(estudianteCard.querySelectorAll('.nombre-curso'));
                 
                 // Filtrar por nombre de estudiante
                 const coincideNombre = !textoBusqueda || nombreEstudiante.includes(textoBusqueda);
@@ -675,17 +678,10 @@
                 
                 return coincideNombre && coincideCurso && coincideProgreso;
             });
-            
-            // Ocultar todos los estudiantes
-            estudianteCards.forEach(estudianteCard => {
-                estudianteCard.style.display = 'none';
-            });
-            
-            // Mostrar solo los estudiantes filtrados
-            estudiantesFiltrados.forEach(estudianteCard => {
-                estudianteCard.style.display = 'block';
-            });
-            
+
+            // Limpiar lista de estudiantes
+            listaEstudiantes.innerHTML = '';
+
             // Mostrar mensaje si no hay estudiantes después de filtrar
             if (estudiantesFiltrados.length === 0) {
                 listaEstudiantes.innerHTML = `
@@ -694,6 +690,9 @@
                     </div>
                 `;
             }
+
+            // Mostrar estudiantes filtrados
+            estudiantesFiltrados.forEach(card => listaEstudiantes.appendChild(card));
         }
 
         // FUNCIÓN PARA VER DETALLES DEL ESTUDIANTE
@@ -738,9 +737,6 @@
             
             // Cargar estudiantes
             cargarEstudiantes();
-            
-            // Cargar filtros de cursos
-            cargarFiltrosCursos();
             
             // Configurar eventos para los filtros
             document.getElementById('buscar-estudiante').addEventListener('input', aplicarFiltros);

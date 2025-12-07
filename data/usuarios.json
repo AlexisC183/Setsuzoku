@@ -46,5 +46,37 @@
     "correo": "instructor@gmail.com",
     "contrasena": "cf2eb894cc40f5c6e781910063859278a3b214a3a14fedb9ca336ca39962b856",
     "fecha_registro": "2025-12-05T00:29:22.748Z"
+  },
+  {
+    "id": 1765133801256,
+    "grupo": "candidato",
+    "nombre": "Elena",
+    "apellido_paterno": "Cázarez",
+    "apellido_materno": "Ortega",
+    "fecha_nacimiento": "2004-01-17",
+    "genero": "femenino",
+    "telefono": "6651765876",
+    "estudios": "Maestría",
+    "experiencia": "5 años trabajando en RRHH",
+    "habilidades": "Asesoría, consultoría, psicología, facilidad de palabra, trabajo en equipo, autodidacta",
+    "correo": "candidato1@gmail.com",
+    "contrasena": "6a1e5f711180523405ee6739887d2172ed9173f4fcbd7e12dbc501a690282477",
+    "fecha_registro": "2025-12-07T18:56:41.256Z"
+  },
+  {
+    "id": 1765137188657,
+    "grupo": "candidato",
+    "nombre": "Martín",
+    "apellido_paterno": "Toledo",
+    "apellido_materno": "Basurto",
+    "fecha_nacimiento": "1999-04-13",
+    "genero": "masculino",
+    "telefono": "6679871211",
+    "estudios": "Licenciatura",
+    "experiencia": "Ninguna",
+    "habilidades": "Programación Funcional, Inglés, Formación continua",
+    "correo": "candidato2@gmail.com",
+    "contrasena": "53c14eb633b048e44e33ffbd629c0918c22c02f8b4c50a101bf61cf6a286b2ce",
+    "fecha_registro": "2025-12-07T19:53:08.657Z"
   }
 ]

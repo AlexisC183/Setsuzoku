@@ -305,6 +305,9 @@
     </div>
 
     <script>
+        // DATOS REALES (luego se consultarán)
+        let cursosInstructor = [];
+
         // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
         function volverPaginaAnterior() {
             window.history.back();
@@ -366,7 +369,7 @@
             const cursosReales = await rawCursos.json();
 
             // Filtrar cursos del instructor
-            const cursosInstructor = cursosReales.filter(curso => curso.instructor_id === usuario.id);
+            cursosInstructor = cursosReales.filter(curso => curso.instructor_id === usuario.id);
             
             // Verificar si el usuario tiene cursos
             if (cursosInstructor.length === 0) {
@@ -431,36 +434,20 @@
             const textoBusqueda = document.getElementById('buscar-curso').value.toLowerCase();
             const estadoSeleccionado = document.getElementById('filtrar-estado').value;
             const listaCursos = document.getElementById('lista-cursos');
-            const cursos = Array.from(listaCursos.children);
             
             // Filtrar cursos según los criterios seleccionados
-            const cursosFiltrados = cursos.filter(cursoElemento => {
-                const titulo = cursoElemento.querySelector('.titulo-curso').textContent.toLowerCase();
-                const descripcion = cursoElemento.querySelector('.descripcion-curso').textContent.toLowerCase();
-                const estado = cursoElemento.querySelector('.estado-curso').textContent.toLowerCase();
-                
-                // Filtrar por texto de búsqueda
-                const coincideBusqueda = !textoBusqueda || 
-                    titulo.includes(textoBusqueda) || 
-                    descripcion.includes(textoBusqueda);
-                
-                // Filtrar por estado
-                const coincideEstado = !estadoSeleccionado || 
-                    estado === estadoSeleccionado;
-                
+            const cursosFiltrados = cursosInstructor.filter(curso => {
+                const coincideBusqueda = curso.titulo.toLowerCase().includes(textoBusqueda) ||
+                                    curso.descripcion.toLowerCase().includes(textoBusqueda);
+                const estadoTexto = curso.activo ? 'activo' : 'inactivo';
+                const coincideEstado = !estadoSeleccionado || estadoTexto === estadoSeleccionado;
+
                 return coincideBusqueda && coincideEstado;
             });
-            
-            // Ocultar todos los cursos
-            cursos.forEach(cursoElemento => {
-                cursoElemento.style.display = 'none';
-            });
-            
-            // Mostrar solo los cursos filtrados
-            cursosFiltrados.forEach(cursoElemento => {
-                cursoElemento.style.display = 'block';
-            });
-            
+
+            // Limpiar lista de cursos
+            listaCursos.innerHTML = '';
+
             // Mostrar mensaje si no hay cursos después de filtrar
             if (cursosFiltrados.length === 0) {
                 listaCursos.innerHTML = `
@@ -469,6 +456,50 @@
                     </div>
                 `;
             }
+
+            // Mostrar cursos filtrados
+            cursosFiltrados.forEach(curso => {
+                const urlImagen = curso.imagen 
+                    ? `https://picsum.photos/seed/${curso.imagen}/600/400.jpg` 
+                    : 'https://picsum.photos/seed/curso/600/400.jpg';
+                
+                // Determinar la clase CSS según el estado
+                let estadoClass;
+                let estadoTexto;
+                if (curso.activo) {
+                    estadoClass = 'activo-verdadero';
+                    estadoTexto = 'Activo';
+                }
+                else {
+                    estadoClass = 'activo-falso';
+                    estadoTexto = 'Inactivo';
+                }
+                
+                const cursoElemento = document.createElement('div');
+                cursoElemento.className = 'curso';
+                cursoElemento.innerHTML = `
+                    <div class="imagen-curso" style="background-image: url('${urlImagen}')"></div>
+                    <div class="informacion-curso">
+                        <h3 class="titulo-curso">${curso.titulo}</h3>
+                        <p class="descripcion-curso">${curso.descripcion}</p>
+                        <div class="detalles-curso">
+                            <span class="instructor-curso">Instructor: ${curso.instructor}</span>
+                            <span>Duración: ${curso.duracion}</span>
+                        </div>
+                        <div class="estado-curso ${estadoClass}">${estadoTexto}</div>
+                        <button class="boton-ver-curso" data-id="${curso.id}">Ver curso</button>
+                    </div>
+                `;
+                
+                listaCursos.appendChild(cursoElemento);
+                
+                // Configurar evento para el botón de ver curso
+                const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
+                botonVerCurso.addEventListener('click', function() {
+                    // En una aplicación real, aquí se redirigiría a la página del curso
+                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                });
+            });
         }
 
         // INICIALIZACIÓN

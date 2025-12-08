@@ -117,5 +117,25 @@
     "mensaje": "Hola José, tu cuenta ha sido creada exitosamente.",
     "leida": false,
     "fecha_creacion": "2025-12-08T01:56:02.471Z"
+  },
+  {
+    "id": 1765232710781,
+    "id_usuario": 1765232710512,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Sandra Megumi, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T22:25:10.781Z"
+  },
+  {
+    "id": 1765234234654,
+    "id_usuario": 1765232710512,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Chuy Gómez se ha inscrito en tu curso \"Curso de Programación en C+\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T22:50:34.654Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso de Programación en C+"
   }
 ]

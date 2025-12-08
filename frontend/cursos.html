@@ -356,19 +356,22 @@
 
             // Procesando respuesta
             const cursosReales = await rawCursos.json();
-
+            
+            // FILTRAR SOLO CURSOS ACTIVOS
+            const cursosActivos = cursosReales.filter(curso => curso.activo === true);
+            
             // Limpiar lista de cursos
             listaCursos.innerHTML = '';
             
             // Verificar si hay cursos
-            if (cursosReales.length === 0) {
+            if (cursosActivos.length === 0) {
                 listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
                 return;
             }
             
             // Llenar el filtro de instructores
             const selectInstructor = document.getElementById('filtrar-instructor');
-            const instructores = [...new Set(cursosReales.map(curso => curso.instructor))];
+            const instructores = [...new Set(cursosActivos.map(curso => curso.instructor))];
             
             instructores.forEach(instructor => {
                 const option = document.createElement('option');
@@ -378,7 +381,7 @@
             });
             
             // Mostrar cursos
-            cursosReales.forEach(curso => {
+            cursosActivos.forEach(curso => {
                 const cursoElemento = document.createElement('div');
                 cursoElemento.className = 'curso';
                 
@@ -422,7 +425,7 @@
             });
             
             // Configurar filtros
-            configurarFiltros(cursosReales, usuario);
+            configurarFiltros(cursosActivos, usuario);
         }
 
         // Función para inscribirse a un curso
@@ -457,6 +460,7 @@
                 alert('Ocurrió un error al intentar inscribirse. Por favor, revisa la consola para más detalles.');
             });
         }
+        
         // Función para configurar los filtros
         function configurarFiltros(cursos, usuario) {
             const buscarCurso = document.getElementById('buscar-curso');
@@ -513,6 +517,7 @@
                                 <span>${curso.duracion}</span>
                             </div>
                             <div class="precio-curso">${curso.precio}</div>
+                            ${curso.video_url ? `<a href="${curso.video_url}" target="_blank" class="boton-video">Ver Video de Introducción</a>` : ''}
                             <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
                                 ${botonTexto}
                             </button>

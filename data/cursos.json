@@ -40,5 +40,19 @@
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:38:08.581Z",
     "activo": false
+  },
+  {
+    "id": 4,
+    "titulo": "Curso de Programación en C+",
+    "descripcion": "Aprenderos sobre lo básico sobre la programación en C+",
+    "duracion": "9 horas",
+    "categoria": "desarrollo-web",
+    "nivel": "principiante",
+    "precio": "$10",
+    "video_url": "https://www.youtube.com/watch?v=RGSEnAzS4XY&list=PL5YuOOJ-FGGjjK8j50TkEcjCcZ8dRAiPy",
+    "instructor": "Sandra Megumi",
+    "instructor_id": 1765232710512,
+    "fecha_creacion": "2025-12-08T22:27:56.967Z",
+    "activo": false
   }
 ]

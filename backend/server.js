@@ -242,7 +242,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al crear el curso' }));
                 }
             });
-        } else {
+        } else if (pathname.match(/^\/api\/cursos\/\d+$/) && metodo === 'PUT') {
+            // Actualizar un curso existente
+            const cursoId = parseInt(pathname.split('/').pop());
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datosActualizados = JSON.parse(cuerpo);
+
+                    // Leer cursos existentes
+                    let cursos = database.leer_cursos();
+
+                    // Encontrar el índice del curso
+                    const indice = cursos.findIndex(c => c.id === cursoId);
+
+                    if (indice !== -1) {
+                        // Actualizar el curso
+                        cursos[indice] = { ...cursos[indice], ...datosActualizados };
+
+                        // Guardar en el archivo
+                        database.escribir_cursos(cursos);
+
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Curso actualizado correctamente' }));
+                    } else {
+                        respuesta.statusCode = 404;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'Curso no encontrado' }));
+                    }
+                } catch (error) {
+                    console.error('Error al actualizar curso:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar el curso' }));
+                }
+            });
+        }
+        else {
             console.log(`Ruta no encontrada: ${pathname}`);
             respuesta.statusCode = 404;
             respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));

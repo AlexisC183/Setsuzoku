@@ -94,5 +94,21 @@
     "correo": "candidato1@mail.com",
     "contrasena": "6a1e5f711180523405ee6739887d2172ed9173f4fcbd7e12dbc501a690282477",
     "fecha_registro": "2025-12-08T01:56:02.458Z"
+  },
+  {
+    "id": 1765232710512,
+    "grupo": "instructor",
+    "nombre": "Sandra Megumi",
+    "apellido_paterno": "Salazar",
+    "apellido_materno": "Martinez",
+    "fecha_nacimiento": "2004-12-02",
+    "genero": "femenino",
+    "telefono": "6647894877",
+    "estudios": "Técnica en Programación",
+    "experiencia": "2 años en Office Depot, 3 meses en OXXO, 3 meses en PEMEX y actualmente en D'Volada.",
+    "habilidades": "Rapidez, Eficiencia, Manejo de dinero",
+    "correo": "m@gmail.com",
+    "contrasena": "4378c5895e7ade691792a8bbed89dbfcbea257a8949a3b1132a875e67aa45583",
+    "fecha_registro": "2025-12-08T22:25:10.512Z"
   }
 ]

@@ -62,5 +62,13 @@
     "fecha_inscripcion": "2025-12-08T05:02:41.244Z",
     "estado": "en-curso",
     "progreso": 0
+  },
+  {
+    "id": 9,
+    "usuario_id": 1764894367943,
+    "curso_id": 4,
+    "fecha_inscripcion": "2025-12-08T22:50:34.651Z",
+    "estado": "en-curso",
+    "progreso": 0
   }
 ]

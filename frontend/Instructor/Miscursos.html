@@ -251,6 +251,103 @@
             color: #7f8c8d;
         }
 
+        /* ESTILOS PARA MODAL DE EDICIÓN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-titulo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo {
+            margin-bottom: 20px;
+        }
+
+        .modal-pie {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .form-grupo {
+            margin-bottom: 15px;
+        }
+
+        .form-etiqueta {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .form-campo {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-campo:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secundario {
+            background-color: #6c757d;
+        }
+
+        .btn-secundario:hover {
+            background-color: #5a6268;
+        }
+
         /* ESTILOS RESPONSIVOS */
         @media (max-width: 768px) {
             .lista-cursos {
@@ -304,9 +401,45 @@
         </div>
     </div>
 
+    <!-- MODAL PARA EDITAR CURSO -->
+    <div id="modal-editar-curso" class="modal">
+        <div class="modal-contenido">
+            <h3 class="modal-titulo">Editar Curso</h3>
+            <div class="modal-cuerpo">
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-titulo">Título del curso</label>
+                    <input type="text" id="editar-titulo" class="form-campo" required>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-descripcion">Descripción</label>
+                    <textarea id="editar-descripcion" class="form-campo form-textarea" required></textarea>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-duracion">Duración</label>
+                    <input type="text" id="editar-duracion" class="form-campo" required>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-activo">Estado</label>
+                    <select id="editar-activo" class="form-campo">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-pie">
+                <button class="btn btn-secundario" onclick="cerrarModalEditar()">Cancelar</button>
+                <button class="btn" onclick="guardarCambiosCurso()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // DATOS REALES (luego se consultarán)
         let cursosInstructor = [];
+        let cursoEditando = null;
 
         // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
         function volverPaginaAnterior() {
@@ -420,12 +553,69 @@
                 
                 listaCursos.appendChild(cursoElemento);
                 
-                // Configurar evento para el botón de ver curso
+                // Configurar evento para el botón de ver/editar curso
                 const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
                 botonVerCurso.addEventListener('click', function() {
-                    // En una aplicación real, aquí se redirigiría a la página del curso
-                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                    abrirModalEditarCurso(curso.id);
                 });
+            });
+        }
+
+        // FUNCIÓN PARA ABRIR MODAL DE EDICIÓN
+        function abrirModalEditarCurso(cursoId) {
+            cursoEditando = cursosInstructor.find(curso => curso.id === cursoId);
+            
+            if (cursoEditando) {
+                document.getElementById('editar-titulo').value = cursoEditando.titulo;
+                document.getElementById('editar-descripcion').value = cursoEditando.descripcion;
+                document.getElementById('editar-duracion').value = cursoEditando.duracion;
+                document.getElementById('editar-activo').value = cursoEditando.activo ? 'true' : 'false';
+                
+                document.getElementById('modal-editar-curso').style.display = 'block';
+            }
+        }
+
+        // FUNCIÓN PARA CERRAR MODAL DE EDICIÓN
+        function cerrarModalEditar() {
+            cursoEditando = null;
+            document.getElementById('modal-editar-curso').style.display = 'none';
+        }
+
+        // FUNCIÓN PARA GUARDAR CAMBIOS DEL CURSO
+        function guardarCambiosCurso() {
+            if (!cursoEditando) return;
+            
+            // Actualizar datos del curso
+            const datosActualizados = {
+                titulo: document.getElementById('editar-titulo').value,
+                descripcion: document.getElementById('editar-descripcion').value,
+                duracion: document.getElementById('editar-duracion').value,
+                activo: document.getElementById('editar-activo').value === 'true' // Convertir a booleano
+            };
+            
+            // Enviar los cambios al servidor
+            fetch(`/api/cursos/${cursoEditando.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosActualizados)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exito) {
+                    alert('Curso actualizado correctamente');
+                    cerrarModalEditar();
+                    // Recargar la lista de cursos
+                    const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+                    cargarCursosUsuario(usuario);
+                } else {
+                    alert('Error al actualizar el curso: ' + data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al actualizar el curso');
             });
         }
 
@@ -455,6 +645,7 @@
                         <p>No se encontraron cursos que coincidan con los filtros aplicados.</p>
                     </div>
                 `;
+                return;
             }
 
             // Mostrar cursos filtrados
@@ -493,11 +684,10 @@
                 
                 listaCursos.appendChild(cursoElemento);
                 
-                // Configurar evento para el botón de ver curso
+                // Configurar evento para el botón de ver/editar curso
                 const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
                 botonVerCurso.addEventListener('click', function() {
-                    // En una aplicación real, aquí se redirigiría a la página del curso
-                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                    abrirModalEditarCurso(curso.id);
                 });
             });
         }
@@ -513,6 +703,14 @@
             // Configurar eventos para los filtros
             document.getElementById('buscar-curso').addEventListener('input', aplicarFiltros);
             document.getElementById('filtrar-estado').addEventListener('change', aplicarFiltros);
+            
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('modal-editar-curso');
+                if (event.target === modal) {
+                    cerrarModalEditar();
+                }
+            });
         });
     </script>
 </body>

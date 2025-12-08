@@ -191,17 +191,17 @@
             color: white;
         }
 
-        .estado-revisada {
+        .estado-revision {
             background-color: #3498db;
             color: white;
         }
 
-        .estado-aceptada {
+        .estado-aceptado {
             background-color: #2ecc71;
             color: white;
         }
 
-        .estado-rechazada {
+        .estado-rechazado {
             background-color: #e74c3c;
             color: white;
         }
@@ -387,9 +387,9 @@
                         <select id="filtrar-estado" class="campo-filtro">
                             <option value="">Todos los estados</option>
                             <option value="pendiente">Pendiente</option>
-                            <option value="revisada">Revisada</option>
-                            <option value="aceptada">Aceptada</option>
-                            <option value="rechazada">Rechazada</option>
+                            <option value="revision">Revisada</option>
+                            <option value="aceptado">Aceptada</option>
+                            <option value="rechazado">Rechazada</option>
                         </select>
                     </div>
                 </div>
@@ -509,12 +509,12 @@
                 
                 // Determinar la clase CSS según el estado
                 let estadoClass = 'estado-pendiente';
-                if (postulacion.estado === 'revisada') {
-                    estadoClass = 'estado-revisada';
-                } else if (postulacion.estado === 'aceptada') {
-                    estadoClass = 'estado-aceptada';
-                } else if (postulacion.estado === 'rechazada') {
-                    estadoClass = 'estado-rechazada';
+                if (postulacion.estado === 'revision') {
+                    estadoClass = 'estado-revision';
+                } else if (postulacion.estado === 'aceptado') {
+                    estadoClass = 'estado-aceptado';
+                } else if (postulacion.estado === 'rechazado') {
+                    estadoClass = 'estado-rechazado';
                 }
                 
                 postulacionElemento.innerHTML = `
@@ -533,7 +533,7 @@
                         ${postulacion.mensaje ? `<div class="mensaje-postulacion">Tú: "${postulacion.mensaje}"</div>` : ''}
                         ${postulacion.comentario ? `<div class="mensaje-postulacion">Reclutador: "${postulacion.comentario}"</div>` : ''}
                         <div class="acciones-postulacion">
-                            ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
+                            ${postulacion.estado === 'pendiente' || postulacion.estado === 'revision' ? 
                                 `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                         </div>
                     </div>
@@ -615,12 +615,12 @@
                     
                     // Determinar la clase CSS según el estado
                     let estadoClass = 'estado-pendiente';
-                    if (postulacion.estado === 'revisada') {
-                        estadoClass = 'estado-revisada';
-                    } else if (postulacion.estado === 'aceptada') {
-                        estadoClass = 'estado-aceptada';
-                    } else if (postulacion.estado === 'rechazada') {
-                        estadoClass = 'estado-rechazada';
+                    if (postulacion.estado === 'revision') {
+                        estadoClass = 'estado-revision';
+                    } else if (postulacion.estado === 'aceptado') {
+                        estadoClass = 'estado-aceptado';
+                    } else if (postulacion.estado === 'rechazado') {
+                        estadoClass = 'estado-rechazado';
                     }
                     
                     postulacionElemento.innerHTML = `
@@ -636,9 +636,10 @@
                             <div class="detalles-postulacion">
                                 <span>Fecha de postulación: ${new Date(postulacion.fecha_postulacion).toLocaleDateString()}</span>
                             </div>
-                            ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
+                            ${postulacion.mensaje ? `<div class="mensaje-postulacion">Tú: "${postulacion.mensaje}"</div>` : ''}
+                            ${postulacion.comentario ? `<div class="mensaje-postulacion">Reclutador: "${postulacion.comentario}"</div>` : ''}
                             <div class="acciones-postulacion">
-                                ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
+                                ${postulacion.estado === 'pendiente' || postulacion.estado === 'revision' ? 
                                     `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                             </div>
                         </div>

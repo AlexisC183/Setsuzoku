@@ -543,37 +543,16 @@
         </div>
     </div>
 
-    <!-- MODAL PARA EDITAR ESTADO -->
-    <div id="modal-editar-estado" class="modal">
-        <div class="modal-contenido">
-            <h3 class="modal-titulo">Cambiar Estado de la Vacante</h3>
-            <div class="modal-cuerpo">
-                <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
-                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-                
-                <label for="comentario-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Comentario (opcional):</label>
-                <textarea id="comentario-estado" class="buscador-input" style="width: 100%; min-height: 80px; resize: vertical;" placeholder="Agrega un comentario sobre este cambio..."></textarea>
-            </div>
-            <div class="modal-pie">
-                <button class="btn btn-secundario" onclick="cerrarModalEditarEstado()">Cancelar</button>
-                <button class="btn" onclick="confirmarCambioEstado()">Guardar Cambio</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL PARA ELIMINAR VACANTE -->
+    <!-- MODAL PARA DESACTIVAR VACANTE -->
     <div id="modal-eliminar" class="modal">
         <div class="modal-contenido">
-            <h3 class="modal-titulo">Confirmar Eliminación</h3>
+            <h3 class="modal-titulo">Confirmar Desactivación</h3>
             <div class="modal-cuerpo">
-                ¿Estás seguro de que deseas eliminar esta vacante? Esta acción no se puede deshacer.
+                ¿Estás seguro de que deseas desactivar esta vacante? La vacante ya no estará visible para los candidatos, pero conservarás toda la información y las postulaciones recibidas.
             </div>
             <div class="modal-pie">
                 <button class="btn btn-secundario" onclick="cerrarModalEliminar()">Cancelar</button>
-                <button class="btn btn-danger" onclick="confirmarEliminarVacante()">Eliminar</button>
+                <button class="btn btn-danger" onclick="confirmarDesactivarVacante()">Desactivar</button>
             </div>
         </div>
     </div>
@@ -582,7 +561,6 @@
         // VARIABLES GLOBALES
         let vacantes = [];
         let vacanteIdDetalles = null;
-        let vacanteIdEditar = null;
         let vacanteIdEliminar = null;
 
         // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
@@ -678,8 +656,7 @@
                         
                         <div class="vacante-acciones">
                             <button class="btn btn-pequeno" onclick="verDetallesVacante(${vacante.id})">Ver Detalles</button>
-                            <button class="btn btn-pequeno btn-secundario" onclick="abrirModalEditarEstado(${vacante.id})">Editar</button>
-                            <button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Eliminar</button>
+                            ${vacante.activo ? `<button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Desactivar</button>` : ''}
                         </div>
                     </div>
                 `;
@@ -751,57 +728,8 @@
             document.getElementById('modal-detalles').style.display = 'none';
         }
 
-        function abrirModalEditarEstado(id) {
-            // Si se llama desde el botón "Editar" de la tarjeta, cerramos el modal de detalles primero
-            if (vacanteIdDetalles) {
-                cerrarModalDetalles();
-            }
-            
-            vacanteIdEditar = id;
-            const vacante = vacantes.find(v => v.id === id);
-            
-            if (vacante) {
-                document.getElementById('nuevo-estado').value = vacante.activo ? 'activo' : 'inactivo';
-                document.getElementById('comentario-estado').value = '';
-                
-                document.getElementById('modal-editar-estado').style.display = 'block';
-            }
-        }
-
-        function cerrarModalEditarEstado() {
-            vacanteIdEditar = null;
-            document.getElementById('modal-editar-estado').style.display = 'none';
-        }
-
-        function confirmarCambioEstado() {
-            if (!vacanteIdEditar) return;
-            
-            const nuevoEstado = document.getElementById('nuevo-estado').value;
-            const comentario = document.getElementById('comentario-estado').value;
-            
-            try {
-                // Actualizar vacante
-                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEditar);
-                if (vacanteIndex !== -1) {
-                    const estadoAnterior = vacantes[vacanteIndex].activo;
-                    vacantes[vacanteIndex].activo = nuevoEstado === 'activo';
-                    
-                    // Mostrar mensaje de éxito
-                    mostrarMensaje('exito', 'Estado actualizado correctamente');
-                    
-                    // Recargar la lista
-                    renderizarVacantes();
-                    
-                    // Cerrar modal
-                    cerrarModalEditarEstado();
-                }
-            } catch (error) {
-                mostrarMensaje('error', 'Error al actualizar el estado. Inténtalo nuevamente');
-            }
-        }
-
         function abrirModalEliminar(id) {
-            // Si se llama desde el botón "Eliminar" de la tarjeta, cerramos el modal de detalles primero
+            // Si se llama desde el botón "Desactivar" de la tarjeta, cerramos el modal de detalles primero
             if (vacanteIdDetalles) {
                 cerrarModalDetalles();
             }
@@ -815,24 +743,26 @@
             document.getElementById('modal-eliminar').style.display = 'none';
         }
 
-        function confirmarEliminarVacante() {
+        function confirmarDesactivarVacante() {
             if (!vacanteIdEliminar) return;
             
             try {
-                // Eliminar vacante del array
-                vacantes = vacantes.filter(v => v.id !== vacanteIdEliminar);
-                
-                // Mostrar mensaje de éxito
-                mostrarMensaje('exito', 'Vacante eliminada correctamente');
-                
-                // Recargar la lista
-                renderizarVacantes();
-                
-                // Cerrar modal
-                cerrarModalEliminar();
-                
+                // Buscar la vacante y marcarla como inactiva
+                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEliminar);
+                if (vacanteIndex !== -1) {
+                    vacantes[vacanteIndex].activo = false;
+                    
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje('exito', 'Vacante desactivada correctamente');
+                    
+                    // Recargar la lista
+                    renderizarVacantes();
+                    
+                    // Cerrar modal
+                    cerrarModalEliminar();
+                }
             } catch (error) {
-                mostrarMensaje('error', 'Error al eliminar la vacante. Inténtalo nuevamente');
+                mostrarMensaje('error', 'Error al desactivar la vacante. Inténtalo nuevamente');
             }
         }
 
@@ -902,14 +832,10 @@
             // Cerrar modales al hacer clic fuera de ellos
             window.addEventListener('click', function(event) {
                 const modalDetalles = document.getElementById('modal-detalles');
-                const modalEditarEstado = document.getElementById('modal-editar-estado');
                 const modalEliminar = document.getElementById('modal-eliminar');
                 
                 if (event.target === modalDetalles) {
                     cerrarModalDetalles();
-                }
-                if (event.target === modalEditarEstado) {
-                    cerrarModalEditarEstado();
                 }
                 if (event.target === modalEliminar) {
                     cerrarModalEliminar();

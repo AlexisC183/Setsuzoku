@@ -6,5 +6,29 @@
     "fecha_postulacion": "2025-12-07T14:37:19.961Z",
     "estado": "pendiente",
     "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 2,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 1,
+    "fecha_postulacion": "2025-12-08T05:02:46.703Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 3,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 2,
+    "fecha_postulacion": "2025-12-08T05:02:48.399Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 4,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 3,
+    "fecha_postulacion": "2025-12-08T05:02:49.683Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
   }
 ]

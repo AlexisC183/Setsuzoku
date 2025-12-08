@@ -254,16 +254,6 @@
             transition: background-color 0.3s;
         }
 
-        .boton-ver-trabajo {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .boton-ver-trabajo:hover, .boton-ver-trabajo:focus {
-            background-color: #2980b9;
-            outline: none;
-        }
-
         .boton-cancelar {
             background-color: #e74c3c;
             color: white;
@@ -543,7 +533,6 @@
                         ${postulacion.mensaje ? `<div class="mensaje-postulacion">Tú: "${postulacion.mensaje}"</div>` : ''}
                         ${postulacion.comentario ? `<div class="mensaje-postulacion">Reclutador: "${postulacion.comentario}"</div>` : ''}
                         <div class="acciones-postulacion">
-                            <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
                             ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
                                 `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                         </div>
@@ -551,13 +540,6 @@
                 `;
                 
                 listaPostulaciones.appendChild(postulacionElemento);
-                
-                // Configurar evento para el botón de ver trabajo
-                const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                botonVerTrabajo.addEventListener('click', function() {
-                    // Redirigir a la página del trabajo
-                    window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                });
                 
                 // Configurar evento para el botón de cancelar postulación (si existe)
                 const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
@@ -609,7 +591,8 @@
                 
                 // Filtrar postulaciones
                 const postulacionesFiltradas = postulaciones.filter(postulacion => {
-                    const coincideTexto = postulacion.trabajo.titulo.toLowerCase().includes(textoBusqueda) || 
+                    // CORREGIDO: Usar 'puesto' en lugar de 'titulo' para la búsqueda
+                    const coincideTexto = postulacion.trabajo.puesto.toLowerCase().includes(textoBusqueda) || 
                                         postulacion.trabajo.empresa.toLowerCase().includes(textoBusqueda);
                     const coincideEstado = !estadoSeleccionado || postulacion.estado === estadoSeleccionado;
                     
@@ -643,7 +626,7 @@
                     postulacionElemento.innerHTML = `
                         <div class="encabezado-postulacion">
                             <div>
-                                <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
+                                <div class="titulo-trabajo">${postulacion.trabajo.puesto}</div>
                                 <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
                             </div>
                             <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
@@ -655,7 +638,6 @@
                             </div>
                             ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
                             <div class="acciones-postulacion">
-                                <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
                                 ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
                                     `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                             </div>
@@ -663,13 +645,6 @@
                     `;
                     
                     listaPostulaciones.appendChild(postulacionElemento);
-                    
-                    // Configurar evento para el botón de ver trabajo
-                    const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                    botonVerTrabajo.addEventListener('click', function() {
-                        // Redirigir a la página del trabajo
-                        window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                    });
                     
                     // Configurar evento para el botón de cancelar postulación (si existe)
                     const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');

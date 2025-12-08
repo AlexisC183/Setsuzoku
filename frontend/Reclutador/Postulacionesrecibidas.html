@@ -325,6 +325,10 @@
             flex-wrap: wrap;
         }
 
+        .estado-cancelada {
+            color: #7f7f7f
+        }
+
         .estado-pendiente {
             color: #ffc107;
             font-weight: bold;
@@ -706,7 +710,13 @@
                         
                         ${postulacion.mensaje ? `
                             <div style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-radius: 4px; font-size: 0.9rem; color: #666;">
-                                <strong>Mensaje:</strong> ${postulacion.mensaje}
+                                <strong>Candidato:</strong> ${postulacion.mensaje}
+                            </div>
+                        ` : ''}
+
+                        ${postulacion.comentario ? `
+                            <div style="margin: 10px 0; padding: 10px; background-color: #f8f9fa; border-radius: 4px; font-size: 0.9rem; color: #666;">
+                                <strong>Tú:</strong> ${postulacion.comentario}
                             </div>
                         ` : ''}
                         
@@ -778,7 +788,7 @@
         async function confirmarCambioEstado() {
             if (!postulacionIdActual) return;
             
-            const nuevoEstado = document.getElementById('nuevo-estado').value;
+            const nuevoEstado = document.getElementById('nuevo-estado').value || undefined;
             const comentario = document.getElementById('comentario-estado').value;
             
             try {

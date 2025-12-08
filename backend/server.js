@@ -696,7 +696,8 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     trabajo_id: datosPostulacion.trabajo_id,
                     fecha_postulacion: new Date().toISOString(),
                     estado: "pendiente",
-                    mensaje: datosPostulacion.mensaje || ""
+                    mensaje: '¡Me animé a postularme! Espero ser un excelente candidato.',
+                    comentario: ''
                 };
 
                 // Agregar a la lista

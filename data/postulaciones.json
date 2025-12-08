@@ -4,24 +4,44 @@
     "usuario_id": 1764894367943,
     "trabajo_id": 3,
     "fecha_postulacion": "2025-12-07T14:37:19.961Z",
-    "estado": "pendiente",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+    "estado": "aceptado",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": "Has sido aceptado. Nos vemos en la reunión de Microsoft Teams programada."
   },
   {
-    "id": 5,
+    "id": 7,
+    "usuario_id": 1765133801256,
+    "trabajo_id": 3,
+    "fecha_postulacion": "2025-12-08T13:39:13.749Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": ""
+  },
+  {
+    "id": 8,
     "usuario_id": 1765137188657,
     "trabajo_id": 2,
-    "fecha_postulacion": "2025-12-08T12:49:49.813Z",
-    "estado": "rechazado",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
-    "comentario": "Vacantes llenas. Gracias por elegirnos."
+    "fecha_postulacion": "2025-12-08T15:21:43.272Z",
+    "estado": "pendiente",
+    "mensaje": "¡Estoy de vuelta! Espero ser un excelente candidato.",
+    "comentario": "Por favor vuelve."
   },
   {
-    "id": 6,
+    "id": 9,
     "usuario_id": 1765137188657,
     "trabajo_id": 3,
-    "fecha_postulacion": "2025-12-08T12:49:52.129Z",
-    "estado": "cancelada",
-    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+    "fecha_postulacion": "2025-12-08T15:24:52.387Z",
+    "estado": "rechazado",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": "Vacante llena."
+  },
+  {
+    "id": 10,
+    "usuario_id": 1765137188657,
+    "trabajo_id": 1,
+    "fecha_postulacion": "2025-12-08T15:31:41.273Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": ""
   }
 ]

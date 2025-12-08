@@ -137,5 +137,129 @@
     "leida": false,
     "fecha_creacion": "2025-12-08T12:49:52.132Z",
     "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765201153752,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Elena Cázarez se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T13:39:13.752Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765204492222,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T14:34:52.222Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765206177251,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:02:57.251Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765206194084,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:03:14.084Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765206470471,
+    "id_usuario": 1765137188657,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"Documentador de proyecto de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:07:50.471Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "Documentador de proyecto de software de acuerdo a la IEEE SRS"
+  },
+  {
+    "id": 1765207080832,
+    "id_usuario": 1764894367943,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"Desarrollador de .NET\" en Microsoft ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:18:00.832Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "Desarrollador de .NET"
+  },
+  {
+    "id": 1765207141315,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:19:01.315Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765207265402,
+    "id_usuario": 1764894367943,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"Desarrollador de .NET\" en Microsoft ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:21:05.402Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "Desarrollador de .NET"
+  },
+  {
+    "id": 1765207303277,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:21:43.277Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765207470815,
+    "id_usuario": 1765137188657,
+    "tipo": "success",
+    "titulo": "¡Buenas noticias!",
+    "mensaje": "Tu postulación a \"DBA Senior\" en Setsuzoku Database Topics ORG ha sido aprobada.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:24:30.815Z",
+    "tipo_referencia": "vacante",
+    "id_referencia": "DBA Senior"
+  },
+  {
+    "id": 1765207492389,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:24:52.389Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765207901276,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T15:31:41.276Z",
+    "tipo_referencia": "vacante"
   }
 ]

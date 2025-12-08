@@ -410,12 +410,33 @@
             configurarFiltros(trabajos, usuario);
         }
 
-        function postularseTrabajo(usuario, trabajoId) {
+        async function postularseTrabajo(usuario, trabajoId) {
+            // Consulta para ver si la postulación ya existe
+            const rawPostulaciones = await fetch('/api/postulaciones');
+            const postulaciones = await rawPostulaciones.json();
+            const postulacionPrevia = postulaciones.find(p => p.trabajo_id === trabajoId && p.usuario_id === usuario.id);
+
+            // Repostularse sólo si la postulación previa ha sido cancelada por el candidato
+            if (postulacionPrevia && postulacionPrevia.estado === 'cancelada') {
+                postulacionPrevia.estado = 'pendiente';
+                postulacionPrevia.mensaje = '¡Estoy de vuelta! Espero ser un excelente candidato.';
+
+                // Petición al servidor para actualizar
+                fetch(`/api/postulaciones/${ postulacionPrevia.id }`, {
+                    method : 'PUT',
+                    body : JSON.stringify(postulacionPrevia)
+                })
+                .then(raw => raw.json())
+                .then(res => alert(res.mensaje));
+
+                return;
+            }
+
+            // Nueva postulación
+
             const datosPostulacion = {
                 usuario_id : usuario.id,
                 trabajo_id : trabajoId,
-                mensaje : '¡Me animé a postularme! Espero ser un excelente candidato.',
-                comentario : ''
             };
 
             fetch('/api/postularse-trabajo', {

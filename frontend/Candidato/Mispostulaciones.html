@@ -563,6 +563,7 @@
 
             // Estableciendo postulación como cancelada
             postulacion.estado = 'cancelada';
+            postulacion.mensaje = 'Mejor no, tal vez en otra ocasión.';
 
             // Petición al servidor para cancelar
             fetch(`/api/postulaciones/${ postulacionId }`, {

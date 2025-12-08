@@ -107,7 +107,83 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                 respuesta.statusCode = 500;
                 respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener los usuarios' }));
             }
-        } else {
+        } 
+        // ACTUALIZAR USUARIO POR ID
+        else if (pathname.match(/^\/api\/usuarios\/\d+$/) && metodo === 'PUT') {
+            const usuario_id = parseInt(pathname.split('/').pop());
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datos_actualizados = JSON.parse(cuerpo);
+                    
+                    // Leer usuarios existentes
+                    let usuarios = database.leer_usuarios();
+                    
+                    // Encontrar índice del usuario
+                    const indice = usuarios.findIndex(u => u.id === usuario_id);
+                    
+                    if (indice !== -1) {
+                        // Mantener la contraseña original (no actualizar)
+                        if (datos_actualizados.contrasena) {
+                            delete datos_actualizados.contrasena;
+                        }
+                        
+                        // Actualizar datos del usuario
+                        usuarios[indice] = { 
+                            ...usuarios[indice], 
+                            ...datos_actualizados,
+                            id: usuario_id // Asegurar que el ID no cambie
+                        };
+                        
+                        // Guardar en archivo
+                        database.escribir_usuarios(usuarios);
+                        
+                        respuesta.end(JSON.stringify({ 
+                            exito: true, 
+                            mensaje: 'Usuario actualizado correctamente',
+                            usuario: usuarios[indice]
+                        }));
+                    } else {
+                        respuesta.statusCode = 404;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'Usuario no encontrado' }));
+                    }
+                } catch (error) {
+                    console.error('Error al actualizar usuario:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar el usuario' }));
+                }
+            });
+        }
+        // OBTENER USUARIO POR ID
+        else if (pathname.match(/^\/api\/usuarios\/\d+$/) && metodo === 'GET') {
+            const usuario_id = parseInt(pathname.split('/').pop());
+            
+            try {
+                const usuarios = database.leer_usuarios();
+                const usuario = usuarios.find(u => u.id === usuario_id);
+                
+                if (usuario) {
+                    // No devolver la contraseña
+                    const usuario_sin_contrasena = { ...usuario };
+                    delete usuario_sin_contrasena.contrasena;
+                    
+                    respuesta.end(JSON.stringify(usuario_sin_contrasena));
+                } else {
+                    respuesta.statusCode = 404;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Usuario no encontrado' }));
+                }
+            } catch (error) {
+                console.error('Error al obtener usuario:', error);
+                respuesta.statusCode = 500;
+                respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al obtener el usuario' }));
+            }
+        }
+        else {
             console.log(`Ruta no encontrada: ${pathname}`);
             respuesta.statusCode = 404;
             respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
@@ -839,8 +915,18 @@ const servidor = http.createServer((peticion, respuesta) => {
         ruta_archivo = `/frontend${ruta_archivo}`;
     }
 
-    // Ruta completa del archivo
-    const ruta_completa = path.join(__dirname, '..', ruta_archivo);
+    // Ruta completa del archivo - CORREGIR PARA USAR RUTAS RELATIVAS
+    let ruta_completa = path.join(__dirname, '..', ruta_archivo);
+
+    // Si la ruta no existe, intentar servir desde directorio raíz
+    if (!fs.existsSync(ruta_completa)) {
+        // Intentar servir archivos específicos de roles
+        if (ruta_archivo.includes('/Candidato/') || ruta_archivo.includes('/Instructor/') || ruta_archivo.includes('/Reclutador/')) {
+            ruta_completa = path.join(__dirname, '..', 'frontend', ruta_archivo.replace('/frontend/', ''));
+        } else {
+            ruta_completa = path.join(__dirname, '..', ruta_archivo);
+        }
+    }
 
     // Servir el archivo solicitado
     servir_archivo(respuesta, ruta_completa);

@@ -108,5 +108,14 @@
     "fecha_creacion": "2025-12-07T19:53:39.463Z",
     "tipo_referencia": "curso",
     "id_referencia": "Curso completo de Redes Emergentes"
+  },
+  {
+    "id": 1765158962471,
+    "id_usuario": 1765158962456,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola José, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T01:56:02.471Z"
   }
 ]

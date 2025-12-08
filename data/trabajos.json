@@ -15,8 +15,7 @@
     "fecha_publicacion": "2025-12-05",
     "reclutador_id": 1764894474829,
     "fecha_creacion": "2025-12-05T00:32:02.946Z",
-    "estado": "activa",
-    "postulaciones": 0
+    "estado": "activa"
   },
   {
     "id": 2,
@@ -34,8 +33,7 @@
     "fecha_publicacion": "2025-12-04",
     "reclutador_id": 1764894474829,
     "fecha_creacion": "2025-12-05T00:33:40.744Z",
-    "estado": "activa",
-    "postulaciones": 0
+    "estado": "activa"
   },
   {
     "id": 3,
@@ -53,7 +51,6 @@
     "fecha_publicacion": "2025-11-22",
     "reclutador_id": 1764894474829,
     "fecha_creacion": "2025-12-05T00:34:57.658Z",
-    "estado": "activa",
-    "postulaciones": 0
+    "estado": "activa"
   }
 ]

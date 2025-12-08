@@ -117,5 +117,25 @@
     "mensaje": "Hola José, tu cuenta ha sido creada exitosamente.",
     "leida": false,
     "fecha_creacion": "2025-12-08T01:56:02.471Z"
+  },
+  {
+    "id": 1765198189818,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T12:49:49.818Z",
+    "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765198192132,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T12:49:52.132Z",
+    "tipo_referencia": "vacante"
   }
 ]

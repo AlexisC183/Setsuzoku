@@ -30,5 +30,22 @@
     "fecha_postulacion": "2025-12-08T05:02:49.683Z",
     "estado": "pendiente",
     "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 5,
+    "usuario_id": 1765137188657,
+    "trabajo_id": 2,
+    "fecha_postulacion": "2025-12-08T12:49:49.813Z",
+    "estado": "rechazado",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
+    "comentario": "Vacantes llenas. Gracias por elegirnos."
+  },
+  {
+    "id": 6,
+    "usuario_id": 1765137188657,
+    "trabajo_id": 3,
+    "fecha_postulacion": "2025-12-08T12:49:52.129Z",
+    "estado": "cancelada",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
   }
 ]

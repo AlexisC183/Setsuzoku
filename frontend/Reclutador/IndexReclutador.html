@@ -124,13 +124,13 @@
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(42, 92, 170, 0.7);
+                box-shadow: 0 0 0 rgba(42, 92, 170, 0.7);
             }
             70% {
                 box-shadow: 0 0 0 10px rgba(42, 92, 170, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(42, 92, 170, 0);
+                box-shadow: 0 0 0 rgba(42, 92, 170, 0);
             }
         }
 
@@ -654,18 +654,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-vacantes-recientes">
-                                    <tr>
-                                        <td>Desarrollador Full Stack</td>
-                                        <td>15/05/2023</td>
-                                        <td>12</td>
-                                        <td><span class="estado-activo">Activa</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diseñador UX/UI</td>
-                                        <td>10/05/2023</td>
-                                        <td>8</td>
-                                        <td><span class="estado-activo">Activa</span></td>
-                                    </tr>
+                                    <!-- Las vacantes se cargarán dinámicamente aquí -->
                                 </tbody>
                             </table>
                         </div>
@@ -683,18 +672,7 @@
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-entrevistas-programadas">
-                                    <tr>
-                                        <td>Juan Pérez</td>
-                                        <td>Desarrollador Full Stack</td>
-                                        <td>18/05/2023 10:00</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>María González</td>
-                                        <td>Diseñador UX/UI</td>
-                                        <td>19/05/2023 14:30</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
+                                    <!-- Las entrevistas se cargarán dinámicamente aquí -->
                                 </tbody>
                             </table>
                         </div>
@@ -723,6 +701,7 @@
         // VARIABLES GLOBALES
         let notificaciones = [];
         let notificacionesNoLeidas = 0;
+        let usuarioActual = null;
 
         // FUNCIONES PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -731,6 +710,7 @@
                 try {
                     const usuario = JSON.parse(usuarioStr);
                     if (usuario && usuario.nombre) {
+                        usuarioActual = usuario;
                         mostrarInterfazConSesion(usuario);
                         return true;
                     }
@@ -757,40 +737,19 @@
         }
 
         // FUNCIONES PARA NOTIFICACIONES
-        function inicializarNotificaciones() {
-            // Cargar notificaciones desde sessionStorage o inicializar con datos de ejemplo
-            const notificacionesGuardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificacionesGuardadas) {
-                notificaciones = JSON.parse(notificacionesGuardadas);
-            } else {
-                // Notificaciones de ejemplo para reclutadores
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nueva postulación recibida",
-                        mensaje: "Juan Pérez ha aplicado a la vacante de Desarrollador Full Stack",
-                        fecha: new Date().toISOString(),
-                        leida: false
-                    },
-                    {
-                        id: 2,
-                        titulo: "Entrevista confirmada",
-                        mensaje: "María González ha confirmado su entrevista para mañana a las 10:00 AM",
-                        fecha: new Date(Date.now() - 86400000).toISOString(), // Ayer
-                        leida: false
-                    },
-                    {
-                        id: 3,
-                        titulo: "Vacante por expirar",
-                        mensaje: "La vacante de Diseñador UX/UI expirará en 3 días",
-                        fecha: new Date(Date.now() - 172800000).toISOString(), // Hace 2 días
-                        leida: true
-                    }
-                ];
-                
-                // Guardar en sessionStorage
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+        async function inicializarNotificaciones() {
+            try {
+                // Cargar notificaciones desde la API
+                const response = await fetch(`/api/notificaciones?id_usuario=${usuarioActual.id}`);
+                if (response.ok) {
+                    notificaciones = await response.json();
+                } else {
+                    console.error('Error al cargar notificaciones');
+                    notificaciones = [];
+                }
+            } catch (error) {
+                console.error('Error al cargar notificaciones:', error);
+                notificaciones = [];
             }
             
             // Contar notificaciones no leídas
@@ -922,32 +881,81 @@
             return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         }
 
-        function marcarComoLeida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion && !notificacion.leida) {
-                notificacion.leida = true;
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesPanel();
+        async function marcarComoLeida(id) {
+            try {
+                const response = await fetch('/api/notificaciones/marcar-leida', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id_notificacion: id })
+                });
+                
+                if (response.ok) {
+                    const resultado = await response.json();
+                    if (resultado.exito) {
+                        // Actualizar localmente
+                        const notificacion = notificaciones.find(n => n.id === id);
+                        if (notificacion) {
+                            notificacion.leida = true;
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesPanel();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al marcar notificación como leída:', error);
             }
         }
 
         function toggleLeida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion) {
-                notificacion.leida = !notificacion.leida;
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesVistaCompleta();
+            try {
+                const notificacion = notificaciones.find(n => n.id === id);
+                if (notificacion) {
+                    const nuevoEstado = !notificacion.leida;
+                    
+                    const response = fetch('/api/notificaciones/marcar-leida', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id_notificacion: id })
+                    });
+                    
+                    if (response.ok) {
+                        const resultado = response.json();
+                        if (resultado.exito) {
+                            // Actualizar localmente
+                            notificacion.leida = nuevoEstado;
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesVistaCompleta();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al cambiar estado de notificación:', error);
             }
         }
 
-        function eliminarNotificacion(id) {
+        async function eliminarNotificacion(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
-                notificaciones = notificaciones.filter(n => n.id !== id);
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesVistaCompleta();
+                try {
+                    const response = await fetch(`/api/notificaciones?id_notificacion=${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        const resultado = await response.json();
+                        if (resultado.exito) {
+                            // Actualizar localmente
+                            notificaciones = notificaciones.filter(n => n.id !== id);
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesVistaCompleta();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error al eliminar notificación:', error);
+                }
             }
         }
 
@@ -964,19 +972,96 @@
             cargarNotificacionesVistaCompleta();
         }
 
-        function agregarNotificacion(titulo, mensaje) {
-            const nuevaNotificacion = {
-                id: Date.now(),
-                titulo: titulo,
-                mensaje: mensaje,
-                fecha: new Date().toISOString(),
-                leida: false
-            };
-            
-            notificaciones.unshift(nuevaNotificacion);
-            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-            actualizarContadorNotificaciones();
-            cargarNotificacionesPanel();
+        async function cargarDatosReclutador() {
+            try {
+                // Cargar vacantes del reclutador actual
+                const response = await fetch(`/api/trabajos?reclutador_id=${usuarioActual.id}`);
+                if (response.ok) {
+                    const trabajos = await response.json();
+                    const vacantes = trabajos.filter(trabajo => trabajo.reclutador_id === usuarioActual.id);
+                    
+                    // Actualizar tabla de vacantes
+                    const tablaVacantes = document.getElementById('tabla-vacantes-recientes');
+                    let html = '';
+                    
+                    if (vacantes.length === 0) {
+                        html = '<tr><td colspan="4">No tienes vacantes publicadas</td></tr>';
+                    } else {
+                        vacantes.forEach(vacante => {
+                            const estadoClass = vacante.activo ? 'estado-activo' : 'estado-inactivo';
+                            const estadoTexto = vacante.activo ? 'Activa' : 'Inactiva';
+                            const fechaFormateada = formatearFecha(vacante.fecha_publicacion);
+                            
+                            // Contar postulaciones para esta vacante
+                            const numPostulaciones = notificaciones.filter(n => 
+                                n.mensaje && n.mensaje.includes(vacante.puesto)
+                            ).length;
+                            
+                            html += `
+                                <tr>
+                                    <td>${vacante.puesto}</td>
+                                    <td>${fechaFormateada}</td>
+                                    <td>${numPostulaciones}</td>
+                                    <td><span class="${estadoClass}">${estadoTexto}</span></td>
+                                </tr>
+                            `;
+                        });
+                    }
+                    
+                    tablaVacantes.innerHTML = html;
+                }
+                
+                // Cargar postulaciones con entrevistas programadas
+                const responsePostulaciones = await fetch('/api/postulaciones');
+                if (responsePostulaciones.ok) {
+                    const postulaciones = await responsePostulaciones.json();
+                    const postulacionesUsuario = postulaciones.filter(p => {
+                        // Obtener usuario para cada postulación
+                        const usuario = usuarios.find(u => u.id === p.usuario_id);
+                        return usuario;
+                    });
+                    
+                    // Filtrar postulaciones con estado "entrevista"
+                    const postulacionesConEntrevista = postulaciones.filter(p => p.estado === 'entrevista');
+                    
+                    // Actualizar tabla de entrevistas
+                    const tablaEntrevistas = document.getElementById('tabla-entrevistas-programadas');
+                    let htmlEntrevistas = '';
+                    
+                    if (postulacionesConEntrevista.length === 0) {
+                        htmlEntrevistas = '<tr><td colspan="4">No tienes entrevistas programadas</td></tr>';
+                    } else {
+                        postulacionesConEntrevista.forEach(postulacion => {
+                            const usuario = usuarios.find(u => u.id === postulacion.usuario_id);
+                            const trabajo = trabajos.find(t => t.id === postulacion.trabajo_id);
+                            const fechaFormateada = formatearFecha(postulacion.fecha_postulacion);
+                            
+                            htmlEntrevistas += `
+                                <tr>
+                                    <td>${usuario ? `${usuario.nombre} ${usuario.apellido_paterno}` : 'Usuario no encontrado'}</td>
+                                    <td>${trabajo ? trabajo.puesto : 'Trabajo no encontrado'}</td>
+                                    <td>${fechaFormateada}</td>
+                                    <td><a href="#" class="btn btn-secundario" onclick="verDetallesPostulacion(${postulacion.id})">Ver Detalles</a></td>
+                                </tr>
+                            `;
+                        });
+                    }
+                    
+                    tablaEntrevistas.innerHTML = htmlEntrevistas;
+                }
+                
+            } catch (error) {
+                console.error('Error al cargar datos del reclutador:', error);
+                
+                // Mostrar mensaje de error en las tablas
+                document.getElementById('tabla-vacantes-recientes').innerHTML = '<tr><td colspan="4">Error al cargar datos</td></tr>';
+                document.getElementById('tabla-entrevistas-programadas').innerHTML = '<tr><td colspan="4">Error al cargar datos</td></tr>';
+            }
+        }
+
+        function verDetallesPostulacion(id) {
+            // Aquí podrías mostrar un modal con los detalles de la postulación
+            alert(`Mostrando detalles de la postulación ${id}`);
         }
 
         // INICIALIZACIÓN
@@ -984,13 +1069,10 @@
             // Establecer el año actual en el footer
             document.getElementById('anio-actual').textContent = new Date().getFullYear();
 
-            // Verificar sesión
+            // Verificar sesión al cargar la página
             verificarSesion();
             
-            // Inicializar notificaciones
-            inicializarNotificaciones();
-            
-            // Configurar evento de cerrar sesión
+            // Configurar evento para el botón de volver
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) { 
                 e.preventDefault(); 
                 cerrarSesion(); 
@@ -1023,6 +1105,11 @@
                     panelNotificaciones.classList.remove('activo');
                 }
             });
+            
+            // Cargar datos del reclutador
+            if (usuarioActual) {
+                cargarDatosReclutador();
+            }
         });
     </script>
 </body>

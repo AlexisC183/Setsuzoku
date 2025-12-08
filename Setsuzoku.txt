@@ -20,29 +20,76 @@ Setsuzoku
 │   ├── logs
 │   │   ├── refs
 │   │   │   ├── heads
+│   │   │   │   ├── Sandra
 │   │   │   │   ├── alexis-1
 │   │   │   │   └── main
 │   │   │   └── remotes
 │   │   │       └── origin
-│   │   │           └── HEAD
+│   │   │           ├── HEAD
+│   │   │           └── alexis-1
 │   │   └── HEAD
 │   ├── objects
+│   │   ├── 00
+│   │   │   └── 787a1a1fbb533ccab1fdc5b762f10072b3607e
+│   │   ├── 01
+│   │   │   └── fadf3b832db96802482f3c2d62c4f110974d56
+│   │   ├── 03
+│   │   │   └── fa224990886d1e195376a8f3f476273e407c07
+│   │   ├── 06
+│   │   │   └── a4204919439751ef0dcf6f4eebd5144e667be2
+│   │   ├── 0c
+│   │   │   └── 403d15d742ecdecdc39dac6e597843afb0d2aa
+│   │   ├── 34
+│   │   │   └── 3908c6ab5a2be110823dd81edfd834bb99e666
+│   │   ├── 3f
+│   │   │   └── 79868f560e7abd483119dfab3d06f1a7383f51
+│   │   ├── 42
+│   │   │   └── 138d8f453e191e821c270b428bdee29d042eea
+│   │   ├── 4c
+│   │   │   ├── 55ec0b5b115bd06b3dd31f8322e18eff7f7e65
+│   │   │   └── b254b6609fcd8feb199f5b9f95d6bab714b12f
+│   │   ├── 4d
+│   │   │   └── e2baf109171b50c061a7561952eb2a35dfa656
+│   │   ├── 6a
+│   │   │   └── 11b374a0ac0ea2fb1a85ae2b04d784cf7facd2
+│   │   ├── 6e
+│   │   │   └── fdc110b5cbf172a1cc6268a7f4f9b33bdc9d89
+│   │   ├── 6f
+│   │   │   └── 7da5dea793af65b74da61719558e48b5054a1b
+│   │   ├── 7e
+│   │   │   └── b223a3e07d9a20c75e35d98abf72d3b634344a
+│   │   ├── 88
+│   │   │   ├── 67fd471720b7cafbe3d741b02fb18cb1b6cf70
+│   │   │   └── af83e266fbce34eef2a2db8831d8e20d49852e
+│   │   ├── 8f
+│   │   │   └── 52f2320e7c532b853ea45be165bc1b849be9fd
+│   │   ├── 91
+│   │   │   └── 72afd32cf609427747d8f9b72ebacfaa7f652b
+│   │   ├── db
+│   │   │   └── d0348d32ed2f321dc62804e8c8904b1099e03a
+│   │   ├── e3
+│   │   │   └── 732621eaf40a29911c5da5874da2ebe6a17566
+│   │   ├── e8
+│   │   │   └── 7228cf1e62d5f8050e5261302cd7f5cd48fc7d
+│   │   ├── fa
+│   │   │   └── d8b5ed9760cc55ae1f8c83a4644e7376b3118d
 │   │   ├── info
 │   │   └── pack
-│   │       ├── pack-85ae885010e81f2e28758561cad0ebe3bb8daa5e.idx
-│   │       ├── pack-85ae885010e81f2e28758561cad0ebe3bb8daa5e.pack
-│   │       └── pack-85ae885010e81f2e28758561cad0ebe3bb8daa5e.rev
+│   │       ├── pack-c0c6033f9345e889942afdaa38353875305575d4.idx
+│   │       ├── pack-c0c6033f9345e889942afdaa38353875305575d4.pack
+│   │       └── pack-c0c6033f9345e889942afdaa38353875305575d4.rev
 │   ├── refs
 │   │   ├── heads
+│   │   │   ├── Sandra
 │   │   │   ├── alexis-1
 │   │   │   └── main
 │   │   ├── remotes
 │   │   │   └── origin
-│   │   │       └── HEAD
+│   │   │       ├── HEAD
+│   │   │       └── alexis-1
 │   │   └── tags
-│   ├── FETCH_HEAD
+│   ├── COMMIT_EDITMSG
 │   ├── HEAD
-│   ├── ORIG_HEAD
 │   ├── config
 │   ├── description
 │   ├── index
@@ -105,6 +152,11 @@ Setsuzoku
 ├── README.md
 └── Setsuzoku.bat
 ------------------------------------
+COMMIT_EDITMSG
+
+Ya agrege lo que faltaba del candidato y el instructor
+
+------------------------------------
 config
 
 [core]
@@ -125,16 +177,15 @@ config
 	remote = origin
 	merge = refs/heads/alexis-1
 	vscode-merge-base = origin/alexis-1
+[branch "Sandra"]
+	remote = origin
+	merge = refs/heads/Sandra
+	vscode-merge-base = origin/Sandra
 
 ------------------------------------
 description
 
 Unnamed repository; edit this file 'description' to name the repository.
-
-------------------------------------
-FETCH_HEAD
-
-76473df05556c9acc84289ee0f475920aa63a00f		branch 'alexis-1' of https://github.com/AlexisC183/Setsuzoku
 
 ------------------------------------
 HEAD
@@ -1078,46 +1129,69 @@ exclude
 ------------------------------------
 HEAD
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765157859 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
-9fe3db48fa33ed641a69ed12eaf350c8f508ee48 76473df05556c9acc84289ee0f475920aa63a00f MegumiUwU <l22211927@tectijuana.edu.mx> 1765157935 -0800	checkout: moving from main to alexis-1
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765169815 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
+9fe3db48fa33ed641a69ed12eaf350c8f508ee48 41a992d74ab00e01e276a7b950c4254a7c31c82e MegumiUwU <l22211927@tectijuana.edu.mx> 1765169862 -0800	checkout: moving from main to alexis-1
+41a992d74ab00e01e276a7b950c4254a7c31c82e 0f985f3f19f0a96e751739ec7050ec46eb9b6c2d MegumiUwU <l22211927@tectijuana.edu.mx> 1765169952 -0800	checkout: moving from alexis-1 to Sandra
+0f985f3f19f0a96e751739ec7050ec46eb9b6c2d 41a992d74ab00e01e276a7b950c4254a7c31c82e MegumiUwU <l22211927@tectijuana.edu.mx> 1765170127 -0800	checkout: moving from Sandra to alexis-1
+41a992d74ab00e01e276a7b950c4254a7c31c82e 41a992d74ab00e01e276a7b950c4254a7c31c82e MegumiUwU <l22211927@tectijuana.edu.mx> 1765170210 -0800	checkout: moving from alexis-1 to alexis-1
+41a992d74ab00e01e276a7b950c4254a7c31c82e 4cb254b6609fcd8feb199f5b9f95d6bab714b12f MegumiUwU <l22211927@tectijuana.edu.mx> 1765195850 -0800	commit: modifique mis vacantes y el filtro del candidato
+4cb254b6609fcd8feb199f5b9f95d6bab714b12f 4c55ec0b5b115bd06b3dd31f8322e18eff7f7e65 MegumiUwU <l22211927@tectijuana.edu.mx> 1765234600 -0800	commit: Ya agrege lo que faltaba del candidato y el instructor
 
 ------------------------------------
 alexis-1
 
-0000000000000000000000000000000000000000 76473df05556c9acc84289ee0f475920aa63a00f MegumiUwU <l22211927@tectijuana.edu.mx> 1765157935 -0800	branch: Created from origin/alexis-1
+0000000000000000000000000000000000000000 41a992d74ab00e01e276a7b950c4254a7c31c82e MegumiUwU <l22211927@tectijuana.edu.mx> 1765169862 -0800	branch: Created from refs/remotes/origin/alexis-1
+41a992d74ab00e01e276a7b950c4254a7c31c82e 4cb254b6609fcd8feb199f5b9f95d6bab714b12f MegumiUwU <l22211927@tectijuana.edu.mx> 1765195850 -0800	commit: modifique mis vacantes y el filtro del candidato
+4cb254b6609fcd8feb199f5b9f95d6bab714b12f 4c55ec0b5b115bd06b3dd31f8322e18eff7f7e65 MegumiUwU <l22211927@tectijuana.edu.mx> 1765234600 -0800	commit: Ya agrege lo que faltaba del candidato y el instructor
 
 ------------------------------------
 main
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765157859 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765169815 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
+
+------------------------------------
+Sandra
+
+0000000000000000000000000000000000000000 0f985f3f19f0a96e751739ec7050ec46eb9b6c2d MegumiUwU <l22211927@tectijuana.edu.mx> 1765169952 -0800	branch: Created from refs/remotes/origin/Sandra
+
+------------------------------------
+alexis-1
+
+41a992d74ab00e01e276a7b950c4254a7c31c82e 4cb254b6609fcd8feb199f5b9f95d6bab714b12f MegumiUwU <l22211927@tectijuana.edu.mx> 1765195860 -0800	update by push
 
 ------------------------------------
 HEAD
 
-0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765157859 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
-
-------------------------------------
-ORIG_HEAD
-
-76473df05556c9acc84289ee0f475920aa63a00f
+0000000000000000000000000000000000000000 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 MegumiUwU <l22211927@tectijuana.edu.mx> 1765169815 -0800	clone: from https://github.com/AlexisC183/Setsuzoku.git
 
 ------------------------------------
 packed-refs
 
 # pack-refs with: peeled fully-peeled sorted 
 0f985f3f19f0a96e751739ec7050ec46eb9b6c2d refs/remotes/origin/Sandra
-76473df05556c9acc84289ee0f475920aa63a00f refs/remotes/origin/alexis-1
+41a992d74ab00e01e276a7b950c4254a7c31c82e refs/remotes/origin/alexis-1
 9fe3db48fa33ed641a69ed12eaf350c8f508ee48 refs/remotes/origin/main
+928320701c4b93af660b8b187d7e93c6c4788607 refs/remotes/origin/ramacombinada
 
 ------------------------------------
 alexis-1
 
-76473df05556c9acc84289ee0f475920aa63a00f
+4c55ec0b5b115bd06b3dd31f8322e18eff7f7e65
 
 ------------------------------------
 main
 
 9fe3db48fa33ed641a69ed12eaf350c8f508ee48
+
+------------------------------------
+Sandra
+
+0f985f3f19f0a96e751739ec7050ec46eb9b6c2d
+
+------------------------------------
+alexis-1
+
+4cb254b6609fcd8feb199f5b9f95d6bab714b12f
 
 ------------------------------------
 HEAD
@@ -1803,7 +1877,45 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                     respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al crear el curso' }));
                 }
             });
-        } else {
+        } else if (pathname.match(/^\/api\/cursos\/\d+$/) && metodo === 'PUT') {
+            // Actualizar un curso existente
+            const cursoId = parseInt(pathname.split('/').pop());
+            let cuerpo = '';
+
+            peticion.on('data', chunk => {
+                cuerpo += chunk.toString();
+            });
+
+            peticion.on('end', () => {
+                try {
+                    const datosActualizados = JSON.parse(cuerpo);
+
+                    // Leer cursos existentes
+                    let cursos = database.leer_cursos();
+
+                    // Encontrar el índice del curso
+                    const indice = cursos.findIndex(c => c.id === cursoId);
+
+                    if (indice !== -1) {
+                        // Actualizar el curso
+                        cursos[indice] = { ...cursos[indice], ...datosActualizados };
+
+                        // Guardar en el archivo
+                        database.escribir_cursos(cursos);
+
+                        respuesta.end(JSON.stringify({ exito: true, mensaje: 'Curso actualizado correctamente' }));
+                    } else {
+                        respuesta.statusCode = 404;
+                        respuesta.end(JSON.stringify({ exito: false, mensaje: 'Curso no encontrado' }));
+                    }
+                } catch (error) {
+                    console.error('Error al actualizar curso:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al actualizar el curso' }));
+                }
+            });
+        }
+        else {
             console.log(`Ruta no encontrada: ${pathname}`);
             respuesta.statusCode = 404;
             respuesta.end(JSON.stringify({ exito: false, mensaje: 'Ruta no encontrada' }));
@@ -2721,7 +2833,6 @@ cursos.json
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:36:01.810Z",
-    "estudiantes": [],
     "activo": true
   },
   {
@@ -2736,7 +2847,6 @@ cursos.json
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:37:22.123Z",
-    "estudiantes": [],
     "activo": true
   },
   {
@@ -2751,7 +2861,20 @@ cursos.json
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:38:08.581Z",
-    "estudiantes": [],
+    "activo": false
+  },
+  {
+    "id": 4,
+    "titulo": "Curso de Programación en C+",
+    "descripcion": "Aprenderos sobre lo básico sobre la programación en C+",
+    "duracion": "9 horas",
+    "categoria": "desarrollo-web",
+    "nivel": "principiante",
+    "precio": "$10",
+    "video_url": "https://www.youtube.com/watch?v=RGSEnAzS4XY&list=PL5YuOOJ-FGGjjK8j50TkEcjCcZ8dRAiPy",
+    "instructor": "Sandra Megumi",
+    "instructor_id": 1765232710512,
+    "fecha_creacion": "2025-12-08T22:27:56.967Z",
     "activo": false
   }
 ]
@@ -2796,6 +2919,38 @@ inscripciones_cursos.json
     "usuario_id": 1765137188657,
     "curso_id": 2,
     "fecha_inscripcion": "2025-12-07T19:53:39.462Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 6,
+    "usuario_id": 1763876316632,
+    "curso_id": 2,
+    "fecha_inscripcion": "2025-12-08T05:02:38.216Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 7,
+    "usuario_id": 1763876316632,
+    "curso_id": 3,
+    "fecha_inscripcion": "2025-12-08T05:02:39.924Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 8,
+    "usuario_id": 1763876316632,
+    "curso_id": 1,
+    "fecha_inscripcion": "2025-12-08T05:02:41.244Z",
+    "estado": "en-curso",
+    "progreso": 0
+  },
+  {
+    "id": 9,
+    "usuario_id": 1764894367943,
+    "curso_id": 4,
+    "fecha_inscripcion": "2025-12-08T22:50:34.651Z",
     "estado": "en-curso",
     "progreso": 0
   }
@@ -2922,6 +3077,26 @@ notificaciones.json
     "mensaje": "Hola José, tu cuenta ha sido creada exitosamente.",
     "leida": false,
     "fecha_creacion": "2025-12-08T01:56:02.471Z"
+  },
+  {
+    "id": 1765232710781,
+    "id_usuario": 1765232710512,
+    "tipo": "success",
+    "titulo": "¡Bienvenido a Setsuzoku!",
+    "mensaje": "Hola Sandra Megumi, tu cuenta ha sido creada exitosamente.",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T22:25:10.781Z"
+  },
+  {
+    "id": 1765234234654,
+    "id_usuario": 1765232710512,
+    "tipo": "info",
+    "titulo": "Nueva inscripción",
+    "mensaje": "Chuy Gómez se ha inscrito en tu curso \"Curso de Programación en C+\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T22:50:34.654Z",
+    "tipo_referencia": "curso",
+    "id_referencia": "Curso de Programación en C+"
   }
 ]
 ------------------------------------
@@ -2933,6 +3108,30 @@ postulaciones.json
     "usuario_id": 1764894367943,
     "trabajo_id": 3,
     "fecha_postulacion": "2025-12-07T14:37:19.961Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 2,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 1,
+    "fecha_postulacion": "2025-12-08T05:02:46.703Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 3,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 2,
+    "fecha_postulacion": "2025-12-08T05:02:48.399Z",
+    "estado": "pendiente",
+    "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
+  },
+  {
+    "id": 4,
+    "usuario_id": 1763876316632,
+    "trabajo_id": 3,
+    "fecha_postulacion": "2025-12-08T05:02:49.683Z",
     "estado": "pendiente",
     "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato."
   }
@@ -3098,6 +3297,22 @@ usuarios.json
     "correo": "candidato1@mail.com",
     "contrasena": "6a1e5f711180523405ee6739887d2172ed9173f4fcbd7e12dbc501a690282477",
     "fecha_registro": "2025-12-08T01:56:02.458Z"
+  },
+  {
+    "id": 1765232710512,
+    "grupo": "instructor",
+    "nombre": "Sandra Megumi",
+    "apellido_paterno": "Salazar",
+    "apellido_materno": "Martinez",
+    "fecha_nacimiento": "2004-12-02",
+    "genero": "femenino",
+    "telefono": "6647894877",
+    "estudios": "Técnica en Programación",
+    "experiencia": "2 años en Office Depot, 3 meses en OXXO, 3 meses en PEMEX y actualmente en D'Volada.",
+    "habilidades": "Rapidez, Eficiencia, Manejo de dinero",
+    "correo": "m@gmail.com",
+    "contrasena": "4378c5895e7ade691792a8bbed89dbfcbea257a8949a3b1132a875e67aa45583",
+    "fecha_registro": "2025-12-08T22:25:10.512Z"
   }
 ]
 ------------------------------------
@@ -6183,16 +6398,6 @@ Mispostulaciones.html
             transition: background-color 0.3s;
         }
 
-        .boton-ver-trabajo {
-            background-color: #3498db;
-            color: white;
-        }
-
-        .boton-ver-trabajo:hover, .boton-ver-trabajo:focus {
-            background-color: #2980b9;
-            outline: none;
-        }
-
         .boton-cancelar {
             background-color: #e74c3c;
             color: white;
@@ -6472,7 +6677,6 @@ Mispostulaciones.html
                         ${postulacion.mensaje ? `<div class="mensaje-postulacion">Tú: "${postulacion.mensaje}"</div>` : ''}
                         ${postulacion.comentario ? `<div class="mensaje-postulacion">Reclutador: "${postulacion.comentario}"</div>` : ''}
                         <div class="acciones-postulacion">
-                            <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
                             ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
                                 `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                         </div>
@@ -6480,13 +6684,6 @@ Mispostulaciones.html
                 `;
                 
                 listaPostulaciones.appendChild(postulacionElemento);
-                
-                // Configurar evento para el botón de ver trabajo
-                const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                botonVerTrabajo.addEventListener('click', function() {
-                    // Redirigir a la página del trabajo
-                    window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                });
                 
                 // Configurar evento para el botón de cancelar postulación (si existe)
                 const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
@@ -6538,7 +6735,8 @@ Mispostulaciones.html
                 
                 // Filtrar postulaciones
                 const postulacionesFiltradas = postulaciones.filter(postulacion => {
-                    const coincideTexto = postulacion.trabajo.titulo.toLowerCase().includes(textoBusqueda) || 
+                    // CORREGIDO: Usar 'puesto' en lugar de 'titulo' para la búsqueda
+                    const coincideTexto = postulacion.trabajo.puesto.toLowerCase().includes(textoBusqueda) || 
                                         postulacion.trabajo.empresa.toLowerCase().includes(textoBusqueda);
                     const coincideEstado = !estadoSeleccionado || postulacion.estado === estadoSeleccionado;
                     
@@ -6572,7 +6770,7 @@ Mispostulaciones.html
                     postulacionElemento.innerHTML = `
                         <div class="encabezado-postulacion">
                             <div>
-                                <div class="titulo-trabajo">${postulacion.trabajo.titulo}</div>
+                                <div class="titulo-trabajo">${postulacion.trabajo.puesto}</div>
                                 <div class="empresa-trabajo">${postulacion.trabajo.empresa}</div>
                             </div>
                             <div class="estado-postulacion ${estadoClass}">${postulacion.estado.charAt(0).toUpperCase() + postulacion.estado.slice(1)}</div>
@@ -6584,7 +6782,6 @@ Mispostulaciones.html
                             </div>
                             ${postulacion.mensaje ? `<div class="mensaje-postulacion">"${postulacion.mensaje}"</div>` : ''}
                             <div class="acciones-postulacion">
-                                <button class="boton-accion boton-ver-trabajo" data-id="${postulacion.trabajo.id}">Ver trabajo</button>
                                 ${postulacion.estado === 'pendiente' || postulacion.estado === 'revisada' ? 
                                     `<button class="boton-accion boton-cancelar" data-id="${postulacion.id}">Cancelar postulación</button>` : ''}
                             </div>
@@ -6592,13 +6789,6 @@ Mispostulaciones.html
                     `;
                     
                     listaPostulaciones.appendChild(postulacionElemento);
-                    
-                    // Configurar evento para el botón de ver trabajo
-                    const botonVerTrabajo = postulacionElemento.querySelector('.boton-ver-trabajo');
-                    botonVerTrabajo.addEventListener('click', function() {
-                        // Redirigir a la página del trabajo
-                        window.location.href = `trabajos.html?id=${postulacion.trabajo.id}`;
-                    });
                     
                     // Configurar evento para el botón de cancelar postulación (si existe)
                     const botonCancelar = postulacionElemento.querySelector('.boton-cancelar');
@@ -9327,19 +9517,22 @@ cursos.html
 
             // Procesando respuesta
             const cursosReales = await rawCursos.json();
-
+            
+            // FILTRAR SOLO CURSOS ACTIVOS
+            const cursosActivos = cursosReales.filter(curso => curso.activo === true);
+            
             // Limpiar lista de cursos
             listaCursos.innerHTML = '';
             
             // Verificar si hay cursos
-            if (cursosReales.length === 0) {
+            if (cursosActivos.length === 0) {
                 listaCursos.innerHTML = '<div class="mensaje-error">No hay cursos disponibles en este momento.</div>';
                 return;
             }
             
             // Llenar el filtro de instructores
             const selectInstructor = document.getElementById('filtrar-instructor');
-            const instructores = [...new Set(cursosReales.map(curso => curso.instructor))];
+            const instructores = [...new Set(cursosActivos.map(curso => curso.instructor))];
             
             instructores.forEach(instructor => {
                 const option = document.createElement('option');
@@ -9349,7 +9542,7 @@ cursos.html
             });
             
             // Mostrar cursos
-            cursosReales.forEach(curso => {
+            cursosActivos.forEach(curso => {
                 const cursoElemento = document.createElement('div');
                 cursoElemento.className = 'curso';
                 
@@ -9393,7 +9586,7 @@ cursos.html
             });
             
             // Configurar filtros
-            configurarFiltros(cursosReales, usuario);
+            configurarFiltros(cursosActivos, usuario);
         }
 
         // Función para inscribirse a un curso
@@ -9428,6 +9621,7 @@ cursos.html
                 alert('Ocurrió un error al intentar inscribirse. Por favor, revisa la consola para más detalles.');
             });
         }
+        
         // Función para configurar los filtros
         function configurarFiltros(cursos, usuario) {
             const buscarCurso = document.getElementById('buscar-curso');
@@ -9484,6 +9678,7 @@ cursos.html
                                 <span>${curso.duracion}</span>
                             </div>
                             <div class="precio-curso">${curso.precio}</div>
+                            ${curso.video_url ? `<a href="${curso.video_url}" target="_blank" class="boton-video">Ver Video de Introducción</a>` : ''}
                             <button class="boton-inscribirse" data-id="${curso.id}" ${botonDisabled ? 'disabled' : ''}>
                                 ${botonTexto}
                             </button>
@@ -12354,7 +12549,6 @@ Crearcurso.html
                 instructor: instructor.nombre,
                 instructor_id: instructor.id, // ID del instructor para las notificaciones
                 fecha_creacion: new Date().toISOString(),
-                estudiantes: [],
                 activo: true
             };
             
@@ -12833,17 +13027,12 @@ IndexInstructor.html
             background-color: #f5f5f5;
         }
 
-        .estado-activo {
+        .activo-verdadero {
             color: #28a745;
             font-weight: bold;
         }
 
-        .estado-pendiente {
-            color: #ffc107;
-            font-weight: bold;
-        }
-
-        .estado-inactivo {
+        .activo-falso {
             color: #dc3545;
             font-weight: bold;
         }
@@ -13098,20 +13287,16 @@ IndexInstructor.html
                         <h2 class="seccion-titulo">Estadísticas de Rendimiento</h2>
                         <div class="estadisticas-container">
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">24</div>
+                                <div id="cursos-activos" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Cursos Activos</div>
                             </div>
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">156</div>
+                                <div id="estudiantes-inscritos" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Estudiantes Inscritos</div>
                             </div>
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">89%</div>
+                                <div id="tasa-finalizacion" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Tasa de Finalización</div>
-                            </div>
-                            <div class="estadistica-card">
-                                <div class="estadistica-valor">4.6</div>
-                                <div class="estadistica-etiqueta">Calificación Promedio</div>
                             </div>
                         </div>
                     </div>
@@ -13124,72 +13309,14 @@ IndexInstructor.html
                         
                         <!-- Tabla de cursos recientes -->
                         <h3 style="margin-bottom: 15px; color: #2A5CAA;">Cursos Recientes</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Curso</th>
-                                        <th>Estudiantes</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-cursos-recientes">
-                                    <tr>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>32</td>
-                                        <td>15/05/2023</td>
-                                        <td><span class="estado-activo">Activo</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Digital Avanzado</td>
-                                        <td>28</td>
-                                        <td>10/05/2023</td>
-                                        <td><span class="estado-activo">Activo</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Introducción a la Programación</td>
-                                        <td>45</td>
-                                        <td>05/05/2023</td>
-                                        <td><span class="estado-pendiente">En revisión</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="cursos-recientes" class="tabla-container">
+                            Cargando cursos...
                         </div>
                         
                         <!-- Tabla de estudiantes destacados -->
                         <h3 style="margin: 30px 0 15px; color: #2A5CAA;">Estudiantes Destacados</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Curso</th>
-                                        <th>Progreso</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-estudiantes-destacados">
-                                    <tr>
-                                        <td>María García</td>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>95%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Pérez</td>
-                                        <td>Marketing Digital Avanzado</td>
-                                        <td>88%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ana López</td>
-                                        <td>Introducción a la Programación</td>
-                                        <td>92%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="estudiantes-destacados" class="tabla-container">
+                            Cargando estudiantes...
                         </div>
                     </div>
                 </section>
@@ -13217,14 +13344,26 @@ IndexInstructor.html
         let notificaciones = [];
         let notificacionesNoLeidas = 0;
 
+        // Datos reales (luego se consultarán)
+        let cursosInstructor = [];
+        let inscripcionesCursosInstructor = [];
+        let estudiantesInstructor = [];
+
         // FUNCIONES PARA VERIFICAR SESIÓN
-        function verificarSesion() {
+        async function verificarSesion() {
             const usuarioStr = sessionStorage.getItem('usuario');
             if (usuarioStr) {
                 try {
                     const usuario = JSON.parse(usuarioStr);
                     if (usuario && usuario.nombre && usuario.grupo) {
                         mostrarInterfazConSesion(usuario);
+
+                        await cargarDatosReales(usuario);
+
+                        calcularEstadisticas();
+                        mostrarCursosRecientes();
+                        mostrarEstudiantesDestacados();
+
                         return true;
                     }
                 } catch (error) {
@@ -13417,6 +13556,12 @@ IndexInstructor.html
             notificacionesLista.innerHTML = html;
         }
 
+        function fechaLegible(fecha) {
+            const mes = fecha.getMonth() + 1;
+
+            return `${ fecha.getDate().toString().padStart(2, '0') }/${ mes.toString().padStart(2, '0') }/${ fecha.getFullYear() }`;
+        }
+
         function formatearFecha(fechaISO) {
             const fecha = new Date(fechaISO);
             const ahora = new Date();
@@ -13499,6 +13644,176 @@ IndexInstructor.html
             sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
             actualizarContadorNotificaciones();
             cargarNotificacionesPanel();
+        }
+
+        async function cargarDatosReales(usuario) {
+            // Consultas a APIs
+            const [
+                rawCursos,
+                rawInscripciones,
+                rawUsuarios
+            ] = await Promise.all([
+                fetch('/api/cursos'),
+                fetch('/api/inscripciones-cursos'),
+                fetch('/api/usuarios')
+            ]);
+            const [
+                cursos,
+                inscripciones,
+                usuarios
+            ] = await Promise.all([
+                rawCursos.json(),
+                rawInscripciones.json(),
+                rawUsuarios.json()
+            ]);
+
+            cursosInstructor = cursos.filter(c => c.instructor_id === usuario.id);
+            inscripcionesCursosInstructor = inscripciones.filter(i => {
+                return cursosInstructor.some(c => c.id === i.curso_id);
+            });
+            estudiantesInstructor = usuarios.filter(u => {
+                return inscripcionesCursosInstructor.some(i => i.usuario_id === u.id);
+            });
+        }
+
+        function calcularEstadisticas() {
+            const inscripciones = inscripcionesCursosInstructor.length;
+            const inscripcionesCompletadas = inscripcionesCursosInstructor.filter(i => i.estado === 'completado').length;
+
+            document.getElementById('cursos-activos').textContent = cursosInstructor.filter(c => c.activo).length;
+            document.getElementById('estudiantes-inscritos').textContent = estudiantesInstructor.length;
+            document.getElementById('tasa-finalizacion').textContent = (inscripcionesCompletadas / inscripciones * 100).toString() + '%';
+        }
+
+        function mostrarCursosRecientes() {
+            const contenedor = document.getElementById('cursos-recientes');
+
+            // Objetos con información a manera de dashboard
+            const agregados = cursosInstructor
+                .slice(-5)
+                .map(c => {
+                    const inscripcionesCursoActual = inscripcionesCursosInstructor
+                        .filter(i => i.curso_id === c.id);
+                    
+                    return {
+                        curso: c.titulo,
+                        estudiantes: inscripcionesCursoActual.length,
+                        fecha: fechaLegible(new Date(c.fecha_creacion)),
+                        estado: c.activo
+                    };
+                });
+
+            // Verificar si el instructor tiene cursos
+            if (agregados.length === 0) {
+                contenedor.textContent = 'Sin cursos recientes';
+                return;
+            }
+
+            // Limpiar cursos recientes
+            contenedor.textContent = '';
+
+            // Generando el DOM de los cursos
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Estudiantes</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cursos-recientes">
+            `;
+
+            agregados.forEach(c => {
+                tabla += `
+                    <tr>
+                        <td>${ c.curso }</td>
+                        <td>${ c.estudiantes }</td>
+                        <td>${ c.fecha }</td>
+                        <td>
+                            <span class="activo-${ c.estado ? 'verdadero' : 'falso' }">
+                                ${ c.estado ? 'Activo' : 'Inactivo' }
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tabla += '</tbody></table>';
+
+            
+            // Mostrar cursos del instructor
+            contenedor.innerHTML = tabla;
+        }
+
+        function mostrarEstudiantesDestacados() {
+            const contenedor = document.getElementById('estudiantes-destacados');
+
+            const inscripcionesDestacadas = inscripcionesCursosInstructor
+                .toSorted((i1, i2) => {
+                    const comparacionInversaProgresos = -(i1.progreso - i2.progreso);
+                    const comparacionInversaFechas = -(
+                        new Date(i1.fecha_inscripcion).getTime() - 
+                        new Date(i2.fecha_inscripcion).getTime()
+                    );
+
+                    return comparacionInversaProgresos || comparacionInversaFechas;
+                })
+                .slice(0, 5) // Los primeros cinco más destacados
+                .map(i => {
+                    const { nombre } = estudiantesInstructor.find(e => e.id === i.usuario_id);
+                    const { titulo } = cursosInstructor.find(c => c.id === i.curso_id);
+
+                    return {
+                        nombre: nombre,
+                        curso: titulo,
+                        progreso: i.progreso
+                    };
+                });
+
+            // Verificar si el instructor tiene estudiantes
+            if (inscripcionesDestacadas.length === 0) {
+                contenedor.textContent = 'Sin estudiantes destacados';
+                return;
+            }
+
+            // Limpiar estudiantes destacados
+            contenedor.textContent = '';
+
+            // Generando el DOM de los estudiantes
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Curso</th>
+                            <th>Progreso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-estudiantes-destacados">
+            `;
+
+            inscripcionesDestacadas.forEach(i => {
+                tabla += `
+                    <tr>
+                        <td>${ i.nombre }</td>
+                        <td>${ i.curso }</td>
+                        <td>${ i.progreso }%</td>
+                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
+                    </tr>
+                `;
+            });
+
+            tabla += '</tbody></table>';
+
+            
+            // Mostrar estudiantes del instructor
+            contenedor.innerHTML = tabla;
         }
 
         // INICIALIZACIÓN
@@ -13812,6 +14127,103 @@ Miscursos.html
             color: #7f8c8d;
         }
 
+        /* ESTILOS PARA MODAL DE EDICIÓN */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-contenido {
+            background-color: white;
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-titulo {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .modal-cuerpo {
+            margin-bottom: 20px;
+        }
+
+        .modal-pie {
+            display: flex;
+            justify-content: flex-end;
+            gap: 10px;
+        }
+
+        .form-grupo {
+            margin-bottom: 15px;
+        }
+
+        .form-etiqueta {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #34495e;
+        }
+
+        .form-campo {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .form-campo:focus {
+            outline: none;
+            border-color: #3498db;
+            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #3498db;
+            color: white;
+            text-align: center;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.2s;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        .btn-secundario {
+            background-color: #6c757d;
+        }
+
+        .btn-secundario:hover {
+            background-color: #5a6268;
+        }
+
         /* ESTILOS RESPONSIVOS */
         @media (max-width: 768px) {
             .lista-cursos {
@@ -13865,9 +14277,45 @@ Miscursos.html
         </div>
     </div>
 
+    <!-- MODAL PARA EDITAR CURSO -->
+    <div id="modal-editar-curso" class="modal">
+        <div class="modal-contenido">
+            <h3 class="modal-titulo">Editar Curso</h3>
+            <div class="modal-cuerpo">
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-titulo">Título del curso</label>
+                    <input type="text" id="editar-titulo" class="form-campo" required>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-descripcion">Descripción</label>
+                    <textarea id="editar-descripcion" class="form-campo form-textarea" required></textarea>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-duracion">Duración</label>
+                    <input type="text" id="editar-duracion" class="form-campo" required>
+                </div>
+                
+                <div class="form-grupo">
+                    <label class="form-etiqueta" for="editar-activo">Estado</label>
+                    <select id="editar-activo" class="form-campo">
+                        <option value="true">Activo</option>
+                        <option value="false">Inactivo</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-pie">
+                <button class="btn btn-secundario" onclick="cerrarModalEditar()">Cancelar</button>
+                <button class="btn" onclick="guardarCambiosCurso()">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+
     <script>
         // DATOS REALES (luego se consultarán)
         let cursosInstructor = [];
+        let cursoEditando = null;
 
         // FUNCIÓN PARA VOLVER A LA PÁGINA ANTERIOR
         function volverPaginaAnterior() {
@@ -13981,12 +14429,69 @@ Miscursos.html
                 
                 listaCursos.appendChild(cursoElemento);
                 
-                // Configurar evento para el botón de ver curso
+                // Configurar evento para el botón de ver/editar curso
                 const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
                 botonVerCurso.addEventListener('click', function() {
-                    // En una aplicación real, aquí se redirigiría a la página del curso
-                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                    abrirModalEditarCurso(curso.id);
                 });
+            });
+        }
+
+        // FUNCIÓN PARA ABRIR MODAL DE EDICIÓN
+        function abrirModalEditarCurso(cursoId) {
+            cursoEditando = cursosInstructor.find(curso => curso.id === cursoId);
+            
+            if (cursoEditando) {
+                document.getElementById('editar-titulo').value = cursoEditando.titulo;
+                document.getElementById('editar-descripcion').value = cursoEditando.descripcion;
+                document.getElementById('editar-duracion').value = cursoEditando.duracion;
+                document.getElementById('editar-activo').value = cursoEditando.activo ? 'true' : 'false';
+                
+                document.getElementById('modal-editar-curso').style.display = 'block';
+            }
+        }
+
+        // FUNCIÓN PARA CERRAR MODAL DE EDICIÓN
+        function cerrarModalEditar() {
+            cursoEditando = null;
+            document.getElementById('modal-editar-curso').style.display = 'none';
+        }
+
+        // FUNCIÓN PARA GUARDAR CAMBIOS DEL CURSO
+        function guardarCambiosCurso() {
+            if (!cursoEditando) return;
+            
+            // Actualizar datos del curso
+            const datosActualizados = {
+                titulo: document.getElementById('editar-titulo').value,
+                descripcion: document.getElementById('editar-descripcion').value,
+                duracion: document.getElementById('editar-duracion').value,
+                activo: document.getElementById('editar-activo').value === 'true' // Convertir a booleano
+            };
+            
+            // Enviar los cambios al servidor
+            fetch(`/api/cursos/${cursoEditando.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datosActualizados)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.exito) {
+                    alert('Curso actualizado correctamente');
+                    cerrarModalEditar();
+                    // Recargar la lista de cursos
+                    const usuario = JSON.parse(sessionStorage.getItem('usuario'));
+                    cargarCursosUsuario(usuario);
+                } else {
+                    alert('Error al actualizar el curso: ' + data.mensaje);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Error al actualizar el curso');
             });
         }
 
@@ -14016,6 +14521,7 @@ Miscursos.html
                         <p>No se encontraron cursos que coincidan con los filtros aplicados.</p>
                     </div>
                 `;
+                return;
             }
 
             // Mostrar cursos filtrados
@@ -14054,11 +14560,10 @@ Miscursos.html
                 
                 listaCursos.appendChild(cursoElemento);
                 
-                // Configurar evento para el botón de ver curso
+                // Configurar evento para el botón de ver/editar curso
                 const botonVerCurso = cursoElemento.querySelector('.boton-ver-curso');
                 botonVerCurso.addEventListener('click', function() {
-                    // En una aplicación real, aquí se redirigiría a la página del curso
-                    alert(`Redirigiendo al curso: ${curso.titulo}`);
+                    abrirModalEditarCurso(curso.id);
                 });
             });
         }
@@ -14074,6 +14579,14 @@ Miscursos.html
             // Configurar eventos para los filtros
             document.getElementById('buscar-curso').addEventListener('input', aplicarFiltros);
             document.getElementById('filtrar-estado').addEventListener('change', aplicarFiltros);
+            
+            // Cerrar modal al hacer clic fuera de él
+            window.addEventListener('click', function(event) {
+                const modal = document.getElementById('modal-editar-curso');
+                if (event.target === modal) {
+                    cerrarModalEditar();
+                }
+            });
         });
     </script>
 </body>
@@ -16598,715 +17111,666 @@ Verestudiantes.html
 Buscarcandidatos.html
 
 <!DOCTYPE html>
+
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setsuzoku - Buscar Candidatos</title>
-    <link rel="stylesheet" href="../../css/fuentes.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Setsuzoku - Buscar Candidatos</title>
+<link rel="stylesheet" href="../../css/fuentes.css">
 
-    <style>
-        /* ESTILOS CSS */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<style>
+/* ESTILOS CSS */
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
 
-        html {
-            scroll-behavior: smooth;
-        }
+html {
+scroll-behavior: smooth;
+}
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: #f5f7fa;
-            color: #333333;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+body {
+font-family: 'Poppins', sans-serif;
+background-color: #f5f7fa;
+color: #333333;
+line-height: 1.6;
+display: flex;
+flex-direction: column;
+min-height: 100vh;
+}
 
-        /* ESTILOS PARA LA BARRA SUPERIOR */
-        .barra-superior {
-            background-color: #2c3e50;
-            padding: 0.8rem 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 60px;
-            z-index: 1000;
-        }
+/* ESTILOS PARA LA BARRA SUPERIOR */
+.barra-superior {
+background-color: #2c3e50;
+padding: 0.8rem 2rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+position: fixed;
+top: 0;
+left: 0;
+right: 0;
+height: 60px;
+z-index: 1000;
+}
 
-        .contenedor-izquierdo {
-            display: flex;
-            align-items: center;
-        }
+.contenedor-izquierdo {
+display: flex;
+align-items: center;
+}
 
-        .contenedor-central {
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+.contenedor-central {
+position: absolute;
+left: 50%;
+transform: translateX(-50%);
+}
 
-        .boton-volver {
-            background-color: transparent;
-            border: none;
-            color: white;
-            font-size: 1.2rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.2s;
-        }
+.boton-volver {
+background-color: transparent;
+border: none;
+color: white;
+font-size: 1.2rem;
+cursor: pointer;
+padding: 0.5rem;
+border-radius: 4px;
+transition: background-color 0.2s;
+}
 
-        .boton-volver:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-        }
+.boton-volver:hover {
+background-color: rgba(255, 255, 255, 0.1);
+}
 
-        .logo {
-            color: #ffffff;
-            font-size: 1.5rem;
-            font-weight: bold;
-        }
+.logo {
+color: #ffffff;
+font-size: 1.5rem;
+font-weight: bold;
+}
 
-        .contenedor-principal {
-            display: flex;
-            flex: 1;
-            margin-top: 60px;
-            position: relative;
-        }
+.contenedor-principal {
+display: flex;
+flex: 1;
+margin-top: 60px;
+position: relative;
+}
 
-        .contenedor-contenido {
-            flex: 1;
-            padding: 20px;
-            width: 100%;
-            padding-bottom: 40px;
-        }
+.contenedor-contenido {
+flex: 1;
+padding: 20px;
+width: 100%;
+padding-bottom: 40px;
+}
 
-        /* ESTILOS GENERALES PARA SECCIONES */
-        .contenido-principal {
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
+/* ESTILOS GENERALES PARA SECCIONES */
+.contenido-principal {
+max-width: 1200px;
+margin: 0 auto;
+width: 100%;
+}
 
-        .seccion_pagina {
-            margin-bottom: 40px;
-        }
+.seccion_pagina {
+margin-bottom: 40px;
+}
 
-        /* ESTILOS PARA BÚSQUEDA Y FILTROS */
-        .seccion-busqueda {
-            background-color: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            padding: 30px;
-            margin-bottom: 30px;
-        }
+/* ESTILOS PARA BÚSQUEDA Y FILTROS */
+.seccion-busqueda {
+background-color: #ffffff;
+border-radius: 12px;
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+padding: 30px;
+margin-bottom: 30px;
+}
 
-        .seccion-titulo {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #2A5CAA;
-            margin-bottom: 20px;
-            text-align: left;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 10px;
-        }
+.seccion-titulo {
+font-size: 1.8rem;
+font-weight: 600;
+color: #2A5CAA;
+margin-bottom: 20px;
+text-align: left;
+border-bottom: 1px solid #eee;
+padding-bottom: 10px;
+}
 
-        .filtros-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 20px;
-        }
+.filtros-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 20px;
+margin-bottom: 20px;
+}
 
-        .filtro {
-            display: flex;
-            flex-direction: column;
-        }
+.filtro {
+display: flex;
+flex-direction: column;
+}
 
-        .etiqueta-filtro {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #34495e;
-        }
+.etiqueta-filtro {
+display: block;
+margin-bottom: 8px;
+font-weight: bold;
+color: #34495e;
+}
 
-        .campo-filtro {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 1rem;
-        }
+.campo-filtro {
+width: 100%;
+padding: 12px;
+border: 1px solid #ddd;
+border-radius: 6px;
+font-size: 1rem;
+}
 
-        .campo-filtro:focus {
-            outline: none;
-            border-color: #3498db;
-            box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
-        }
+.campo-filtro:focus {
+outline: none;
+border-color: #3498db;
+box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
 
-        .btn {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #2A5CAA;
-            color: white;
-            text-align: center;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 500;
-            transition: background-color 0.2s;
-            cursor: pointer;
-            border: none;
-        }
+.btn {
+display: inline-block;
+padding: 10px 20px;
+background-color: #2A5CAA;
+color: white;
+text-align: center;
+border-radius: 6px;
+text-decoration: none;
+font-weight: 500;
+transition: background-color 0.2s;
+cursor: pointer;
+border: none;
+}
 
-        .btn:hover {
-            background-color: #1e3f7a;
-        }
+.btn:hover {
+background-color: #1e3f7a;
+}
 
-        .btn-secundario {
-            background-color: #6c757d;
-        }
+.btn-secundario {
+background-color: #6c757d;
+}
 
-        .btn-secundario:hover {
-            background-color: #5a6268;
-        }
+.btn-secundario:hover {
+background-color: #5a6268;
+}
 
-        /* ESTILOS PARA LA LISTA DE CANDIDATOS */
-        .candidatos-lista {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
+/* ESTILOS PARA LA LISTA DE CANDIDATOS */
+.candidatos-lista {
+display: flex;
+flex-direction: column;
+gap: 15px;
+margin-top: 20px;
+}
 
-        .candidato-item {
-            background-color: #f8f9fa;
-            border-radius: 8px;
-            padding: 20px;
-            border-left: 4px solid #2A5CAA;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
+.candidato-item {
+background-color: #f8f9fa;
+border-radius: 8px;
+padding: 20px;
+border-left: 4px solid #2A5CAA;
+transition: transform 0.3s ease, box-shadow 0.3s ease;
+display: flex;
+align-items: center;
+gap: 20px;
+}
 
-        .candidato-item:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
+.candidato-item:hover {
+transform: translateY(-3px);
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-        .candidato-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background-color: #2A5CAA;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            flex-shrink: 0; /* Evita que el avatar se encoja */
-        }
+.candidato-avatar {
+width: 60px;
+height: 60px;
+border-radius: 50%;
+background-color: #2A5CAA;
+color: white;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.5rem;
+font-weight: bold;
+flex-shrink: 0;
+}
 
-        .candidato-info {
-            flex-grow: 1; /* Ocupa el espacio disponible */
-        }
+.candidato-info {
+flex-grow: 1;
+}
 
-        .candidato-nombre {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
+.candidato-nombre {
+font-size: 1.2rem;
+font-weight: 600;
+color: #333;
+margin-bottom: 5px;
+}
 
-        .candidato-email {
-            font-size: 0.9rem;
-            color: #666;
-            margin-bottom: 10px;
-        }
+.candidato-email {
+font-size: 0.9rem;
+color: #666;
+margin-bottom: 10px;
+}
 
-        .candidato-detalles {
-            font-size: 0.9rem;
-            color: #555;
-        }
+.candidato-detalles {
+font-size: 0.9rem;
+color: #555;
+}
 
-        .candidato-detalles span {
-            margin-right: 15px;
-        }
-        
-        .candidato-habilidades {
-            margin-top: 10px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 5px;
-        }
+.candidato-detalles span {
+margin-right: 15px;
+}
 
-        .habilidad-tag {
-            display: inline-block;
-            background-color: #e9ecef;
-            color: #495057;
-            padding: 4px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-        }
+.candidato-habilidades {
+margin-top: 10px;
+display: flex;
+flex-wrap: wrap;
+gap: 5px;
+}
 
-        .candidato-acciones {
-            flex-shrink: 0; /* Evita que el botón se encoja */
-        }
-        
-        /* ESTILOS PARA MODAL DE DETALLES */
-        .modal-detalles {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-        }
+.habilidad-tag {
+display: inline-block;
+background-color: #e9ecef;
+color: #495057;
+padding: 4px 8px;
+border-radius: 12px;
+font-size: 0.8rem;
+}
 
-        .modal-contenido-detalles {
-            background-color: white;
-            margin: 5% auto;
-            padding: 30px;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-            max-height: 80vh;
-            overflow-y: auto;
-        }
+.candidato-acciones {
+flex-shrink: 0;
+}
 
-        .modal-titulo-detalles {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 20px;
-        }
+/* ESTILOS PARA MODAL DE DETALLES */
+.modal-detalles {
+display: none;
+position: fixed;
+z-index: 1000;
+left: 0;
+top: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.5);
+}
 
-        .modal-cuerpo-detalles {
-            margin-bottom: 20px;
-            color: #666;
-        }
+.modal-contenido-detalles {
+background-color: white;
+margin: 5% auto;
+padding: 30px;
+border-radius: 12px;
+width: 90%;
+max-width: 600px;
+box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+max-height: 80vh;
+overflow-y: auto;
+}
 
-        .modal-pie-detalles {
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
+.modal-titulo-detalles {
+font-size: 1.5rem;
+font-weight: 600;
+color: #333;
+margin-bottom: 20px;
+}
 
-        .info-grupo {
-            margin-bottom: 15px;
-        }
+.modal-cuerpo-detalles {
+margin-bottom: 20px;
+color: #666;
+}
 
-        .info-etiqueta {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
+.modal-pie-detalles {
+display: flex;
+justify-content: flex-end;
+gap: 10px;
+}
 
-        .info-valor {
-            color: #666;
-        }
+.info-grupo {
+margin-bottom: 15px;
+}
 
-        .info-texto {
-            color: #666;
-            line-height: 1.5;
-        }
+.info-etiqueta {
+font-weight: 600;
+color: #333;
+margin-bottom: 5px;
+}
 
-        .mensaje-vacio {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-            font-size: 1.1rem;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
+.info-valor {
+color: #666;
+}
 
-        /* RESPONSIVE DESIGN */
-        @media (max-width: 768px) {
-            .filtros-grid {
-                grid-template-columns: 1fr;
-            }
+.info-texto {
+color: #666;
+line-height: 1.5;
+}
 
-            .candidato-item {
-                flex-direction: column;
-                align-items: flex-start;
-                text-align: center;
-            }
+.mensaje-vacio {
+text-align: center;
+padding: 40px;
+color: #666;
+font-size: 1.1rem;
+background-color: #ffffff;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
 
-            .candidato-detalles {
-                text-align: left;
-            }
+/* RESPONSIVE DESIGN */
+@media (max-width: 768px) {
+.filtros-grid {
+grid-template-columns: 1fr;
+}
 
-            .candidato-detalles span {
-                display: block;
-                margin-bottom: 5px;
-            }
+.candidato-item {
+flex-direction: column;
+align-items: flex-start;
+text-align: center;
+}
 
-            .candidato-acciones {
-                width: 100%;
-                margin-top: 15px;
-            }
+.candidato-detalles {
+text-align: left;
+}
 
-            .candidato-acciones .btn {
-                width: 100%;
-            }
+.candidato-detalles span {
+display: block;
+margin-bottom: 5px;
+}
 
-            .contenedor-contenido {
-                padding: 10px;
-            }
-        }
-    </style>
-</head>
+.candidato-acciones {
+width: 100%;
+margin-top: 15px;
+}
+
+.candidato-acciones .btn {
+width: 100%;
+}
+
+.contenedor-contenido {
+padding: 10px;
+}
+}
+</style></head>
 <body>
-    <!-- BARRA SUPERIOR -->
-    <nav class="barra-superior">
-        <div class="contenedor-izquierdo">
-            <button class="boton-volver" id="boton-volver" title="Volver al panel principal">
-                ←
-            </button>
-        </div>
-        <div class="contenedor-central">
-            <span class="logo">Setsuzoku</span>
-        </div>
-    </nav>
+<!-- BARRA SUPERIOR -->
+<nav class="barra-superior">
+<div class="contenedor-izquierdo">
+<button class="boton-volver" id="boton-volver" title="Volver al panel principal">
+←
+</button>
+</div>
+<div class="contenedor-central">
+<span class="logo">Setsuzoku</span>
+</div>
+</nav>
 
-    <div class="contenedor-principal">
-        <!-- CONTENEDOR DE CONTENIDO -->
-        <div class="contenedor-contenido" id="contenedor-contenido">
-            <main class="contenido-principal">
-                <!-- SECCIÓN DE BÚSQUEDA Y FILTROS -->
-                <section class="seccion_pagina">
-                    <div class="seccion-busqueda">
-                        <h2 class="seccion-titulo">Buscar Candidatos</h2>
-                        
-                        <div class="filtros-grid">
-                            <div class="filtro">
-                                <label class="etiqueta-filtro" for="buscar-nombre">Buscar por Nombre o Email</label>
-                                <input type="text" id="buscar-nombre" class="campo-filtro" placeholder="Ej: Juan Pérez">
-                            </div>
-                            
-                            <div class="filtro">
-                                <label class="etiqueta-filtro" for="filtrar-habilidad">Filtrar por Habilidad</label>
-                                <input type="text" id="filtrar-habilidad" class="campo-filtro" placeholder="Ej: JavaScript">
-                            </div>
+<div class="contenedor-principal">
+<!-- CONTENEDOR DE CONTENIDO -->
+<div class="contenedor-contenido" id="contenedor-contenido">
+<main class="contenido-principal">
+<!-- SECCIÓN DE BÚSQUEDA Y FILTROS -->
+<section class="seccion_pagina">
+<div class="seccion-busqueda">
+<h2 class="seccion-titulo">Buscar Candidatos</h2>
 
-                            <div class="filtro">
-                                <label class="etiqueta-filtro" for="filtrar-ubicacion">Filtrar por Ubicación</label>
-                                <input type="text" id="filtrar-ubicacion" class="campo-filtro" placeholder="Ej: Tijuana">
-                            </div>
-                            
-                            <div class="filtro">
-                                <label class="etiqueta-filtro" for="filtrar-experiencia">Experiencia Mínima (años)</label>
-                                <input type="number" id="filtrar-experiencia" class="campo-filtro" placeholder="Ej: 3" min="0">
-                            </div>
+<div class="filtros-grid">
+<div class="filtro">
+<label class="etiqueta-filtro" for="buscar-nombre">Buscar por Nombre o Email</label>
+<input type="text" id="buscar-nombre" class="campo-filtro" placeholder="Ej: Juan Pérez">
+</div>
 
-                            <div class="filtro">
-                                <label class="etiqueta-filtro" for="filtrar-educacion">Nivel Educativo</label>
-                                <select id="filtrar-educacion" class="campo-filtro">
-                                    <option value="">Todos los niveles</option>
-                                    <option value="Secundaria">Secundaria</option>
-                                    <option value="Preparatoria">Preparatoria</option>
-                                    <option value="Licenciatura">Licenciatura</option>
-                                    <option value="Maestría">Maestría</option>
-                                    <option value="Doctorado">Doctorado</option>
-                                </select>
-                            </div>
-                        </div>
-                        
-                        <div style="display: flex; gap: 10px;">
-                            <button class="btn" onclick="aplicarFiltros()">Aplicar Filtros</button>
-                            <button class="btn btn-secundario" onclick="limpiarFiltros()">Limpiar Filtros</button>
-                        </div>
-                    </div>
-                </section>
+<div class="filtro">
+<label class="etiqueta-filtro" for="filtrar-habilidad">Filtrar por Habilidad</label>
+<input type="text" id="filtrar-habilidad" class="campo-filtro" placeholder="Ej: JavaScript">
+</div>
 
-                <!-- SECCIÓN DE RESULTADOS -->
-                <section class="seccion_pagina">
-                    <div class="seccion-busqueda">
-                        <h2 class="seccion-titulo">Resultados de la Búsqueda</h2>
-                        <div class="candidatos-lista" id="candidatos-container">
-                            <!-- Los candidatos se cargarán dinámicamente aquí -->
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </div>
-    </div>
+<div class="filtro">
+<label class="etiqueta-filtro" for="filtrar-experiencia">Experiencia Mínima (años)</label>
+<input type="number" id="filtrar-experiencia" class="campo-filtro" placeholder="Ej: 3" min="0">
+</div>
 
-    <!-- MODAL PARA VER DETALLES -->
-    <div id="modal-detalles" class="modal-detalles">
-        <div class="modal-contenido-detalles">
-            <h3 class="modal-titulo-detalles">Detalles del Candidato</h3>
-            <div class="modal-cuerpo-detalles">
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Nombre:</div>
-                    <div class="info-valor" id="detalles-nombre"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Email:</div>
-                    <div class="info-valor" id="detalles-email"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Teléfono:</div>
-                    <div class="info-valor" id="detalles-telefono"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Ubicación:</div>
-                    <div class="info-valor" id="detalles-ubicacion"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Experiencia:</div>
-                    <div class="info-valor" id="detalles-experiencia"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Educación:</div>
-                    <div class="info-valor" id="detalles-educacion"></div>
-                </div>
-                
-                <div class="info-grupo">
-                    <div class="info-etiqueta">Habilidades:</div>
-                    <div class="info-valor" id="detalles-habilidades"></div>
-                </div>
-            </div>
-            <div class="modal-pie-detalles">
-                <button class="btn btn-secundario" onclick="cerrarModalDetalles()">Cerrar</button>
-                <button class="btn" onclick="descargarCV()">Descargar CV</button>
-            </div>
-        </div>
-    </div>
+<div class="filtro">
+<label class="etiqueta-filtro" for="filtrar-educacion">Nivel Educativo</label>
+<input type="text" id="filtrar-educacion" class="campo-filtro" placeholder="Ej: Licenciatura">
+</div>
+</div>
 
-    <script>
-        // VARIABLES GLOBALES
-        let candidatos = [];
-        let candidatoIdDetalles = null;
+<div style="display: flex; gap: 10px;">
+<button class="btn btn-secundario" onclick="limpiar_filtros()">Limpiar Filtros</button>
+</div>
+</div>
+</section>
 
-        // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
-        function volverPaginaAnterior() {
-            window.location.href = "IndexReclutador.html";
-        }
+<!-- SECCIÓN DE RESULTADOS -->
+<section class="seccion_pagina">
+<div class="seccion-busqueda">
+<h2 class="seccion-titulo">Resultados de la Búsqueda</h2>
+<div class="candidatos-lista" id="candidatos-container">
+<!-- Los candidatos se cargarán dinámicamente aquí -->
+</div>
+</div>
+</section>
+</main>
+</div>
+</div>
 
-        // FUNCIONES PARA VERIFICAR SESIÓN
-        function verificarSesion() {
-            const usuarioStr = sessionStorage.getItem('usuario');
-            if (usuarioStr) {
-                try {
-                    const usuario = JSON.parse(usuarioStr);
-                    if (usuario && usuario.nombre) {
-                        return true;
-                    }
-                } catch (error) {
-                    sessionStorage.removeItem('usuario');
-                }
-            }
-            window.location.href = '../index.html';
-            return false;
-        }
+<!-- MODAL PARA VER DETALLES -->
+<div id="modal-detalles" class="modal-detalles">
+<div class="modal-contenido-detalles">
+<h3 class="modal-titulo-detalles">Detalles del Candidato</h3>
+<div class="modal-cuerpo-detalles">
+<div class="info-grupo">
+<div class="info-etiqueta">Nombre:</div>
+<div class="info-valor" id="detalles-nombre"></div>
+</div>
 
-        // FUNCIONES PARA CANDIDATOS
-        function cargarDatos() {
-            const candidatosStr = localStorage.getItem('candidatos');
-            candidatos = candidatosStr ? JSON.parse(candidatosStr) : [];
-            
-            // Si no hay candidatos, agregar datos de ejemplo
-            if (candidatos.length === 0) {
-                candidatos = [
-                    {
-                        id: 1,
-                        nombre: "Ana Sofía Ramírez",
-                        email: "ana.ramirez@email.com",
-                        telefono: "664-123-4567",
-                        ubicacion: "Tijuana, B.C.",
-                        experiencia_anios: 5,
-                        experiencia_texto: "5 años desarrollando aplicaciones web full stack.",
-                        educacion: "Licenciatura",
-                        habilidades: ["JavaScript", "React", "Node.js", "MongoDB", "CSS"]
-                    },
-                    {
-                        id: 2,
-                        nombre: "Carlos Eduardo Vargas",
-                        email: "carlos.vargas@email.com",
-                        telefono: "664-987-6543",
-                        ubicacion: "Mexicali, B.C.",
-                        experiencia_anios: 8,
-                        experiencia_texto: "Más de 8 años de experiencia en la gestión de proyectos de tecnología y liderazgo de equipos de desarrollo.",
-                        educacion: "Maestría",
-                        habilidades: ["Gestión de Proyectos", "Agile", "Scrum", "Liderazgo", "Comunicación"]
-                    },
-                    {
-                        id: 3,
-                        nombre: "María Fernanda López",
-                        email: "mf.lopez@email.com",
-                        telefono: "664-555-4433",
-                        ubicacion: "Ensenada, B.C.",
-                        experiencia_anios: 3,
-                        experiencia_texto: "3 años de experiencia en el diseño de experiencias de usuario para aplicaciones móviles y web.",
-                        educacion: "Licenciatura",
-                        habilidades: ["Figma", "Adobe XD", "Illustrator", "Photoshop", "Prototipado"]
-                    },
-                    {
-                        id: 4,
-                        nombre: "Jorge Alberto Hernández",
-                        email: "jorge.hdz@email.com",
-                        telefono: "664-222-1100",
-                        ubicacion: "Tijuana, B.C.",
-                        experiencia_anios: 12,
-                        experiencia_texto: "12 años de experiencia en ciberseguridad, especializado en pruebas de penetración y auditoría de sistemas.",
-                        educacion: "Maestría",
-                        habilidades: ["Ciberseguridad", "Ethical Hacking", "Análisis de Riesgos", "Python", "Linux"]
-                    },
-                    {
-                        id: 5,
-                        nombre: "Lucía Gutiérrez",
-                        email: "lucia.gutierrez@email.com",
-                        telefono: "664-333-2211",
-                        ubicacion: "Tijuana, B.C.",
-                        experiencia_anios: 6,
-                        experiencia_texto: "6 años en marketing digital, con enfoque en SEO, SEM y estrategias de contenido.",
-                        educacion: "Licenciatura",
-                        habilidades: ["SEO", "SEM", "Google Analytics", "Redes Sociales", "Copywriting"]
-                    }
-                ];
-                
-                localStorage.setItem('candidatos', JSON.stringify(candidatos));
-            }
-            
-            // Renderizar candidatos inicialmente
-            renderizarCandidatos();
-        }
+<div class="info-grupo">
+<div class="info-etiqueta">Email:</div>
+<div class="info-valor" id="detalles-email"></div>
+</div>
 
-        function renderizarCandidatos(candidatosFiltrados = null) {
-            const container = document.getElementById('candidatos-container');
-            const candidatosAMostrar = candidatosFiltrados || candidatos;
-            
-            if (candidatosAMostrar.length === 0) {
-                container.innerHTML = '<div class="mensaje-vacio">No se encontraron candidatos con los criterios seleccionados.</div>';
-                return;
-            }
-            
-            let html = '';
-            candidatosAMostrar.forEach(candidato => {
-                const iniciales = candidato.nombre.split(' ').map(n => n[0]).join('').toUpperCase();
-                
-                html += `
-                    <div class="candidato-item">
-                        <div class="candidato-avatar">${iniciales}</div>
-                        <div class="candidato-info">
-                            <div class="candidato-nombre">${candidato.nombre}</div>
-                            <div class="candidato-email">${candidato.email}</div>
-                            <div class="candidato-detalles">
-                                <span><strong>Ubicación:</strong> ${candidato.ubicacion}</span>
-                                <span><strong>Experiencia:</strong> ${candidato.experiencia_texto}</span>
-                            </div>
-                            <div class="candidato-habilidades">
-                                ${candidato.habilidades.map(habilidad => `<span class="habilidad-tag">${habilidad}</span>`).join('')}
-                            </div>
-                        </div>
-                        <div class="candidato-acciones">
-                            <button class="btn btn-pequeno" onclick="verDetalles(${candidato.id})">Ver Detalles</button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            container.innerHTML = html;
-        }
+<div class="info-grupo">
+<div class="info-etiqueta">Teléfono:</div>
+<div class="info-valor" id="detalles-telefono"></div>
+</div>
 
-        function aplicarFiltros() {
-            const nombre = document.getElementById('buscar-nombre').value.toLowerCase();
-            const habilidad = document.getElementById('filtrar-habilidad').value.toLowerCase();
-            const ubicacion = document.getElementById('filtrar-ubicacion').value.toLowerCase();
-            const experienciaMinima = parseInt(document.getElementById('filtrar-experiencia').value) || 0;
-            const educacion = document.getElementById('filtrar-educacion').value;
+<div class="info-grupo">
+<div class="info-etiqueta">Experiencia:</div>
+<div class="info-valor" id="detalles-experiencia"></div>
+</div>
 
-            const candidatosFiltrados = candidatos.filter(candidato => {
-                const coincideNombre = !nombre || candidato.nombre.toLowerCase().includes(nombre) || candidato.email.toLowerCase().includes(nombre);
-                const coincideHabilidad = !habilidad || candidato.habilidades.some(h => h.toLowerCase().includes(habilidad));
-                const coincideUbicacion = !ubicacion || candidato.ubicacion.toLowerCase().includes(ubicacion);
-                const cumpleExperiencia = candidato.experiencia_anios >= experienciaMinima;
-                const coincideEducacion = !educacion || candidato.educacion === educacion;
+<div class="info-grupo">
+<div class="info-etiqueta">Educación:</div>
+<div class="info-valor" id="detalles-educacion"></div>
+</div>
 
-                return coincideNombre && coincideHabilidad && coincideUbicacion && cumpleExperiencia && coincideEducacion;
-            });
+<div class="info-grupo">
+<div class="info-etiqueta">Habilidades:</div>
+<div class="info-valor" id="detalles-habilidades"></div>
+</div>
+</div>
+<div class="modal-pie-detalles">
+<button class="btn btn-secundario" onclick="cerrar_modal_detalles()">Cerrar</button>
+</div>
+</div>
+</div>
 
-            renderizarCandidatos(candidatosFiltrados);
-        }
+<script>
+// VARIABLES GLOBALES
+let candidatos = [];
+let candidatoIdDetalles = null;
 
-        function limpiarFiltros() {
-            document.getElementById('buscar-nombre').value = '';
-            document.getElementById('filtrar-habilidad').value = '';
-            document.getElementById('filtrar-ubicacion').value = '';
-            document.getElementById('filtrar-experiencia').value = '';
-            document.getElementById('filtrar-educacion').value = '';
-            
-            renderizarCandidatos();
-        }
+// FUNCIONES
+// Vuelve a la página del panel principal del reclutador
+function volver_pagina_anterior() {
+window.location.href = "IndexReclutador.html";
+}
 
-        function verDetalles(id) {
-            candidatoIdDetalles = id;
-            const candidato = candidatos.find(c => c.id === id);
-            
-            if (candidato) {
-                document.getElementById('detalles-nombre').textContent = candidato.nombre;
-                document.getElementById('detalles-email').textContent = candidato.email;
-                document.getElementById('detalles-telefono').textContent = candidato.telefono;
-                document.getElementById('detalles-ubicacion').textContent = candidato.ubicacion;
-                document.getElementById('detalles-experiencia').textContent = candidato.experiencia_texto;
-                document.getElementById('detalles-educacion').textContent = candidato.educacion;
-                document.getElementById('detalles-habilidades').textContent = candidato.habilidades.join(', ');
-                
-                document.getElementById('modal-detalles').style.display = 'block';
-            }
-        }
+// Verifica si hay una sesión activa, redirige si no la hay
+function verificar_sesion() {
+const usuario_str = sessionStorage.getItem('usuario');
+if (usuario_str) {
+try {
+const usuario = JSON.parse(usuario_str);
+if (usuario && usuario.nombre) {
+return true;
+}
+} catch (error) {
+sessionStorage.removeItem('usuario');
+}
+}
+window.location.href = '../index.html';
+return false;
+}
 
-        function cerrarModalDetalles() {
-            candidatoIdDetalles = null;
-            document.getElementById('modal-detalles').style.display = 'none';
-        }
+// Renderiza la lista de candidatos en el contenedor principal
+function renderizar_candidatos(candidatos_filtrados = null) {
+const container = document.getElementById('candidatos-container');
+const candidatos_a_mostrar = candidatos_filtrados || candidatos;
 
-        function descargarCV() {
-            if (candidatoIdDetalles) {
-                const candidato = candidatos.find(c => c.id === candidatoIdDetalles);
-                alert(`Descargando CV para ${candidato.nombre}. (Función de ejemplo)`);
-            }
-        }
+if (candidatos_a_mostrar.length === 0) {
+container.innerHTML = '<div class="mensaje-vacio">No se encontraron candidatos con los criterios seleccionados.</div>';
+return;
+}
 
-        // INICIALIZACIÓN
-        document.addEventListener('DOMContentLoaded', function() {
-            // Verificar sesión
-            verificarSesion();
-            
-            // Cargar datos de candidatos
-            cargarDatos();
-            
-            // Configurar evento para el botón de volver
-            document.getElementById('boton-volver').addEventListener('click', volverPaginaAnterior);
-            
-            // Cerrar modal al hacer clic fuera de él
-            window.addEventListener('click', function(event) {
-                const modalDetalles = document.getElementById('modal-detalles');
-                if (event.target === modalDetalles) {
-                    cerrarModalDetalles();
-                }
-            });
-        });
-    </script>
-</body>
+let html = '';
+candidatos_a_mostrar.forEach(candidato => {
+const iniciales = candidato.nombre.split(' ').map(n => n[0]).join('').toUpperCase();
+
+html += `
+<div class="candidato-item">
+<div class="candidato-avatar">${iniciales}</div>
+<div class="candidato-info">
+<div class="candidato-nombre">${candidato.nombre}</div>
+<div class="candidato-email">${candidato.email}</div>
+<div class="candidato-detalles">
+<span><strong>Experiencia:</strong> ${candidato.ubicacion}</span>
+<span><strong>Estudios:</strong> ${candidato.experiencia_texto}</span>
+</div>
+<div class="candidato-habilidades">
+ ${candidato.habilidades.map(habilidad => `<span class="habilidad-tag">${habilidad}</span>`).join('')}
+</div>
+</div>
+<div class="candidato-acciones">
+<button class="btn btn-pequeno" onclick="ver_detalles(${candidato.id})">Ver Detalles</button>
+</div>
+</div>
+`;
+});
+
+container.innerHTML = html;
+}
+
+// Aplica los filtros de búsqueda a la lista de candidatos
+function aplicar_filtros() {
+const nombre = document.getElementById('buscar-nombre').value.toLowerCase();
+const habilidad = document.getElementById('filtrar-habilidad').value.toLowerCase();
+const experiencia_minima = parseInt(document.getElementById('filtrar-experiencia').value) || 0;
+const educacion = document.getElementById('filtrar-educacion').value.toLowerCase();
+
+const candidatos_filtrados = candidatos.filter(candidato => {
+const coincide_nombre = !nombre || candidato.nombre.toLowerCase().includes(nombre) || candidato.email.toLowerCase().includes(nombre);
+const coincide_habilidad = !habilidad || candidato.habilidades.some(h => h.toLowerCase().includes(habilidad));
+const cumple_experiencia = candidato.experiencia_anios >= experiencia_minima;
+const coincide_educacion = !educacion || candidato.educacion.toLowerCase().includes(educacion);
+
+return coincide_nombre && coincide_habilidad && cumple_experiencia && coincide_educacion;
+});
+
+renderizar_candidatos(candidatos_filtrados);
+}
+
+// Limpia todos los campos de filtro y recarga la lista completa
+function limpiar_filtros() {
+document.getElementById('buscar-nombre').value = '';
+document.getElementById('filtrar-habilidad').value = '';
+document.getElementById('filtrar-experiencia').value = '';
+document.getElementById('filtrar-educacion').value = '';
+
+renderizar_candidatos();
+}
+
+// Muestra el modal con los detalles completos de un candidato
+function ver_detalles(id) {
+candidatoIdDetalles = id;
+const candidato = candidatos.find(c => c.id === id);
+
+if (candidato) {
+document.getElementById('detalles-nombre').textContent = candidato.nombre;
+document.getElementById('detalles-email').textContent = candidato.email;
+document.getElementById('detalles-telefono').textContent = candidato.telefono;
+document.getElementById('detalles-experiencia').textContent = candidato.experiencia_texto;
+document.getElementById('detalles-educacion').textContent = candidato.educacion;
+document.getElementById('detalles-habilidades').textContent = candidato.habilidades.join(', ');
+
+document.getElementById('modal-detalles').style.display = 'block';
+}
+}
+
+// Cierra el modal de detalles
+function cerrar_modal_detalles() {
+candidatoIdDetalles = null;
+document.getElementById('modal-detalles').style.display = 'none';
+}
+
+// Carga los datos de candidatos desde la API del servidor
+async function cargar_datos() {
+try {
+const respuesta = await fetch('/api/usuarios');
+
+if (!respuesta.ok) {
+throw new Error('Error al obtener los datos de los usuarios');
+}
+
+const datos_usuarios = await respuesta.json();
+
+// Filtrar solo los usuarios con grupo 'candidato'
+const solo_candidatos = datos_usuarios.filter(usuario => usuario.grupo === 'candidato');
+
+// Transformar los datos al formato que espera la vista
+candidatos = solo_candidatos.map(candidato => {
+// Separar la cadena de habilidades en un array
+const habilidades_array = candidato.habilidades.split(',').map(h => h.trim());
+
+return {
+id: candidato.id,
+nombre: `${candidato.nombre} ${candidato.apellido_paterno} ${candidato.apellido_materno}`,
+email: candidato.correo,
+telefono: candidato.telefono,
+ubicacion: candidato.experiencia, // CAMBIO: Ahora muestra la experiencia
+experiencia_anios: 0, // Campo no usado en el filtrado actual
+experiencia_texto: candidato.estudios, // CAMBIO: Ahora muestra los estudios
+educacion: candidato.estudios,
+habilidades: habilidades_array
+};
+});
+
+// Renderizar los candidatos obtenidos
+renderizar_candidatos();
+
+} catch (error) {
+console.error('Error al cargar candidatos:', error);
+const container = document.getElementById('candidatos-container');
+container.innerHTML = '<div class="mensaje-vacio">Error al cargar los candidatos. Por favor, intenta de nuevo más tarde.</div>';
+}
+}
+
+// PUNTO DE PARTIDA
+document.addEventListener('DOMContentLoaded', function() {
+// Verificar sesión al cargar la página
+verificar_sesion();
+
+// Cargar datos de candidatos desde el servidor
+cargar_datos();
+
+// Configurar evento para el botón de volver
+document.getElementById('boton-volver').addEventListener('click', volver_pagina_anterior);
+
+// Configurar eventos para la búsqueda dinámica
+document.getElementById('buscar-nombre').addEventListener('input', aplicar_filtros);
+document.getElementById('filtrar-habilidad').addEventListener('input', aplicar_filtros);
+document.getElementById('filtrar-experiencia').addEventListener('input', aplicar_filtros);
+document.getElementById('filtrar-educacion').addEventListener('input', aplicar_filtros);
+
+// Cerrar modal al hacer clic fuera de él
+window.addEventListener('click', function(event) {
+const modal_detalles = document.getElementById('modal-detalles');
+if (event.target === modal_detalles) {
+cerrar_modal_detalles();
+}
+});
+});
+</script></body>
 </html>
 ------------------------------------
 IndexReclutador.html
@@ -17437,13 +17901,13 @@ IndexReclutador.html
 
         @keyframes pulse {
             0% {
-                box-shadow: 0 0 0 0 rgba(42, 92, 170, 0.7);
+                box-shadow: 0 0 0 rgba(42, 92, 170, 0.7);
             }
             70% {
                 box-shadow: 0 0 0 10px rgba(42, 92, 170, 0);
             }
             100% {
-                box-shadow: 0 0 0 0 rgba(42, 92, 170, 0);
+                box-shadow: 0 0 0 rgba(42, 92, 170, 0);
             }
         }
 
@@ -17967,18 +18431,7 @@ IndexReclutador.html
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-vacantes-recientes">
-                                    <tr>
-                                        <td>Desarrollador Full Stack</td>
-                                        <td>15/05/2023</td>
-                                        <td>12</td>
-                                        <td><span class="estado-activo">Activa</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Diseñador UX/UI</td>
-                                        <td>10/05/2023</td>
-                                        <td>8</td>
-                                        <td><span class="estado-activo">Activa</span></td>
-                                    </tr>
+                                    <!-- Las vacantes se cargarán dinámicamente aquí -->
                                 </tbody>
                             </table>
                         </div>
@@ -17996,18 +18449,7 @@ IndexReclutador.html
                                     </tr>
                                 </thead>
                                 <tbody id="tabla-entrevistas-programadas">
-                                    <tr>
-                                        <td>Juan Pérez</td>
-                                        <td>Desarrollador Full Stack</td>
-                                        <td>18/05/2023 10:00</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>María González</td>
-                                        <td>Diseñador UX/UI</td>
-                                        <td>19/05/2023 14:30</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
+                                    <!-- Las entrevistas se cargarán dinámicamente aquí -->
                                 </tbody>
                             </table>
                         </div>
@@ -18036,6 +18478,7 @@ IndexReclutador.html
         // VARIABLES GLOBALES
         let notificaciones = [];
         let notificacionesNoLeidas = 0;
+        let usuarioActual = null;
 
         // FUNCIONES PARA VERIFICAR SESIÓN
         function verificarSesion() {
@@ -18044,6 +18487,7 @@ IndexReclutador.html
                 try {
                     const usuario = JSON.parse(usuarioStr);
                     if (usuario && usuario.nombre) {
+                        usuarioActual = usuario;
                         mostrarInterfazConSesion(usuario);
                         return true;
                     }
@@ -18070,40 +18514,19 @@ IndexReclutador.html
         }
 
         // FUNCIONES PARA NOTIFICACIONES
-        function inicializarNotificaciones() {
-            // Cargar notificaciones desde sessionStorage o inicializar con datos de ejemplo
-            const notificacionesGuardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificacionesGuardadas) {
-                notificaciones = JSON.parse(notificacionesGuardadas);
-            } else {
-                // Notificaciones de ejemplo para reclutadores
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nueva postulación recibida",
-                        mensaje: "Juan Pérez ha aplicado a la vacante de Desarrollador Full Stack",
-                        fecha: new Date().toISOString(),
-                        leida: false
-                    },
-                    {
-                        id: 2,
-                        titulo: "Entrevista confirmada",
-                        mensaje: "María González ha confirmado su entrevista para mañana a las 10:00 AM",
-                        fecha: new Date(Date.now() - 86400000).toISOString(), // Ayer
-                        leida: false
-                    },
-                    {
-                        id: 3,
-                        titulo: "Vacante por expirar",
-                        mensaje: "La vacante de Diseñador UX/UI expirará en 3 días",
-                        fecha: new Date(Date.now() - 172800000).toISOString(), // Hace 2 días
-                        leida: true
-                    }
-                ];
-                
-                // Guardar en sessionStorage
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
+        async function inicializarNotificaciones() {
+            try {
+                // Cargar notificaciones desde la API
+                const response = await fetch(`/api/notificaciones?id_usuario=${usuarioActual.id}`);
+                if (response.ok) {
+                    notificaciones = await response.json();
+                } else {
+                    console.error('Error al cargar notificaciones');
+                    notificaciones = [];
+                }
+            } catch (error) {
+                console.error('Error al cargar notificaciones:', error);
+                notificaciones = [];
             }
             
             // Contar notificaciones no leídas
@@ -18235,32 +18658,81 @@ IndexReclutador.html
             return `${fecha.getDate()}/${fecha.getMonth() + 1}/${fecha.getFullYear()}`;
         }
 
-        function marcarComoLeida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion && !notificacion.leida) {
-                notificacion.leida = true;
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesPanel();
+        async function marcarComoLeida(id) {
+            try {
+                const response = await fetch('/api/notificaciones/marcar-leida', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ id_notificacion: id })
+                });
+                
+                if (response.ok) {
+                    const resultado = await response.json();
+                    if (resultado.exito) {
+                        // Actualizar localmente
+                        const notificacion = notificaciones.find(n => n.id === id);
+                        if (notificacion) {
+                            notificacion.leida = true;
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesPanel();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al marcar notificación como leída:', error);
             }
         }
 
         function toggleLeida(id) {
-            const notificacion = notificaciones.find(n => n.id === id);
-            if (notificacion) {
-                notificacion.leida = !notificacion.leida;
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesVistaCompleta();
+            try {
+                const notificacion = notificaciones.find(n => n.id === id);
+                if (notificacion) {
+                    const nuevoEstado = !notificacion.leida;
+                    
+                    const response = fetch('/api/notificaciones/marcar-leida', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ id_notificacion: id })
+                    });
+                    
+                    if (response.ok) {
+                        const resultado = response.json();
+                        if (resultado.exito) {
+                            // Actualizar localmente
+                            notificacion.leida = nuevoEstado;
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesVistaCompleta();
+                        }
+                    }
+                }
+            } catch (error) {
+                console.error('Error al cambiar estado de notificación:', error);
             }
         }
 
-        function eliminarNotificacion(id) {
+        async function eliminarNotificacion(id) {
             if (confirm('¿Estás seguro de que deseas eliminar esta notificación?')) {
-                notificaciones = notificaciones.filter(n => n.id !== id);
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-                actualizarContadorNotificaciones();
-                cargarNotificacionesVistaCompleta();
+                try {
+                    const response = await fetch(`/api/notificaciones?id_notificacion=${id}`, {
+                        method: 'DELETE'
+                    });
+                    
+                    if (response.ok) {
+                        const resultado = await response.json();
+                        if (resultado.exito) {
+                            // Actualizar localmente
+                            notificaciones = notificaciones.filter(n => n.id !== id);
+                            actualizarContadorNotificaciones();
+                            cargarNotificacionesVistaCompleta();
+                        }
+                    }
+                } catch (error) {
+                    console.error('Error al eliminar notificación:', error);
+                }
             }
         }
 
@@ -18277,19 +18749,96 @@ IndexReclutador.html
             cargarNotificacionesVistaCompleta();
         }
 
-        function agregarNotificacion(titulo, mensaje) {
-            const nuevaNotificacion = {
-                id: Date.now(),
-                titulo: titulo,
-                mensaje: mensaje,
-                fecha: new Date().toISOString(),
-                leida: false
-            };
-            
-            notificaciones.unshift(nuevaNotificacion);
-            sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-            actualizarContadorNotificaciones();
-            cargarNotificacionesPanel();
+        async function cargarDatosReclutador() {
+            try {
+                // Cargar vacantes del reclutador actual
+                const response = await fetch(`/api/trabajos?reclutador_id=${usuarioActual.id}`);
+                if (response.ok) {
+                    const trabajos = await response.json();
+                    const vacantes = trabajos.filter(trabajo => trabajo.reclutador_id === usuarioActual.id);
+                    
+                    // Actualizar tabla de vacantes
+                    const tablaVacantes = document.getElementById('tabla-vacantes-recientes');
+                    let html = '';
+                    
+                    if (vacantes.length === 0) {
+                        html = '<tr><td colspan="4">No tienes vacantes publicadas</td></tr>';
+                    } else {
+                        vacantes.forEach(vacante => {
+                            const estadoClass = vacante.activo ? 'estado-activo' : 'estado-inactivo';
+                            const estadoTexto = vacante.activo ? 'Activa' : 'Inactiva';
+                            const fechaFormateada = formatearFecha(vacante.fecha_publicacion);
+                            
+                            // Contar postulaciones para esta vacante
+                            const numPostulaciones = notificaciones.filter(n => 
+                                n.mensaje && n.mensaje.includes(vacante.puesto)
+                            ).length;
+                            
+                            html += `
+                                <tr>
+                                    <td>${vacante.puesto}</td>
+                                    <td>${fechaFormateada}</td>
+                                    <td>${numPostulaciones}</td>
+                                    <td><span class="${estadoClass}">${estadoTexto}</span></td>
+                                </tr>
+                            `;
+                        });
+                    }
+                    
+                    tablaVacantes.innerHTML = html;
+                }
+                
+                // Cargar postulaciones con entrevistas programadas
+                const responsePostulaciones = await fetch('/api/postulaciones');
+                if (responsePostulaciones.ok) {
+                    const postulaciones = await responsePostulaciones.json();
+                    const postulacionesUsuario = postulaciones.filter(p => {
+                        // Obtener usuario para cada postulación
+                        const usuario = usuarios.find(u => u.id === p.usuario_id);
+                        return usuario;
+                    });
+                    
+                    // Filtrar postulaciones con estado "entrevista"
+                    const postulacionesConEntrevista = postulaciones.filter(p => p.estado === 'entrevista');
+                    
+                    // Actualizar tabla de entrevistas
+                    const tablaEntrevistas = document.getElementById('tabla-entrevistas-programadas');
+                    let htmlEntrevistas = '';
+                    
+                    if (postulacionesConEntrevista.length === 0) {
+                        htmlEntrevistas = '<tr><td colspan="4">No tienes entrevistas programadas</td></tr>';
+                    } else {
+                        postulacionesConEntrevista.forEach(postulacion => {
+                            const usuario = usuarios.find(u => u.id === postulacion.usuario_id);
+                            const trabajo = trabajos.find(t => t.id === postulacion.trabajo_id);
+                            const fechaFormateada = formatearFecha(postulacion.fecha_postulacion);
+                            
+                            htmlEntrevistas += `
+                                <tr>
+                                    <td>${usuario ? `${usuario.nombre} ${usuario.apellido_paterno}` : 'Usuario no encontrado'}</td>
+                                    <td>${trabajo ? trabajo.puesto : 'Trabajo no encontrado'}</td>
+                                    <td>${fechaFormateada}</td>
+                                    <td><a href="#" class="btn btn-secundario" onclick="verDetallesPostulacion(${postulacion.id})">Ver Detalles</a></td>
+                                </tr>
+                            `;
+                        });
+                    }
+                    
+                    tablaEntrevistas.innerHTML = htmlEntrevistas;
+                }
+                
+            } catch (error) {
+                console.error('Error al cargar datos del reclutador:', error);
+                
+                // Mostrar mensaje de error en las tablas
+                document.getElementById('tabla-vacantes-recientes').innerHTML = '<tr><td colspan="4">Error al cargar datos</td></tr>';
+                document.getElementById('tabla-entrevistas-programadas').innerHTML = '<tr><td colspan="4">Error al cargar datos</td></tr>';
+            }
+        }
+
+        function verDetallesPostulacion(id) {
+            // Aquí podrías mostrar un modal con los detalles de la postulación
+            alert(`Mostrando detalles de la postulación ${id}`);
         }
 
         // INICIALIZACIÓN
@@ -18297,13 +18846,10 @@ IndexReclutador.html
             // Establecer el año actual en el footer
             document.getElementById('anio-actual').textContent = new Date().getFullYear();
 
-            // Verificar sesión
+            // Verificar sesión al cargar la página
             verificarSesion();
             
-            // Inicializar notificaciones
-            inicializarNotificaciones();
-            
-            // Configurar evento de cerrar sesión
+            // Configurar evento para el botón de volver
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) { 
                 e.preventDefault(); 
                 cerrarSesion(); 
@@ -18336,6 +18882,11 @@ IndexReclutador.html
                     panelNotificaciones.classList.remove('activo');
                 }
             });
+            
+            // Cargar datos del reclutador
+            if (usuarioActual) {
+                cargarDatosReclutador();
+            }
         });
     </script>
 </body>
@@ -18888,37 +19439,16 @@ Misvacantes.html
         </div>
     </div>
 
-    <!-- MODAL PARA EDITAR ESTADO -->
-    <div id="modal-editar-estado" class="modal">
-        <div class="modal-contenido">
-            <h3 class="modal-titulo">Cambiar Estado de la Vacante</h3>
-            <div class="modal-cuerpo">
-                <label for="nuevo-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Nuevo estado:</label>
-                <select id="nuevo-estado" class="filtro-select" style="width: 100%; margin-bottom: 15px;">
-                    <option value="activo">Activo</option>
-                    <option value="inactivo">Inactivo</option>
-                </select>
-                
-                <label for="comentario-estado" style="display: block; margin-bottom: 10px; font-weight: 500;">Comentario (opcional):</label>
-                <textarea id="comentario-estado" class="buscador-input" style="width: 100%; min-height: 80px; resize: vertical;" placeholder="Agrega un comentario sobre este cambio..."></textarea>
-            </div>
-            <div class="modal-pie">
-                <button class="btn btn-secundario" onclick="cerrarModalEditarEstado()">Cancelar</button>
-                <button class="btn" onclick="confirmarCambioEstado()">Guardar Cambio</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL PARA ELIMINAR VACANTE -->
+    <!-- MODAL PARA DESACTIVAR VACANTE -->
     <div id="modal-eliminar" class="modal">
         <div class="modal-contenido">
-            <h3 class="modal-titulo">Confirmar Eliminación</h3>
+            <h3 class="modal-titulo">Confirmar Desactivación</h3>
             <div class="modal-cuerpo">
-                ¿Estás seguro de que deseas eliminar esta vacante? Esta acción no se puede deshacer.
+                ¿Estás seguro de que deseas desactivar esta vacante? La vacante ya no estará visible para los candidatos, pero conservarás toda la información y las postulaciones recibidas.
             </div>
             <div class="modal-pie">
                 <button class="btn btn-secundario" onclick="cerrarModalEliminar()">Cancelar</button>
-                <button class="btn btn-danger" onclick="confirmarEliminarVacante()">Eliminar</button>
+                <button class="btn btn-danger" onclick="confirmarDesactivarVacante()">Desactivar</button>
             </div>
         </div>
     </div>
@@ -18927,7 +19457,6 @@ Misvacantes.html
         // VARIABLES GLOBALES
         let vacantes = [];
         let vacanteIdDetalles = null;
-        let vacanteIdEditar = null;
         let vacanteIdEliminar = null;
 
         // FUNCIÓN PARA VOLVER AL PANEL PRINCIPAL
@@ -19023,8 +19552,7 @@ Misvacantes.html
                         
                         <div class="vacante-acciones">
                             <button class="btn btn-pequeno" onclick="verDetallesVacante(${vacante.id})">Ver Detalles</button>
-                            <button class="btn btn-pequeno btn-secundario" onclick="abrirModalEditarEstado(${vacante.id})">Editar</button>
-                            <button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Eliminar</button>
+                            ${vacante.activo ? `<button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Desactivar</button>` : ''}
                         </div>
                     </div>
                 `;
@@ -19096,57 +19624,8 @@ Misvacantes.html
             document.getElementById('modal-detalles').style.display = 'none';
         }
 
-        function abrirModalEditarEstado(id) {
-            // Si se llama desde el botón "Editar" de la tarjeta, cerramos el modal de detalles primero
-            if (vacanteIdDetalles) {
-                cerrarModalDetalles();
-            }
-            
-            vacanteIdEditar = id;
-            const vacante = vacantes.find(v => v.id === id);
-            
-            if (vacante) {
-                document.getElementById('nuevo-estado').value = vacante.activo ? 'activo' : 'inactivo';
-                document.getElementById('comentario-estado').value = '';
-                
-                document.getElementById('modal-editar-estado').style.display = 'block';
-            }
-        }
-
-        function cerrarModalEditarEstado() {
-            vacanteIdEditar = null;
-            document.getElementById('modal-editar-estado').style.display = 'none';
-        }
-
-        function confirmarCambioEstado() {
-            if (!vacanteIdEditar) return;
-            
-            const nuevoEstado = document.getElementById('nuevo-estado').value;
-            const comentario = document.getElementById('comentario-estado').value;
-            
-            try {
-                // Actualizar vacante
-                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEditar);
-                if (vacanteIndex !== -1) {
-                    const estadoAnterior = vacantes[vacanteIndex].activo;
-                    vacantes[vacanteIndex].activo = nuevoEstado === 'activo';
-                    
-                    // Mostrar mensaje de éxito
-                    mostrarMensaje('exito', 'Estado actualizado correctamente');
-                    
-                    // Recargar la lista
-                    renderizarVacantes();
-                    
-                    // Cerrar modal
-                    cerrarModalEditarEstado();
-                }
-            } catch (error) {
-                mostrarMensaje('error', 'Error al actualizar el estado. Inténtalo nuevamente');
-            }
-        }
-
         function abrirModalEliminar(id) {
-            // Si se llama desde el botón "Eliminar" de la tarjeta, cerramos el modal de detalles primero
+            // Si se llama desde el botón "Desactivar" de la tarjeta, cerramos el modal de detalles primero
             if (vacanteIdDetalles) {
                 cerrarModalDetalles();
             }
@@ -19160,24 +19639,26 @@ Misvacantes.html
             document.getElementById('modal-eliminar').style.display = 'none';
         }
 
-        function confirmarEliminarVacante() {
+        function confirmarDesactivarVacante() {
             if (!vacanteIdEliminar) return;
             
             try {
-                // Eliminar vacante del array
-                vacantes = vacantes.filter(v => v.id !== vacanteIdEliminar);
-                
-                // Mostrar mensaje de éxito
-                mostrarMensaje('exito', 'Vacante eliminada correctamente');
-                
-                // Recargar la lista
-                renderizarVacantes();
-                
-                // Cerrar modal
-                cerrarModalEliminar();
-                
+                // Buscar la vacante y marcarla como inactiva
+                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEliminar);
+                if (vacanteIndex !== -1) {
+                    vacantes[vacanteIndex].activo = false;
+                    
+                    // Mostrar mensaje de éxito
+                    mostrarMensaje('exito', 'Vacante desactivada correctamente');
+                    
+                    // Recargar la lista
+                    renderizarVacantes();
+                    
+                    // Cerrar modal
+                    cerrarModalEliminar();
+                }
             } catch (error) {
-                mostrarMensaje('error', 'Error al eliminar la vacante. Inténtalo nuevamente');
+                mostrarMensaje('error', 'Error al desactivar la vacante. Inténtalo nuevamente');
             }
         }
 
@@ -19247,14 +19728,10 @@ Misvacantes.html
             // Cerrar modales al hacer clic fuera de ellos
             window.addEventListener('click', function(event) {
                 const modalDetalles = document.getElementById('modal-detalles');
-                const modalEditarEstado = document.getElementById('modal-editar-estado');
                 const modalEliminar = document.getElementById('modal-eliminar');
                 
                 if (event.target === modalDetalles) {
                     cerrarModalDetalles();
-                }
-                if (event.target === modalEditarEstado) {
-                    cerrarModalEditarEstado();
                 }
                 if (event.target === modalEliminar) {
                     cerrarModalEliminar();

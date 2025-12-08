@@ -1001,57 +1001,7 @@
                     </div>
 
                     <div class="grid_cursos">
-                        <!-- Curso 1: Desarrollo Web -->
-                        <div class="curso_card">
-                            <div class="curso_imagen">
-                                <svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <path d="M12 8v8m-4-4h8" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="curso_contenido">
-                                <h3 class="curso_titulo">Desarrollo Web Completo</h3>
-                                <p class="curso_descripcion">Aprende a crear sitios web modernos desde cero.</p>
-                                <p class="curso_duracion">Duración: 8 semanas</p>
-                                <p class="curso_precio">$29.99</p>
-                                <a href="#" class="btn_curso">Ver más</a>
-                            </div>
-                        </div>
-
-                        <!-- Curso 2: Marketing Digital -->
-                        <div class="curso_card">
-                            <div class="curso_imagen">
-                                <svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <line x1="12" y1="9" x2="12" y2="13" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round"/>
-                                    <line x1="12" y1="17" x2="12.01" y2="17" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round"/>
-                                </svg>
-                            </div>
-                            <div class="curso_contenido">
-                                <h3 class="curso_titulo">Marketing Digital</h3>
-                                <p class="curso_descripcion">Domina las estrategias de marketing digital.</p>
-                                <p class="curso_duracion">Duración: 6 semanas</p>
-                                <p class="curso_precio">$24.99</p>
-                                <a href="#" class="btn_curso">Ver más</a>
-                            </div>
-                        </div>
-
-                        <!-- Curso 3: Diseño UX/UI -->
-                        <div class="curso_card">
-                            <div class="curso_imagen">
-                                <svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                    <circle cx="12" cy="12" r="3" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </div>
-                            <div class="curso_contenido">
-                                <h3 class="curso_titulo">Diseño UX/UI</h3>
-                                <p class="curso_descripcion">Aprende a diseñar interfaces atractivas e intuitivas.</p>
-                                <p class="curso_duracion">Duración: 10 semanas</p>
-                                <p class="curso_precio">$34.99</p>
-                                <a href="#" class="btn_curso">Ver más</a>
-                            </div>
-                        </div>
+                        Cargando...
                     </div>
 
                     <div class="call_to_action">
@@ -1240,6 +1190,60 @@
                 }
             }
         }
+
+        async function cargarCursos() {
+            const contenedor = document.querySelector('.grid_cursos');
+
+            const iconos = [
+                `<svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M12 8v8m-4-4h8" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>`,
+                `<svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12" y1="9" x2="12" y2="13" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round"/>
+                    <line x1="12" y1="17" x2="12.01" y2="17" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round"/>
+                </svg>`,
+                `<svg class="curso_imagen_logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" stroke="#4A90E2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="12" cy="12" r="3" stroke="#2A5CAA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>`
+            ];
+
+            // Consultando API de cursos
+            const rawCursos = await fetch('/api/cursos');
+            const cursos = await rawCursos.json();
+
+            // Obteniendo los primeros tres cursos
+            const primerosTresCursos = cursos.slice(0, 3);
+
+            // Generando el DOM
+
+            let tarjetas = '';
+
+            // Convirtiendo cada curso en una tarjeta HTML
+            primerosTresCursos.forEach((c, i) => {
+                tarjetas += `
+                    <div class="curso_card">
+                        <div class="curso_imagen">
+                            ${ iconos[i] }
+                        </div>
+                        <div class="curso_contenido">
+                            <h3 class="curso_titulo">${ c.titulo }</h3>
+                            <p class="curso_descripcion">${ c.descripcion }</p>
+                            <p class="curso_duracion">${ c.duracion }</p>
+                            <p class="curso_precio">${ c.precio }</p>
+                            <a href="registro.html" class="btn_curso">Ver más</a>
+                        </div>
+                    </div>
+                `;
+            });
+
+            // Limpiar contenido del contenedor
+            contenedor.textContent = '';
+
+            contenedor.innerHTML = tarjetas;            
+        }
         
         // FUNCIONES PARA CARGAR DATOS DE RECLUTADOR (Sin cambios)
         function cargarDatosReclutador() {
@@ -1265,6 +1269,8 @@
 
             verificarSesion();
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) { e.preventDefault(); cerrarSesion(); });
+
+            cargarCursos();
         });
     </script>
 </body>

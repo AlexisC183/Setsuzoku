@@ -760,6 +760,7 @@
                         calcularEstadisticas();
                         mostrarCursosRecientes();
                         mostrarEstudiantesDestacados();
+                        inicializarNotificaciones(usuario);
 
                         return true;
                     }
@@ -815,41 +816,13 @@
         }
 
         // FUNCIONES PARA NOTIFICACIONES
-        function inicializarNotificaciones() {
-            // Cargar notificaciones desde sessionStorage o inicializar con datos de ejemplo
-            const notificacionesGuardadas = sessionStorage.getItem('notificaciones');
-            
-            if (notificacionesGuardadas) {
-                notificaciones = JSON.parse(notificacionesGuardadas);
-            } else {
-                // Notificaciones de ejemplo para instructor
-                notificaciones = [
-                    {
-                        id: 1,
-                        titulo: "Nuevo estudiante inscrito",
-                        mensaje: "María García se ha inscrito en tu curso 'Desarrollo Web Completo'",
-                        fecha: new Date().toISOString(),
-                        leida: false
-                    },
-                    {
-                        id: 2,
-                        titulo: "Evaluación de curso completada",
-                        mensaje: "Tu curso 'Marketing Digital Avanzado' ha sido evaluado y aprobado",
-                        fecha: new Date(Date.now() - 86400000).toISOString(), // Ayer
-                        leida: false
-                    },
-                    {
-                        id: 3,
-                        titulo: "Comentario positivo recibido",
-                        mensaje: "Juan Pérez ha dejado un comentario de 5 estrellas en tu curso",
-                        fecha: new Date(Date.now() - 172800000).toISOString(), // Hace 2 días
-                        leida: true
-                    }
-                ];
-                
-                // Guardar en sessionStorage
-                sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
-            }
+        async function inicializarNotificaciones(usuario) {
+            // Consultando notificaciones
+            const rawNotificaciones = await fetch(`/api/notificaciones?id_usuario=${ usuario.id }`);
+            const notificacionesTodas = await rawNotificaciones.json();
+
+            // Filtrando las notificaciones del usuario actual
+            notificaciones = notificacionesTodas.filter(n => n.id_usuario === usuario.id);
             
             // Contar notificaciones no leídas
             actualizarContadorNotificaciones();
@@ -886,12 +859,12 @@
                 if (a.leida !== b.leida) {
                     return a.leida ? 1 : -1;
                 }
-                return new Date(b.fecha) - new Date(a.fecha);
+                return new Date(b.fecha_creacion) - new Date(a.fecha_creacion);
             });
             
             let html = '';
             notificacionesOrdenadas.slice(0, 5).forEach(notificacion => {
-                const fecha = formatearFecha(notificacion.fecha);
+                const fecha = formatearFecha(notificacion.fecha_creacion);
                 const claseNoLeida = notificacion.leida ? '' : 'no-leida';
                 
                 html += `
@@ -1220,9 +1193,6 @@
 
             // Verificar sesión
             verificarSesion();
-            
-            // Inicializar notificaciones
-            inicializarNotificaciones();
             
             // Configurar evento de cerrar sesión
             document.getElementById('cerrar-sesion').addEventListener('click', function(e) { 

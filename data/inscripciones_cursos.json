@@ -1,65 +1,9 @@
 [
   {
     "id": 1,
-    "usuario_id": 1764894367943,
-    "curso_id": 2,
-    "fecha_inscripcion": "2025-12-07T13:51:17.596Z",
-    "estado": "en-curso",
-    "progreso": 25
-  },
-  {
-    "id": 2,
-    "usuario_id": 1765133801256,
+    "usuario_id": 1765225921683,
     "curso_id": 1,
-    "fecha_inscripcion": "2025-12-07T18:58:24.238Z",
-    "estado": "en-curso",
-    "progreso": 0
-  },
-  {
-    "id": 3,
-    "usuario_id": 1765133801256,
-    "curso_id": 3,
-    "fecha_inscripcion": "2025-12-07T18:58:27.925Z",
-    "estado": "en-curso",
-    "progreso": 90
-  },
-  {
-    "id": 4,
-    "usuario_id": 1765137188657,
-    "curso_id": 1,
-    "fecha_inscripcion": "2025-12-07T19:53:29.235Z",
-    "estado": "completado",
-    "progreso": 100
-  },
-  {
-    "id": 5,
-    "usuario_id": 1765137188657,
-    "curso_id": 2,
-    "fecha_inscripcion": "2025-12-07T19:53:39.462Z",
-    "estado": "en-curso",
-    "progreso": 0
-  },
-  {
-    "id": 6,
-    "usuario_id": 1763876316632,
-    "curso_id": 2,
-    "fecha_inscripcion": "2025-12-08T05:02:38.216Z",
-    "estado": "en-curso",
-    "progreso": 0
-  },
-  {
-    "id": 7,
-    "usuario_id": 1763876316632,
-    "curso_id": 3,
-    "fecha_inscripcion": "2025-12-08T05:02:39.924Z",
-    "estado": "en-curso",
-    "progreso": 0
-  },
-  {
-    "id": 8,
-    "usuario_id": 1763876316632,
-    "curso_id": 1,
-    "fecha_inscripcion": "2025-12-08T05:02:41.244Z",
+    "fecha_inscripcion": "2025-12-08T20:48:04.962Z",
     "estado": "en-curso",
     "progreso": 0
   }

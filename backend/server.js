@@ -770,7 +770,7 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
                         // Crear notificación para el reclutador
                         notificaciones.notificar_nueva_postulacion(
                             trabajo_postulado.reclutador_id,            // ID del reclutador
-                            trabajo_postulado.titulo,                  // Nombre de la vacante
+                            trabajo_postulado.puesto,                  // Nombre de la vacante
                             `${candidato.nombre} ${candidato.apellido_paterno}` // Nombre del candidato
                         );
                         console.log('Función de notificación ejecutada.');

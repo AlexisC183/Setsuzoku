@@ -1,275 +1,62 @@
 [
   {
-    "id": 1764894367948,
-    "id_usuario": 1764894367943,
+    "id": 1765225921691,
+    "id_usuario": 1765225921683,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Chuy, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-05T00:26:07.948Z"
+    "leida": true,
+    "fecha_creacion": "2025-12-08T20:32:01.691Z"
   },
   {
-    "id": 1764894474831,
-    "id_usuario": 1764894474829,
+    "id": 1765226519187,
+    "id_usuario": 1765226519186,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Sergio Ángel, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-05T00:27:54.831Z"
+    "fecha_creacion": "2025-12-08T20:41:59.187Z"
   },
   {
-    "id": 1764894562749,
-    "id_usuario": 1764894562748,
+    "id": 1765226757272,
+    "id_usuario": 1765226757270,
     "tipo": "success",
     "titulo": "¡Bienvenido a Setsuzoku!",
     "mensaje": "Hola Héctor Alonso, tu cuenta ha sido creada exitosamente.",
     "leida": false,
-    "fecha_creacion": "2025-12-05T00:29:22.749Z"
+    "fecha_creacion": "2025-12-08T20:45:57.272Z"
   },
   {
-    "id": 1765115477627,
-    "id_usuario": 1764894562748,
+    "id": 1765226884966,
+    "id_usuario": 1765226757270,
     "tipo": "info",
     "titulo": "Nueva inscripción",
-    "mensaje": "Chuy Gómez se ha inscrito en tu curso \"Curso completo de Redes Emergentes\".",
+    "mensaje": "Chuy Gómez se ha inscrito en tu curso \"Curso Django Framework Zero-To-Hero\".",
     "leida": false,
-    "fecha_creacion": "2025-12-07T13:51:17.627Z",
-    "tipo_referencia": "curso",
-    "id_referencia": "Curso completo de Redes Emergentes"
-  },
-  {
-    "id": 1765118239974,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Chuy Gómez se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T14:37:19.974Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765133801286,
-    "id_usuario": 1765133801256,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Elena, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T18:56:41.286Z"
-  },
-  {
-    "id": 1765133904241,
-    "id_usuario": 1764894562748,
-    "tipo": "info",
-    "titulo": "Nueva inscripción",
-    "mensaje": "Elena Cázarez se ha inscrito en tu curso \"Curso Django Framework Zero-To-Hero\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T18:58:24.241Z",
+    "fecha_creacion": "2025-12-08T20:48:04.966Z",
     "tipo_referencia": "curso",
     "id_referencia": "Curso Django Framework Zero-To-Hero"
   },
   {
-    "id": 1765133907927,
-    "id_usuario": 1764894562748,
-    "tipo": "info",
-    "titulo": "Nueva inscripción",
-    "mensaje": "Elena Cázarez se ha inscrito en tu curso \"Curso Bash en Ubuntu\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T18:58:27.927Z",
-    "tipo_referencia": "curso",
-    "id_referencia": "Curso Bash en Ubuntu"
-  },
-  {
-    "id": 1765137188696,
-    "id_usuario": 1765137188657,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola Martín, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T19:53:08.696Z"
-  },
-  {
-    "id": 1765137209240,
-    "id_usuario": 1764894562748,
-    "tipo": "info",
-    "titulo": "Nueva inscripción",
-    "mensaje": "Martín Toledo se ha inscrito en tu curso \"Curso Django Framework Zero-To-Hero\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T19:53:29.240Z",
-    "tipo_referencia": "curso",
-    "id_referencia": "Curso Django Framework Zero-To-Hero"
-  },
-  {
-    "id": 1765137219463,
-    "id_usuario": 1764894562748,
-    "tipo": "info",
-    "titulo": "Nueva inscripción",
-    "mensaje": "Martín Toledo se ha inscrito en tu curso \"Curso completo de Redes Emergentes\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-07T19:53:39.463Z",
-    "tipo_referencia": "curso",
-    "id_referencia": "Curso completo de Redes Emergentes"
-  },
-  {
-    "id": 1765158962471,
-    "id_usuario": 1765158962456,
-    "tipo": "success",
-    "titulo": "¡Bienvenido a Setsuzoku!",
-    "mensaje": "Hola José, tu cuenta ha sido creada exitosamente.",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T01:56:02.471Z"
-  },
-  {
-    "id": 1765198189818,
-    "id_usuario": 1764894474829,
+    "id": 1765226921782,
+    "id_usuario": 1765226519186,
     "tipo": "info",
     "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
+    "mensaje": "Chuy Gómez se ha postulado a tu vacante \"Documentador de proyecto de software de acuerdo a la IEEE SRS\".",
     "leida": false,
-    "fecha_creacion": "2025-12-08T12:49:49.818Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765198192132,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T12:49:52.132Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765201153752,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Elena Cázarez se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T13:39:13.752Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765204492222,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T14:34:52.222Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765206177251,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:02:57.251Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765206194084,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:03:14.084Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765206470471,
-    "id_usuario": 1765137188657,
-    "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"Documentador de proyecto de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:07:50.471Z",
+    "fecha_creacion": "2025-12-08T20:48:41.782Z",
     "tipo_referencia": "vacante",
     "id_referencia": "Documentador de proyecto de software de acuerdo a la IEEE SRS"
   },
   {
-    "id": 1765207080832,
-    "id_usuario": 1764894367943,
+    "id": 1765226972544,
+    "id_usuario": 1765225921683,
     "tipo": "success",
     "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"Desarrollador de .NET\" en Microsoft ha sido aprobada.",
+    "mensaje": "Tu postulación a \"Documentador de proyecto de software de acuerdo a la IEEE SRS\" en Setsuzoku ha sido aprobada.",
     "leida": false,
-    "fecha_creacion": "2025-12-08T15:18:00.832Z",
+    "fecha_creacion": "2025-12-08T20:49:32.544Z",
     "tipo_referencia": "vacante",
-    "id_referencia": "Desarrollador de .NET"
-  },
-  {
-    "id": 1765207141315,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:19:01.315Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765207265402,
-    "id_usuario": 1764894367943,
-    "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"Desarrollador de .NET\" en Microsoft ha sido aprobada.",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:21:05.402Z",
-    "tipo_referencia": "vacante",
-    "id_referencia": "Desarrollador de .NET"
-  },
-  {
-    "id": 1765207303277,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:21:43.277Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765207470815,
-    "id_usuario": 1765137188657,
-    "tipo": "success",
-    "titulo": "¡Buenas noticias!",
-    "mensaje": "Tu postulación a \"DBA Senior\" en Setsuzoku Database Topics ORG ha sido aprobada.",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:24:30.815Z",
-    "tipo_referencia": "vacante",
-    "id_referencia": "DBA Senior"
-  },
-  {
-    "id": 1765207492389,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:24:52.389Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765207901276,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Martín Toledo se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T15:31:41.276Z",
-    "tipo_referencia": "vacante"
-  },
-  {
-    "id": 1765221575381,
-    "id_usuario": 1764894474829,
-    "tipo": "info",
-    "titulo": "Nueva postulación",
-    "mensaje": "Chuy Gómez se ha postulado a tu vacante \"undefined\".",
-    "leida": false,
-    "fecha_creacion": "2025-12-08T19:19:35.381Z",
-    "tipo_referencia": "vacante"
+    "id_referencia": "Documentador de proyecto de software de acuerdo a la IEEE SRS"
   }
 ]

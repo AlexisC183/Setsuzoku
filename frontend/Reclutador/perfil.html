@@ -672,9 +672,11 @@
                             <div class="contenedor-subida">
                                 <select class="select-tipo-doc" id="select-tipo-doc">
                                     <option value="">Seleccionar tipo</option>
-                                    <option value="Reglas de la empresa">Reglas de la empresa</option>
-                                    <option value="Certificado legal">Certificado legal</option>
-                                    <option value="Constancia de trabajo">Constancia de trabajo</option>
+                                    <option value="Carta de Recomendación">Carta de Recomendación</option>
+                                    <option value="Título Profesional">Título Profesional</option>
+                                    <option value="Cédula Profesional">Cédula Profesional</option>
+                                    <option value="Certificado de Estudios">Certificado de Estudios</option>
+                                    <option value="Otro">Otro</option>
                                 </select>
                                 <button class="boton-subir" id="boton-subir">Seleccionar Archivo PDF</button>
                             </div>
@@ -715,51 +717,92 @@
     </div>
 
     <script>
+        // VARIABLES GLOBALES
+        const url_servidor = 'http://localhost:8000'; // URL del servidor backend
+
         // Función para volver a la página anterior
         function volverPaginaAnterior() {
             window.history.back();
         }
 
-        // Función para cargar los datos del perfil
-        function cargarPerfil() {
+        // Función para cargar los datos del perfil desde el backend
+        async function cargarPerfil() {
             const usuarioStr = sessionStorage.getItem('usuario');
             
-            if (usuarioStr) {
-                try {
-                    const usuario = JSON.parse(usuarioStr);
-                    
-                    // Actualizar la información del perfil
-                    document.getElementById('perfil-nombre').textContent = 
-                        `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
-                    document.getElementById('perfil-rol').textContent = usuario.grupo;
-                    
-                    // Actualizar los datos del perfil
-                    document.getElementById('nombre-completo').textContent = 
-                        `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
-                    document.getElementById('fecha-nacimiento').textContent = usuario.fecha_nacimiento;
-                    document.getElementById('genero').textContent = usuario.genero;
-                    document.getElementById('telefono').textContent = usuario.telefono;
-                    document.getElementById('estudios').textContent = usuario.estudios;
-                    document.getElementById('experiencia').textContent = usuario.experiencia;
-                    document.getElementById('habilidades').textContent = usuario.habilidades;
-                    document.getElementById('correo').textContent = usuario.correo;
-                    
-                    // Actualizar la imagen del perfil si existe
-                    if (usuario.imagen) {
-                        document.getElementById('perfil-imagen').style.backgroundImage = `url('${usuario.imagen}')`;
-                    }
-                    
-                    // Cargar documentos si existen
-                    if (usuario.documentos && usuario.documentos.length > 0) {
-                        mostrarDocumentos(usuario.documentos);
-                    }
-                } catch (error) {
-                    console.error('Error al cargar el perfil:', error);
-                }
+            if (!usuarioStr) {
+                document.getElementById('no-sesion').style.display = 'block';
+                document.getElementById('contenido-principal').style.display = 'none';
+                return;
             }
             
-            // Siempre mostrar el contenido del perfil
-            document.getElementById('contenido-principal').style.display = 'block';
+            try {
+                const usuario = JSON.parse(usuarioStr);
+                
+                // Obtener datos actualizados del backend
+                const respuesta = await fetch(`${url_servidor}/api/usuarios/${usuario.id}`);
+                
+                if (!respuesta.ok) {
+                    throw new Error('Error al cargar el perfil del servidor');
+                }
+                
+                const usuario_actualizado = await respuesta.json();
+                
+                // Actualizar sessionStorage con datos del servidor
+                sessionStorage.setItem('usuario', JSON.stringify(usuario_actualizado));
+                
+                // Actualizar la información del perfil en la interfaz
+                actualizarInterfazPerfil(usuario_actualizado);
+                
+                // Mostrar el contenido principal
+                document.getElementById('contenido-principal').style.display = 'block';
+                document.getElementById('no-sesion').style.display = 'none';
+                
+            } catch (error) {
+                console.error('Error al cargar el perfil:', error);
+                
+                // Si hay error, intentar con datos de sessionStorage
+                try {
+                    const usuario = JSON.parse(usuarioStr);
+                    actualizarInterfazPerfil(usuario);
+                    document.getElementById('contenido-principal').style.display = 'block';
+                    document.getElementById('no-sesion').style.display = 'none';
+                } catch (error2) {
+                    console.error('Error con datos locales:', error2);
+                    document.getElementById('no-sesion').style.display = 'block';
+                    document.getElementById('contenido-principal').style.display = 'none';
+                }
+            }
+        }
+
+        // Función para actualizar la interfaz con los datos del perfil
+        function actualizarInterfazPerfil(usuario) {
+            // Actualizar la información del perfil
+            document.getElementById('perfil-nombre').textContent = 
+                `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
+            document.getElementById('perfil-rol').textContent = usuario.grupo;
+            
+            // Actualizar los datos del perfil
+            document.getElementById('nombre-completo').textContent = 
+                `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
+            document.getElementById('fecha-nacimiento').textContent = usuario.fecha_nacimiento || 'No disponible';
+            document.getElementById('genero').textContent = usuario.genero || 'No disponible';
+            document.getElementById('telefono').textContent = usuario.telefono || 'No disponible';
+            document.getElementById('estudios').textContent = usuario.estudios || 'No disponible';
+            document.getElementById('experiencia').textContent = usuario.experiencia || 'No disponible';
+            document.getElementById('habilidades').textContent = usuario.habilidades || 'No disponible';
+            document.getElementById('correo').textContent = usuario.correo || 'No disponible';
+            
+            // Actualizar la imagen del perfil si existe
+            if (usuario.imagen) {
+                document.getElementById('perfil-imagen').style.backgroundImage = `url('${usuario.imagen}')`;
+            } else {
+                document.getElementById('perfil-imagen').style.backgroundImage = '';
+            }
+            
+            // Cargar documentos si existen
+            if (usuario.documentos && usuario.documentos.length > 0) {
+                mostrarDocumentos(usuario.documentos);
+            }
         }
 
         // Función para habilitar modo edición
@@ -767,7 +810,7 @@
             const usuarioStr = sessionStorage.getItem('usuario');
             
             if (!usuarioStr) {
-                window.location.href = 'inicio_sesion.html';
+                window.location.href = '../inicio_sesion.html';
                 return;
             }
             
@@ -792,9 +835,6 @@
             
             // Mostrar botones de guardar/cancelar
             document.getElementById('botones-edicion').classList.add('activo');
-            
-            // Ocultar botones de acción principales
-            document.querySelector('.botones-accion').style.display = 'none';
         }
 
         // Función para deshabilitar modo edición
@@ -818,9 +858,6 @@
             
             // Ocultar botones de guardar/cancelar
             document.getElementById('botones-edicion').classList.remove('activo');
-            
-            // Mostrar botones de acción principales
-            document.querySelector('.botones-accion').style.display = 'flex';
         }
 
         // Función para manejar la selección de imagen
@@ -1017,64 +1054,82 @@
             }
         }
 
-        // Función para guardar cambios
-        function guardarCambios() {
+        // Función para guardar cambios en el backend
+        async function guardarCambios() {
             const usuarioStr = sessionStorage.getItem('usuario');
             
             if (!usuarioStr) {
-                window.location.href = 'inicio_sesion.html';
+                window.location.href = '../inicio_sesion.html';
                 return;
             }
             
             try {
                 const usuario = JSON.parse(usuarioStr);
                 
-                // Actualizar datos del usuario con los valores editados
-                const nombreCompleto = document.getElementById('nombre-completo').textContent.trim();
-                const nombres = nombreCompleto.split(' ');
-                
-                if (nombres.length >= 2) {
-                    usuario.nombre = nombres[0];
-                    usuario.apellido_paterno = nombres[1];
-                    usuario.apellido_materno = nombres.slice(2).join(' ');
-                }
-                
-                usuario.fecha_nacimiento = document.getElementById('fecha-nacimiento').textContent.trim();
-                usuario.genero = document.getElementById('genero').textContent.trim();
-                usuario.telefono = document.getElementById('telefono').textContent.trim();
-                usuario.estudios = document.getElementById('estudios').textContent.trim();
-                usuario.experiencia = document.getElementById('experiencia').textContent.trim();
-                usuario.habilidades = document.getElementById('habilidades').textContent.trim();
-                usuario.correo = document.getElementById('correo').textContent.trim();
-                
+                // Preparar datos para enviar al backend
+                const datosActualizados = {
+                    nombre: document.getElementById('nombre-completo').textContent.trim().split(' ')[0] || usuario.nombre,
+                    apellido_paterno: document.getElementById('nombre-completo').textContent.trim().split(' ')[1] || usuario.apellido_paterno,
+                    apellido_materno: document.getElementById('nombre-completo').textContent.trim().split(' ').slice(2).join(' ') || usuario.apellido_materno,
+                    fecha_nacimiento: document.getElementById('fecha-nacimiento').textContent.trim() || usuario.fecha_nacimiento,
+                    genero: document.getElementById('genero').textContent.trim() || usuario.genero,
+                    telefono: document.getElementById('telefono').textContent.trim() || usuario.telefono,
+                    estudios: document.getElementById('estudios').textContent.trim() || usuario.estudios,
+                    experiencia: document.getElementById('experiencia').textContent.trim() || usuario.experiencia,
+                    habilidades: document.getElementById('habilidades').textContent.trim() || usuario.habilidades,
+                    correo: document.getElementById('correo').textContent.trim() || usuario.correo
+                };
+
                 // Actualizar la imagen si se cambió
                 const imagenTemporal = sessionStorage.getItem('imagen_temporal');
                 if (imagenTemporal) {
-                    usuario.imagen = imagenTemporal;
-                    sessionStorage.removeItem('imagen_temporal');
+                    datosActualizados.imagen = imagenTemporal;
                 }
-                
+
                 // Actualizar documentos si se cambiaron
                 const documentosTemporales = sessionStorage.getItem('documentos_temporales');
                 if (documentosTemporales) {
-                    usuario.documentos = JSON.parse(documentosTemporales);
+                    datosActualizados.documentos = JSON.parse(documentosTemporales);
+                }
+
+                // Enviar datos al backend
+                const respuesta = await fetch(`${url_servidor}/api/usuarios/${usuario.id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datosActualizados)
+                });
+
+                if (!respuesta.ok) {
+                    throw new Error('Error al guardar cambios en el servidor');
+                }
+
+                const resultado = await respuesta.json();
+                
+                if (resultado.exito) {
+                    // Actualizar sessionStorage con datos actualizados
+                    const usuarioActualizado = { ...usuario, ...datosActualizados };
+                    sessionStorage.setItem('usuario', JSON.stringify(usuarioActualizado));
+                    
+                    // Limpiar datos temporales
+                    sessionStorage.removeItem('imagen_temporal');
                     sessionStorage.removeItem('documentos_temporales');
+                    
+                    // Deshabilitar modo edición
+                    deshabilitarEdicion();
+                    
+                    // Recargar datos desde el backend para asegurar consistencia
+                    await cargarPerfil();
+                    
+                    alert('Cambios guardados exitosamente');
+                } else {
+                    throw new Error(resultado.mensaje);
                 }
                 
-                // Guardar en sessionStorage
-                sessionStorage.setItem('usuario', JSON.stringify(usuario));
-                
-                // Actualizar la información mostrada
-                document.getElementById('perfil-nombre').textContent = 
-                    `${usuario.nombre} ${usuario.apellido_paterno} ${usuario.apellido_materno}`;
-                
-                // Deshabilitar modo edición
-                deshabilitarEdicion();
-                
-                alert('Cambios guardados exitosamente');
             } catch (error) {
                 console.error('Error al guardar cambios:', error);
-                alert('Error al guardar los cambios');
+                alert('Error al guardar los cambios: ' + error.message);
             }
         }
 
@@ -1084,7 +1139,7 @@
             sessionStorage.removeItem('imagen_temporal');
             sessionStorage.removeItem('documentos_temporales');
             
-            // Recargar los datos originales
+            // Recargar los datos originales desde el backend
             cargarPerfil();
             
             // Deshabilitar modo edición
@@ -1118,27 +1173,6 @@
             // Configurar eventos para los botones de guardar y cancelar
             document.getElementById('guardar-cambios').addEventListener('click', guardarCambios);
             document.getElementById('cancelar-edicion').addEventListener('click', cancelarEdicion);
-            
-            // Configurar eventos para los botones de acción
-            document.getElementById('ver-postulaciones').addEventListener('click', function() {
-                const usuarioStr = sessionStorage.getItem('usuario');
-                
-                if (usuarioStr) {
-                    window.location.href = 'Mispostulaciones.html';
-                } else {
-                    window.location.href = 'inicio_sesion.html';
-                }
-            });
-            
-            document.getElementById('ver-cursos').addEventListener('click', function() {
-                const usuarioStr = sessionStorage.getItem('usuario');
-                
-                if (usuarioStr) {
-                    window.location.href = 'Miscursos.html';
-                } else {
-                    window.location.href = 'inicio_sesion.html';
-                }
-            });
         });
     </script>
 </body>

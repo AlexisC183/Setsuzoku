@@ -78,5 +78,21 @@
     "correo": "candidato2@gmail.com",
     "contrasena": "53c14eb633b048e44e33ffbd629c0918c22c02f8b4c50a101bf61cf6a286b2ce",
     "fecha_registro": "2025-12-07T19:53:08.657Z"
+  },
+  {
+    "id": 1765158962456,
+    "grupo": "candidato",
+    "nombre": "Omar",
+    "apellido_paterno": "Beltrán",
+    "apellido_materno": "Ruíz",
+    "fecha_nacimiento": "2002-07-22",
+    "genero": "masculino",
+    "telefono": "6633100000",
+    "estudios": "Algo",
+    "experiencia": "Algo",
+    "habilidades": "Algo",
+    "correo": "candidato1@mail.com",
+    "contrasena": "6a1e5f711180523405ee6739887d2172ed9173f4fcbd7e12dbc501a690282477",
+    "fecha_registro": "2025-12-08T01:56:02.458Z"
   }
 ]

@@ -4,6 +4,7 @@ const path = require('path'); // Manejo de rutas
 
 // VARIABLES GLOBALES
 const ruta_usuarios = path.join(__dirname, '..', 'data', 'usuarios.json');
+const ruta_soportes = path.join(__dirname, '..', 'data', 'mensajes_soporte.json');
 const ruta_cursos = path.join(__dirname, '..', 'data', 'cursos.json');
 const ruta_trabajos = path.join(__dirname, '..', 'data', 'trabajos.json');
 const ruta_inscripciones = path.join(__dirname, '..', 'data', 'inscripciones_cursos.json');
@@ -30,6 +31,30 @@ function escribir_usuarios(usuarios) {
         return true;
     } catch (error) {
         console.error('Error al escribir usuarios:', error);
+        return false;
+    }
+}
+
+// Lee el archivo de soportes y devuelve los datos
+function leer_soportes() {
+    try {
+        if (fs.existsSync(ruta_soportes)) {
+            const datos = fs.readFileSync(ruta_soportes, 'utf8');
+            return JSON.parse(datos);
+        }
+    } catch (error) {
+        console.error('Error al leer soportes:', error);
+    }
+    return [];
+}
+
+// Escribe los soportes en el archivo
+function escribir_soportes(soportes) {
+    try {
+        fs.writeFileSync(ruta_soportes, JSON.stringify(soportes, null, 2));
+        return true;
+    } catch (error) {
+        console.error('Error al escribir soportes:', error);
         return false;
     }
 }
@@ -158,6 +183,8 @@ function escribir_notificaciones(notificaciones) {
 module.exports = {
     leer_usuarios,
     escribir_usuarios,
+    leer_soportes,
+    escribir_soportes,
     leer_cursos,
     escribir_cursos,
     leer_trabajos,

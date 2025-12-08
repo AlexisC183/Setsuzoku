@@ -190,6 +190,46 @@ function manejar_peticion_api(peticion, respuesta, ruta_parseada) {
         }
     }
 
+    // API para soporte
+    else if (pathname === '/api/soporte' && metodo === 'POST') {
+        // Crear nuevo mensaje de soporte
+        let cuerpo = '';
+
+        peticion.on('data', chunk => {
+            cuerpo += chunk.toString();
+        });
+
+        peticion.on('end', () => {
+                try {
+                    const datosSoporte = JSON.parse(cuerpo);
+
+                    // Leer soportes existentes
+                    const soportes = database.leer_soportes();
+
+                    // Generar nuevo ID
+                    const nuevoId = new Date().getTime();
+
+                    // Crear nuevo mensaje de soporte
+                    const nuevoSoporte = {
+                        id: nuevoId,
+                        ...datosSoporte
+                    };
+
+                    // Agregar a la lista
+                    soportes.push(nuevoSoporte);
+
+                    // Guardar en el archivo
+                    database.escribir_soportes(soportes);
+
+                    respuesta.end(JSON.stringify({ exito: true, mensaje: 'Tu mensaje ha sido enviado correctamente. Te responderemos lo antes posible.' }));
+                } catch (error) {
+                    console.error('Error al crear soporte:', error);
+                    respuesta.statusCode = 500;
+                    respuesta.end(JSON.stringify({ exito: false, mensaje: 'Error al enviar el mensaje de soporte' }));
+                }
+        });
+    }
+
     // API para cursos
     else if (pathname.startsWith('/api/cursos')) {
         if (pathname === '/api/cursos' && metodo === 'GET') {

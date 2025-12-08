@@ -11,7 +11,6 @@
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:36:01.810Z",
-    "estudiantes": [],
     "activo": true
   },
   {
@@ -26,7 +25,6 @@
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:37:22.123Z",
-    "estudiantes": [],
     "activo": true
   },
   {
@@ -41,7 +39,6 @@
     "instructor": "Héctor Alonso",
     "instructor_id": 1764894562748,
     "fecha_creacion": "2025-12-05T00:38:08.581Z",
-    "estudiantes": [],
     "activo": false
   }
 ]

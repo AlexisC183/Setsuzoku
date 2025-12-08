@@ -424,17 +424,12 @@
             background-color: #f5f5f5;
         }
 
-        .estado-activo {
+        .activo-verdadero {
             color: #28a745;
             font-weight: bold;
         }
 
-        .estado-pendiente {
-            color: #ffc107;
-            font-weight: bold;
-        }
-
-        .estado-inactivo {
+        .activo-falso {
             color: #dc3545;
             font-weight: bold;
         }
@@ -689,20 +684,16 @@
                         <h2 class="seccion-titulo">Estadísticas de Rendimiento</h2>
                         <div class="estadisticas-container">
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">24</div>
+                                <div id="cursos-activos" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Cursos Activos</div>
                             </div>
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">156</div>
+                                <div id="estudiantes-inscritos" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Estudiantes Inscritos</div>
                             </div>
                             <div class="estadistica-card">
-                                <div class="estadistica-valor">89%</div>
+                                <div id="tasa-finalizacion" class="estadistica-valor"></div>
                                 <div class="estadistica-etiqueta">Tasa de Finalización</div>
-                            </div>
-                            <div class="estadistica-card">
-                                <div class="estadistica-valor">4.6</div>
-                                <div class="estadistica-etiqueta">Calificación Promedio</div>
                             </div>
                         </div>
                     </div>
@@ -715,72 +706,14 @@
                         
                         <!-- Tabla de cursos recientes -->
                         <h3 style="margin-bottom: 15px; color: #2A5CAA;">Cursos Recientes</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Curso</th>
-                                        <th>Estudiantes</th>
-                                        <th>Fecha</th>
-                                        <th>Estado</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-cursos-recientes">
-                                    <tr>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>32</td>
-                                        <td>15/05/2023</td>
-                                        <td><span class="estado-activo">Activo</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Marketing Digital Avanzado</td>
-                                        <td>28</td>
-                                        <td>10/05/2023</td>
-                                        <td><span class="estado-activo">Activo</span></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Introducción a la Programación</td>
-                                        <td>45</td>
-                                        <td>05/05/2023</td>
-                                        <td><span class="estado-pendiente">En revisión</span></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="cursos-recientes" class="tabla-container">
+                            Cargando cursos...
                         </div>
                         
                         <!-- Tabla de estudiantes destacados -->
                         <h3 style="margin: 30px 0 15px; color: #2A5CAA;">Estudiantes Destacados</h3>
-                        <div class="tabla-container">
-                            <table class="tabla">
-                                <thead>
-                                    <tr>
-                                        <th>Nombre</th>
-                                        <th>Curso</th>
-                                        <th>Progreso</th>
-                                        <th>Acciones</th>
-                                    </tr>
-                                </thead>
-                                <tbody id="tabla-estudiantes-destacados">
-                                    <tr>
-                                        <td>María García</td>
-                                        <td>Desarrollo Web Completo</td>
-                                        <td>95%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Juan Pérez</td>
-                                        <td>Marketing Digital Avanzado</td>
-                                        <td>88%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Ana López</td>
-                                        <td>Introducción a la Programación</td>
-                                        <td>92%</td>
-                                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div id="estudiantes-destacados" class="tabla-container">
+                            Cargando estudiantes...
                         </div>
                     </div>
                 </section>
@@ -808,14 +741,26 @@
         let notificaciones = [];
         let notificacionesNoLeidas = 0;
 
+        // Datos reales (luego se consultarán)
+        let cursosInstructor = [];
+        let inscripcionesCursosInstructor = [];
+        let estudiantesInstructor = [];
+
         // FUNCIONES PARA VERIFICAR SESIÓN
-        function verificarSesion() {
+        async function verificarSesion() {
             const usuarioStr = sessionStorage.getItem('usuario');
             if (usuarioStr) {
                 try {
                     const usuario = JSON.parse(usuarioStr);
                     if (usuario && usuario.nombre && usuario.grupo) {
                         mostrarInterfazConSesion(usuario);
+
+                        await cargarDatosReales(usuario);
+
+                        calcularEstadisticas();
+                        mostrarCursosRecientes();
+                        mostrarEstudiantesDestacados();
+
                         return true;
                     }
                 } catch (error) {
@@ -1008,6 +953,12 @@
             notificacionesLista.innerHTML = html;
         }
 
+        function fechaLegible(fecha) {
+            const mes = fecha.getMonth() + 1;
+
+            return `${ fecha.getDate().toString().padStart(2, '0') }/${ mes.toString().padStart(2, '0') }/${ fecha.getFullYear() }`;
+        }
+
         function formatearFecha(fechaISO) {
             const fecha = new Date(fechaISO);
             const ahora = new Date();
@@ -1090,6 +1041,176 @@
             sessionStorage.setItem('notificaciones', JSON.stringify(notificaciones));
             actualizarContadorNotificaciones();
             cargarNotificacionesPanel();
+        }
+
+        async function cargarDatosReales(usuario) {
+            // Consultas a APIs
+            const [
+                rawCursos,
+                rawInscripciones,
+                rawUsuarios
+            ] = await Promise.all([
+                fetch('/api/cursos'),
+                fetch('/api/inscripciones-cursos'),
+                fetch('/api/usuarios')
+            ]);
+            const [
+                cursos,
+                inscripciones,
+                usuarios
+            ] = await Promise.all([
+                rawCursos.json(),
+                rawInscripciones.json(),
+                rawUsuarios.json()
+            ]);
+
+            cursosInstructor = cursos.filter(c => c.instructor_id === usuario.id);
+            inscripcionesCursosInstructor = inscripciones.filter(i => {
+                return cursosInstructor.some(c => c.id === i.curso_id);
+            });
+            estudiantesInstructor = usuarios.filter(u => {
+                return inscripcionesCursosInstructor.some(i => i.usuario_id === u.id);
+            });
+        }
+
+        function calcularEstadisticas() {
+            const inscripciones = inscripcionesCursosInstructor.length;
+            const inscripcionesCompletadas = inscripcionesCursosInstructor.filter(i => i.estado === 'completado').length;
+
+            document.getElementById('cursos-activos').textContent = cursosInstructor.filter(c => c.activo).length;
+            document.getElementById('estudiantes-inscritos').textContent = estudiantesInstructor.length;
+            document.getElementById('tasa-finalizacion').textContent = (inscripcionesCompletadas / inscripciones * 100).toString() + '%';
+        }
+
+        function mostrarCursosRecientes() {
+            const contenedor = document.getElementById('cursos-recientes');
+
+            // Objetos con información a manera de dashboard
+            const agregados = cursosInstructor
+                .slice(-5)
+                .map(c => {
+                    const inscripcionesCursoActual = inscripcionesCursosInstructor
+                        .filter(i => i.curso_id === c.id);
+                    
+                    return {
+                        curso: c.titulo,
+                        estudiantes: inscripcionesCursoActual.length,
+                        fecha: fechaLegible(new Date(c.fecha_creacion)),
+                        estado: c.activo
+                    };
+                });
+
+            // Verificar si el instructor tiene cursos
+            if (agregados.length === 0) {
+                contenedor.textContent = 'Sin cursos recientes';
+                return;
+            }
+
+            // Limpiar cursos recientes
+            contenedor.textContent = '';
+
+            // Generando el DOM de los cursos
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Curso</th>
+                            <th>Estudiantes</th>
+                            <th>Fecha</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-cursos-recientes">
+            `;
+
+            agregados.forEach(c => {
+                tabla += `
+                    <tr>
+                        <td>${ c.curso }</td>
+                        <td>${ c.estudiantes }</td>
+                        <td>${ c.fecha }</td>
+                        <td>
+                            <span class="activo-${ c.estado ? 'verdadero' : 'falso' }">
+                                ${ c.estado ? 'Activo' : 'Inactivo' }
+                            </span>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            tabla += '</tbody></table>';
+
+            
+            // Mostrar cursos del instructor
+            contenedor.innerHTML = tabla;
+        }
+
+        function mostrarEstudiantesDestacados() {
+            const contenedor = document.getElementById('estudiantes-destacados');
+
+            const inscripcionesDestacadas = inscripcionesCursosInstructor
+                .toSorted((i1, i2) => {
+                    const comparacionInversaProgresos = -(i1.progreso - i2.progreso);
+                    const comparacionInversaFechas = -(
+                        new Date(i1.fecha_inscripcion).getTime() - 
+                        new Date(i2.fecha_inscripcion).getTime()
+                    );
+
+                    return comparacionInversaProgresos || comparacionInversaFechas;
+                })
+                .slice(0, 5) // Los primeros cinco más destacados
+                .map(i => {
+                    const { nombre } = estudiantesInstructor.find(e => e.id === i.usuario_id);
+                    const { titulo } = cursosInstructor.find(c => c.id === i.curso_id);
+
+                    return {
+                        nombre: nombre,
+                        curso: titulo,
+                        progreso: i.progreso
+                    };
+                });
+
+            // Verificar si el instructor tiene estudiantes
+            if (inscripcionesDestacadas.length === 0) {
+                contenedor.textContent = 'Sin estudiantes destacados';
+                return;
+            }
+
+            // Limpiar estudiantes destacados
+            contenedor.textContent = '';
+
+            // Generando el DOM de los estudiantes
+
+            let tabla = `
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Curso</th>
+                            <th>Progreso</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla-estudiantes-destacados">
+            `;
+
+            inscripcionesDestacadas.forEach(i => {
+                tabla += `
+                    <tr>
+                        <td>${ i.nombre }</td>
+                        <td>${ i.curso }</td>
+                        <td>${ i.progreso }%</td>
+                        <td><a href="#" class="btn btn-secundario">Ver Detalles</a></td>
+                    </tr>
+                `;
+            });
+
+            tabla += '</tbody></table>';
+
+            
+            // Mostrar estudiantes del instructor
+            contenedor.innerHTML = tabla;
         }
 
         // INICIALIZACIÓN

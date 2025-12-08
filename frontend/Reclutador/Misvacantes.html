@@ -445,8 +445,8 @@
                             <div style="display: flex; gap: 10px;">
                                 <select id="filtro-estado" class="filtro-select" onchange="filtrarVacantes()">
                                     <option value="">Todos los estados</option>
-                                    <option value="activo">Activo</option>
-                                    <option value="inactivo">Inactivo</option>
+                                    <option value="activa">Activo</option>
+                                    <option value="inactiva">Inactivo</option>
                                 </select>
                                 
                                 <select id="filtro-departamento" class="filtro-select" onchange="filtrarVacantes()">
@@ -616,8 +616,8 @@
             
             let html = '';
             vacantesAMostrar.forEach(vacante => {
-                const estadoClase = `estado-${vacante.activo}`;
-                const estadoTexto = vacante.activo ? 'Activa' : 'Inactiva';
+                const estadoClase = `estado-${vacante.estado}`;
+                const estadoTexto = vacante.estado[0].toUpperCase() + vacante.estado.slice(1);
                 
                 html += `
                     <div class="vacante-card">
@@ -656,7 +656,7 @@
                         
                         <div class="vacante-acciones">
                             <button class="btn btn-pequeno" onclick="verDetallesVacante(${vacante.id})">Ver Detalles</button>
-                            ${vacante.activo ? `<button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Desactivar</button>` : ''}
+                            ${vacante.estado === 'activa' ? `<button class="btn btn-pequeno btn-danger" onclick="abrirModalEliminar(${vacante.id})">Desactivar</button>` : ''}
                         </div>
                     </div>
                 `;
@@ -689,9 +689,7 @@
             let vacantesFiltradas = vacantes;
             
             if (estado) {
-                const estadoBool = estado === 'activo';
-
-                vacantesFiltradas = vacantesFiltradas.filter(v => v.activo === estadoBool);
+                vacantesFiltradas = vacantesFiltradas.filter(v => v.estado === estado);
             }
             
             if (departamento) {
@@ -716,7 +714,7 @@
                 document.getElementById('detalles-requisitos').textContent = vacante.requisitos;
                 document.getElementById('detalles-beneficios').textContent = vacante.beneficios;
                 document.getElementById('detalles-fecha-publicacion').textContent = formatearFecha(vacante.fecha_publicacion);
-                document.getElementById('detalles-estado').textContent = vacante.activo ? 'Activa' : 'Inactiva';
+                document.getElementById('detalles-estado').textContent = vacante.estado[0].toUpperCase() + vacante.estado.slice(1);
                 document.getElementById('detalles-postulaciones').textContent = vacante.postulaciones;
                 
                 document.getElementById('modal-detalles').style.display = 'block';
@@ -747,32 +745,30 @@
             if (!vacanteIdEliminar) return;
             
             try {
-                // Buscar la vacante y marcarla como inactiva
-                const vacanteIndex = vacantes.findIndex(v => v.id === vacanteIdEliminar);
-                if (vacanteIndex !== -1) {
-                    vacantes[vacanteIndex].activo = false;
-                    
-                    // Mostrar mensaje de éxito
-                    mostrarMensaje('exito', 'Vacante desactivada correctamente');
-                    
-                    // Recargar la lista
-                    renderizarVacantes();
-                    
-                    // Cerrar modal
-                    cerrarModalEliminar();
-                }
+                fetch(`/api/trabajos/${ vacanteIdEliminar }`, {
+                    method: 'PUT',
+                    body: JSON.stringify({ estado : 'inactiva' })
+                })
+                .then(raw => raw.json())
+                .then(res => mostrarMensaje(res.exito ? 'exito' : 'error', res.mensaje));
             } catch (error) {
                 mostrarMensaje('error', 'Error al desactivar la vacante. Inténtalo nuevamente');
             }
         }
 
         function mostrarMensaje(tipo, mensaje) {
+            document.getElementById('modal-eliminar').style.display = 'none';
+            
             const elementoMensaje = document.getElementById(`mensaje-${tipo}`);
             elementoMensaje.textContent = mensaje;
             elementoMensaje.style.display = 'block';
             
             setTimeout(() => {
                 elementoMensaje.style.display = 'none';
+
+                if (tipo === 'exito') {
+                    window.location.reload();
+                }
             }, 5000);
         }
 

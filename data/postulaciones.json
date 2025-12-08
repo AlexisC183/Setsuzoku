@@ -43,5 +43,14 @@
     "estado": "pendiente",
     "mensaje": "¡Me animé a postularme! Espero ser un excelente candidato.",
     "comentario": ""
+  },
+  {
+    "id": 11,
+    "usuario_id": 1764894367943,
+    "trabajo_id": 1,
+    "fecha_postulacion": "2025-12-08T19:19:35.362Z",
+    "estado": "pendiente",
+    "mensaje": "¡Estoy de vuelta! Espero ser un excelente candidato.",
+    "comentario": ""
   }
 ]

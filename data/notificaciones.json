@@ -261,5 +261,15 @@
     "leida": false,
     "fecha_creacion": "2025-12-08T15:31:41.276Z",
     "tipo_referencia": "vacante"
+  },
+  {
+    "id": 1765221575381,
+    "id_usuario": 1764894474829,
+    "tipo": "info",
+    "titulo": "Nueva postulación",
+    "mensaje": "Chuy Gómez se ha postulado a tu vacante \"undefined\".",
+    "leida": false,
+    "fecha_creacion": "2025-12-08T19:19:35.381Z",
+    "tipo_referencia": "vacante"
   }
 ]
